@@ -1,0 +1,74 @@
+<script setup>
+import { ref, onMounted, watch, computed } from 'vue'
+import Icon from '@/components/UI/Icon/Icon.vue'
+
+const isVisible = ref(false)
+const timer = ref(null)
+
+const props = defineProps({
+  error: {
+    type: Boolean,
+    default: false
+  },
+  info: {
+    type: Boolean,
+    default: false
+  },
+  success: {
+    type: Boolean,
+    default: false
+  },
+  message: {
+    type: String,
+    default: ''
+  }
+})
+
+onMounted(() => {
+  isVisible.value = true
+  timer.value = setTimeout(() => {
+    isVisible.value = false
+  }, 3000)
+})
+
+watch(isVisible, val => {
+  if (!val) {
+    clearTimeout(timer.value)
+  }
+})
+
+const header = computed(() => (props.error ? 'Error' : props.info ? 'Information' : 'Success'))
+</script>
+
+<template>
+  <div
+    v-if="isVisible"
+    class="notification-parent"
+  >
+    <div
+      class="notification-content"
+      :class="{
+        'notification--error': error,
+        'notification--info': info,
+        'notification--success': success,
+      }"
+    >
+      <div class="notification-icon">
+        <Icon
+          width="20px"
+          icon-name="bug"
+        />
+      </div>
+      <div class="notification-data">
+        <div class="notification__header">
+          {{ header }}
+        </div>
+        <div class="notification-text">
+          {{ message }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped src="./style.css"></style>

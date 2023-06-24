@@ -1,0 +1,26 @@
+.form__auth {
+	width: 350px;
+	display: flex;
+	flex-direction: column;
+	margin: 50px auto 0;
+	gap: 24px;
+}
+
+.form__submit {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.form__submit p {
+	margin: 0;
+}
+
+.form__header {
+	margin-bottom: 0;
+}
+
+.form-redirect {
+	font-weight: 600;
+	color: rgba(26,92,255,1);
+}

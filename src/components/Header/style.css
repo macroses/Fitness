@@ -1,0 +1,87 @@
+.header {
+	background-color: #fff;
+	box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.header__user {
+	margin-left: auto;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 24px;
+}
+
+.header__wrap {
+	display: flex;
+	align-items: center;
+	height: 55px;
+}
+
+.header__logo {
+	color: green;
+}
+
+.header__logo img {
+	width: 100px;
+}
+
+.header__user .ant-avatar {
+	cursor: pointer;
+}
+
+.header__nav {
+	display: flex;
+	margin-left: 24px;
+	gap: 20px;
+}
+
+.header__nav a {
+	color: rgba(44,62,80, 1);
+	transition: color 0.25s ease;
+}
+
+.header__nav a:hover {
+	color: rgba(26,92,255,1);
+}
+
+.user-dropdown__content {
+	width: 200px;
+	position: absolute;
+	top: calc(100% + 10px);
+	right: 0;
+	background-color: #fff;
+	padding: 5px;
+	overflow: hidden;
+	max-height: 0;
+	opacity: 0;
+	border-radius: 12px;
+	transform-origin: top;
+	color: rgba(44,62,80, 1);
+	box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
+	transition: all 0.25s ease
+}
+
+.user-dropdown {
+	width: 100%;
+	overflow: auto;
+	border-radius: inherit;
+}
+
+.user-menu--visible {
+	max-height: 200px;
+	opacity: 1;
+}
+
+.user-dropdown__item {
+	cursor: pointer;
+	padding: 6px 10px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	transition: all 0.25s ease;
+}
+
+.user-dropdown__item:hover {
+	padding-left: 14px;
+	color: rgba(26,92,255,1);
+}
