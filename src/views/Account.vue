@@ -10,7 +10,7 @@ import { supabase } from '@/lib/supabaseClient'
 
 const isLoading = ref(false)
 
-let userData = reactive({
+const userData = reactive({
   username: null,
   age: null,
   weight: null,
@@ -66,7 +66,7 @@ async function updateProfile() {
       level: userData.level
     }
 
-    let { error } = await supabase.from('profiles').upsert(updates)
+    const { error } = await supabase.from('profiles').upsert(updates)
     console.log('updated')
 
     if (error) throw error
@@ -90,8 +90,6 @@ onMounted(async () => {
 
   await getProfile()
 })
-
-// watch()
 </script>
 
 <template>
@@ -104,8 +102,14 @@ onMounted(async () => {
             <b>statistics</b> and creating <b>training programs</b>.
           </Alert>
 
-          <form class="account__user-form" @submit.prevent="handleSubmit">
-            <Loading v-if="isLoading" large />
+          <form
+            class="account__user-form"
+            @submit.prevent="handleSubmit"
+          >
+            <Loading
+              v-if="isLoading"
+              large
+            />
 
             <Input
               label-placeholder="Name"
@@ -131,12 +135,32 @@ onMounted(async () => {
               @keydown="useOnlyNumbers($event)"
             />
             <GroupInputs>
-              <Radio name="gender" v-model="userData.gender" value="Male" label="Male" />
-              <Radio name="gender" v-model="userData.gender" value="Female" label="Female" />
+              <Radio
+                name="gender"
+                v-model="userData.gender"
+                value="Male"
+                label="Male"
+              />
+              <Radio
+                name="gender"
+                v-model="userData.gender"
+                value="Female"
+                label="Female"
+              />
             </GroupInputs>
             <GroupInputs>
-              <Radio name="gender" v-model="userData.level" value="Novice" label="Novice" />
-              <Radio name="gender" v-model="userData.level" value="Advanced" label="Advanced" />
+              <Radio
+                name="gender"
+                v-model="userData.level"
+                value="Novice"
+                label="Novice"
+              />
+              <Radio
+                name="gender"
+                v-model="userData.level"
+                value="Advanced"
+                label="Advanced"
+              />
               <Radio
                 name="gender"
                 v-model="userData.level"
@@ -144,7 +168,12 @@ onMounted(async () => {
                 label="Professional"
               />
             </GroupInputs>
-            <Button type="submit" class="account__user-form-submit"> Update info </Button>
+            <Button
+              type="submit"
+              class="account__user-form-submit"
+            >
+              Update info
+            </Button>
           </form>
         </div>
         <div class="account__layout-item" />

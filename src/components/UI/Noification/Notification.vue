@@ -1,9 +1,14 @@
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, watch, computed, reactive } from 'vue'
 import Icon from '@/components/UI/Icon/Icon.vue'
 
 const isVisible = ref(false)
 const timer = ref(null)
+
+const notificationData = reactive({
+  header: computed(() => (props.error ? 'Error' : props.info ? 'Information' : 'Success')),
+  iconName: computed(() => (props.error ? 'bug' : props.info ? 'circle-info' : 'circle-check'))
+})
 
 const props = defineProps({
   error: {
@@ -36,8 +41,6 @@ watch(isVisible, val => {
     clearTimeout(timer.value)
   }
 })
-
-const header = computed(() => (props.error ? 'Error' : props.info ? 'Information' : 'Success'))
 </script>
 
 <template>
@@ -56,12 +59,12 @@ const header = computed(() => (props.error ? 'Error' : props.info ? 'Information
       <div class="notification-icon">
         <Icon
           width="20px"
-          icon-name="bug"
+          :icon-name="notificationData.iconName"
         />
       </div>
       <div class="notification-data">
         <div class="notification__header">
-          {{ header }}
+          {{ notificationData.header }}
         </div>
         <div class="notification-text">
           {{ message }}

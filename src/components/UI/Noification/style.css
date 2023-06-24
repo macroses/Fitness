@@ -19,11 +19,13 @@
 	bottom: 0;
 	background-color: rgba(26,92,255,1);
 	animation: timer 3s linear;
+	animation-fill-mode: forwards;
 }
 
 .notification-content {
 	position: relative;
-	max-width: 340px;
+	min-width: 340px;
+	max-width: 500px;
 	width: 100%;
 	height: auto;
 	padding: 20px;
@@ -34,10 +36,31 @@
 .notification--error {
 	background: linear-gradient(to bottom, rgba(255,71,87, 0.3), transparent);
 	color: rgba(255,71,87, 1);
+	border: 1px solid rgba(255,71,87, 1);
+}
+
+.notification--success {
+	background: linear-gradient(to bottom, rgba(70,201,58, 0.3), transparent);
+	color: rgba(70,201,58, 1);
+	border: 1px solid rgba(70,201,58, 1);
+}
+
+.notification--info {
+	background: linear-gradient(to bottom, rgba(26,92,255, 0.3), transparent);
+	color: rgba(26,92,255, 1);
+	border: 1px solid rgba(26,92,255, 1);
 }
 
 .notification-content.notification--error::after {
 	background-color: rgba(255,71,87, 1);
+}
+
+.notification-content.notification--success::after {
+	background-color: rgba(70,201,58, 1);
+}
+
+.notification-content.notification--info::after {
+	background-color: rgba(26,92,255, 1);
 }
 
 .notification-icon {
@@ -58,6 +81,6 @@
 
 @keyframes timer {
 	to {
-		translate: -100%;
+		translate: -110%;
 	}
 }

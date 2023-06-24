@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { supabase } from '@/lib/supabaseClient'
 import Button from '@/components/UI/Button/Button.vue'
 import Input from '@/components/UI/Input/Input.vue'
+import TransitionClip from '@/components/UI/Noification/TransitionClip.vue'
 
 const router = useRouter()
 const formState = reactive({
@@ -50,12 +51,14 @@ const register = async () => {
     class="form__auth"
     @submit.prevent="register"
   >
-    <div
-      class="form__error"
-      v-if="formState.errorMessage"
-    >
-      {{ formState.errorMessage }}
-    </div>
+    <TransitionClip>
+      <Notification
+        v-if="formState.errorMessage"
+        :message="formState.errorMessage"
+        error
+      />
+    </TransitionClip>
+
     <h1 class="form__header">
       Register
     </h1>

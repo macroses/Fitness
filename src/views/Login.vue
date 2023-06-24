@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { supabase } from '@/lib/supabaseClient'
 import Button from '@/components/UI/Button/Button.vue'
 import Input from '@/components/UI/Input/Input.vue'
+import TransitionClip from '@/components/UI/Noification/TransitionClip.vue'
 
 const router = useRouter()
 const formState = reactive({
@@ -38,13 +39,27 @@ const isButtonDisabled = computed(() => Boolean(formState.errorMessage))
 </script>
 
 <template>
-  <form class="form__auth" @submit.prevent="login">
-    <transition name="clip">
-      <Notification v-if="formState.errorMessage" :message="formState.errorMessage" error />
-    </transition>
+  <form
+    class="form__auth"
+    @submit.prevent="login"
+  >
+    <TransitionClip>
+      <Notification
+        v-if="formState.errorMessage"
+        :message="formState.errorMessage"
+        error
+      />
+    </TransitionClip>
 
-    <h1 class="form__header">Login</h1>
-    <Input v-model="formState.email" value="" label-placeholder="Email" width="350px" />
+    <h1 class="form__header">
+      Login
+    </h1>
+    <Input
+      v-model="formState.email"
+      value=""
+      label-placeholder="Email"
+      width="350px"
+    />
     <Input
       type="password"
       v-model="formState.password"
@@ -53,27 +68,22 @@ const isButtonDisabled = computed(() => Boolean(formState.errorMessage))
     />
 
     <div class="form__submit">
-      <Button type="submit" :loading="loading" :disabled="isButtonDisabled"> Submit </Button>
+      <Button
+        type="submit"
+        :loading="loading"
+        :disabled="isButtonDisabled"
+      >
+        Submit
+      </Button>
       <p>
         Do not have an account?
-        <RouterLink to="/register" class="form-redirect"> Register </RouterLink>
+        <RouterLink
+          to="/register"
+          class="form-redirect"
+        >
+          Register
+        </RouterLink>
       </p>
     </div>
   </form>
 </template>
-
-<style scoped>
-.clip-enter-active,
-.clip-leave-active {
-  transition: all 0.25s ease;
-}
-
-.clip-enter-from {
-  clip-path: circle(0% at 80% 35%);
-}
-
-.clip-leave-to {
-  max-height: 0;
-  clip-path: circle(0% at 80% 35%) !important;
-}
-</style>

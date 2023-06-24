@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient'
 
 const getProfile = async (session, username, website, avatar_url, loading) => {
@@ -49,7 +48,7 @@ const updateProfile = async (session, username, website, avatar_url, loading) =>
   }
 }
 
-const signOut = async (loading) => {
+const signOut = async loading => {
   try {
     loading.value = true
     const { error } = await supabase.auth.signOut()

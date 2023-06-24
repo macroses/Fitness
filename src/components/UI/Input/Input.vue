@@ -1,6 +1,5 @@
 <script setup>
 import { uid } from 'uid'
-import { ref, watch } from 'vue'
 
 const uniqueId = uid(10)
 
@@ -31,7 +30,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="input-parent" :style="{ width: width }">
+  <div
+    class="input-parent"
+    :style="{ width: width }"
+  >
     <div class="input-content">
       <input
         class="input-component"
@@ -40,14 +42,13 @@ const props = defineProps({
         autocomplete="off"
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
-      />
+      >
       <label
         v-if="labelPlaceholder"
         :for="uniqueId"
         class="input-label"
         :class="{ 'input-label--hidden': modelValue }"
-        >{{ labelPlaceholder }}</label
-      >
+      >{{ labelPlaceholder }}</label>
     </div>
   </div>
 </template>

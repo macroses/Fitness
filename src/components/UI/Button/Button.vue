@@ -34,7 +34,7 @@ defineProps({
 
 const btn = ref(null)
 
-const buttonPress = (e) => {
+const buttonPress = e => {
   const offset = btn.value.getBoundingClientRect()
   const newX = e.clientX - offset.left
   const newY = e.clientY - offset.top
@@ -74,11 +74,14 @@ onBeforeUnmount(() => {
       'button--sm': size === 'small',
       'button--disabled': disabled,
       'button--bordered': bordered,
-      'button--loading': loading
+      'button--loading': loading,
     }"
   >
     <slot />
-    <div v-if="loading" class="loading" />
+    <div
+      v-if="loading"
+      class="loading"
+    />
   </button>
   <RouterLink
     v-else
@@ -92,11 +95,14 @@ onBeforeUnmount(() => {
       'button--sm': size === 'small',
       'button--disabled': disabled,
       'button--bordered': bordered,
-      'button--loading': loading
+      'button--loading': loading,
     }"
   >
     <slot />
-    <div v-if="loading" class="loading" />
+    <div
+      v-if="loading"
+      class="loading"
+    />
   </RouterLink>
 </template>
 
