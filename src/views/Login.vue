@@ -24,6 +24,7 @@ const login = async () => {
     })
 
     loading.value = false
+
     if (error) throw error
     router.push('/')
   } catch (error) {

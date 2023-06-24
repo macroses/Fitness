@@ -24,3 +24,12 @@
 	font-weight: 600;
 	color: rgba(26,92,255,1);
 }
+
+.reset-password {
+	text-align: center;
+	font-size: 13px;
+}
+
+.reset-password span {
+	cursor: pointer;
+}
