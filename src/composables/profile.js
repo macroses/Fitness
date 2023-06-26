@@ -1,42 +1,52 @@
 import { supabase } from '@/lib/supabaseClient'
 
-const getProfile = async (session, username, website, avatar_url, loading) => {
+const getProfile = async (userData, isLoading) => {
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
   try {
-    loading.value = true
-    const { user } = session.value
+    isLoading.value = true
+    const { user } = session
 
     const { data, error, status } = await supabase
       .from('profiles')
-      .select('username, website, avatar_url')
+      .select(Object.keys(userData).join(','))
       .eq('id', user.id)
       .single()
 
     if (error && status !== 406) throw error
 
     if (data) {
-      username.value = data.username
-      website.value = data.website
-      avatar_url.value = data.avatar_url
+      for (const key in userData) {
+        if (data.hasOwnProperty(key)) {
+          userData[key] = data[key]
+        }
+      }
     }
   } catch (error) {
     console.log(error.message)
   } finally {
-    loading.value = false
+    isLoading.value = false
   }
 }
 
-const updateProfile = async (session, username, website, avatar_url, loading) => {
+const updateProfile = async (userData, isLoading) => {
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
   try {
-    loading.value = true
-    const { user } = session.value
+    isLoading.value = true
+    const { user } = session
 
     const updates = {
       id: user.id,
-      username: username.value,
-      website: website.value,
-      avatar_url: avatar_url.value,
+      ...userData,
       updated_at: new Date()
     }
+
+    console.log(userData.updated_at)
 
     const { error } = await supabase.from('profiles').upsert(updates)
 
@@ -44,11 +54,11 @@ const updateProfile = async (session, username, website, avatar_url, loading) =>
   } catch (error) {
     console.log(error.message)
   } finally {
-    loading.value = false
+    isLoading.value = false
   }
 }
 
-const signOut = async loading => {
+const signOut = async (loading) => {
   try {
     loading.value = true
     const { error } = await supabase.auth.signOut()

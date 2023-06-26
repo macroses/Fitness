@@ -1,6 +1,4 @@
 <script setup>
-import { onBeforeUnmount, ref } from 'vue'
-
 defineProps({
   full: {
     type: Boolean,
@@ -31,42 +29,11 @@ defineProps({
     default: ''
   }
 })
-
-const btn = ref(null)
-
-const buttonPress = e => {
-  const offset = btn.value.getBoundingClientRect()
-  const newX = e.clientX - offset.left
-  const newY = e.clientY - offset.top
-  const color = getComputedStyle(btn.value).backgroundColor
-  let size = 0
-  let opacity = 0.25
-
-  const btnClick = () => {
-    size += 8
-    opacity -= 0.008
-    btn.value.style.background = `${color} radial-gradient(circle at ${newX}px ${newY}px, rgba(1,8,22,${opacity}) ${size}%, transparent ${
-      size + 2
-    }%) no-repeat`
-    if (size <= 300) {
-      requestAnimationFrame(btnClick)
-    } else {
-      btn.value.style.background = ''
-    }
-  }
-  btnClick()
-}
-
-onBeforeUnmount(() => {
-  btn.value.style.background = ''
-})
 </script>
 
 <template>
   <button
     v-if="!isLink"
-    ref="btn"
-    @click="buttonPress"
     class="button"
     :disabled="disabled"
     :class="{
@@ -74,14 +41,11 @@ onBeforeUnmount(() => {
       'button--sm': size === 'small',
       'button--disabled': disabled,
       'button--bordered': bordered,
-      'button--loading': loading,
+      'button--loading': loading
     }"
   >
     <slot />
-    <div
-      v-if="loading"
-      class="loading"
-    />
+    <div v-if="loading" class="loading" />
   </button>
   <RouterLink
     v-else
@@ -95,14 +59,11 @@ onBeforeUnmount(() => {
       'button--sm': size === 'small',
       'button--disabled': disabled,
       'button--bordered': bordered,
-      'button--loading': loading,
+      'button--loading': loading
     }"
   >
     <slot />
-    <div
-      v-if="loading"
-      class="loading"
-    />
+    <div v-if="loading" class="loading" />
   </RouterLink>
 </template>
 

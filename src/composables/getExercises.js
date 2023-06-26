@@ -1,11 +1,8 @@
-<script setup>
-import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient'
 
-const dataExercises = ref([])
-
-const getExercises = async () => {
+const getExercises = async (tableName, loading) => {
   try {
+    loading.value = true
     let { data: exercises, error } = await supabase.from('exercises').select('*')
 
     if (error) throw error
@@ -13,14 +10,9 @@ const getExercises = async () => {
     dataExercises.value = exercises
   } catch (e) {
     console.log(e.message)
+  } finally {
+    loading.value = false
   }
 }
 
-getExercises()
-</script>
-
-<template>
-  <main>
-    <div class="container">{{ dataExercises }}</div>
-  </main>
-</template>
+export { getExercises }

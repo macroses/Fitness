@@ -23,12 +23,12 @@ const login = async () => {
       password: formState.password
     })
 
-    loading.value = false
-
     if (error) throw error
     router.push('/')
   } catch (error) {
     formState.errorMessage = error.message
+  } finally {
+    loading.value = false
   }
 
   setTimeout(() => {
@@ -40,27 +40,13 @@ const isButtonDisabled = computed(() => Boolean(formState.errorMessage))
 </script>
 
 <template>
-  <form
-    class="form__auth"
-    @submit.prevent="login"
-  >
+  <form class="form__auth" @submit.prevent="login">
     <TransitionClip>
-      <Notification
-        v-if="formState.errorMessage"
-        :message="formState.errorMessage"
-        error
-      />
+      <Notification v-if="formState.errorMessage" :message="formState.errorMessage" error />
     </TransitionClip>
 
-    <h1 class="form__header">
-      Login
-    </h1>
-    <Input
-      v-model="formState.email"
-      value=""
-      label-placeholder="Email"
-      width="350px"
-    />
+    <h1 class="form__header">Login</h1>
+    <Input v-model="formState.email" value="" label-placeholder="Email" width="350px" />
     <Input
       type="password"
       v-model="formState.password"
@@ -69,21 +55,10 @@ const isButtonDisabled = computed(() => Boolean(formState.errorMessage))
     />
 
     <div class="form__submit">
-      <Button
-        type="submit"
-        :loading="loading"
-        :disabled="isButtonDisabled"
-      >
-        Submit
-      </Button>
+      <Button type="submit" :loading="loading" :disabled="isButtonDisabled"> Submit </Button>
       <p>
         Do not have an account?
-        <RouterLink
-          to="/register"
-          class="form-redirect"
-        >
-          Register
-        </RouterLink>
+        <RouterLink to="/register" class="form-redirect"> Register </RouterLink>
       </p>
     </div>
   </form>

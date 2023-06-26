@@ -1,12 +1,9 @@
 .account__layout {
 	display: grid;
-	grid-template-columns: 1fr;
+	grid-template-columns: 500px;
+	justify-content: center;
 	margin-top: 24px;
 	gap: 12px;
-}
-
-.account__layout-item {
-
 }
 
 .account__user-form {
@@ -23,10 +20,4 @@
 
 .account__user-form-submit {
 	max-width: 350px;
-}
-
-@media (width > 768px){
-	.account__layout {
-		grid-template-columns: 1fr 1fr 1fr;
-	}
 }
