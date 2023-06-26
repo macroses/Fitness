@@ -1,0 +1,21 @@
+.calendar__days {
+	display: grid;
+	height: 100%;
+	gap: 1px;
+	grid-template-columns: repeat(7, 1fr);
+	grid-auto-rows: minmax(min-content, 1fr);
+	border: 1px solid rgba(220, 223, 230,1);
+	border-radius: 12px;
+}
+
+.calendar__cell {
+	text-align: center;
+	color: rgba(44,62,80,1);
+	height: 12vw;
+}
+
+@media (width > 490px) {
+	.calendar__cell {
+		height: 8vw;
+	}
+}

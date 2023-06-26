@@ -73,5 +73,21 @@ body {
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 16px;
+}
+
+.main__layout {
+  display: grid;
+  grid-auto-columns: 1fr;
+  container: main-layout / inline-size;
+}
+
+@media (width > 768px) {
+  .container {
+    padding: 0 32px;
+  }
+
+  .main__layout {
+    grid-template-columns: 1fr 1fr;
+  }
 }

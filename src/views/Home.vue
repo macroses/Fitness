@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient'
+import Calendar from '@/components/Calendar/Calendar.vue'
 
 const dataExercises = ref([])
 
@@ -21,6 +22,13 @@ getExercises()
 
 <template>
   <main>
-    <div class="container">{{ dataExercises }}</div>
+    <div class="container">
+      <div class="main__layout">
+        <Calendar />
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   </main>
 </template>
