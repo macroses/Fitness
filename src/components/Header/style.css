@@ -58,7 +58,7 @@
 	transform-origin: top;
 	color: rgba(44,62,80, 1);
 	box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
-	transition: all 0.25s ease
+	transition: all 0.25s;
 }
 
 .user-dropdown {

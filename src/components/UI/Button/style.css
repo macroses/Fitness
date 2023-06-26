@@ -68,6 +68,41 @@
 	border: 2px solid rgba(26,92,255,0.5);
 }
 
+.button--transparent {
+	background: transparent;
+	color: rgba(26,92,255,1);
+	overflow: hidden;
+	height: 40px;
+	box-shadow: none;
+}
+
+.button--transparent::before {
+	content: "";
+	background: rgba(var(--vs-color),.1);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+	pointer-events: none;
+	transition: all .25s ease;
+	z-index: -1;
+	transform: scale(.5);
+	opacity: 0;
+}
+
+.button--transparent:hover {
+	box-shadow: none;
+	transform: none;
+}
+
+.button--transparent:hover::before {
+	opacity: 1;
+	transform: scale(1);
+	background-color: rgba(26,92,255,.2);
+}
+
 .button--loading {
 	pointer-events: none;
 }

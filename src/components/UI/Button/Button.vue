@@ -16,6 +16,10 @@ defineProps({
     type: Boolean,
     default: false
   },
+  transparent: {
+    type: Boolean,
+    default: false
+  },
   loading: {
     type: Boolean,
     default: false
@@ -41,7 +45,8 @@ defineProps({
       'button--sm': size === 'small',
       'button--disabled': disabled,
       'button--bordered': bordered,
-      'button--loading': loading
+      'button--loading': loading,
+      'button--transparent': transparent
     }"
   >
     <slot />

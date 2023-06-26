@@ -1,9 +1,19 @@
 <script setup>
 import dayjs from 'dayjs'
 import { onMounted, ref } from 'vue'
+import Button from '@/components/UI/Button/Button.vue'
+import Icon from '@/components/UI/Icon/Icon.vue'
+
+const emit = defineEmits(['getDate'])
 
 const currentDate = ref(dayjs())
 const calendarCells = ref([])
+const transitionName = ref('')
+const isCellActive = ref(false)
+
+const handleClickCell = (cellDate) => {
+  emit('getDate', cellDate)
+}
 
 const updateCalendar = () => {
   const today = dayjs()
@@ -12,7 +22,7 @@ const updateCalendar = () => {
 
   calendarCells.value = Array.from({ length: 35 }, (_, index) => {
     const cellDate = firstDayOfWeek.add(index, 'day')
-    const formattedDate = cellDate.format('D.M')
+    const formattedDate = cellDate.format('YYYY-MM-DDTHH:mm:ssZ')
     const isOtherMonth = !cellDate.isSame(firstDayOfMonth, 'month')
     const isCurrentDay = cellDate.isSame(today, 'day')
 
@@ -26,11 +36,13 @@ const updateCalendar = () => {
 
 const goToPreviousMonth = () => {
   currentDate.value = currentDate.value.subtract(1, 'month')
+  transitionName.value = 'slideMonth'
   updateCalendar()
 }
 
 const goToNextMonth = () => {
   currentDate.value = currentDate.value.add(1, 'month')
+  transitionName.value = 'slideMonthRight'
   updateCalendar()
 }
 
@@ -42,24 +54,31 @@ onMounted(() => {
 <template>
   <div class="calendar">
     <div class="calendar__controls">
-      <button @click="goToPreviousMonth">Предыдущий месяц</button>
-      <button @click="goToNextMonth">Следующий месяц</button>
+      <Button transparent @click="goToPreviousMonth">
+        <Icon icon-name="angle-left" width="20px" />
+      </Button>
+      <Button transparent @click="goToNextMonth">
+        <Icon icon-name="angle-right" width="20px" />
+      </Button>
     </div>
-    <div class="calendar__days">
-      <div
-        v-for="cell in calendarCells"
-        :key="cell.date"
-        :class="[
-          'calendar__cell',
-          {
-            'calendar__cell--other-month': cell.isOtherMonth,
-            'calendar__cell--current-day': cell.isCurrentDay
-          }
-        ]"
-      >
-        {{ cell.date }}
+    <Transition mode="out-in" :name="transitionName">
+      <div class="calendar__days" :key="new Date()">
+        <div
+          v-for="cell in calendarCells"
+          :key="cell.date"
+          :class="[
+            'calendar__cell',
+            {
+              'calendar__cell--other-month': cell.isOtherMonth,
+              'calendar__cell--current-day': cell.isCurrentDay
+            }
+          ]"
+          @click="handleClickCell(cell.date)"
+        >
+          {{ dayjs(cell.date).format('D') }}
+        </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 

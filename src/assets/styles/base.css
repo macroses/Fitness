@@ -79,7 +79,7 @@ body {
 .main__layout {
   display: grid;
   grid-auto-columns: 1fr;
-  container: main-layout / inline-size;
+  padding-top: 16px;
 }
 
 @media (width > 768px) {
