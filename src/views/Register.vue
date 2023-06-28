@@ -49,13 +49,26 @@ const register = async () => {
 </script>
 
 <template>
-  <form class="form__auth" @submit.prevent="register">
+  <form
+    class="form__auth"
+    @submit.prevent="register"
+  >
     <TransitionClip>
-      <Notification v-if="formState.errorMessage" :message="formState.errorMessage" error />
+      <Notification
+        v-if="formState.errorMessage"
+        :message="formState.errorMessage"
+        error
+      />
     </TransitionClip>
 
-    <h1 class="form__header">Register</h1>
-    <Input v-model="formState.email" label-placeholder="Email" width="350px" />
+    <h1 class="form__header">
+      Register
+    </h1>
+    <Input
+      v-model="formState.email"
+      label-placeholder="Email"
+      width="350px"
+    />
     <Input
       type="password"
       v-model="formState.password"
@@ -70,10 +83,20 @@ const register = async () => {
     />
 
     <div class="form__submit">
-      <Button type="submit" :loading="loading"> Submit </Button>
+      <Button
+        type="submit"
+        :loading="loading"
+      >
+        Submit
+      </Button>
       <p>
         Already registered?
-        <RouterLink to="/login" class="form-redirect"> Login </RouterLink>
+        <RouterLink
+          to="/login"
+          class="form-redirect"
+        >
+          Login
+        </RouterLink>
       </p>
     </div>
   </form>

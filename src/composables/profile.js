@@ -58,7 +58,7 @@ const updateProfile = async (userData, isLoading) => {
   }
 }
 
-const signOut = async (loading) => {
+const signOut = async loading => {
   try {
     loading.value = true
     const { error } = await supabase.auth.signOut()

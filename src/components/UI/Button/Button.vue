@@ -46,11 +46,14 @@ defineProps({
       'button--disabled': disabled,
       'button--bordered': bordered,
       'button--loading': loading,
-      'button--transparent': transparent
+      'button--transparent': transparent,
     }"
   >
     <slot />
-    <div v-if="loading" class="loading" />
+    <div
+      v-if="loading"
+      class="loading"
+    />
   </button>
   <RouterLink
     v-else
@@ -64,11 +67,14 @@ defineProps({
       'button--sm': size === 'small',
       'button--disabled': disabled,
       'button--bordered': bordered,
-      'button--loading': loading
+      'button--loading': loading,
     }"
   >
     <slot />
-    <div v-if="loading" class="loading" />
+    <div
+      v-if="loading"
+      class="loading"
+    />
   </RouterLink>
 </template>
 

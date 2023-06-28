@@ -25,9 +25,9 @@ import Calendar from '@/components/Calendar/Calendar.vue'
     <div class="container">
       <div class="main__layout">
         <Calendar />
-        <div></div>
-        <div></div>
-        <div></div>
+        <div />
+        <div />
+        <div />
       </div>
     </div>
   </main>
