@@ -2,8 +2,6 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
 import { supabase } from '@/lib/supabaseClient'
-import GroupInputs from '@/components/UI/GroupInputs/GroupInputs.vue'
-import Radio from '@/components/UI/Radio/Radio.vue'
 import { getProfile, updateProfile } from '@/composables/profile'
 
 const isLoading = ref(false)

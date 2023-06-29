@@ -22,7 +22,7 @@
 
 .form-redirect {
 	font-weight: 600;
-	color: rgba(26,92,255,1);
+	color: var(--accent-color);
 }
 
 .reset-password {

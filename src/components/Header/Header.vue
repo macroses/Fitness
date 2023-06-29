@@ -3,8 +3,6 @@ import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { signOut } from '@/composables/profile'
 import { getSession } from '@/composables/getSession'
-import Avatar from '@/components/UI/Avatar/Avatar.vue'
-import Icon from '@/components/UI/Icon/Icon.vue'
 import router from '@/router'
 
 const { session } = getSession()

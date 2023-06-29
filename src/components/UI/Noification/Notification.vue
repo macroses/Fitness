@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, watch, computed, reactive } from 'vue'
-import Icon from '@/components/UI/Icon/Icon.vue'
 
 const isVisible = ref(false)
 const timer = ref(null)

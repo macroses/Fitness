@@ -1,0 +1,31 @@
+.tabs-parent {
+	position: relative;
+	margin-bottom: 16px;
+}
+
+.tabs {
+	display: flex;
+}
+
+.tabs__item {
+	padding: 8px 12px;
+	cursor: pointer;
+	transition: color 0.25s ease;
+}
+
+.tabs__item:hover {
+	color: var(--accent-color);
+}
+
+.tabs__item.active {
+	cursor: default;
+	color: var(--accent-color);
+}
+
+.tabs-line {
+	transition: all 0.25s ease;
+	will-change: left, right;
+	position: absolute;
+	height: 2px;
+	background-color: var(--accent-color);
+}

@@ -1,5 +1,5 @@
 .header {
-	background-color: #fff;
+	background-color: var(--main-bg);
 	box-shadow: 0 2px 8px #f0f1f2;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .header__nav a:hover {
-	color: rgba(26,92,255,1);
+	color: var(--accent-color);
 }
 
 .user-dropdown__content {
@@ -49,7 +49,7 @@
 	position: absolute;
 	top: calc(100% + 10px);
 	right: 0;
-	background-color: #fff;
+	background-color: var(--main-bg);
 	padding: 5px;
 	overflow: hidden;
 	max-height: 0;
@@ -59,6 +59,7 @@
 	color: rgba(44,62,80, 1);
 	box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
 	transition: all 0.25s;
+	z-index: 1000;
 }
 
 .user-dropdown {
@@ -83,5 +84,5 @@
 
 .user-dropdown__item:hover {
 	padding-left: 14px;
-	color: rgba(26,92,255,1);
+	color: var(--accent-color);
 }

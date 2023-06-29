@@ -1,6 +1,6 @@
 /*!* color palette from <https://github.com/vuejs/theme> *!*/
-/*:root {*/
-/*  --vt-c-white: #ffffff;*/
+:root {
+/*  --vt-c-white: var(--main-bg)fff;*/
 /*  --vt-c-white-soft: #f8f8f8;*/
 /*  --vt-c-white-mute: #f2f2f2;*/
 
@@ -34,7 +34,11 @@
 /*  --color-text: var(--vt-c-text-light-1);*/
 
 /*  --section-gap: 160px;*/
-/*}*/
+
+  --accent-color: rgba(26,92,255,1);
+  --text-color: rgba(44,62,80,1);
+  --main-bg: #fff;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -64,6 +68,7 @@ body {
   line-height: 1.6;
   font-family: 'Poppins', sans-serif!important;
   font-size: 15px;
+  color: rgba(44,62,80,1);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

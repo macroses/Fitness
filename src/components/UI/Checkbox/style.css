@@ -95,7 +95,7 @@
 
 .checkbox-effect.active .line1,
 .checkbox-effect.active .line2 {
-	background-color: #fff;
+	background-color: var(--main-bg);
 }
 
 .checkbox-effect.active .line1 {

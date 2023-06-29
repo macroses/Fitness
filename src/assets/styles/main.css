@@ -2,6 +2,9 @@
 @import './base.css';
 @import './forms.css';
 
+/*components*/
+@import 'workout.css';
+
 /* pages */
 @import './account.css';
 

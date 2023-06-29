@@ -16,6 +16,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  labelFade: {
+    type: Boolean,
+    default: false
+  },
   type: {
     type: String,
     default: 'text'
@@ -47,7 +51,7 @@ const props = defineProps({
         v-if="labelPlaceholder"
         :for="uniqueId"
         class="input-label"
-        :class="{ 'input-label--hidden': modelValue }"
+        :class="{ 'input-label--hidden': modelValue, 'label-fade': labelFade }"
       >{{ labelPlaceholder }}</label>
     </div>
   </div>
