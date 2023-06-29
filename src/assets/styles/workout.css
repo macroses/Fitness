@@ -1,3 +1,7 @@
 .workout__date {
-	margin-bottom: 16px;
+	margin-bottom: 24px;
+}
+
+.workout__name {
+	margin-bottom: 24px;
 }

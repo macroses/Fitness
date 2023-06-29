@@ -1,16 +1,6 @@
 .calendar {
 	position: relative;
-	overflow: hidden;
-}
-
-.calendar::after {
-	content: '';
-	position: absolute;
-	width: 1px;
-	height: 70%;
-	top: 15%;
-	right: -12px;
-	background-color: rgb(240, 241, 242, 1);
+	overflow-x: hidden;
 }
 
 .calendar__days {
