@@ -1,7 +1,17 @@
 .workout__date {
 	margin-bottom: 24px;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	color: var(--text-color);
 }
 
 .workout__name {
 	margin-bottom: 24px;
+}
+
+.workout__color {
+	display: flex;
+	align-items: center;
+	margin-left: 24px;
 }

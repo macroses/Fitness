@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 
-export const useUserStore = defineStore({
-  id: 'user',
+export const useWorkout = defineStore({
+  id: 'workout',
   state: () => ({
-    isLogged: false
+    name: null,
+    color: '246, 191, 38'
   })
 })

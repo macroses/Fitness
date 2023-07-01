@@ -85,7 +85,7 @@ body {
   display: grid;
   grid-auto-columns: 1fr;
   padding-top: 16px;
-  gap: 24px;
+  column-gap: 24px;
 }
 
 @media (width > 768px) {

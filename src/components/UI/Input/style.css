@@ -59,3 +59,22 @@
 	transform: translate(-3px,-80%);
 	font-size: .75rem;
 }
+
+.input-label.input-label--fade {
+	opacity: 0.5;
+	visibility: visible;
+	pointer-events: auto;
+	transform: translate(-3px, 0);
+	font-size: .75rem;
+}
+
+.input-label.input-has-value {
+	opacity: 0;
+}
+
+.input-component:focus ~ .input-label.input-label--fade {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: auto;
+	transform: translate(50px, 0);
+}

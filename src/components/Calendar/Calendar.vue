@@ -71,9 +71,18 @@ onMounted(() => {
       >
         Current
       </Button>
-      <div class="callendar__date">
-        {{ currentDate.format('MMMM') }} {{ currentDate.format('YYYY') }}
-      </div>
+      <Transition
+        mode="out-in"
+        :name="transitionName"
+        appear
+      >
+        <div
+          class="callendar__date"
+          :key="currentDate"
+        >
+          {{ currentDate.format('MMMM') }} {{ currentDate.format('YYYY') }}
+        </div>
+      </Transition>
     </div>
     <Transition
       mode="out-in"
@@ -97,7 +106,7 @@ onMounted(() => {
           ]"
           @click="handleClickCell(cell.date)"
         >
-          {{ dayjs(cell.date).format('D') }}
+          <span class="calendar__cell-text">{{ dayjs(cell.date).format('D') }}</span>
         </div>
       </div>
     </Transition>

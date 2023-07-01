@@ -1,6 +1,7 @@
 .calendar {
 	position: relative;
 	overflow-x: hidden;
+	padding-bottom: 12px;
 }
 
 .calendar__days {
@@ -17,6 +18,17 @@
 	height: 50px;
 	border-radius: 9px;
 	transition: all 0.25s ease;
+}
+
+.calendar__cell--current-day {
+	color: var(--accent-color);
+	font-weight: 600;
+}
+
+.calendar__cell--current-day .calendar__cell-text {
+	border-bottom: 2px solid var(--accent-color);
+	display: inline-block;
+	width: 15px;
 }
 
 .calendar__cell:not(.calendar__cell--other-month):hover {
