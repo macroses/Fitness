@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { getCollection } from '@/composables/getCollection'
+import BodySvg from '@/components/BodySvg/BodySvg.vue'
 
 const dataExercises = ref([])
 const loading = ref(false)
@@ -19,15 +20,14 @@ const filteredExercisesByMuscle = computed(() => {
   })
 })
 
-// вывести те упражнения, в которых поле main_muscle соответствует одному из значений массива uniqueMainMuscle
-
 onMounted(async () => {
   await getCollection('exercises', '*', loading, dataExercises)
-  console.log(uniqueMainMuscles.value)
 })
 </script>
 
 <template>
+  <BodySvg body-part="chest" :secondary-part="['forearms', 'glutes']" />
+
   <ul class="muscles">
     <li v-for="item in filteredExercisesByMuscle" :key="item.muscle" class="muscles__item">
       {{ item.muscle }}

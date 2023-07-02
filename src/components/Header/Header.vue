@@ -14,6 +14,7 @@ const isDropdownVisible = ref(false)
 const handleSignOut = async () => {
   await signOut(loading)
   isDropdownVisible.value = false
+  router.push('/login')
 }
 const redirectToAccount = () => {
   router.push('/account')
@@ -27,53 +28,28 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
   <header class="header">
     <div class="container">
       <div class="header__wrap">
-        <RouterLink
-          to="/"
-          class="header__logo"
-        >
-          <img
-            src="/Sports.svg"
-            alt="logo"
-          >
+        <RouterLink to="/" class="header__logo">
+          <img src="/Sports.svg" alt="logo" />
         </RouterLink>
 
         <div class="header__user">
           <nav class="header__nav">
-            <RouterLink to="/docs">
-              Docs
-            </RouterLink>
-            <RouterLink to="/">
-              Blog
-            </RouterLink>
+            <RouterLink to="/docs"> Docs </RouterLink>
+            <RouterLink to="/"> Blog </RouterLink>
           </nav>
-          <Avatar
-            v-if="session"
-            @click="isDropdownVisible = true"
-          />
+          <Avatar v-if="session" @click="isDropdownVisible = true" />
           <div
             ref="userMenu"
             class="user-dropdown__content"
             :class="{ 'user-menu--visible': isDropdownVisible }"
           >
             <ul class="user-dropdown">
-              <li
-                @click="redirectToAccount"
-                class="user-dropdown__item"
-              >
-                <Icon
-                  icon-name="person"
-                  width="20px"
-                />
+              <li @click="redirectToAccount" class="user-dropdown__item">
+                <Icon icon-name="person" width="20px" />
                 Account
               </li>
-              <li
-                @click="handleSignOut"
-                class="user-dropdown__item"
-              >
-                <Icon
-                  icon-name="right-from-bracket"
-                  width="20px"
-                />
+              <li @click="handleSignOut" class="user-dropdown__item">
+                <Icon icon-name="right-from-bracket" width="20px" />
                 Logout
               </li>
             </ul>

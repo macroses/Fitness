@@ -5,13 +5,13 @@ import { supabase } from '@/lib/supabaseClient'
 import Button from '@/components/UI/Button/Button.vue'
 import Input from '@/components/UI/Input/Input.vue'
 import TransitionClip from '@/components/UI/Noification/TransitionClip.vue'
+import { toast } from 'vue3-toastify'
 
 const router = useRouter()
 const formState = reactive({
   email: null,
   password: null,
-  confirmPassword: null,
-  errorMessage: null
+  confirmPassword: null
 })
 
 const loading = ref(false)
@@ -25,50 +25,23 @@ const register = async () => {
         password: formState.password
       })
 
-      console.log(formState)
-
       loading.value = false
       if (error) throw error
       router.push('/')
     } catch (error) {
-      formState.errorMessage = error.message
-      setTimeout(() => {
-        formState.errorMessage = null
-      }, 5000)
+      toast.error(error.message, { position: toast.POSITION.TOP_RIGHT })
     }
 
     return
   }
-
-  setTimeout(() => {
-    formState.errorMessage = null
-  }, 5000)
-
-  formState.errorMessage = 'Password do not match'
+  toast.error('Password do not match', { position: toast.POSITION.TOP_CENTER })
 }
 </script>
 
 <template>
-  <form
-    class="form__auth"
-    @submit.prevent="register"
-  >
-    <TransitionClip>
-      <Notification
-        v-if="formState.errorMessage"
-        :message="formState.errorMessage"
-        error
-      />
-    </TransitionClip>
-
-    <h1 class="form__header">
-      Register
-    </h1>
-    <Input
-      v-model="formState.email"
-      label-placeholder="Email"
-      width="350px"
-    />
+  <form class="form__auth" @submit.prevent="register">
+    <h1 class="form__header">Register</h1>
+    <Input v-model="formState.email" label-placeholder="Email" width="350px" />
     <Input
       type="password"
       v-model="formState.password"
@@ -83,20 +56,10 @@ const register = async () => {
     />
 
     <div class="form__submit">
-      <Button
-        type="submit"
-        :loading="loading"
-      >
-        Submit
-      </Button>
+      <Button type="submit" :loading="loading"> Submit </Button>
       <p>
         Already registered?
-        <RouterLink
-          to="/login"
-          class="form-redirect"
-        >
-          Login
-        </RouterLink>
+        <RouterLink to="/login" class="form-redirect"> Login </RouterLink>
       </p>
     </div>
   </form>

@@ -1,0 +1,24 @@
+body .Toastify__toast {
+	box-shadow: 0 10px 20px -10px rgba(0,0,0,0.5);
+	border-radius: 20px;
+	font-family: 'Poppins', sans-serif;
+}
+
+body .Toastify__toast--error {
+	background: linear-gradient(to bottom, rgb(255 204 206), #fff);
+	color: rgba(255,71,87, 1);
+}
+
+body .Toastify__toast--success {
+	background: linear-gradient(to bottom, rgba(70,201,58, 0.3), #fff);
+	color: rgba(70,201,58, 1);
+}
+
+body .Toastify__toast--info {
+	background: linear-gradient(to bottom, rgba(26,92,255, 0.3), #fff);
+	color: rgba(26,92,255, 1);
+}
+
+body .Toastify__progress-bar--info {
+	background: rgba(26,92,255, 1);
+}
