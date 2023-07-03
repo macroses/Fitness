@@ -1,7 +1,7 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
-import { getCollection } from '@/composables/getCollection'
+import { computed, ref } from 'vue'
 import BodySvg from '@/components/BodySvg/BodySvg.vue'
+import { cacheExercises } from '@/composables/cacheExercises'
 
 const dataExercises = ref([])
 const loading = ref(false)
@@ -20,9 +20,7 @@ const filteredExercisesByMuscle = computed(() => {
   })
 })
 
-onMounted(async () => {
-  await getCollection('exercises', '*', loading, dataExercises)
-})
+cacheExercises(loading, dataExercises)
 </script>
 
 <template>

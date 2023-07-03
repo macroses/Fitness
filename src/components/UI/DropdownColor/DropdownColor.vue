@@ -17,6 +17,8 @@ const colorCollection = [
   { id: 11, rgb: '97, 97, 97' }
 ]
 
+const emit = defineEmits(['dropColor'])
+
 const container = ref(null)
 
 const defaultColor = ref(colorCollection[0].rgb)
@@ -25,6 +27,7 @@ const isDropDownActive = ref(false)
 const dropColor = (color) => {
   isDropDownActive.value = false
   defaultColor.value = color
+  emit('dropColor', color)
 }
 
 onClickOutside(container, () => (isDropDownActive.value = false))
@@ -32,13 +35,7 @@ onClickOutside(container, () => (isDropDownActive.value = false))
 
 <template>
   <div ref="container" class="dropdown-color__container" @click="isDropDownActive = true">
-    <div class="title">
-      <!--      <Icon-->
-      <!--        icon-name="brush"-->
-      <!--        width="20px"-->
-      <!--      />-->
-      Label
-    </div>
+    <div class="title">Label</div>
     <div class="dropdown-color__result" :style="{ backgroundColor: 'rgb(' + defaultColor + ')' }" />
     <Icon class="dropdown-color__arrow" icon-name="angle-down" width="11px" />
     <ul v-if="isDropDownActive" class="dropdown-color">

@@ -7,7 +7,7 @@ export const updateCalendar = (currentDate, today, calendarCells) => {
 
   calendarCells.value = Array.from({ length: 35 }, (_, index) => {
     const cellDate = firstDayOfWeek.add(index, 'day')
-    const formattedDate = cellDate.format('YYYY-MM-DDTHH:mm:ssZ')
+    const formattedDate = dayjs(cellDate)
     const isOtherMonth = !cellDate.isSame(firstDayOfMonth, 'month')
     const isCurrentDay = cellDate.isSame(todayValue, 'day')
 
