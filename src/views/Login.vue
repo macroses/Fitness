@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import { supabase } from '@/lib/supabaseClient'
 import Button from '@/components/UI/Button/Button.vue'
 import Input from '@/components/UI/Input/Input.vue'
-import TransitionClip from '@/components/UI/Noification/TransitionClip.vue'
 import { toast } from 'vue3-toastify'
 
 const router = useRouter()

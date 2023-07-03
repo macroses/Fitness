@@ -1049,10 +1049,10 @@ onMounted(() => {
 
 <style scoped>
 .active {
-  fill: red;
+  fill: rgb(255, 102, 102);
 }
 
 .secondary-active {
-  fill: yellow;
+  fill: #ffe55b;
 }
 </style>
