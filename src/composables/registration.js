@@ -1,6 +1,6 @@
-import { supabase } from '@/lib/supabaseClient'
 import { toast } from 'vue3-toastify'
 import { useRouter } from 'vue-router'
+import { supabase } from '@/lib/supabaseClient'
 
 const router = useRouter()
 

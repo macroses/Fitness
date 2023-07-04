@@ -1,10 +1,10 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { toast } from 'vue3-toastify'
 import { supabase } from '@/lib/supabaseClient'
 import Button from '@/components/UI/Button/Button.vue'
 import Input from '@/components/UI/Input/Input.vue'
-import { toast } from 'vue3-toastify'
 
 const router = useRouter()
 const formState = reactive({
@@ -38,9 +38,18 @@ const register = async () => {
 </script>
 
 <template>
-  <form class="form__auth" @submit.prevent="register">
-    <h1 class="form__header">Register</h1>
-    <Input v-model="formState.email" label-placeholder="Email" width="350px" />
+  <form
+    class="form__auth"
+    @submit.prevent="register"
+  >
+    <h1 class="form__header">
+      Register
+    </h1>
+    <Input
+      v-model="formState.email"
+      label-placeholder="Email"
+      width="350px"
+    />
     <Input
       type="password"
       v-model="formState.password"
@@ -55,10 +64,20 @@ const register = async () => {
     />
 
     <div class="form__submit">
-      <Button type="submit" :loading="loading"> Submit </Button>
+      <Button
+        type="submit"
+        :loading="loading"
+      >
+        Submit
+      </Button>
       <p>
         Already registered?
-        <RouterLink to="/login" class="form-redirect"> Login </RouterLink>
+        <RouterLink
+          to="/login"
+          class="form-redirect"
+        >
+          Login
+        </RouterLink>
       </p>
     </div>
   </form>

@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { workoutStore } from '@/stores/workout'
 
 const store = workoutStore()
-const getColor = (color) => (store.labelColor = color)
+const getColor = color => (store.labelColor = color)
 </script>
 
 <template>

@@ -10,11 +10,11 @@ const workoutsStore = workoutStore()
 const activeTab = ref(0)
 const chosenDate = ref(dayjs())
 
-const getActiveTab = (value) => {
+const getActiveTab = value => {
   activeTab.value = value
 }
 
-const getDate = (date) => {
+const getDate = date => {
   chosenDate.value = date
   workoutsStore.date = date
 }
@@ -33,9 +33,15 @@ const tabs = [
         <Calendar @get-date="getDate" />
         <div />
         <div class="workouts">
-          <Tabs :tabs="tabs" @activeTab="getActiveTab" />
-          <Workout v-if="activeTab === 0" :active-tab="activeTab" :chosen-date="chosenDate" />
-          <!--          <MySelect :options="testOptions" />-->
+          <Tabs
+            :tabs="tabs"
+            @activeTab="getActiveTab"
+          />
+          <Workout
+            v-if="activeTab === 0"
+            :active-tab="activeTab"
+            :chosen-date="chosenDate"
+          />
         </div>
         <div />
       </div>

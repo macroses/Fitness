@@ -7,7 +7,7 @@ export const getUserId = () => {
 
   onMounted(() => {
     for (let i = 0; i < localStorage.length; i++) {
-      let key = localStorage.key(i)
+      const key = localStorage.key(i)
 
       if (authTokenRegex.test(key)) {
         timeout = setTimeout(() => {
