@@ -34,10 +34,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div
-    class="input-parent"
-    :style="{ width: width }"
-  >
+  <div class="input-parent" :style="{ width: width }">
     <div class="input-content">
       <input
         class="input-component"
@@ -46,7 +43,7 @@ const props = defineProps({
         autocomplete="off"
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
-      >
+      />
       <label
         v-if="labelPlaceholder"
         :for="uniqueId"
@@ -54,11 +51,12 @@ const props = defineProps({
         :class="{
           'input-label--hidden': modelValue && !labelFade,
           'input-label--fade': labelFade,
-          'input-has-value': labelFade && modelValue,
+          'input-has-value': labelFade && modelValue
         }"
-      >{{ labelPlaceholder }}</label>
+        >{{ labelPlaceholder }}</label
+      >
     </div>
   </div>
 </template>
 
-<style scoped src="./style.css"></style>
+<style src="./style.css"></style>

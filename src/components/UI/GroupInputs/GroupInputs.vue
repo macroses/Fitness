@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 .group-inputs {
   display: flex;
   gap: 12px;

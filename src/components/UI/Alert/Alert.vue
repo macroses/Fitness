@@ -7,4 +7,4 @@
   </div>
 </template>
 
-<style scoped src="./style.css"></style>
+<style src="./style.css"></style>

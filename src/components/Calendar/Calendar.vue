@@ -11,7 +11,7 @@ const calendarCells = ref([])
 const transitionName = ref('')
 const activeDate = ref(dayjs())
 
-const handleClickCell = cellDate => {
+const handleClickCell = (cellDate) => {
   emit('getDate', cellDate)
   activeDate.value = cellDate
   transitionName.value = ''
@@ -43,25 +43,11 @@ onMounted(() => {
 <template>
   <div class="calendar">
     <div class="calendar__controls">
-      <Button
-        transparent
-        @click="goToPreviousMonth"
-      >
-        <Icon
-          icon-name="angle-left"
-          width="20px"
-          aria-label="previous month"
-        />
+      <Button transparent @click="goToPreviousMonth">
+        <Icon icon-name="angle-left" width="20px" aria-label="previous month" />
       </Button>
-      <Button
-        transparent
-        @click="goToNextMonth"
-      >
-        <Icon
-          icon-name="angle-right"
-          width="20px"
-          aria-label="next month"
-        />
+      <Button transparent @click="goToNextMonth">
+        <Icon icon-name="angle-right" width="20px" aria-label="next month" />
       </Button>
       <Button
         transparent
@@ -71,28 +57,14 @@ onMounted(() => {
       >
         Current
       </Button>
-      <Transition
-        mode="out-in"
-        :name="transitionName"
-        appear
-      >
-        <div
-          class="callendar__date"
-          :key="currentDate"
-        >
+      <Transition mode="out-in" :name="transitionName" appear>
+        <div class="callendar__date" :key="currentDate">
           {{ currentDate.format('MMMM') }} {{ currentDate.format('YYYY') }}
         </div>
       </Transition>
     </div>
-    <Transition
-      mode="out-in"
-      :name="transitionName"
-      appear
-    >
-      <div
-        class="calendar__days"
-        :key="new Date()"
-      >
+    <Transition mode="out-in" :name="transitionName" appear>
+      <div class="calendar__days" :key="new Date()">
         <div
           v-for="cell in calendarCells"
           :key="cell.date"
@@ -101,8 +73,8 @@ onMounted(() => {
             {
               'calendar__cell--other-month': cell.isOtherMonth,
               'calendar__cell--current-day': cell.isCurrentDay,
-              active: dayjs(cell.date).isSame(activeDate, 'day'),
-            },
+              active: dayjs(cell.date).isSame(activeDate, 'day')
+            }
           ]"
           @click="handleClickCell(cell.date)"
         >
@@ -113,4 +85,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped src="./style.css"></style>
+<style src="./style.css"></style>

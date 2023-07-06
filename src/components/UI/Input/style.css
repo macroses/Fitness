@@ -5,6 +5,10 @@
 	position: relative;
 }
 
+.input-parent:has(.input-label--fade) {
+	overflow: hidden;
+}
+
 .input-content {
 	display: flex;
 	align-items: center;

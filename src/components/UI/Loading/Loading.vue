@@ -18,14 +18,10 @@ defineProps({
 </script>
 
 <template>
-  <div
-    ref="loader"
-    class="loading"
-    :class="{ large: large }"
-  />
+  <div ref="loader" class="loading" :class="{ large: large }" />
 </template>
 
-<style scoped>
+<style>
 .loading {
   width: 100%;
   height: 100%;

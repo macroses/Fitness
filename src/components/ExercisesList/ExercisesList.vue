@@ -1,48 +1,66 @@
 <script setup>
 import { computed, ref } from 'vue'
-import BodySvg from '@/components/BodySvg/BodySvg.vue'
 import { cacheExercises } from '@/composables/cacheExercises'
+import { exerciseStore } from '@/stores/exercise'
+
+const exercisesStore = exerciseStore()
 
 const dataExercises = ref([])
 const loading = ref(false)
+const activeMuscle = ref(null)
 
 const uniqueMainMuscles = computed(() => {
-  const mainMuscles = new Set(dataExercises.value.map(exercise => exercise.main_muscle))
+  const mainMuscles = new Set(dataExercises.value.map((exercise) => exercise.main_muscle))
   return Array.from(mainMuscles)
 })
 
-const filteredExercisesByMuscle = computed(() => uniqueMainMuscles.value.map(muscle => ({
-  muscle,
-  exercises: dataExercises.value.filter(exercise => exercise.main_muscle === muscle)
-})))
+const filteredExercisesByMuscle = computed(() =>
+  uniqueMainMuscles.value.map((muscle) => ({
+    muscle,
+    exercises: dataExercises.value.filter((exercise) => exercise.main_muscle === muscle)
+  }))
+)
 
 cacheExercises(loading, dataExercises)
+
+const selectMuscle = (index) => {
+  activeMuscle.value === index ? (activeMuscle.value = null) : (activeMuscle.value = index)
+}
+
+const showExercise = (exercise) => (exercisesStore.exercise = exercise)
 </script>
 
 <template>
-  <BodySvg
-    body-part="chest"
-    :secondary-part="['forearms', 'glutes']"
-  />
-
   <ul class="muscles">
     <li
-      v-for="item in filteredExercisesByMuscle"
+      v-for="(item, index) in filteredExercisesByMuscle"
       :key="item.muscle"
       class="muscles__item"
+      :class="{ active: activeMuscle === index }"
     >
-      {{ item.muscle }}
-      <ul class="muscle-exercises">
-        <li
-          v-for="exercise in item.exercises"
-          :key="exercise.id"
-          class="muscle-exercises__item"
-        >
-          {{ exercise.name }}
-        </li>
-      </ul>
+      <div class="muscles__item-header" @click="selectMuscle(index)">
+        {{ item.muscle }}
+        <div class="muscle__item-length">
+          {{ item.exercises.length }}
+          <div class="muscles__item-img" />
+        </div>
+        <div class="collapse__icon" />
+      </div>
+
+      <div class="exercises-wr">
+        <ul class="exercises">
+          <li
+            v-for="exercise in item.exercises"
+            :key="exercise.id"
+            class="exercises__item"
+            @click="showExercise(exercise)"
+          >
+            {{ exercise.name }}
+          </li>
+        </ul>
+      </div>
     </li>
   </ul>
 </template>
 
-<style scoped src="./style.css"></style>
+<style src="./style.css"></style>

@@ -4,7 +4,7 @@
   </transition>
 </template>
 
-<style scoped>
+<style>
 .clip-enter-active,
 .clip-leave-active {
   transition: all 0.5s ease;

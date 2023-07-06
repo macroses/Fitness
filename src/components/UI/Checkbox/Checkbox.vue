@@ -41,11 +41,8 @@ const model = computed({
           :id="uniqueId"
           v-model="model"
           :checked="modelValue"
-        >
-        <div
-          class="checkbox-effect"
-          :class="{ active: modelValue }"
-        >
+        />
+        <div class="checkbox-effect" :class="{ active: modelValue }">
           <div class="checkbox-icon">
             <div class="line1" />
             <div class="line2" />
@@ -53,12 +50,9 @@ const model = computed({
         </div>
       </div>
 
-      <label
-        :for="uniqueId"
-        class="checkbox-label"
-      >{{ label }}</label>
+      <label :for="uniqueId" class="checkbox-label">{{ label }}</label>
     </div>
   </div>
 </template>
 
-<style scoped src="./style.css"></style>
+<style src="./style.css"></style>

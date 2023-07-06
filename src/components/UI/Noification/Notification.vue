@@ -35,7 +35,7 @@ onMounted(() => {
   }, 3000)
 })
 
-watch(isVisible, val => {
+watch(isVisible, (val) => {
   if (!val) {
     clearTimeout(timer.value)
   }
@@ -43,23 +43,17 @@ watch(isVisible, val => {
 </script>
 
 <template>
-  <div
-    v-if="isVisible"
-    class="notification-parent"
-  >
+  <div v-if="isVisible" class="notification-parent">
     <div
       class="notification-content"
       :class="{
         'notification--error': error,
         'notification--info': info,
-        'notification--success': success,
+        'notification--success': success
       }"
     >
       <div class="notification-icon">
-        <Icon
-          width="20px"
-          :icon-name="notificationData.iconName"
-        />
+        <Icon width="20px" :icon-name="notificationData.iconName" />
       </div>
       <div class="notification-data">
         <div class="notification__header">
@@ -73,4 +67,4 @@ watch(isVisible, val => {
   </div>
 </template>
 
-<style scoped src="./style.css"></style>
+<style src="./style.css"></style>

@@ -31,7 +31,6 @@ const tabs = [
     <div class="container">
       <div class="main__layout">
         <Calendar @get-date="getDate" />
-        <div />
         <div class="workouts">
           <Tabs
             :tabs="tabs"
@@ -42,6 +41,9 @@ const tabs = [
             :active-tab="activeTab"
             :chosen-date="chosenDate"
           />
+        </div>
+        <div class="event">
+          выберите дату
         </div>
         <div />
       </div>

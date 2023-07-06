@@ -1,6 +1,8 @@
 <script setup>
 import dayjs from 'dayjs'
 import { workoutStore } from '@/stores/workout'
+import Button from '@/components/UI/Button/Button.vue'
+import Input from '@/components/UI/Input/Input.vue'
 
 const store = workoutStore()
 const getColor = color => (store.labelColor = color)
@@ -22,5 +24,11 @@ const getColor = color => (store.labelColor = color)
         label-fade
       />
     </div>
+    <Button
+      :disabled="!store.title"
+      @click="$emit('clickBtn')"
+    >
+      Choose exercises
+    </Button>
   </div>
 </template>
