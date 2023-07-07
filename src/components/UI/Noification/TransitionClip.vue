@@ -11,7 +11,7 @@
 }
 
 .clip-enter-from {
-  clip-path: circle(0% at 80% 35%);
+  transform: translateX(50%);
 }
 
 .clip-leave-to {

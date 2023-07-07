@@ -31,10 +31,18 @@
 	width: 15px;
 }
 
-.calendar__cell:not(.calendar__cell--other-month):hover {
+.calendar__cell:not(.calendar__cell--other-month):focus {
 	box-shadow: 0 10px 20px -10px rgba(26,92,255, 0.5);
 	transform: translateY(-3px);
 	cursor: pointer;
+}
+
+@media(hover: hover) and (pointer: fine) {
+	.calendar__cell:not(.calendar__cell--other-month):hover {
+		box-shadow: 0 10px 20px -10px rgba(26,92,255, 0.5);
+		transform: translateY(-3px);
+		cursor: pointer;
+	}
 }
 
 .calendar__cell.active {

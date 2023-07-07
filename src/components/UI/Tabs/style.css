@@ -13,8 +13,10 @@
 	transition: color 0.25s ease;
 }
 
-.tabs__item:hover {
-	color: var(--accent-color);
+@media(hover: hover) and (pointer: fine) {
+	.tabs__item:hover {
+		color: var(--accent-color);
+	}
 }
 
 .tabs__item.active {

@@ -34,11 +34,17 @@ defineEmits(['update:modelValue'])
           :value="value"
           @input="$emit('update:modelValue', $event.target.value)"
           :checked="isChecked"
+        >
+        <span
+          class="radio-effect"
+          :class="{ active: isChecked }"
         />
-        <span class="radio-effect" :class="{ active: isChecked }" />
       </div>
 
-      <label :for="uniqueId" class="radio-label">{{ label }}</label>
+      <label
+        :for="uniqueId"
+        class="radio-label"
+      >{{ label }}</label>
     </div>
   </div>
 </template>

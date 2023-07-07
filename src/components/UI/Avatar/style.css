@@ -20,7 +20,14 @@
 	transition: all 0.25s ease;
 }
 
-.avatar-content:hover svg {
+.avatar-content:focus svg {
 	scale: 1.2;
 	transition: all 0.25s ease;
+}
+
+@media(hover: hover) and (pointer: fine) {
+	.avatar-content:hover svg {
+		scale: 1.2;
+		transition: all 0.25s ease;
+	}
 }

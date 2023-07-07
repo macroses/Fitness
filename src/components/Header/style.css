@@ -1,6 +1,5 @@
 .header {
 	background-color: var(--main-bg);
-	box-shadow: 0 2px 8px #f0f1f2;
 }
 
 .header__user {
@@ -40,8 +39,14 @@
 	transition: color 0.25s ease;
 }
 
-.header__nav a:hover {
+.header__nav a:focus {
 	color: var(--accent-color);
+}
+
+@media(hover: hover) and (pointer: fine) {
+	.header__nav a:hover {
+		color: var(--accent-color);
+	}
 }
 
 .user-dropdown__content {
@@ -82,7 +87,14 @@
 	transition: all 0.25s ease;
 }
 
-.user-dropdown__item:hover {
+.user-dropdown__item:focus {
 	padding-left: 14px;
 	color: var(--accent-color);
+}
+
+@media(hover: hover) and (pointer: fine) {
+	.user-dropdown__item:hover {
+		padding-left: 14px;
+		color: var(--accent-color);
+	}
 }

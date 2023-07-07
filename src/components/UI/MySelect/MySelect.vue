@@ -18,9 +18,18 @@ defineProps({
 <template>
   <div class="select-parent">
     <div class="select__icon" />
-    <input readonly v-model="selectValue" :placeholder="label" class="select-input" />
+    <input
+      readonly
+      v-model="selectValue"
+      :placeholder="label"
+      class="select-input"
+    >
     <ul class="options">
-      <li v-for="option in options" class="options__item" @click="selectValue = option">
+      <li
+        v-for="option in options"
+        class="options__item"
+        @click="selectValue = option"
+      >
         {{ option }}
       </li>
     </ul>

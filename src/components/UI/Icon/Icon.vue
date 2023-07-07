@@ -7,7 +7,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <svg viewBox="0 0 24 24" :width="width" style="fill: currentColor">
+  <svg
+    viewBox="0 0 24 24"
+    :width="width"
+    style="fill: currentColor"
+  >
     <use :xlink:href="`/light.svg#${iconName}`" />
   </svg>
 </template>

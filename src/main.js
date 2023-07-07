@@ -19,5 +19,4 @@ app.use(Vue3Toasity, {
     fontSize: '15px'
   }
 })
-
 app.mount('#app')

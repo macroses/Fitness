@@ -14,11 +14,13 @@
 	height: 42px;
 }
 
-.select-input:hover {
-	background: rgba(var(--main-bg),1);
-	box-shadow: 0 5px 25px -4px rgba(0,0,0,0.05);
-	transform: translateY(-4px);
-	cursor: pointer;
+@media(hover: hover) and (pointer: fine) {
+	.select-input:hover {
+		background: rgba(var(--main-bg),1);
+		box-shadow: 0 5px 25px -4px rgba(0,0,0,0.05);
+		transform: translateY(-4px);
+		cursor: pointer;
+	}
 }
 
 .select-input:focus {

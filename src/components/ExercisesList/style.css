@@ -10,9 +10,16 @@
 	color: rgba(44,62,80,1);
 }
 
-.muscles__item-header:hover {
+.muscles__item-header:focus {
 	box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
 	transform: translateY(-3px);
+}
+
+@media(hover: hover) and (pointer: fine) {
+	.muscles__item-header:hover {
+		box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
+		transform: translateY(-3px);
+	}
 }
 
 .muscles__item.active .muscles__item-header {
@@ -37,7 +44,7 @@
 	top: calc(50% - 4px);
 	transform: rotate(-135deg);
 	transition: all .25s ease;
-	z-index: 600;
+	z-index: 10;
 	border-left: 1px solid black;
 	border-radius: 2px;
 	border-top: 1px solid black;
@@ -45,15 +52,15 @@
 
 .exercises-wr {
 	display: grid;
-	grid-template-rows: 0fr;
-	overflow: hidden;
+	grid-template-rows: 0;
+	overflow: auto;
 	transition: grid-template-rows 0.5s ease;
 }
 .exercises {
 	min-height: 0;
 }
 .muscles__item.active .exercises-wr{
-	grid-template-rows: 1fr;
+	grid-template-rows: 300px;
 }
 
 .muscle__item-length {
@@ -84,7 +91,14 @@
 	transform: rotate(45deg);
 }
 
-.exercises__item:hover {
+.exercises__item:focus {
 	transform: translateY(-3px);
 	background: rgba(244,247,248,1);
+}
+
+@media(hover: hover) and (pointer: fine) {
+	.exercises__item:hover {
+		transform: translateY(-3px);
+		background: rgba(244,247,248,1);
+	}
 }

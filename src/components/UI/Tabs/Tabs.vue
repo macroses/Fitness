@@ -14,7 +14,7 @@ const activeTab = ref(0)
 const tabRect = ref(null)
 const tabsLine = ref(null)
 
-const changeActiveTab = (index) => {
+const changeActiveTab = index => {
   activeTab.value = index
   emit('activeTab', activeTab.value)
 }
@@ -45,7 +45,11 @@ const tabStyle = computed(() => {
         {{ tab.tabTitle }}
       </li>
     </ul>
-    <div ref="tabsLine" class="tabs-line" :style="tabStyle" />
+    <div
+      ref="tabsLine"
+      class="tabs-line"
+      :style="tabStyle"
+    />
   </div>
 </template>
 

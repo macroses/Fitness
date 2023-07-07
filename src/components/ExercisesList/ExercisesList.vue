@@ -10,24 +10,22 @@ const loading = ref(false)
 const activeMuscle = ref(null)
 
 const uniqueMainMuscles = computed(() => {
-  const mainMuscles = new Set(dataExercises.value.map((exercise) => exercise.main_muscle))
+  const mainMuscles = new Set(dataExercises.value.map(exercise => exercise.main_muscle))
   return Array.from(mainMuscles)
 })
 
-const filteredExercisesByMuscle = computed(() =>
-  uniqueMainMuscles.value.map((muscle) => ({
-    muscle,
-    exercises: dataExercises.value.filter((exercise) => exercise.main_muscle === muscle)
-  }))
-)
+const filteredExercisesByMuscle = computed(() => uniqueMainMuscles.value.map(muscle => ({
+  muscle,
+  exercises: dataExercises.value.filter(exercise => exercise.main_muscle === muscle)
+})))
 
 cacheExercises(loading, dataExercises)
 
-const selectMuscle = (index) => {
+const selectMuscle = index => {
   activeMuscle.value === index ? (activeMuscle.value = null) : (activeMuscle.value = index)
 }
 
-const showExercise = (exercise) => (exercisesStore.exercise = exercise)
+const showExercise = exercise => (exercisesStore.exercise = exercise)
 </script>
 
 <template>
@@ -38,7 +36,10 @@ const showExercise = (exercise) => (exercisesStore.exercise = exercise)
       class="muscles__item"
       :class="{ active: activeMuscle === index }"
     >
-      <div class="muscles__item-header" @click="selectMuscle(index)">
+      <div
+        class="muscles__item-header"
+        @click="selectMuscle(index)"
+      >
         {{ item.muscle }}
         <div class="muscle__item-length">
           {{ item.exercises.length }}
