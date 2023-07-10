@@ -4,9 +4,17 @@ import { onClickOutside } from '@vueuse/core'
 import { exerciseStore } from '@/stores/exercise'
 import BodySvg from '@/components/BodySvg/BodySvg.vue'
 import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
+import Button from '@/components/UI/Button/Button.vue'
+import { workoutStore } from '@/stores/workout'
 
 const store = exerciseStore()
+const workoutsStore = workoutStore()
 const asideExercise = ref(null)
+
+const addExerciseToWorkout = id => {
+  workoutsStore.addExerciseToWorkout(id)
+  store.exercise = null
+}
 
 onClickOutside(asideExercise, () => (store.exercise = null))
 </script>
@@ -23,6 +31,12 @@ onClickOutside(asideExercise, () => (store.exercise = null))
     >
       close
     </ButtonClose>
+    <Button
+      class="button_to-workout"
+      @click="addExerciseToWorkout(store.exercise?.id)"
+    >
+      Add to workout
+    </Button>
     <div class="aside__content">
       <div class="exercise-description">
         <div class="title">

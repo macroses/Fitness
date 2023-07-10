@@ -156,3 +156,9 @@
 		rotate: 360deg
 	}
 }
+
+.button_to-workout {
+	position: absolute;
+	bottom: 16px;
+	right: 16px;
+}

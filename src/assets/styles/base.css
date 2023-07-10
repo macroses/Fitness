@@ -93,13 +93,24 @@ body {
   column-gap: 24px;
 }
 
+.group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (width > 768px) {
   .container {
     padding: 0 32px;
   }
 
-  .main__layout {
+  .main__layout.workout-mode {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .main__layout.workout-mode .calendar {
+    max-width: 100%;
   }
 }
 

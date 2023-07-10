@@ -1,5 +1,9 @@
+.muscles {
+	margin-top: 16px;
+}
+
 .muscles__item-header {
-	height: 50px;
+	height: 42px;
 	display: flex;
 	align-items: center;
 	border-radius: 12px;
@@ -29,8 +33,8 @@
 }
 
 .muscles__item-img {
-	width: 38px;
-	height: 38px;
+	width: 32px;
+	height: 32px;
 	border-radius: 50%;
 	border: 1px solid rgba(26,92,255, 0.5);
 }
@@ -66,7 +70,7 @@
 .muscle__item-length {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: 24px;
 	color: lightgray;
 	margin-left: auto;
 }

@@ -1,55 +1,62 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import dayjs from 'dayjs'
 import Workout from '@/components/Workout/Workout.vue'
 import { workoutStore } from '@/stores/workout'
 import AsideExercise from '@/components/AsideExercise/AsideExercise.vue'
 import { exerciseStore } from '@/stores/exercise'
+import Button from '@/components/UI/Button/Button.vue'
+import WorkoutDescription from '@/components/Workout/WorkoutDescription.vue'
+import ExercisesList from '@/components/ExercisesList/ExercisesList.vue'
+import ChosenExercisesList from '@/components/ChosenExercisesList/ChosenExercisesList.vue'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()
 
-const activeTab = ref(0)
 const chosenDate = ref(dayjs())
-
-const getActiveTab = value => {
-  activeTab.value = value
-}
+const workoutMode = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
   workoutsStore.date = date
 }
-
-const tabs = [
-  { id: 0, tabTitle: 'Workout' },
-  { id: 1, tabTitle: 'Program' },
-  { id: 2, tabTitle: 'Body Parameters' }
-]
 </script>
 
 <template>
   <main>
     <div class="container">
-      <div class="main__layout">
+      <div
+        class="main__layout"
+        :class="{ 'workout-mode': workoutMode }"
+      >
         <div class="main__layout-left">
           <Calendar @get-date="getDate" />
-          <div class="events">
-            its chosen events
+
+          <div
+            v-if="!workoutMode"
+            class="group"
+          >
+            <Button @click="workoutMode = true">
+              Create workout
+            </Button>
+            <Button>Program</Button>
+            <Button>Body parameters</Button>
           </div>
+          <div
+            v-if="!workoutMode"
+            class="events"
+          >
+            <div class="events__empty">
+              Today there are no events
+            </div>
+          </div>
+          <template v-if="workoutMode">
+            <WorkoutDescription />
+            <ChosenExercisesList />
+          </template>
         </div>
         <div class="main__layout-right">
-          <div class="workouts">
-            <Tabs
-              :tabs="tabs"
-              @activeTab="getActiveTab"
-            />
-            <Workout
-              v-if="activeTab === 0"
-              :active-tab="activeTab"
-              :chosen-date="chosenDate"
-            />
-          </div>
+          <ExercisesList v-if="workoutMode" />
         </div>
       </div>
     </div>
