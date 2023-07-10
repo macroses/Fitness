@@ -1,27 +1,24 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { cacheExercises } from '@/composables/cacheExercises'
 import { exerciseStore } from '@/stores/exercise'
 import Input from '@/components/UI/Input/Input.vue'
 
 const exercisesStore = exerciseStore()
 
-const dataExercises = ref([])
 const loading = ref(false)
 const activeMuscle = ref(null)
 const search = ref(null)
+const sessionExercises = ref(JSON.parse(sessionStorage.getItem('exercisesCache')))
 
 const uniqueMainMuscles = computed(() => {
-  const mainMuscles = new Set(dataExercises.value.map(exercise => exercise.main_muscle))
+  const mainMuscles = new Set(sessionExercises.value.map(exercise => exercise.main_muscle))
   return Array.from(mainMuscles)
 })
 
 const filteredExercisesByMuscle = computed(() => uniqueMainMuscles.value.map(muscle => ({
   muscle,
-  exercises: dataExercises.value.filter(exercise => exercise.main_muscle === muscle)
+  exercises: sessionExercises.value.filter(exercise => exercise.main_muscle === muscle)
 })))
-
-cacheExercises(loading, dataExercises)
 
 const selectMuscle = index => {
   activeMuscle.value === index ? (activeMuscle.value = null) : (activeMuscle.value = index)
@@ -31,15 +28,7 @@ const showExercise = exercise => (exercisesStore.exercise = exercise)
 </script>
 
 <template>
-  <Loading
-    v-if="loading"
-    large
-    style="height: 240px"
-  />
-  <div
-    v-else
-    class="exercises-list"
-  >
+  <div class="exercises-list">
     <Input
       v-model="search"
       :value="search"

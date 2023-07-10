@@ -11,7 +11,10 @@ const showExercisesByChosenId = computed(() => {
 </script>
 
 <template>
-  <ul class="chosen-exercises">
+  <ul
+    v-if="showExercisesByChosenId.length"
+    class="chosen-exercises"
+  >
     <li
       v-for="exercise in showExercisesByChosenId"
       :key="exercise.id"
@@ -20,6 +23,9 @@ const showExercisesByChosenId = computed(() => {
       {{ exercise.name }}
     </li>
   </ul>
+  <p v-else>
+    no data
+  </p>
 </template>
 
 <style scoped src="./style.css" />

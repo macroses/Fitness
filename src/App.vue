@@ -1,8 +1,12 @@
 <script setup>
-import Header from '@/components/Header/Header.vue'
-import { getUserId } from '@/composables/getUserId'
+// import { getUserId } from '@/composables/getUserId'
+import { ref } from 'vue'
+import { cacheExercises } from '@/composables/cacheExercises'
 
-const { userId } = getUserId()
+// const { userId } = getUserId()
+
+const dataExercises = ref([])
+cacheExercises(dataExercises)
 </script>
 
 <template>

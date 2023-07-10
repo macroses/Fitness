@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 export const workoutStore = defineStore({
   id: 'workout',
   state: () => ({
+    isWorkoutMode: false,
     title: null,
     labelColor: '246, 191, 38',
     date: dayjs(),

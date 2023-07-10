@@ -79,6 +79,7 @@
 	font-size: 13px;
 	padding: 8px 12px;
 	cursor: pointer;
+	border-radius: 12px;
 	transition: all 0.25s ease;
 	position: relative;
 }
