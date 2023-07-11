@@ -1,30 +1,32 @@
 <script setup>
-import { computed } from 'vue'
 import { workoutStore } from '@/stores/workout'
+import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
 
 const store = workoutStore()
-
-const showExercisesByChosenId = computed(() => {
-  const sessionExercises = JSON.parse(sessionStorage.getItem('exercisesCache'))
-  return sessionExercises.filter(exercise => store.exercises.includes(exercise.id))
-})
 </script>
 
 <template>
   <ul
-    v-if="showExercisesByChosenId.length"
+    v-if="store.exercises.length"
     class="chosen-exercises"
   >
     <li
-      v-for="exercise in showExercisesByChosenId"
+      v-for="exercise in store.exercises"
       :key="exercise.id"
       class="chosen-exercises__item"
     >
       {{ exercise.name }}
+      <ButtonClose
+        @click="store.deleteExercise(exercise.id)"
+        class="chosen-exercises__delete"
+      />
     </li>
   </ul>
-  <p v-else>
-    no data
+  <p
+    v-else
+    class="chosen-exercises__empty"
+  >
+    Add exercises
   </p>
 </template>
 

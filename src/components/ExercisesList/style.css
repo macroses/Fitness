@@ -54,17 +54,18 @@
 	border-top: 1px solid black;
 }
 
-.exercises-wr {
-	display: grid;
-	grid-template-rows: 0;
-	overflow: auto;
-	transition: grid-template-rows 0.5s ease;
-}
+/*.exercises-wr {*/
+/*	max-height: 0;*/
+/*	overflow: auto;*/
+/*	transition: all 0.25s ease;*/
+/*}*/
 .exercises {
-	min-height: 0;
+	max-height: 0;
+	overflow: auto;
+	transition: all 0.25s ease;
 }
-.muscles__item.active .exercises-wr{
-	grid-template-rows: 300px;
+.muscles__item.active .exercises {
+	max-height: 300px;
 }
 
 .muscle__item-length {

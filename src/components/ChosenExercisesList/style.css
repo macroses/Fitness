@@ -1,0 +1,22 @@
+.chosen-exercises__item {
+	font-size: 13px;
+	padding: 8px 12px;
+	cursor: pointer;
+	border-radius: 12px;
+	transition: all 0.25s ease;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.chosen-exercises__empty {
+	opacity: 0.3;
+	text-align: center;
+}
+
+@media(hover: hover) and (pointer: fine) {
+	.chosen-exercises__item:hover {
+		transform: translateY(-3px);
+		background: rgba(244,247,248,1);
+	}
+}

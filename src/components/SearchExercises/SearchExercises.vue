@@ -1,0 +1,67 @@
+<script setup>
+import { ref, watch } from 'vue'
+import { useDebounceFn } from '@vueuse/core'
+import Input from '@/components/UI/Input/Input.vue'
+
+const isSearchInFocus = ref(false)
+const search = ref(null)
+const sessionExercises = ref(JSON.parse(sessionStorage.getItem('exercisesCache')))
+
+const searchResults = ref(null)
+const resultList = ref(null)
+const debouncedSearch = useDebounceFn(() => {
+  if (!search.value) {
+    searchResults.value = null
+    return
+  }
+
+  const query = search.value.toLowerCase()
+  searchResults.value = sessionExercises.value.filter(exercise => exercise.name.toLowerCase().includes(query))
+}, 500)
+
+const highlightText = text => {
+  if (!search.value) return text
+
+  const query = search.value.toLowerCase()
+  const regex = new RegExp(query, 'gi')
+  return text.replace(regex, '<mark>$&</mark>')
+}
+
+const clearSearch = () => {
+  search.value = null
+  searchResults.value = null
+}
+
+watch(search, debouncedSearch)
+</script>
+
+<template>
+  <div class="exercises-search">
+    <Input
+      v-model="search"
+      :value="search"
+      label-placeholder="Find exercise"
+      @clear="clearSearch"
+      @focus="isSearchInFocus = true"
+      @blur="isSearchInFocus = false"
+    />
+    <ul
+      ref="resultList"
+      v-if="searchResults && isSearchInFocus"
+      class="exercises-search__results-list"
+    >
+      <li
+        v-for="exercise in searchResults"
+        :key="exercise.id"
+        class="exercises-search__results-item"
+      >
+        <span v-html="highlightText(exercise.name)" />
+      </li>
+      <li v-if="searchResults.length === 0">
+        no results
+      </li>
+    </ul>
+  </div>
+</template>
+
+<style src="./style.css" />

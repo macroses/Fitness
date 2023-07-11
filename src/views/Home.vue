@@ -48,8 +48,10 @@ const getDate = date => {
           </div>
 
           <template v-if="workoutsStore.isWorkoutMode">
-            <WorkoutDescription />
-            <ChosenExercisesList />
+            <div class="user-workout">
+              <WorkoutDescription />
+              <ChosenExercisesList />
+            </div>
           </template>
         </div>
 
@@ -60,13 +62,13 @@ const getDate = date => {
     </div>
   </main>
 
-  <transition name="slide-left">
-    <AsideExercise v-if="exercisesStore.exercise" />
-  </transition>
-  <transition>
-    <div
-      v-if="exercisesStore.exercise"
-      class="aside-layout"
-    />
-  </transition>
+  <AsideExercise v-if="exercisesStore.exercise" />
 </template>
+
+<style>
+.user-workout {
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(26, 92, 255, 0.1);
+}
+</style>

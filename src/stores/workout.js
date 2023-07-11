@@ -15,6 +15,9 @@ export const workoutStore = defineStore({
       if (!this.exercises.includes(exerciseId)) {
         this.exercises.push(exerciseId)
       }
+    },
+    deleteExercise(id) {
+      this.exercises = this.exercises.filter(exercise => exercise.id !== id)
     }
   }
 })

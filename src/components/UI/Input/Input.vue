@@ -46,6 +46,8 @@ const props = defineProps({
         autocomplete="off"
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
+        @focus="$emit('focus')"
+        @blur="$emit('blur')"
       >
       <label
         v-if="labelPlaceholder"
@@ -57,6 +59,16 @@ const props = defineProps({
           'input-has-value': labelFade && modelValue,
         }"
       >{{ labelPlaceholder }}</label>
+      <button
+        v-if="modelValue"
+        class="input-clear"
+        @click="$emit('clear')"
+      >
+        <Icon
+          icon-name="xmark"
+          width="18px"
+        />
+      </button>
     </div>
   </div>
 </template>

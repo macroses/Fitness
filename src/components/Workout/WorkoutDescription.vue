@@ -14,6 +14,7 @@ const getColor = color => (store.labelColor = color)
         :value="store.title"
         label-placeholder="Workout name"
         label-fade
+        @clear="store.title = null"
       />
       <DropdownColor @drop-color="getColor" />
     </div>

@@ -82,3 +82,25 @@
 	pointer-events: auto;
 	transform: translate(50px, 0);
 }
+
+.input-clear {
+	background: transparent;
+	display: flex;
+	align-items: center;
+	height: 42px;
+	width: 42px;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 0;
+	cursor: pointer;
+	border-radius: 9px;
+	transition: all 0.25s ease;
+}
+
+.input-clear:hover {
+	background-color: rgba(249,252,253, 1);
+	transform: translate(6px, -6px);
+	box-shadow: -15px 10px 10px -10px rgba(0,0,0,0.05);
+}
