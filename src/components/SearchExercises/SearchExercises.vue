@@ -1,7 +1,10 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { useDebounceFn } from '@vueuse/core'
+import { onClickOutside, useDebounceFn } from '@vueuse/core'
 import Input from '@/components/UI/Input/Input.vue'
+import { exerciseStore } from '@/stores/exercise'
+
+const exercisesStore = exerciseStore()
 
 const isSearchInFocus = ref(false)
 const search = ref(null)
@@ -17,7 +20,7 @@ const debouncedSearch = useDebounceFn(() => {
 
   const query = search.value.toLowerCase()
   searchResults.value = sessionExercises.value.filter(exercise => exercise.name.toLowerCase().includes(query))
-}, 500)
+}, 0)
 
 const highlightText = text => {
   if (!search.value) return text
@@ -33,17 +36,23 @@ const clearSearch = () => {
 }
 
 watch(search, debouncedSearch)
+
+const showExercise = exercise => {
+  exercisesStore.exercise = exercise
+  search.value = null
+}
+
+// onClickOutside(resultList, () => isSearchInFocus.value = false)
 </script>
 
 <template>
   <div class="exercises-search">
     <Input
-      v-model="search"
+      v-model.trim="search"
       :value="search"
       label-placeholder="Find exercise"
       @clear="clearSearch"
       @focus="isSearchInFocus = true"
-      @blur="isSearchInFocus = false"
     />
     <ul
       ref="resultList"
@@ -54,11 +63,15 @@ watch(search, debouncedSearch)
         v-for="exercise in searchResults"
         :key="exercise.id"
         class="exercises-search__results-item"
+        @click="showExercise(exercise)"
       >
         <span v-html="highlightText(exercise.name)" />
       </li>
-      <li v-if="searchResults.length === 0">
-        no results
+      <li
+        v-if="searchResults.length === 0"
+        class="exercises-search__empty"
+      >
+        No results
       </li>
     </ul>
   </div>

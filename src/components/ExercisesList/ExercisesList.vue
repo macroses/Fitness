@@ -41,7 +41,6 @@ onMounted(() => {
 <template>
   <div class="exercises-list">
     <SearchExercises />
-
     <ul
       ref="muscles"
       class="muscles"
