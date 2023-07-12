@@ -6,6 +6,7 @@ import { cacheExercises } from '@/composables/cacheExercises'
 // const { userId } = getUserId()
 
 const dataExercises = ref([])
+
 cacheExercises(dataExercises)
 </script>
 

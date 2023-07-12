@@ -63,6 +63,7 @@ const props = defineProps({
         v-if="modelValue"
         class="input-clear"
         @click="$emit('clear')"
+        type="button"
       >
         <Icon
           icon-name="xmark"

@@ -1,4 +1,4 @@
-.chosen-exercises__item {
+.chosen-exercises__item-header {
 	font-size: 13px;
 	padding: 8px 12px;
 	cursor: pointer;
@@ -9,14 +9,60 @@
 	align-items: center;
 }
 
+.chosen-exercises__item-name {
+	padding-left: 24px;
+}
+
 .chosen-exercises__empty {
 	opacity: 0.3;
 	text-align: center;
 }
 
+.chosen-exercises__delete {
+	width: 34px;
+	height: 34px;
+	background-color: transparent;
+	border-radius: 12px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 0;
+	cursor: pointer;
+	opacity: 0.5;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.25s ease;
+}
+
+.chosen-exercises__delete::after {
+	background: var(--text-color);
+	content: "";
+	position: absolute;
+	width: 14px;
+	height: 2px;
+	border-radius: 2px;
+	transform: rotate(-45deg);
+}
+
+.chosen-exercises__delete::before {
+	background: var(--text-color);
+	content: "";
+	position: absolute;
+	width: 2px;
+	height: 14px;
+	border-radius: 2px;
+	transform: rotate(-45deg);
+}
+
 @media(hover: hover) and (pointer: fine) {
-	.chosen-exercises__item:hover {
+	.chosen-exercises__item-header:hover {
 		transform: translateY(-3px);
 		background: rgba(244,247,248,1);
+	}
+
+	.chosen-exercises__delete:hover {
+		opacity: 1;
 	}
 }

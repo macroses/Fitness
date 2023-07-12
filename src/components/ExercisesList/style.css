@@ -50,22 +50,24 @@
 	transition: all .25s ease;
 	z-index: 10;
 	border-left: 1px solid black;
-	border-radius: 2px;
 	border-top: 1px solid black;
 }
 
-/*.exercises-wr {*/
-/*	max-height: 0;*/
-/*	overflow: auto;*/
-/*	transition: all 0.25s ease;*/
-/*}*/
-.exercises {
-	max-height: 0;
-	overflow: auto;
-	transition: all 0.25s ease;
+.muscles__item.active .collapse__icon {
+	transform: rotate(-315deg);
 }
-.muscles__item.active .exercises {
-	max-height: 300px;
+
+.exercises-wr {
+	display: grid;
+	grid-template-rows: 0fr;
+	overflow: hidden;
+	transition: grid-template-rows 0.5s ease;
+}
+.exercises {
+	min-height: 0;
+}
+.muscles__item.active .exercises-wr {
+	grid-template-rows: 1fr;
 }
 
 .muscle__item-length {

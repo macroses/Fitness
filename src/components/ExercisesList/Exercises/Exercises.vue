@@ -14,14 +14,16 @@ const showExercise = exercise => {
 </script>
 
 <template>
-  <ul class="exercises">
-    <li
-      v-for="exercise in exercises"
-      :key="exercise.id"
-      class="exercises__item"
-      @click="showExercise(exercise)"
-    >
-      {{ exercise.name }}
-    </li>
-  </ul>
+  <div class='exercises-wr'>
+    <ul class="exercises">
+      <li
+        v-for="exercise in exercises"
+        :key="exercise.id"
+        class="exercises__item"
+        @click="showExercise(exercise)"
+      >
+        {{ exercise.name }}
+      </li>
+    </ul>
+  </div>
 </template>
