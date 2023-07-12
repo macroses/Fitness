@@ -8,7 +8,8 @@ export const workoutStore = defineStore({
     title: null,
     labelColor: '246, 191, 38',
     date: dayjs(),
-    exercises: []
+    exercises: [],
+    workoutExercisesRepeats: null
   }),
   actions: {
     addExerciseToWorkout(exerciseId) {

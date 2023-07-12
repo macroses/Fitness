@@ -14,7 +14,7 @@ const showExercise = exercise => {
 </script>
 
 <template>
-  <div class='exercises-wr'>
+  <div class="exercises-wr">
     <ul class="exercises">
       <li
         v-for="exercise in exercises"
