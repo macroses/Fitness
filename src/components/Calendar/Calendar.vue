@@ -3,6 +3,13 @@ import dayjs from 'dayjs'
 import { onMounted, ref } from 'vue'
 import { updateCalendar } from '@/helpers/calendarHelper'
 
+defineProps({
+  isWorkout: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const emit = defineEmits(['getDate'])
 
 const currentDate = ref(dayjs())

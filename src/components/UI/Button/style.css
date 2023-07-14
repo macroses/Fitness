@@ -21,6 +21,10 @@
 		box-shadow: 0 10px 20px -10px var(--accent-color);
 		transform: translateY(-3px);
 	}
+
+	.button--sm:hover {
+		transform: translateY(0);
+	}
 }
 
 .button--large {
@@ -29,9 +33,10 @@
 	padding: 10px 15px;
 }
 
-.button--small {
+.button--sm {
 	font-size: .75rem;
 	border-radius: 9px;
+	height: 30px;
 	padding: 5px 10px;
 }
 
@@ -161,4 +166,10 @@
 	position: absolute;
 	bottom: 16px;
 	right: 16px;
+}
+
+.hide-calendar__button {
+	position: absolute;
+	right: 0;
+	top: 5px;
 }

@@ -4,12 +4,16 @@ import dayjs from 'dayjs'
 export const workoutStore = defineStore({
   id: 'workout',
   state: () => ({
-    isWorkoutMode: false,
+    userId: null,
+    workoutId: null,
     title: null,
     labelColor: '246, 191, 38',
     date: dayjs(),
     exercises: [],
-    workoutExercisesRepeats: null
+    weight: null,
+    repeats: null,
+    load: null,
+    exercisesParamsCollection: null
   }),
   actions: {
     addExerciseToWorkout(exerciseId) {

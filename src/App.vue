@@ -1,16 +1,19 @@
 <script setup>
-// import { getUserId } from '@/composables/getUserId'
 import { ref } from 'vue'
 import { cacheExercises } from '@/composables/cacheExercises'
 
-// const { userId } = getUserId()
-
 const dataExercises = ref([])
+const loadingExercise = ref(false)
 
-cacheExercises(dataExercises)
+cacheExercises(dataExercises, loadingExercise)
 </script>
 
 <template>
   <Header />
-  <RouterView />
+  <!--  {{loadingExercise}}-->
+  <RouterView v-slot="{ Component }">
+    <Transition mode="out-in">
+      <component :is="Component" />
+    </Transition>
+  </RouterView>
 </template>

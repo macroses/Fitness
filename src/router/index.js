@@ -5,6 +5,7 @@ import Docs from '@/views/Docs.vue'
 import Register from '@/views/Register.vue'
 import { supabase } from '@/lib/supabaseClient'
 import Account from '@/views/Account.vue'
+import WorkoutMode from '@/views/WorkoutMode.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,14 @@ const router = createRouter({
       path: '/account',
       name: 'Account',
       component: Account,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/workout/:userId/:workoutId',
+      name: 'workoutmode',
+      component: WorkoutMode,
       meta: {
         auth: true
       }

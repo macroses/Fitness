@@ -1,3 +1,24 @@
+.workout-mode .calendar-wr {
+	display: grid;
+	grid-template-rows: 1fr;
+	transition: grid-template-rows 0.25s ease;
+	overflow: hidden;
+}
+
+.workout-mode .calendar-wr .calendar {
+	width: 100%;
+	overflow: hidden;
+}
+
+.workout-mode .calendar-wr.hidden {
+	grid-template-rows: 0.15fr;
+}
+
+.workout-mode .calendar-wr.hidden .calendar {
+	opacity: 0;
+	visibility: hidden;
+}
+
 .calendar {
 	position: relative;
 	overflow-x: hidden;
@@ -61,6 +82,7 @@
 	display: flex;
 	gap: 4px;
 	margin-bottom: 8px;
+	align-items: center;
 }
 
 .callendar__date {
@@ -99,4 +121,16 @@
 	opacity: 0;
 	transform: translateX(30%);
 	overflow: hidden;
+}
+
+.calendar-chosen-date {
+	font-weight: 500;
+	position: absolute;
+	left: 0;
+	top: 6px;
+}
+
+.calendar-chosen-date span {
+	opacity: 0.5;
+	font-style: italic;
 }

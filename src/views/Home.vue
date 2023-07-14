@@ -1,74 +1,53 @@
 <script setup>
 import { ref } from 'vue'
 import dayjs from 'dayjs'
+import { uid } from 'uid'
 import { workoutStore } from '@/stores/workout'
-import { exerciseStore } from '@/stores/exercise'
+import router from '@/router'
+import { getUserId } from '@/composables/getUserId'
 
 const workoutsStore = workoutStore()
-const exercisesStore = exerciseStore()
 const chosenDate = ref(dayjs())
+
+const { userId } = getUserId()
+const workoutId = ref(uid(20))
 
 const getDate = date => {
   chosenDate.value = date
   workoutsStore.date = date
 }
+
+const toWorkoutMode = () => {
+  console.log(userId.value)
+  workoutsStore.userId = userId.value
+  workoutsStore.workoutId = workoutId.value
+  router.push(`/workout/${userId.value}/${workoutId.value}`)
+}
 </script>
 
 <template>
   <main>
+    {{ userId }}
     <div class="container">
-      <div
-        class="main__layout"
-        :class="{ 'workout-mode': workoutsStore.isWorkoutMode }"
-      >
+      <div class="main__layout">
         <div class="main__layout-left">
-          <Calendar
-            @get-date="getDate"
-            :class="{ mode: workoutsStore.isWorkoutMode }"
-          />
+          <Calendar @get-date="getDate" />
 
-          <div
-            v-if="!workoutsStore.isWorkoutMode"
-            class="group"
-          >
-            <Button @click="workoutsStore.isWorkoutMode = true">
+          <div class="group">
+            <Button @click="toWorkoutMode">
               Create workout
             </Button>
             <Button>Program</Button>
             <Button>Body parameters</Button>
           </div>
 
-          <div
-            v-if="!workoutsStore.isWorkoutMode"
-            class="events"
-          >
+          <div class="events">
             <div class="events__empty">
               Today there are no events
             </div>
           </div>
-
-          <template v-if="workoutsStore.isWorkoutMode">
-            <div class="user-workout">
-              <WorkoutDescription />
-              <ChosenExercisesList />
-            </div>
-          </template>
-        </div>
-
-        <div class="main__layout-right">
-          <ExercisesList v-if="workoutsStore.isWorkoutMode" />
         </div>
       </div>
     </div>
   </main>
-
-  <AsideExercise v-if="exercisesStore.exercise" />
 </template>
-
-<style>
-.user-workout {
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(26, 92, 255, 0.1);
-}
-</style>
