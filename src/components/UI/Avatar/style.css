@@ -17,17 +17,17 @@
 }
 
 .avatar-content svg {
-	transition: all 0.25s ease;
+	transition: all var(--base-transition);
 }
 
 .avatar-content:focus svg {
 	scale: 1.2;
-	transition: all 0.25s ease;
+	transition: all var(--base-transition);
 }
 
 @media(hover: hover) and (pointer: fine) {
 	.avatar-content:hover svg {
 		scale: 1.2;
-		transition: all 0.25s ease;
+		transition: all var(--base-transition);
 	}
 }

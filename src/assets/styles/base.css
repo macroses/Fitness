@@ -3,6 +3,9 @@
   --accent-color: rgba(26,92,255,1);
   --text-color: rgba(44,62,80,1);
   --main-bg: #fff;
+
+  --base-transition: 0.25s ease;
+
 }
 
 @media (prefers-color-scheme: dark) {

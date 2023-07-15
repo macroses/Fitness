@@ -10,7 +10,7 @@
 	padding: 8px 12px 8px 36px;
 	cursor: pointer;
 	position: relative;
-	transition: all 0.25s ease;
+	transition: all var(--base-transition);
 	color: rgba(44,62,80,1);
 }
 
@@ -85,7 +85,7 @@
 	padding: 8px 12px;
 	cursor: pointer;
 	border-radius: 12px;
-	transition: all 0.25s ease;
+	transition: all var(--base-transition);
 	position: relative;
 }
 

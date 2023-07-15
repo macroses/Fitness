@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
+import { uid } from 'uid'
 
 export const workoutStore = defineStore({
   id: 'workout',
@@ -10,10 +11,7 @@ export const workoutStore = defineStore({
     labelColor: '246, 191, 38',
     date: dayjs(),
     exercises: [],
-    weight: null,
-    repeats: null,
-    load: null,
-    exercisesParamsCollection: null
+    exercisesParamsCollection: []
   }),
   actions: {
     addExerciseToWorkout(exerciseId) {
@@ -23,6 +21,25 @@ export const workoutStore = defineStore({
     },
     deleteExercise(id) {
       this.exercises = this.exercises.filter(exercise => exercise.id !== id)
+    },
+    addSet(exerciseId, paramsSets) {
+      const set = {
+        setId: uid(10),
+        ...paramsSets
+      }
+
+      const existingIndex = this.exercisesParamsCollection.findIndex(item => item.exerciseId === exerciseId)
+
+      if (existingIndex === -1) {
+        const newExerciseParams = {
+          exerciseId,
+          sets: [set]
+        }
+
+        this.exercisesParamsCollection.push(newExerciseParams)
+      } else {
+        this.exercisesParamsCollection[existingIndex].sets.push(set)
+      }
     }
   }
 })

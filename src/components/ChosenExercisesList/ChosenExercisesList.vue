@@ -1,37 +1,47 @@
 <script setup>
-import { ref } from 'vue'
-import { uid } from 'uid'
+import { reactive, readonly, ref } from 'vue'
 import Input from '@/components/UI/Input/Input.vue'
 import { workoutStore } from '@/stores/workout'
 import Button from '@/components/UI/Button/Button.vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
 
 const store = workoutStore()
-const parametersVisibility = ref({})
-const weight = ref(null)
-const repeats = ref(null)
-const loadType = ref(null)
+const activeExerciseId = ref(null)
 
-const toggleParameters = id => parametersVisibility.value[id] = !parametersVisibility.value[id]
-const isParametersVisible = id => parametersVisibility.value[id]
+const paramsSets = reactive({
+  weight: null,
+  repeats: null,
+  effort: null
+})
 
-// todo: в тренировку входит, id тренировки, id пользователя, название, дата, цвет, массив упражнений, тоннаж упражнений
-// todo: в массив упражнений входят объекты упражнений
-// todo: каждый объект содержит id упражнения, и массив подходов
-// todo: каждый массив подходов содержит объекты подходов
-// todo: каждый объект подходов содержит id подхода, вес, кол-во повторов, сложность подхода
-const addSet = exerciseId => {
-  const set = {
-    setId: uid(10),
-    exerciseId,
-    weight: weight.value,
-    repeats: repeats.value,
-    loadType: loadType.value,
-    tonnage: weight.value * repeats.value
-  }
+const toggleParameters = id => {
+  activeExerciseId.value === id
+    ? activeExerciseId.value = null
+    : activeExerciseId.value = id
 
-  console.log(set)
+  paramsSets.effort = null
 }
+
+const addSetHandler = exerciseId => {
+  store.addSet(exerciseId, paramsSets)
+  paramsSets.weight = null
+  paramsSets.repeats = null
+}
+
+const getExerciseSets = exerciseId => {
+  const exerciseParams = store.exercisesParamsCollection.find(item => item.exerciseId === exerciseId);
+  return exerciseParams ? exerciseParams.sets : [];
+}
+
+const addEffortType = effortId => paramsSets.effort = effortId
+
+const efforts = readonly([
+  { id: 0, text: 'Warm-up', color: '#ececec' },
+  { id: 1, text: 'Low', color: '#d0ffad' },
+  { id: 2, text: 'Med', color: '#ffe38c' },
+  { id: 3, text: 'High', color: '#f9b5b5' },
+  { id: 4, text: 'Max', color: '#ff7d7d' }
+])
 </script>
 
 <template>
@@ -46,6 +56,7 @@ const addSet = exerciseId => {
     >
       <div
         class="chosen-exercises__item-header"
+        :class="{ active: activeExerciseId === exercise.id }"
         @click="toggleParameters(exercise.id)"
       >
         <div class="collapse__icon" />
@@ -58,26 +69,56 @@ const addSet = exerciseId => {
         />
       </div>
       <div
-        v-if="isParametersVisible(exercise.id)"
+        v-if="activeExerciseId === exercise.id"
         class="chosen-exercises__parameters"
       >
+        <div class="chosen-exercises__sets">
+          <ul v-if="getExerciseSets(exercise.id).length">
+            <li
+              v-for="set in getExerciseSets(exercise.id)"
+              :key="set.setId"
+            >
+              {{ set }}
+            </li>
+          </ul>
+        </div>
         <div class="group">
           <Input
-            v-model.number="weight"
+            v-model.number="paramsSets.weight"
             label-fade
             label-placeholder="Weight"
-            @clear="weight = null"
+            @clear="paramsSets.weight = null"
             @keydown="useOnlyNumbers($event)"
           />
           <Input
-            v-model.number="repeats"
+            v-model.number="paramsSets.repeats"
             label-fade
             label-placeholder="Repeats"
-            @clear="repeats = null"
+            @clear="paramsSets.repeats = null"
             @keydown="useOnlyNumbers($event)"
           />
-          <Button @click="addSet(exercise.id)">
-            +
+        </div>
+        <div class="group">
+          <div class="chosen-exercises__effort">
+            <button
+              v-for="(effort, index) in efforts"
+              :key="effort.id"
+              class="button__effort-type"
+              :class="{ active: index === paramsSets.effort }"
+              :style="{ backgroundColor: effort.color }"
+              @click="addEffortType(effort.id)"
+            >
+              {{ effort.text }}
+            </button>
+          </div>
+          <Button
+            class="chosen-exercises__add"
+            @click="addSetHandler(exercise.id)"
+          >
+            <Icon
+              icon-name="plus"
+              width="20px"
+            />
           </Button>
         </div>
         <div class="chosen-exercises__load" />
@@ -92,4 +133,4 @@ const addSet = exerciseId => {
   </p>
 </template>
 
-<style scoped src="./style.css" />
+<style src="./style.css" />

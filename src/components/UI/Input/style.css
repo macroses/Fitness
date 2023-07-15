@@ -96,7 +96,7 @@
 	border: 0;
 	cursor: pointer;
 	border-radius: 9px;
-	transition: all 0.25s ease;
+	transition: all var(--base-transition);
 }
 
 .input-clear:hover {
