@@ -68,6 +68,10 @@ body {
   justify-content: center;
 }
 
+.group.efforts {
+  margin-bottom: 12px;
+}
+
 @media (width > 768px) {
   .container {
     padding: 0 32px;

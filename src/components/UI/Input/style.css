@@ -101,6 +101,4 @@
 
 .input-clear:hover {
 	background-color: rgba(249,252,253, 1);
-	transform: translate(6px, -6px);
-	box-shadow: -15px 10px 10px -10px rgba(0,0,0,0.05);
 }

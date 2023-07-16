@@ -7,7 +7,7 @@ const cacheExercises = (dataExercises, loading) => {
   onMounted(async () => {
     const cachedData = sessionStorage.getItem(cacheKey)
 
-    if (cachedData) {
+    if (cachedData && JSON.parse(cachedData).length !== 0) {
       dataExercises.value = JSON.parse(cachedData)
     } else {
       await getAndCacheCollection()

@@ -27,7 +27,6 @@ const toWorkoutMode = () => {
 
 <template>
   <main>
-    {{ userId }}
     <div class="container">
       <div class="main__layout">
         <div class="main__layout-left">
