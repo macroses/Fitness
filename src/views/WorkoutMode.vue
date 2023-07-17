@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import { workoutStore } from '@/stores/workout'
 import { exerciseStore } from '@/stores/exercise'
+import { pushWorkout } from '@/composables/workouts'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()
@@ -13,6 +14,7 @@ const homeCalendar = ref(null)
 const userWorkoutEl = ref(null)
 const exList = ref(null)
 const isCalendarVisible = ref(false)
+const isTranslateToBase = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
@@ -27,6 +29,16 @@ onMounted(() => {
   gsap.from(userWorkoutEl.value, { y: '-100', ...settings })
   gsap.from(exList.value, { x: '-100', ...settings })
 })
+
+const workoutToBase = async () => {
+  await pushWorkout({
+    title: workoutsStore.title,
+    color: workoutsStore.labelColor,
+    date: workoutsStore.date,
+    workoutId: workoutsStore.workoutId,
+    exercisesParamsCollection: workoutsStore.exercisesParamsCollection
+  }, isTranslateToBase)
+}
 </script>
 
 <template>
@@ -43,6 +55,9 @@ onMounted(() => {
               @get-date="getDate"
               is-workout
             />
+            <button @click="workoutToBase">
+              add workout to base
+            </button>
             <div
               v-if="!isCalendarVisible"
               class="calendar-chosen-date"

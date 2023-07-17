@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
 import { uid } from 'uid'
+// import { getWorkout } from '@/composables/workouts'
 
 export const workoutStore = defineStore({
   id: 'workout',
@@ -52,5 +53,8 @@ export const workoutStore = defineStore({
         exerciseParams.sets = exerciseParams.sets.filter(set => set.setId !== setId);
       }
     }
+    // async addWorkoutToBase (workoutObject) {
+    //   await getWorkout(workoutObject)
+    // }
   }
 })

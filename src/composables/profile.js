@@ -46,8 +46,6 @@ const updateProfile = async (userData, isLoading) => {
       updated_at: new Date()
     }
 
-    console.log(userData.updated_at)
-
     const { error } = await supabase.from('profiles').upsert(updates)
 
     if (error) throw error

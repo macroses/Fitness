@@ -10,7 +10,7 @@ const workoutsStore = workoutStore()
 const chosenDate = ref(dayjs())
 
 const { userId } = getUserId()
-const workoutId = ref(uid(20))
+const workoutId = ref(uid(50))
 
 const getDate = date => {
   chosenDate.value = date
@@ -18,10 +18,9 @@ const getDate = date => {
 }
 
 const toWorkoutMode = () => {
-  console.log(userId.value)
   workoutsStore.userId = userId.value
   workoutsStore.workoutId = workoutId.value
-  router.push(`/workout/${userId.value}/${workoutId.value}`)
+  router.push(`/workout/${workoutId.value}`)
 }
 </script>
 
