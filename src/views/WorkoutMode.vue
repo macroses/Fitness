@@ -3,12 +3,16 @@ import { onMounted, ref } from 'vue'
 import dayjs from 'dayjs'
 import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
+import { toast } from 'vue3-toastify'
 import { workoutStore } from '@/stores/workout'
 import { exerciseStore } from '@/stores/exercise'
 import { pushWorkout } from '@/composables/workouts'
+import router from '@/router'
+import { chosenDateStore } from '@/stores/chosenDate'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()
+const dateStore = chosenDateStore()
 const chosenDate = ref(dayjs())
 const homeCalendar = ref(null)
 const userWorkoutEl = ref(null)
@@ -18,7 +22,7 @@ const isTranslateToBase = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
-  workoutsStore.date = date
+  dateStore.date = date
 }
 
 gsap.registerPlugin(CSSPlugin)
@@ -34,10 +38,13 @@ const workoutToBase = async () => {
   await pushWorkout({
     title: workoutsStore.title,
     color: workoutsStore.labelColor,
-    date: workoutsStore.date,
+    date: dateStore.date,
     workoutId: workoutsStore.workoutId,
     exercisesParamsCollection: workoutsStore.exercisesParamsCollection
   }, isTranslateToBase)
+
+  workoutsStore.$reset()
+  router.push('/')
 }
 </script>
 
@@ -51,10 +58,7 @@ const workoutToBase = async () => {
             class="calendar-wr"
             :class="{ hidden: !isCalendarVisible }"
           >
-            <Calendar
-              @get-date="getDate"
-              is-workout
-            />
+            <Calendar @get-date="getDate" />
             <button @click="workoutToBase">
               add workout to base
             </button>
@@ -62,8 +66,8 @@ const workoutToBase = async () => {
               v-if="!isCalendarVisible"
               class="calendar-chosen-date"
             >
-              {{ chosenDate.format('DD MMMM YYYY') }}
-              <span>{{ chosenDate.format('dddd') }}</span>
+              {{ dateStore.date.format('DD MMMM YYYY') }}
+              <span>{{ dateStore.date.format('dddd') }}</span>
             </div>
             <Button
               size="small"

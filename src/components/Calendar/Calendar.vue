@@ -1,22 +1,25 @@
 <script setup>
 import dayjs from 'dayjs'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { updateCalendar } from '@/helpers/calendarHelper'
+import { chosenDateStore } from '@/stores/chosenDate'
 
-defineProps({
-  isWorkout: {
-    type: Boolean,
-    default: false
+const props = defineProps({
+  events: {
+    type: Array,
+    default: () => []
   }
 })
 
 const emit = defineEmits(['getDate'])
 
+const dateStore = chosenDateStore()
+
 const currentDate = ref(dayjs())
 const today = ref(dayjs())
 const calendarCells = ref([])
 const transitionName = ref('')
-const activeDate = ref(dayjs())
+const activeDate = ref(dateStore.date)
 
 const handleClickCell = cellDate => {
   emit('getDate', cellDate)
@@ -42,9 +45,22 @@ const goToCurrentMonth = () => {
   updateCalendar(currentDate, today, calendarCells)
 }
 
+const isMarker = date => props.events.some(event => dayjs(event.date).isSame(date, 'day'))
+
+const getCellColor = date => {
+  const matchingEvent = props.events.find(event => dayjs(event.date).isSame(date, 'day'))
+  return matchingEvent ? matchingEvent.color : ''
+}
+
 onMounted(() => {
   updateCalendar(currentDate, today, calendarCells)
 })
+
+watch(props.events, val => {
+  if (val) {
+    updateCalendar(currentDate, today, calendarCells)
+  }
+}, { immediate: true })
 </script>
 
 <template>
@@ -84,7 +100,7 @@ onMounted(() => {
         appear
       >
         <div
-          class="callendar__date"
+          class="calendar__date"
           :key="currentDate"
         >
           {{ currentDate.format('MMMM') }} {{ currentDate.format('YYYY') }}
@@ -111,9 +127,15 @@ onMounted(() => {
               active: dayjs(cell.date).isSame(activeDate, 'day'),
             },
           ]"
+
           @click="handleClickCell(cell.date)"
         >
           <span class="calendar__cell-text">{{ dayjs(cell.date).format('D') }}</span>
+          <div
+            v-if="isMarker(cell.date)"
+            :style="{ backgroundColor: `rgb(${getCellColor(cell.date)})` }"
+            class="markerDate"
+          />
         </div>
       </div>
     </Transition>

@@ -35,6 +35,8 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           <img
             src="/Sports.svg"
             alt="logo"
+            width="100"
+            height="64"
           >
         </RouterLink>
 

@@ -6,6 +6,7 @@ const dataExercises = ref([])
 const loadingExercise = ref(false)
 
 cacheExercises(dataExercises, loadingExercise)
+
 </script>
 
 <template>

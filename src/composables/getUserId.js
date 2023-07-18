@@ -2,7 +2,7 @@ import { onMounted, ref } from 'vue'
 
 export const getUserId = () => {
   const authTokenRegex = /.*auth-token$/
-  const userId = ref(null)
+  const user_id = ref(null)
   let timeout
 
   onMounted(() => {
@@ -11,7 +11,7 @@ export const getUserId = () => {
 
       if (authTokenRegex.test(key)) {
         timeout = setTimeout(() => {
-          userId.value = JSON.parse(localStorage.getItem(key)).user.id
+          user_id.value = JSON.parse(localStorage.getItem(key)).user.id
         }, 50)
         break
       }
@@ -19,5 +19,5 @@ export const getUserId = () => {
   })
 
   clearTimeout(timeout)
-  return { userId }
+  return { user_id }
 }
