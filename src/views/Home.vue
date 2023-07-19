@@ -1,11 +1,9 @@
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { ref, computed } from 'vue'
 import dayjs from 'dayjs'
 import { uid } from 'uid'
 import { workoutStore } from '@/stores/workout'
 import router from '@/router'
-import { getUserId } from '@/composables/getUserId'
-import { deleteEvent, getWorkouts } from '@/composables/workouts'
 import Loading from '@/components/UI/Loading/Loading.vue'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
@@ -25,7 +23,7 @@ const getDate = date => {
 }
 
 const filteredEvents = computed(() => {
-  userEvents.events.filter(event => {
+  return userEvents.events.filter(event => {
     const eventDate = dayjs(event.date).format('YYYY-MM-DD')
     return eventDate === chosenDate.value.format('YYYY-MM-DD')
   })

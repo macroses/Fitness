@@ -8,10 +8,7 @@ defineProps({
 })
 
 const emit = defineEmits(['deleteEvent'])
-
-const deleteEvent = eventId => {
-  emit('deleteEvent', eventId)
-}
+const deleteEvent = eventId => emit('deleteEvent', eventId)
 </script>
 
 <template>
