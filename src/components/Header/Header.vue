@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { signOut } from '@/composables/profile'
 import { getSession } from '@/composables/getSession'
@@ -22,6 +22,16 @@ const redirectToAccount = () => {
 }
 
 onClickOutside(userMenu, () => (isDropdownVisible.value = false))
+
+// onMounted(() => {
+//   window.addEventListener('online',  updateOnlineStatus);
+//   window.addEventListener('offline', updateOnlineStatus);
+//
+//   function updateOnlineStatus() {
+//     const condition = navigator.onLine ? "online" : "offline";
+//     console.log(condition)
+//   }
+// })
 </script>
 
 <template>

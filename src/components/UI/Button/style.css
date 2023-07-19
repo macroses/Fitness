@@ -27,6 +27,10 @@
 	}
 }
 
+.button--full {
+	width: 100%;
+}
+
 .button--large {
 	font-size: 1rem;
 	border-radius: 15px;
@@ -110,6 +114,10 @@
 .button--transparent:hover::before {
 	opacity: 1;
 	transform: scale(1);
+	background-color: rgba(26,92,255,.2);
+}
+
+.button--transparent.active {
 	background-color: rgba(26,92,255,.2);
 }
 

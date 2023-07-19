@@ -2,7 +2,6 @@
 import dayjs from 'dayjs'
 import { onMounted, ref, watch } from 'vue'
 import { updateCalendar } from '@/helpers/calendarHelper'
-import { chosenDateStore } from '@/stores/chosenDate'
 
 const props = defineProps({
   events: {
@@ -13,13 +12,11 @@ const props = defineProps({
 
 const emit = defineEmits(['getDate'])
 
-const dateStore = chosenDateStore()
-
 const currentDate = ref(dayjs())
 const today = ref(dayjs())
 const calendarCells = ref([])
 const transitionName = ref('')
-const activeDate = ref(dateStore.date)
+const activeDate = ref(null)
 
 const handleClickCell = cellDate => {
   emit('getDate', cellDate)

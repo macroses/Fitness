@@ -35,6 +35,10 @@
 .chosen-exercises__item-name {
 	padding-left: 24px;
 	font-weight: 600;
+	max-width: 80%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .chosen-exercises__empty {

@@ -59,6 +59,7 @@
 	overflow: hidden;
 	max-height: 0;
 	opacity: 0;
+	border: 1px solid rgba(26, 92, 255, 0.1);
 	border-radius: 12px;
 	transform-origin: top;
 	color: rgba(44,62,80, 1);
@@ -67,13 +68,20 @@
 	z-index: 1000;
 }
 
+.events__functions .user-dropdown__content {
+	top: auto;
+	bottom: calc(100% + 4px);
+	padding: 0;
+}
+
 .user-dropdown {
 	width: 100%;
 	overflow: auto;
 	border-radius: inherit;
 }
 
-.user-menu--visible {
+.user-menu--visible,
+.user-menu__funcs--visible {
 	max-height: 200px;
 	opacity: 1;
 }

@@ -31,6 +31,10 @@ defineProps({
   path: {
     type: String,
     default: ''
+  },
+  active: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
@@ -47,6 +51,8 @@ defineProps({
       'button--bordered': bordered,
       'button--loading': loading,
       'button--transparent': transparent,
+      'button--full': full,
+      active: active,
     }"
   >
     <slot />
@@ -68,6 +74,7 @@ defineProps({
       'button--disabled': disabled,
       'button--bordered': bordered,
       'button--loading': loading,
+      'button--full': full,
     }"
   >
     <slot />

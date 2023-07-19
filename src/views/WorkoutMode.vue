@@ -3,6 +3,8 @@ import { onMounted, ref } from 'vue'
 import dayjs from 'dayjs'
 import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
+import { onBeforeRouteLeave } from 'vue-router'
+import Button from '@/components/UI/Button/Button.vue'
 import { workoutStore } from '@/stores/workout'
 import { exerciseStore } from '@/stores/exercise'
 import router from '@/router'
@@ -38,6 +40,8 @@ const workoutToBase = async () => {
   workoutsStore.$reset()
   router.push('/')
 }
+
+onBeforeRouteLeave(() => workoutsStore.$reset())
 </script>
 
 <template>
@@ -51,9 +55,6 @@ const workoutToBase = async () => {
             :class="{ hidden: !isCalendarVisible }"
           >
             <Calendar @get-date="getDate" />
-            <button @click="workoutToBase">
-              add workout to base
-            </button>
             <div
               v-if="!isCalendarVisible"
               class="calendar-chosen-date"
@@ -78,6 +79,14 @@ const workoutToBase = async () => {
             <WorkoutDescription />
             <ChosenExercisesList />
           </div>
+
+          <Button
+            transparent
+            full
+            @click="workoutToBase"
+          >
+            Add workout
+          </Button>
         </div>
 
         <div class="main__layout-right">
@@ -100,5 +109,6 @@ const workoutToBase = async () => {
   padding: 12px;
   border-radius: 20px;
   border: 1px solid rgba(26, 92, 255, 0.1);
+  margin-bottom: 12px;
 }
 </style>
