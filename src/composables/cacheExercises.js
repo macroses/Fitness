@@ -1,9 +1,7 @@
 import { onMounted, ref } from 'vue'
 import { getCollection } from '@/composables/getCollection'
 
-const cacheExercises = (dataExercises, loading) => {
-  const cacheKey = 'exercisesCache'
-
+const cacheExercises = (cacheKey, dataExercises, loading) => {
   onMounted(async () => {
     const cachedData = sessionStorage.getItem(cacheKey)
 

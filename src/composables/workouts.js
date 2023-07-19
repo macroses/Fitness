@@ -1,13 +1,12 @@
 import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient'
 
-const pushWorkout = async (userData, isLoading) => {
+const pushEvent = async userData => {
   const {
     data: { session }
   } = await supabase.auth.getSession()
 
   try {
-    isLoading.value = true
     const { user } = session
 
     const updated = {
@@ -20,8 +19,6 @@ const pushWorkout = async (userData, isLoading) => {
     if (error) throw new Error(error.message)
   } catch (error) {
     console.log(error.message)
-  } finally {
-    isLoading.value = false
   }
 }
 
@@ -79,4 +76,4 @@ const deleteEvent = async (tableName, nameOfId, id, loading) => {
   return { status }
 }
 
-export { pushWorkout, getWorkouts, deleteEvent }
+export { pushEvent, getWorkouts, deleteEvent }

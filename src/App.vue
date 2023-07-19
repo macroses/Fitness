@@ -1,17 +1,21 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { cacheExercises } from '@/composables/cacheExercises'
+import { useEventsStore } from '@/stores/userEvents'
 
 const dataExercises = ref([])
 const loadingExercise = ref(false)
+const userEvents = useEventsStore()
 
-cacheExercises(dataExercises, loadingExercise)
+cacheExercises('exercisesCache', dataExercises, loadingExercise)
 
+onMounted(async () => {
+  await userEvents.fetchEventHandler()
+})
 </script>
 
 <template>
   <Header />
-  <!--  {{loadingExercise}}-->
   <RouterView v-slot="{ Component }">
     <Transition mode="out-in">
       <component :is="Component" />

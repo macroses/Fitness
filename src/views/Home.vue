@@ -8,14 +8,15 @@ import { getUserId } from '@/composables/getUserId'
 import { deleteEvent, getWorkouts } from '@/composables/workouts'
 import Loading from '@/components/UI/Loading/Loading.vue'
 import { chosenDateStore } from '@/stores/chosenDate'
+import { useEventsStore } from '@/stores/userEvents'
+import EventsList from '@/components/EventsList/EventsList.vue'
+import EventsMode from '@/components/EventsMode/EventsMode.vue'
 
 const workoutsStore = workoutStore()
 const dateStore = chosenDateStore()
+const userEvents = useEventsStore()
 const chosenDate = ref(dayjs())
-const events = ref([])
-const eventsLoading = ref(false)
 
-const { user_id } = getUserId()
 const workoutId = ref(uid(50))
 
 const getDate = date => {
@@ -23,67 +24,45 @@ const getDate = date => {
   dateStore.date = date
 }
 
-const filteredEvents = computed(() => events.value.filter(event => dayjs(event.date).format('YYYY-MM-DD') === chosenDate.value.format('YYYY-MM-DD')))
+const filteredEvents = computed(() => {
+  userEvents.events.filter(event => {
+    const eventDate = dayjs(event.date).format('YYYY-MM-DD')
+    return eventDate === chosenDate.value.format('YYYY-MM-DD')
+  })
+})
 
 const toWorkoutMode = () => {
   workoutsStore.workoutId = workoutId.value
   router.push(`/workout/${workoutId.value}`)
 }
 
-const deleteHandler = async workoutId => {
-  await deleteEvent('workouts', 'workoutId', workoutId, eventsLoading)
-  await getWorkouts(events, eventsLoading)
+const deleteHandler = workoutId => {
+  userEvents.deleteEventHandler(
+    'workouts',
+    'workoutId',
+    workoutId
+  )
 }
-
-onMounted(async () => await getWorkouts(events, eventsLoading))
 </script>
 
 <template>
   <main>
     <div class="container">
       <Loading
-        v-if="eventsLoading"
+        v-if="userEvents.eventsLoading"
         large
       />
       <div class="main__layout">
         <div class="main__layout-left">
           <Calendar
             @get-date="getDate"
-            :events="events"
+            :events="userEvents.events"
           />
-
-          <div class="group">
-            <Button @click="toWorkoutMode">
-              Create workout
-            </Button>
-            <Button>Program</Button>
-            <Button>Body parameters</Button>
-          </div>
-
-          <div class="events">
-            <ul
-              v-if="filteredEvents.length"
-              class="events__list"
-            >
-              <li
-                v-for="event in filteredEvents"
-                :key="event.id"
-                class="events__item"
-              >
-                {{ event.title || 'without name' }}
-                {{ event.workoutId }}
-                <button @click="deleteHandler(event.workoutId)">
-                  delete
-                </button>
-              </li>
-            </ul>
-            <div
-              v-else
-              class="events__empty"
-            >
-              Today there are no events
-            </div>
-          </div>
+          <EventsMode @workoutMode="toWorkoutMode" />
+          <EventsList
+            :events="filteredEvents"
+            @deleteEvent="deleteHandler"
+          />
         </div>
       </div>
     </div>

@@ -3,22 +3,21 @@ import { onMounted, ref } from 'vue'
 import dayjs from 'dayjs'
 import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
-import { toast } from 'vue3-toastify'
 import { workoutStore } from '@/stores/workout'
 import { exerciseStore } from '@/stores/exercise'
-import { pushWorkout } from '@/composables/workouts'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
+import { useEventsStore } from '@/stores/userEvents'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()
 const dateStore = chosenDateStore()
+const userEvents = useEventsStore()
 const chosenDate = ref(dayjs())
 const homeCalendar = ref(null)
 const userWorkoutEl = ref(null)
 const exList = ref(null)
 const isCalendarVisible = ref(false)
-const isTranslateToBase = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
@@ -35,14 +34,7 @@ onMounted(() => {
 })
 
 const workoutToBase = async () => {
-  await pushWorkout({
-    title: workoutsStore.title,
-    color: workoutsStore.labelColor,
-    date: dateStore.date,
-    workoutId: workoutsStore.workoutId,
-    exercisesParamsCollection: workoutsStore.exercisesParamsCollection
-  }, isTranslateToBase)
-
+  await userEvents.pushEventHandler()
   workoutsStore.$reset()
   router.push('/')
 }
