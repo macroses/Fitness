@@ -42,8 +42,26 @@
 }
 
 .chosen-exercises__empty {
-	opacity: 0.3;
 	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.chosen-exercises__empty span {
+	margin-top: 5px;
+	opacity: 0.5;
+}
+
+.chosen-exercises__img-wr {
+	width: 80px;
+	height: 40px;
+}
+
+.chosen-exercises__img-wr img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .chosen-exercises__delete {

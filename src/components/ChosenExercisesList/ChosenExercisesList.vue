@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import draggable from 'vuedraggable'
 import { workoutStore } from '@/stores/workout'
 
 const store = workoutStore()
@@ -17,43 +18,54 @@ const toggleParameters = id => {
 </script>
 
 <template>
-  <ul
+  <draggable
     v-if="store.exercises.length"
-    class="chosen-exercises"
+    v-model="store.exercises"
+    tag="ul"
+    :animation="300"
+    :item-key="item => item.id"
   >
-    <li
-      v-for="exercise in store.exercises"
-      :key="exercise.id"
-      class="chosen-exercises__item"
-    >
-      <div
-        class="chosen-exercises__item-header"
-        :class="{ active: activeExerciseId === exercise.id }"
-        @click="toggleParameters(exercise.id)"
+    <template #item="{ element }">
+      <li
+        class="chosen-exercises__item"
       >
-        <div class="collapse__icon" />
-        <div class="chosen-exercises__item-name">
-          {{ exercise.name }}
+        <div
+          class="chosen-exercises__item-header"
+          :class="{ active: activeExerciseId === element.id }"
+          @click="toggleParameters(element.id)"
+        >
+          <div class="collapse__icon" />
+          <div class="chosen-exercises__item-name">
+            {{ element.name }}
+          </div>
+          <button
+            @click="store.deleteExercise(element.id)"
+            class="chosen-exercises__delete"
+          />
         </div>
-        <button
-          @click="store.deleteExercise(exercise.id)"
-          class="chosen-exercises__delete"
-        />
-      </div>
-      <TransitionSlideY>
-        <SetExerciseForm
-          v-if="activeExerciseId === exercise.id"
-          :exercise-id="exercise.id"
-        />
-      </TransitionSlideY>
-    </li>
-  </ul>
-  <p
+        <TransitionSlideY>
+          <SetExerciseForm
+            v-if="activeExerciseId === element.id"
+            :exercise-id="element.id"
+          />
+        </TransitionSlideY>
+      </li>
+    </template>
+  </draggable>
+  <div
     v-else
     class="chosen-exercises__empty"
   >
-    Add exercises
-  </p>
+    <div class="chosen-exercises__img-wr">
+      <img
+        src="/Folder.svg"
+        alt="add exercises"
+        width="100"
+        height="100"
+      >
+    </div>
+    <span>Add exercises</span>
+  </div>
 </template>
 
 <style src="./style.css" />

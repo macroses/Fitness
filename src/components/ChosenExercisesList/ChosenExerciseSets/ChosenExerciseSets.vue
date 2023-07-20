@@ -12,15 +12,13 @@ defineProps({
 const store = workoutStore()
 
 const getExerciseSets = exerciseId => {
-  const exerciseParams = store.exercisesParamsCollection.find(item => item.exerciseId === exerciseId);
-  return exerciseParams ? exerciseParams.sets : [];
+  const exerciseParams = store.exercisesParamsCollection.find(item => item.exerciseId === exerciseId)
+  return exerciseParams ? exerciseParams.sets : []
 }
 
 const getEffortColor = effort => EFFORTS.filter(el => el.id === effort).map(item => item.color)
 
-const deleteSetHandler = (exerciseId, setId) => {
-  store.deleteSet(exerciseId, setId);
-}
+const deleteSetHandler = (exerciseId, setId) => store.deleteSet(exerciseId, setId)
 </script>
 
 <template>

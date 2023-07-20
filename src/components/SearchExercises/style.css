@@ -33,7 +33,12 @@ mark {
 }
 
 .exercises-search__empty {
-	padding: 8px;
 	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.exercises-search__empty span {
 	opacity: 0.5;
 }

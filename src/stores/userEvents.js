@@ -20,6 +20,8 @@ export const useEventsStore = defineStore('userEvents', () => {
   }
 
   const pushEventHandler = async () => {
+    if (!workoutData.workoutId) return
+
     const workoutObject = {
       title: workoutData.title,
       color: workoutData.labelColor,

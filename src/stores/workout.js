@@ -4,9 +4,9 @@ import { uid } from 'uid'
 export const workoutStore = defineStore({
   id: 'workout',
   state: () => ({
-    workoutId: null,
+    workoutId: localStorage.getItem('wId') || null,
     title: null,
-    labelColor: '246, 191, 38',
+    labelColor: '213, 0, 0',
     weight: null,
     repeats: null,
     effort: null,

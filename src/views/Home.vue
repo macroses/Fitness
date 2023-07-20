@@ -24,12 +24,13 @@ const getDate = date => {
 
 const filteredEvents = computed(() => userEvents.events.filter(event => {
   const eventDate = dayjs(event.date).format('YYYY-MM-DD')
-  return eventDate === chosenDate.value.format('YYYY-MM-DD')
+  return eventDate === dateStore.date.format('YYYY-MM-DD')
 }))
 
 const toWorkoutMode = () => {
   workoutsStore.workoutId = workoutId.value
   router.push(`/workout/${workoutId.value}`)
+  localStorage.setItem('wId', workoutId.value)
 }
 
 const deleteHandler = workoutId => {

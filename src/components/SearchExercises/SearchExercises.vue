@@ -71,7 +71,13 @@ const showExercise = exercise => {
         v-if="searchResults.length === 0"
         class="exercises-search__empty"
       >
-        No results
+        <img
+          src="/glass.svg"
+          alt=""
+          width="50"
+          height="50"
+        >
+        <span>No results</span>
       </li>
     </ul>
   </div>

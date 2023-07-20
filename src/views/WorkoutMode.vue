@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import dayjs from 'dayjs'
 import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
@@ -41,7 +41,10 @@ const workoutToBase = async () => {
   router.push('/')
 }
 
-onBeforeRouteLeave(() => workoutsStore.$reset())
+onBeforeRouteLeave(() => {
+  localStorage.removeItem('wId')
+  workoutsStore.$reset()
+})
 </script>
 
 <template>
@@ -81,7 +84,7 @@ onBeforeRouteLeave(() => workoutsStore.$reset())
           </div>
 
           <Button
-            transparent
+            bordered
             full
             @click="workoutToBase"
           >

@@ -75,8 +75,10 @@ onClickOutside(dropdownList, () => activeIndex.value = null)
     >
       <img
         src="Box.svg"
-        alt=""
+        alt="There are no events"
         class="events__empty-img"
+        width="150"
+        height="150"
       >
       There are no events
     </div>
