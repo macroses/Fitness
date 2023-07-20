@@ -36,6 +36,12 @@ onMounted(() => {
 })
 
 const workoutToBase = async () => {
+  if (workoutsStore.isWorkoutEdit) {
+    await userEvents.updateEventHandler()
+    router.push('/')
+    return
+  }
+
   await userEvents.pushEventHandler()
   workoutsStore.$reset()
   router.push('/')
@@ -88,7 +94,7 @@ onBeforeRouteLeave(() => {
             full
             @click="workoutToBase"
           >
-            Save workout
+            {{ workoutsStore.isWorkoutEdit ? 'Update workout' : 'Save workout' }}
           </Button>
         </div>
 

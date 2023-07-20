@@ -5,8 +5,9 @@ export const workoutStore = defineStore({
   id: 'workout',
   state: () => ({
     workoutId: localStorage.getItem('wId') || null,
+    isWorkoutEdit: false,
     title: null,
-    labelColor: '213, 0, 0',
+    color: '213, 0, 0',
     weight: null,
     repeats: null,
     effort: null,
@@ -48,6 +49,21 @@ export const workoutStore = defineStore({
       if (exerciseParams) {
         exerciseParams.sets = exerciseParams.sets.filter(set => set.setId !== setId);
       }
+    },
+    editUsersEvent (event) {
+      this.isWorkoutEdit = true
+
+      this.workoutId = event.workoutId
+      this.title = event.title
+      this.color = event.color
+      this.exercisesParamsCollection = event.exercisesParamsCollection
+
+      this.exercises = JSON.parse(sessionStorage.getItem('exercisesCache')).filter(sessionExercise => {
+        return event.exercisesParamsCollection.some(exercise =>
+          sessionExercise.id === exercise.exerciseId ||
+          sessionExercise.exerciseId === exercise.exerciseId
+        )
+      })
     }
   }
 })

@@ -3,7 +3,7 @@ import { workoutStore } from '@/stores/workout'
 import Input from '@/components/UI/Input/Input.vue'
 
 const store = workoutStore()
-const getColor = color => store.labelColor = color
+const getColor = color => store.color = color
 </script>
 
 <template>

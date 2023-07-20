@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { deleteEvent, getWorkouts, pushEvent } from '@/composables/workouts'
+import { deleteEvent, getWorkouts, pushEvent, updateEvent } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
 
@@ -24,7 +24,7 @@ export const useEventsStore = defineStore('userEvents', () => {
 
     const workoutObject = {
       title: workoutData.title,
-      color: workoutData.labelColor,
+      color: workoutData.color,
       date: dateStore.date,
       workoutId: workoutData.workoutId,
       exercisesParamsCollection: workoutData.exercisesParamsCollection
@@ -34,11 +34,35 @@ export const useEventsStore = defineStore('userEvents', () => {
     events.value.push(workoutObject)
   }
 
+  const updateEventHandler = async () => {
+    const workoutObject = {
+      title: workoutData.title,
+      color: workoutData.color,
+      date: dateStore.date,
+      exercisesParamsCollection: workoutData.exercisesParamsCollection
+    }
+
+    await updateEvent(
+      'workouts',
+      'workoutId',
+      workoutData.workoutId,
+      workoutObject,
+      eventsLoading
+    )
+
+    const index = events.value.findIndex(event => event.workoutId === workoutData.workoutId)
+
+    if (index !== -1) {
+      events.value.splice(index, 1, workoutObject)
+    }
+  }
+
   return {
     events,
     eventsLoading,
     fetchEventHandler,
     deleteEventHandler,
-    pushEventHandler
+    pushEventHandler,
+    updateEventHandler
   }
 })
