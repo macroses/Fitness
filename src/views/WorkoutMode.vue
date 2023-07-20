@@ -88,7 +88,7 @@ onBeforeRouteLeave(() => {
             full
             @click="workoutToBase"
           >
-            Add workout
+            Save workout
           </Button>
         </div>
 

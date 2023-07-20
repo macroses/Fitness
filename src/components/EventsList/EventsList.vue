@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
+import { workoutStore } from '@/stores/workout'
+import router from '@/router'
 
 defineProps({
   events: {
@@ -11,6 +13,8 @@ defineProps({
 })
 
 const emit = defineEmits(['deleteEvent'])
+const userEvents = workoutStore()
+
 const deleteEvent = eventId => emit('deleteEvent', eventId)
 
 const activeIndex = ref(null)
@@ -19,6 +23,15 @@ const dropdownList = ref(null)
 const toggleMenu = index => activeIndex.value = (activeIndex.value === index) ? null : index
 
 onClickOutside(dropdownList, () => activeIndex.value = null)
+
+const editUsersEvent = (event) => {
+  console.log(event)
+  userEvents.workoutId = event.workoutId
+  userEvents.title = event.title
+  userEvents.labelColor = event.color
+  userEvents.exercisesParamsCollection = event.exercisesParamsCollection
+  // router.push('/workout')
+}
 </script>
 
 <template>
@@ -55,7 +68,10 @@ onClickOutside(dropdownList, () => activeIndex.value = null)
               class="user-dropdown"
               style="width: 100px"
             >
-              <li class="user-dropdown__item">
+              <li
+                class="user-dropdown__item"
+                @click="editUsersEvent(event)"
+              >
                 Edit
               </li>
               <li

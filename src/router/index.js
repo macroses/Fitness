@@ -51,7 +51,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/workout/:workoutId',
+      path: '/workout/',
       name: 'workoutmode',
       component: WorkoutMode,
       meta: {

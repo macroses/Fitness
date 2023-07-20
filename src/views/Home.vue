@@ -29,7 +29,7 @@ const filteredEvents = computed(() => userEvents.events.filter(event => {
 
 const toWorkoutMode = () => {
   workoutsStore.workoutId = workoutId.value
-  router.push(`/workout/${workoutId.value}`)
+  router.push(`/workout`)
   localStorage.setItem('wId', workoutId.value)
 }
 
