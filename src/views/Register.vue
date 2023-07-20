@@ -48,13 +48,11 @@ const register = async () => {
     <Input
       v-model="formState.email"
       label-placeholder="Email"
-      width="350px"
     />
     <Input
       type="password"
       v-model="formState.password"
       label-placeholder="Password"
-      width="350px"
     />
     <Input
       type="password"
