@@ -1,11 +1,13 @@
 import { supabase } from '@/lib/supabaseClient'
 
-const pushEvent = async userData => {
+const pushEvent = async (userData, loading) => {
+  console.log(loading)
   const {
     data: { session }
   } = await supabase.auth.getSession()
 
   try {
+    loading.value = true
     const { user } = session
 
     const updated = {
@@ -18,6 +20,8 @@ const pushEvent = async userData => {
     if (error) throw new Error(error.message)
   } catch (error) {
     console.log(error.message)
+  } finally {
+    loading.value = false
   }
 }
 
@@ -78,7 +82,7 @@ const updateEvent = async (tableName, nameOfId, eventId, updatedObject, loading)
     loading.value = true
     const { user } = session
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from(tableName)
       .update(updatedObject)
       .eq(nameOfId, eventId)
@@ -86,7 +90,6 @@ const updateEvent = async (tableName, nameOfId, eventId, updatedObject, loading)
       .select()
 
     if (error) throw new Error(error.message)
-
   } catch (error) {
     console.log(error.message)
   } finally {

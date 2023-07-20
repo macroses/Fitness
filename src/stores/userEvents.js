@@ -27,10 +27,11 @@ export const useEventsStore = defineStore('userEvents', () => {
       color: workoutData.color,
       date: dateStore.date,
       workoutId: workoutData.workoutId,
-      exercisesParamsCollection: workoutData.exercisesParamsCollection
+      exercisesParamsCollection: workoutData.exercisesParamsCollection,
+      tonnage: workoutData.tonnage
     }
 
-    await pushEvent(workoutObject)
+    await pushEvent(workoutObject, eventsLoading)
     events.value.push(workoutObject)
   }
 
@@ -39,7 +40,8 @@ export const useEventsStore = defineStore('userEvents', () => {
       title: workoutData.title,
       color: workoutData.color,
       date: dateStore.date,
-      exercisesParamsCollection: workoutData.exercisesParamsCollection
+      exercisesParamsCollection: workoutData.exercisesParamsCollection,
+      tonnage: workoutData.tonnage
     }
 
     await updateEvent(

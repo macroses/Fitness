@@ -10,6 +10,7 @@ import { exerciseStore } from '@/stores/exercise'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
+import Loading from '@/components/UI/Loading/Loading.vue'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()
@@ -57,6 +58,10 @@ onBeforeRouteLeave(() => {
   <main>
     <div class="container">
       <div class="main__layout workout-mode">
+        <Loading
+          large
+          v-if="userEvents.eventsLoading"
+        />
         <div class="main__layout-left">
           <div
             ref="homeCalendar"

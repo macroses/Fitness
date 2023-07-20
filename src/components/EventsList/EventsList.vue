@@ -15,8 +15,6 @@ defineProps({
 const emit = defineEmits(['deleteEvent'])
 const userEvents = workoutStore()
 
-
-
 const deleteEvent = eventId => emit('deleteEvent', eventId)
 
 const activeIndex = ref(null)
@@ -26,7 +24,7 @@ const toggleMenu = index => activeIndex.value = (activeIndex.value === index) ? 
 
 onClickOutside(dropdownList, () => activeIndex.value = null)
 
-const editEvent = (event) => {
+const editEvent = event => {
   userEvents.editUsersEvent(event)
   router.push('/workout')
 }
