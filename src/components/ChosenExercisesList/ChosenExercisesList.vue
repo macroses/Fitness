@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import draggable from 'vuedraggable'
 import { workoutStore } from '@/stores/workout'
 
@@ -15,11 +15,6 @@ const toggleParameters = id => {
   store.weight = null
   store.repeats = null
 }
-
-const getSetTonnage = (exerciseId) => {
-  const exercise = store.exercisesParamsCollection.find((item) => item.exerciseId === exerciseId);
-  return exercise ? exercise.setTonnage : 0;
-};
 </script>
 
 <template>
@@ -27,6 +22,7 @@ const getSetTonnage = (exerciseId) => {
     v-if="store.exercises.length"
     v-model="store.exercises"
     tag="ul"
+    handle=".chosen-exercises__item-header"
     :animation="300"
     :item-key="item => item.id"
   >
@@ -42,7 +38,9 @@ const getSetTonnage = (exerciseId) => {
           <div class="collapse__icon" />
           <div class="chosen-exercises__item-name">
             {{ element.name }}
-            {{ getSetTonnage(element.id) }}
+          </div>
+          <div class='chosen-exercises__item-tonnage'>
+            {{ store.getSetTonnage(element.id) / 1000 }} T
           </div>
           <button
             @click="store.deleteExercise(element.id)"

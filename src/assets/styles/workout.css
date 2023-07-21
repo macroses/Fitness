@@ -31,3 +31,26 @@
 	margin: 24px auto;
 }
 
+.user-workout {
+	padding: 12px;
+	border-radius: 20px;
+	border: 1px solid rgba(26, 92, 255, 0.1);
+	margin-bottom: 12px;
+}
+
+.total-tonnage {
+	font-size: 12px;
+	background-color: rgba(244,247,248,1);
+	padding: 0 12px;
+	display: flex;
+	align-items: center;
+	border-radius: 9px;
+	overflow: hidden;
+	transition: height 0.25s ease;
+	height: 0;
+}
+
+.total-tonnage.active {
+	height: 35px;
+	margin-bottom: 12px;
+}

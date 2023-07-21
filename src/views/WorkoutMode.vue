@@ -25,6 +25,7 @@ const isCalendarVisible = ref(false)
 const getDate = date => {
   chosenDate.value = date
   dateStore.date = date
+  isCalendarVisible.value = false
 }
 
 gsap.registerPlugin(CSSPlugin)
@@ -91,8 +92,8 @@ onBeforeRouteLeave(() => {
             class="user-workout"
           >
             <WorkoutDescription />
-            <div class='total-tonnage'>
-              Total tonnage: <b>{{ workoutsStore.tonnage / 1000 }}T</b>
+            <div class='total-tonnage' :class='{ active: workoutsStore.tonnage !== 0 }'>
+              Total tonnage: <b>{{ workoutsStore.tonnage / 1000 }} T</b>
             </div>
             <ChosenExercisesList />
           </div>
@@ -120,12 +121,3 @@ onBeforeRouteLeave(() => {
     <AsideExercise v-if="exercisesStore.exercise" />
   </main>
 </template>
-
-<style>
-.user-workout {
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(26, 92, 255, 0.1);
-  margin-bottom: 12px;
-}
-</style>
