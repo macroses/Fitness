@@ -12,7 +12,7 @@ export const workoutStore = defineStore({
     repeats: null,
     effort: null,
     exercises: [],
-    tonnage: null,
+    tonnage: 0,
     exercisesParamsCollection: []
   }),
   actions: {

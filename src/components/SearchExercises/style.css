@@ -37,8 +37,8 @@ mark {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
 
-.exercises-search__empty span {
-	opacity: 0.5;
+	& span {
+		opacity: 0.5;
+	}
 }

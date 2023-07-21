@@ -17,6 +17,7 @@
     "dayjs": "^1.11.8",
     "gsap": "^3.12.2",
     "pinia": "^2.1.3",
+    "postcss-nesting": "^12.0.0",
     "uid": "^2.0.2",
     "unplugin-vue-components": "^0.25.1",
     "vue": "^3.3.4",
@@ -26,6 +27,8 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "@fullhuman/vue-cli-plugin-purgecss": "^5.0.0",
     "@rushstack/eslint-patch": "^1.3.2",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",

@@ -10,10 +10,10 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
-}
 
-.form__submit p {
-	margin: 0;
+	& p {
+		margin: 0;
+	}
 }
 
 .form__header {
@@ -28,8 +28,8 @@
 .reset-password {
 	text-align: center;
 	font-size: 13px;
-}
 
-.reset-password span {
-	cursor: pointer;
+	& span {
+		cursor: pointer;
+	}
 }

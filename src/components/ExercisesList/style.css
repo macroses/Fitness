@@ -15,11 +15,11 @@
 	background: transparent;
 	width: 100%;
 	border: 0;
-}
 
-.muscles__item-header:focus {
-	box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
-	transform: translateY(-3px);
+	&:focus {
+		box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
+		transform: translateY(-3px);
+	}
 }
 
 @media(hover: hover) and (pointer: fine) {
@@ -29,10 +29,20 @@
 	}
 }
 
-.muscles__item.active .muscles__item-header {
-	background: rgba(244,247,248,1);
-	transform: translateY(-3px);
-	box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
+.muscles__item.active {
+	& .muscles__item-header {
+		background: rgba(244,247,248,1);
+		transform: translateY(-3px);
+		box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
+	}
+
+	& .collapse__icon {
+		transform: rotate(-315deg);
+	}
+
+	& .exercises-wr {
+		grid-template-rows: 1fr;
+	}
 }
 
 .muscles__item-img {
@@ -56,10 +66,6 @@
 	border-top: 1px solid black;
 }
 
-.muscles__item.active .collapse__icon {
-	transform: rotate(-315deg);
-}
-
 .exercises-wr {
 	display: grid;
 	grid-template-rows: 0fr;
@@ -70,9 +76,6 @@
 	min-height: 0;
 	max-height: 300px;
 	overflow: auto;
-}
-.muscles__item.active .exercises-wr {
-	grid-template-rows: 1fr;
 }
 
 .muscle__item-length {
@@ -90,23 +93,23 @@
 	border-radius: 12px;
 	transition: all var(--base-transition);
 	position: relative;
-}
 
-.exercises__item::after {
-	content: '';
-	position: absolute;
-	right: 15px;
-	top: 15px;
-	width: 7px;
-	height: 7px;
-	border-top: 1px solid lightgray;
-	border-right: 1px solid lightgray;
-	transform: rotate(45deg);
-}
+	&::after {
+		content: '';
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		width: 7px;
+		height: 7px;
+		border-top: 1px solid lightgray;
+		border-right: 1px solid lightgray;
+		transform: rotate(45deg);
+	}
 
-.exercises__item:focus {
-	transform: translateY(-3px);
-	background: rgba(244,247,248,1);
+	&:focus {
+		transform: translateY(-3px);
+		background: rgba(244,247,248,1);
+	}
 }
 
 @media(hover: hover) and (pointer: fine) {

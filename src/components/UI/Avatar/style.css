@@ -3,6 +3,15 @@
 	height: 44px;
 	border-radius: 35%;
 	cursor: pointer;
+
+	& svg {
+		transition: all var(--base-transition);
+	}
+
+	&:focus svg {
+		scale: 1.2;
+		transition: all var(--base-transition);
+	}
 }
 
 .avatar {
@@ -14,15 +23,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-.avatar-content svg {
-	transition: all var(--base-transition);
-}
-
-.avatar-content:focus svg {
-	scale: 1.2;
-	transition: all var(--base-transition);
 }
 
 @media(hover: hover) and (pointer: fine) {

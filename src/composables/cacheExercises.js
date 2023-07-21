@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { getCollection } from '@/composables/getCollection'
 
 const cacheExercises = (cacheKey, dataExercises, loading) => {
