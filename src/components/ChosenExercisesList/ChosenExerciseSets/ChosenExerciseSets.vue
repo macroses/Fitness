@@ -40,43 +40,73 @@ const previousResults = computed(() => {
 
   return previousSets
 })
+
+const combinedResults = computed(() => {
+  const previous = previousResults.value.slice();
+  const exerciseSets = getExerciseSets(props.exerciseId)
+
+  const combined = exerciseSets.map((set, index) => {
+    const prevSet = previous[index] || {}
+
+    return {
+      setId: set.setId,
+      weight: set.weight,
+      repeats: set.repeats,
+      prevWeight: prevSet.weight ?? '-',
+      prevRepeats: prevSet.repeats ?? '-',
+      effort: set.effort,
+    }
+  })
+
+  if (previous.length > exerciseSets.length) {
+    for (let i = exerciseSets.length; i < previous.length; i++) {
+      const prevSet = previous[i];
+      combined.push({
+        setId: null,
+        weight: '-',
+        repeats: '-',
+        prevWeight: prevSet.weight,
+        prevRepeats: prevSet.repeats,
+        effort: prevSet.effort,
+      })
+    }
+  }
+
+  return combined
+});
+
 </script>
 
 <template>
-  {{ previousResults }}
-  <div
-    v-if="getExerciseSets(exerciseId).length"
-    class="table-parent"
-  >
-    <table>
-      <thead>
+  <div>
+    {{ previousResults }}
+    <div v-if="combinedResults.length" class="table-parent">
+      <table>
+        <thead>
         <tr>
           <td />
           <td>Weight</td>
           <td>Repeats</td>
+          <td>Previous Weight</td>
+          <td>Previous Repeats</td>
           <td />
         </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="set in getExerciseSets(exerciseId)"
-          :key="set.setId"
-        >
-          <td
-            style="width: 10px"
-            :style="{ background: getEffortColor(set.effort) }"
-          />
-          <td>{{ set.weight ?? '-' }}</td>
-          <td>{{ set.repeats ?? '-' }}</td>
-          <td>
-            <button
-              class="chosen-exercises__delete"
-              @click="deleteSetHandler(exerciseId, set.setId)"
-            />
+        </thead>
+        <tbody>
+        <tr v-for="result in combinedResults" :key="result.setId">
+          <td style="width: 10px" :style="{ background: getEffortColor(result.effort) }" />
+          <td>{{ result.weight }}</td>
+          <td>{{ result.repeats }}</td>
+          <td>{{ result.prevWeight }}</td>
+          <td>{{ result.prevRepeats }}</td>
+          <td v-if="result.setId !== null">
+            <button class="chosen-exercises__delete" @click="deleteSetHandler(exerciseId, result.setId)" />
           </td>
+          <td v-else />
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
