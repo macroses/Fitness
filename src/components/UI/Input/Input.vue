@@ -8,6 +8,10 @@ const props = defineProps({
     type: String,
     default: '100%'
   },
+  min: {
+    type: String,
+    default: ''
+  },
   disabled: {
     type: Boolean,
     default: false

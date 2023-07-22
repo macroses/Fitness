@@ -93,9 +93,10 @@ export const useEventsStore = defineStore('userEvents', () => {
         setId: set.setId,
         weight: set.weight,
         repeats: set.repeats,
+        effort: set.effort,
         prevWeight: prevSet.weight ?? null,
         prevRepeats: prevSet.repeats ?? null,
-        effort: set.effort
+        prevEffort: prevSet.effort ?? null
       }
     })
 
@@ -106,9 +107,10 @@ export const useEventsStore = defineStore('userEvents', () => {
           setId: null,
           weight: null,
           repeats: null,
+          effort: null,
           prevWeight: prevSet.weight,
           prevRepeats: prevSet.repeats,
-          effort: prevSet.effort
+          prevEffort: prevSet.effort
         })
       }
     }
