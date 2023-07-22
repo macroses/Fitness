@@ -58,12 +58,15 @@ const editEvent = event => {
           <div
             class="user-dropdown__content"
             :class="{ 'user-menu__funcs--visible': activeIndex === index }"
-            style="width: 100px"
+            style="width: max-content"
           >
-            <ul
-              class="user-dropdown"
-              style="width: 100px"
-            >
+            <ul class="user-dropdown">
+              <li
+                class="user-dropdown__item"
+                @click="editEvent(event)"
+              >
+                Reschedule an event
+              </li>
               <li
                 class="user-dropdown__item"
                 @click="editEvent(event)"

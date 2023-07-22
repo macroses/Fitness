@@ -8,7 +8,6 @@ import dayjs from 'dayjs'
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
   const eventsLoading = ref(false)
-  const exercisesLoading = ref(false)
   const workoutData = workoutStore()
   const dateStore = chosenDateStore()
 
