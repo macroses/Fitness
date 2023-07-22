@@ -39,7 +39,7 @@ const toggleParameters = id => {
           <div class="chosen-exercises__item-name">
             {{ element.name }}
           </div>
-          <div class='chosen-exercises__item-tonnage'>
+          <div class="chosen-exercises__item-tonnage">
             {{ store.getSetTonnage(element.id) / 1000 }} T
           </div>
           <button

@@ -92,7 +92,10 @@ onBeforeRouteLeave(() => {
             class="user-workout"
           >
             <WorkoutDescription />
-            <div class='total-tonnage' :class='{ active: workoutsStore.tonnage !== 0 }'>
+            <div
+              class="total-tonnage"
+              :class="{ active: workoutsStore.tonnage !== 0 }"
+            >
               Total tonnage: <b>{{ workoutsStore.tonnage / 1000 }} T</b>
             </div>
             <ChosenExercisesList />

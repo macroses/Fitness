@@ -1,10 +1,10 @@
 <script setup>
+import { computed } from 'vue'
+import dayjs from 'dayjs'
 import { EFFORTS } from '@/constants/EFFORTS'
 import { workoutStore } from '@/stores/workout'
-import { computed } from 'vue'
 import { useEventsStore } from '@/stores/userEvents'
 import { chosenDateStore } from '@/stores/chosenDate'
-import dayjs from 'dayjs'
 
 const props = defineProps({
   exerciseId: {
@@ -52,9 +52,9 @@ const combinedResults = computed(() => {
       setId: set.setId,
       weight: set.weight,
       repeats: set.repeats,
-      prevWeight: prevSet.weight ?? '-',
-      prevRepeats: prevSet.repeats ?? '-',
-      effort: set.effort,
+      prevWeight: prevSet.weight ?? null,
+      prevRepeats: prevSet.repeats ?? null,
+      effort: set.effort
     }
   })
 
@@ -63,11 +63,11 @@ const combinedResults = computed(() => {
       const prevSet = previous[i];
       combined.push({
         setId: null,
-        weight: '-',
-        repeats: '-',
+        weight: null,
+        repeats: null,
         prevWeight: prevSet.weight,
         prevRepeats: prevSet.repeats,
-        effort: prevSet.effort,
+        effort: prevSet.effort
       })
     }
   }
@@ -79,31 +79,66 @@ const combinedResults = computed(() => {
 
 <template>
   <div>
-    {{ previousResults }}
-    <div v-if="combinedResults.length" class="table-parent">
+    <div
+      v-if="combinedResults.length"
+      class="table-parent"
+    >
       <table>
-        <thead>
-        <tr>
-          <td />
-          <td>Weight</td>
-          <td>Repeats</td>
-          <td>Previous Weight</td>
-          <td>Previous Repeats</td>
-          <td />
-        </tr>
+        <thead v-once>
+          <tr>
+            <td />
+            <td>Weight</td>
+            <td>Repeats</td>
+            <td />
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="result in combinedResults" :key="result.setId">
-          <td style="width: 10px" :style="{ background: getEffortColor(result.effort) }" />
-          <td>{{ result.weight }}</td>
-          <td>{{ result.repeats }}</td>
-          <td>{{ result.prevWeight }}</td>
-          <td>{{ result.prevRepeats }}</td>
-          <td v-if="result.setId !== null">
-            <button class="chosen-exercises__delete" @click="deleteSetHandler(exerciseId, result.setId)" />
-          </td>
-          <td v-else />
-        </tr>
+          <tr
+            v-for="result in combinedResults"
+            :key="result.setId"
+          >
+            <td
+              style="width: 10px"
+              :style="{ background: getEffortColor(result.effort) }"
+            />
+
+            <td>
+              {{ result.weight }}
+              <span
+                v-if="!result.weight"
+                class="prev-result"
+              >{{ result.prevWeight }}</span>
+              <span
+                v-if="result.prevWeight && result.weight"
+                class="prev-result__grow"
+                :style="Math.sign(result.weight - result.prevWeight) === 1 ? 'color: green' : 'color: red'"
+              >
+                {{ Math.sign(result.weight - result.prevWeight) === 1 ? '+' : '' }}{{ result.weight - result.prevWeight }}
+              </span>
+            </td>
+
+            <td>
+              {{ result.repeats }}
+              <span
+                v-if="!result.repeats"
+                class="prev-result"
+              >{{ result.prevRepeats }}</span>
+              <span
+                v-if="result.prevRepeats && result.repeats"
+                class="prev-result__grow"
+                :style="Math.sign(result.repeats - result.prevRepeats) === 1 ? 'color: green' : 'color: red'"
+              >
+                {{ Math.sign(result.repeats - result.prevRepeats) === 1 ? '+' : '' }}{{ result.repeats - result.prevRepeats }}
+              </span>
+            </td>
+
+            <td v-if="result.setId !== null">
+              <button
+                class="chosen-exercises__delete"
+                @click="deleteSetHandler(exerciseId, result.setId)"
+              />
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

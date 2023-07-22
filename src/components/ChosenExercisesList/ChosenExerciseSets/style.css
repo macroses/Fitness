@@ -26,3 +26,12 @@ tbody tr:nth-child(even) {
 	border: 1px solid rgba(26, 92, 255, 0.1);
 	margin-bottom: 12px;
 }
+
+.prev-result {
+	opacity: 0.3;
+}
+
+.prev-result__grow {
+	font-weight: 600;
+	font-size: 12px;
+}
