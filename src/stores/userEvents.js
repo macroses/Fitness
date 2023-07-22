@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { deleteEvent, getWorkouts, pushEvent, updateEvent } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
+import dayjs from 'dayjs'
 
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
   const eventsLoading = ref(false)
+  const exercisesLoading = ref(false)
   const workoutData = workoutStore()
   const dateStore = chosenDateStore()
 
@@ -59,12 +61,68 @@ export const useEventsStore = defineStore('userEvents', () => {
     }
   }
 
+  const getExerciseSets = () => {
+    const exerciseParams = workoutData.exercisesParamsCollection.find(item => item.exerciseId === workoutData.openedExerciseId)
+    return exerciseParams ? exerciseParams.sets : []
+  }
+
+  const previousResults = computed(() => {
+    const userWorkouts = events.value.filter(workout => dayjs(workout.date) < dateStore.date) // Filter workouts with date before current date
+
+    const previousSets = []
+    for (const workout of userWorkouts.reverse()) { // Reverse the array to start with the latest workout
+      const exerciseParams = workout.exercisesParamsCollection.find(item => item.exerciseId === workoutData.openedExerciseId)
+      if (exerciseParams && exerciseParams.sets.length > 0) {
+        previousSets.push(...exerciseParams.sets)
+        break
+      }
+    }
+
+    return previousSets
+  })
+
+  // Новое вычисляемое свойство для получения комбинированных результатов
+  const combinedResults = computed(() => {
+    const previous = previousResults.value.slice()
+    const exerciseSets = getExerciseSets()
+
+    const combined = exerciseSets.map((set, index) => {
+      const prevSet = previous[index] || {}
+
+      return {
+        setId: set.setId,
+        weight: set.weight,
+        repeats: set.repeats,
+        prevWeight: prevSet.weight ?? null,
+        prevRepeats: prevSet.repeats ?? null,
+        effort: set.effort
+      }
+    })
+
+    if (previous.length > exerciseSets.length) {
+      for (let i = exerciseSets.length; i < previous.length; i++) {
+        const prevSet = previous[i]
+        combined.push({
+          setId: null,
+          weight: null,
+          repeats: null,
+          prevWeight: prevSet.weight,
+          prevRepeats: prevSet.repeats,
+          effort: prevSet.effort
+        })
+      }
+    }
+
+    return combined
+  })
+
   return {
     events,
     eventsLoading,
     fetchEventHandler,
     deleteEventHandler,
     pushEventHandler,
-    updateEventHandler
+    updateEventHandler,
+    combinedResults
   }
 })

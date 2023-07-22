@@ -1,7 +1,6 @@
 import { supabase } from '@/lib/supabaseClient'
 
 const pushEvent = async (userData, loading) => {
-  console.log(loading)
   const {
     data: { session }
   } = await supabase.auth.getSession()

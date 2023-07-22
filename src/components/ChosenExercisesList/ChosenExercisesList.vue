@@ -14,6 +14,8 @@ const toggleParameters = id => {
   store.effort = null
   store.weight = null
   store.repeats = null
+
+  store.openedExerciseId = activeExerciseId.value
 }
 </script>
 

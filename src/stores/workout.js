@@ -5,6 +5,7 @@ export const workoutStore = defineStore({
   id: 'workout',
   state: () => ({
     workoutId: localStorage.getItem('wId') || null,
+    openedExerciseId: null,
     isWorkoutEdit: false,
     title: null,
     color: '213, 0, 0',
@@ -62,8 +63,8 @@ export const workoutStore = defineStore({
 
       this.updateTonnage()
     },
-    deleteSet(exerciseId, setId) {
-      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === exerciseId);
+    deleteSet(setId) {
+      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === this.openedExerciseId);
       if (exerciseParams) {
         exerciseParams.sets = exerciseParams.sets.filter(set => set.setId !== setId);
 
