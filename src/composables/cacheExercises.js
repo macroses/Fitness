@@ -1,20 +1,15 @@
-import { onMounted } from 'vue'
 import { getCollection } from '@/composables/getCollection'
 
-const cacheExercises = (cacheKey, dataExercises, loading) => {
-  onMounted(async () => {
-    const cachedData = sessionStorage.getItem(cacheKey)
+const cacheExercises = async (cacheKey, dataExercises, loading) => {
+  const cachedData = sessionStorage.getItem(cacheKey)
 
-    if (cachedData && JSON.parse(cachedData).length !== 0) {
-      dataExercises.value = JSON.parse(cachedData)
-    } else {
-      await getAndCacheCollection()
-    }
-  })
+  if (!cachedData) {
+    await getAndCacheCollection()
+  }
 
-  const getAndCacheCollection = async () => {
-    await getCollection('exercises', '*', loading, dataExercises)
-    sessionStorage.setItem(cacheKey, JSON.stringify(dataExercises.value))
+  async function getAndCacheCollection () {
+    const dataExercises = await getCollection('exercises', '*', loading)
+    sessionStorage.setItem(cacheKey, JSON.stringify(dataExercises))
   }
 }
 

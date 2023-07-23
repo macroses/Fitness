@@ -7,11 +7,9 @@ const getCollection = async (table, column, loading, arrayContainer) => {
 
     if (error) throw error
 
-    arrayContainer.value = array
+    return array
   } catch (e) {
     console.log(e.message)
-  } finally {
-    loading.value = false
   }
 }
 
