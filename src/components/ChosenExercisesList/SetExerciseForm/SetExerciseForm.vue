@@ -1,7 +1,7 @@
 <script setup>
+import { watch } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
 import { workoutStore } from '@/stores/workout'
-import { watch } from 'vue'
 import { EFFORTS } from '@/constants/EFFORTS'
 import ChosenExerciseSets from '@/components/ChosenExercisesList/ChosenExerciseSets/ChosenExerciseSets.vue'
 
@@ -18,7 +18,7 @@ const addEffortType = effortId => store.effort = effortId
 
 const addSetHandler = exerciseId => store.addSet(exerciseId)
 
-watch(() => store.repeats, (newValue) => {
+watch(() => store.repeats, newValue => {
   if (newValue < 1) store.repeats = null
 })
 </script>

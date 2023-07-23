@@ -2,18 +2,14 @@
 import { EFFORTS } from '@/constants/EFFORTS'
 import { workoutStore } from '@/stores/workout'
 import { useEventsStore } from '@/stores/userEvents'
+import { getPrevChangesStyles } from '@/helpers/getPrevChangesStyles'
 
 const store = workoutStore()
 const eventsStore = useEventsStore()
 
 const getEffortColor = effort => EFFORTS.filter(el => el.id === effort).map(item => item.color)
 
-const deleteSetHandler = (setId) => store.deleteSet(setId)
-
-const isPositive = (num) => ({
-  color: num > 0 ? 'green' : num < 0 ? 'red' : 'rgb(191 196 203)',
-  sign: num > 0 ? '+' : '',
-})
+const deleteSetHandler = setId => store.deleteSet(setId)
 </script>
 
 <template>
@@ -38,55 +34,32 @@ const isPositive = (num) => ({
             :key="result.setId"
           >
             <td
-              style="width: 10px"
+              style="width: 15px"
               :style="[
-                getEffortColor(result.effort).length
+                result.effort
                   ? `background: ${getEffortColor(result.effort)}`
                   : `background: ${getEffortColor(result.prevEffort)}; opacity: 0.5`
-                ]"
+              ]"
             />
             <td
-              style="width: 5px"
+              style="width: 10px"
               :style="{
                 background: getEffortColor(result.prevEffort),
-                opacity: 0.5,
-                borderLeft: '1px solid rgba(26, 92, 255, 0.1)'
+                borderLeft: '1px solid rgba(26, 92, 255, 0.1)',
               }"
             />
 
             <td>
               {{ result.weight }}
-              <span
-                v-if="!result.weight"
-                class="prev-result"
-              >{{ result.prevWeight }}</span>
-              <span
-                v-if="result.prevWeight && result.weight"
-                class="prev-result__grow"
-                :style="{ color: isPositive(result.weight - result.prevWeight).color }"
-              >
-                <span v-if='result.weight - result.prevWeight !== 0' class='sign'>
-                  {{ isPositive(result.weight - result.prevWeight).sign }}
-                </span>
-                {{ result.weight - result.prevWeight }}
+              <span :class="getPrevChangesStyles(result.weight, result.prevWeight).class">
+                {{ getPrevChangesStyles(result.weight, result.prevWeight).value }}
               </span>
             </td>
 
             <td>
               {{ result.repeats }}
-              <span
-                v-if="!result.repeats"
-                class="prev-result"
-              >{{ result.prevRepeats }}</span>
-              <span
-                v-if="result.prevRepeats && result.repeats"
-                class="prev-result__grow"
-                :style="{ color: isPositive(result.repeats - result.prevRepeats).color }"
-              >
-                <span v-if='result.repeats - result.prevRepeats !== 0' class='sign'>
-                  {{ isPositive(result.repeats - result.prevRepeats).sign }}
-                </span>
-                {{ result.repeats - result.prevRepeats }}
+              <span :class="getPrevChangesStyles(result.repeats, result.prevRepeats).class">
+                {{ getPrevChangesStyles(result.repeats, result.prevRepeats).value }}
               </span>
             </td>
 

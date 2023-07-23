@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import dayjs from 'dayjs'
 import { deleteEvent, getWorkouts, pushEvent, updateEvent } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
-import dayjs from 'dayjs'
 
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
