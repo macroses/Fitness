@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import dayjs from 'dayjs'
 import { deleteEvent, getWorkouts, pushEvent, updateEvent } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
@@ -66,11 +65,12 @@ export const useEventsStore = defineStore('userEvents', () => {
   }
 
   const previousResults = computed(() => {
-    const userWorkouts = events.value.filter(workout => dayjs(workout.date) < dateStore.date) // Filter workouts with date before current date
+    const userWorkouts = events.value.filter(workout => workout.date < dateStore.date)
 
     const previousSets = []
-    for (const workout of userWorkouts.reverse()) { // Reverse the array to start with the latest workout
+    for (const workout of userWorkouts.reverse()) {
       const exerciseParams = workout.exercisesParamsCollection.find(item => item.exerciseId === workoutData.openedExerciseId)
+
       if (exerciseParams && exerciseParams.sets.length > 0) {
         previousSets.push(...exerciseParams.sets)
         break
