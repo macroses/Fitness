@@ -45,10 +45,10 @@ const goToCurrentMonth = () => {
   updateCalendar(currentDate, today, calendarCells)
 }
 
-const isMarker = date => props.events.some(event => dayjs(event.date).isSame(date, 'day'))
+const isMarker = date => props.events.some(event => event.date.isSame(date, 'day'))
 
 const getCellColor = date => {
-  const matchingEvent = props.events.find(event => dayjs(event.date).isSame(date, 'day'))
+  const matchingEvent = props.events.find(event => event.date.isSame(date, 'day'))
   return matchingEvent ? matchingEvent.color : ''
 }
 

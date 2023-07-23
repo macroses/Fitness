@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watchEffect, onBeforeMount } from 'vue'
+import { ref, computed} from 'vue'
 import dayjs from 'dayjs'
 import { uid } from 'uid'
 import { workoutStore } from '@/stores/workout'
@@ -23,7 +23,7 @@ const getDate = date => {
 }
 
 const filteredEvents = computed(() => userEvents.events.filter(event => {
-  const eventDate = dayjs(event.date).format('YYYY-MM-DD')
+  const eventDate = event.date.format('YYYY-MM-DD')
   return eventDate === dateStore.date.format('YYYY-MM-DD')
 }))
 
