@@ -38,8 +38,7 @@ const deleteSetHandler = setId => store.deleteSet(setId)
               :style="[
                 result.effort
                   ? `background: ${getEffortColor(result.effort)}`
-                  : `background: ${getEffortColor(result.prevEffort)}; opacity: 0.5`
-              ]"
+                  : `background: ${getEffortColor(result.prevEffort)}; opacity: 0.5`]"
             />
             <td
               style="width: 10px"
@@ -51,14 +50,20 @@ const deleteSetHandler = setId => store.deleteSet(setId)
 
             <td>
               {{ result.weight }}
-              <span :class="getPrevChangesStyles(result.weight, result.prevWeight).class">
+              <span
+                :class="getPrevChangesStyles(result.weight, result.prevWeight).class"
+                :style='{color: getPrevChangesStyles(result.weight, result.prevWeight).color}'
+              >
                 {{ getPrevChangesStyles(result.weight, result.prevWeight).value }}
               </span>
             </td>
 
             <td>
               {{ result.repeats }}
-              <span :class="getPrevChangesStyles(result.repeats, result.prevRepeats).class">
+              <span
+                :class="getPrevChangesStyles(result.repeats, result.prevRepeats).class"
+                :style="{ color: getPrevChangesStyles(result.repeats, result.prevRepeats).color }"
+              >
                 {{ getPrevChangesStyles(result.repeats, result.prevRepeats).value }}
               </span>
             </td>
