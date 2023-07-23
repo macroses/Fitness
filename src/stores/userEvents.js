@@ -32,7 +32,7 @@ export const useEventsStore = defineStore('userEvents', () => {
       tonnage: workoutData.tonnage
     }
 
-    await pushEvent(workoutObject, eventsLoading)
+    await pushEvent('workouts', workoutObject, eventsLoading)
     events.value.push(workoutObject)
   }
 
@@ -95,27 +95,27 @@ export const useEventsStore = defineStore('userEvents', () => {
         effort: set.effort,
         prevWeight: prevSet.weight ?? null,
         prevRepeats: prevSet.repeats ?? null,
-        prevEffort: prevSet.effort ?? null
+        prevEffort: prevSet.effort ?? null,
       }
     })
 
-    if (previous.length > exerciseSets.length) {
-      for (let i = exerciseSets.length; i < previous.length; i++) {
-        const prevSet = previous[i]
-        combined.push({
+    combined.push(
+      ...previous
+        .slice(exerciseSets.length)
+        .map((prevSet) => ({
           setId: null,
           weight: null,
           repeats: null,
           effort: null,
           prevWeight: prevSet.weight,
           prevRepeats: prevSet.repeats,
-          prevEffort: prevSet.effort
-        })
-      }
-    }
+          prevEffort: prevSet.effort,
+        }))
+    )
 
     return combined
   })
+
 
   return {
     events,

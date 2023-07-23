@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabaseClient'
 
-const pushEvent = async (userData, loading) => {
+const pushEvent = async (tableName, userData, loading) => {
   const {
     data: { session }
   } = await supabase.auth.getSession()
@@ -14,7 +14,7 @@ const pushEvent = async (userData, loading) => {
       ...userData
     }
 
-    const { error } = await supabase.from('workouts').insert(updated)
+    const { error } = await supabase.from(tableName).insert(updated)
 
     if (error) throw new Error(error.message)
   } catch (error) {

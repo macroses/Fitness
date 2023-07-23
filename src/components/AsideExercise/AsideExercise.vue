@@ -72,14 +72,6 @@ onClickOutside(asideExercise, () => (store.exercise = null))
         </div>
         <div class="exercise-description">
           <div class="title">
-            Muscle targeted
-          </div>
-          <div class="value">
-            {{ store.exercise.main_muscle }}
-          </div>
-        </div>
-        <div class="exercise-description">
-          <div class="title">
             Other muscles
           </div>
           <div class="value">
