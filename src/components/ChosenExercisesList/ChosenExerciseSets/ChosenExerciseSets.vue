@@ -8,11 +8,11 @@ const eventsStore = useEventsStore()
 
 const getEffortColor = effort => EFFORTS.filter(el => el.id === effort).map(item => item.color)
 
-const deleteSetHandler = (setId) => store.deleteSet(setId)
+const deleteSetHandler = setId => store.deleteSet(setId)
 
-const isPositive = (num) => ({
+const isPositive = num => ({
   color: num > 0 ? 'green' : num < 0 ? 'red' : 'rgb(191 196 203)',
-  sign: num > 0 ? '+' : '',
+  sign: num > 0 ? '+' : ''
 })
 </script>
 
@@ -24,79 +24,85 @@ const isPositive = (num) => ({
     >
       <table>
         <thead v-once>
-        <tr>
-          <td />
-          <td />
-          <td>Weight</td>
-          <td>Repeats</td>
-          <td />
-        </tr>
+          <tr>
+            <td />
+            <td />
+            <td>Weight</td>
+            <td>Repeats</td>
+            <td />
+          </tr>
         </thead>
         <tbody>
-        <tr
-          v-for="result in eventsStore.combinedResults"
-          :key="result.setId"
-        >
-          <td
-            style="width: 10px"
-            :style="[
+          <tr
+            v-for="result in eventsStore.combinedResults"
+            :key="result.setId"
+          >
+            <td
+              style="width: 10px"
+              :style="[
                 getEffortColor(result.effort).length
                   ? `background: ${getEffortColor(result.effort)}`
-                  : `background: ${getEffortColor(result.prevEffort)}; opacity: 0.5`
-                ]"
-          />
-          <td
-            style="width: 5px"
-            :style="{
+                  : `background: ${getEffortColor(result.prevEffort)}; opacity: 0.5`,
+              ]"
+            />
+            <td
+              style="width: 5px"
+              :style="{
                 background: getEffortColor(result.prevEffort),
                 opacity: 0.5,
-                borderLeft: '1px solid rgba(26, 92, 255, 0.1)'
+                borderLeft: '1px solid rgba(26, 92, 255, 0.1)',
               }"
-          />
+            />
 
-          <td>
-            {{ result.weight }}
-            <span
-              v-if="!result.weight"
-              class="prev-result"
-            >{{ result.prevWeight }}</span>
-            <span
-              v-if="result.prevWeight && result.weight"
-              class="prev-result__grow"
-              :style="{ color: isPositive(result.weight - result.prevWeight).color }"
-            >
-                <span v-if='result.weight - result.prevWeight !== 0' class='sign'>
+            <td>
+              {{ result.weight }}
+              <span
+                v-if="!result.weight"
+                class="prev-result"
+              >{{ result.prevWeight }}</span>
+              <span
+                v-if="result.prevWeight && result.weight"
+                class="prev-result__grow"
+                :style="{ color: isPositive(result.weight - result.prevWeight).color }"
+              >
+                <span
+                  v-if="result.weight - result.prevWeight !== 0"
+                  class="sign"
+                >
                   {{ isPositive(result.weight - result.prevWeight).sign }}
                 </span>
                 {{ result.weight - result.prevWeight }}
               </span>
-          </td>
+            </td>
 
-          <td>
-            {{ result.repeats }}
-            <span
-              v-if="!result.repeats"
-              class="prev-result"
-            >{{ result.prevRepeats }}</span>
-            <span
-              v-if="result.prevRepeats && result.repeats"
-              class="prev-result__grow"
-              :style="{ color: isPositive(result.repeats - result.prevRepeats).color }"
-            >
-                <span v-if='result.repeats - result.prevRepeats !== 0' class='sign'>
+            <td>
+              {{ result.repeats }}
+              <span
+                v-if="!result.repeats"
+                class="prev-result"
+              >{{ result.prevRepeats }}</span>
+              <span
+                v-if="result.prevRepeats && result.repeats"
+                class="prev-result__grow"
+                :style="{ color: isPositive(result.repeats - result.prevRepeats).color }"
+              >
+                <span
+                  v-if="result.repeats - result.prevRepeats !== 0"
+                  class="sign"
+                >
                   {{ isPositive(result.repeats - result.prevRepeats).sign }}
                 </span>
                 {{ result.repeats - result.prevRepeats }}
               </span>
-          </td>
+            </td>
 
-          <td v-if="result.setId !== null">
-            <button
-              class="chosen-exercises__delete"
-              @click="deleteSetHandler(result.setId)"
-            />
-          </td>
-        </tr>
+            <td v-if="result.setId !== null">
+              <button
+                class="chosen-exercises__delete"
+                @click="deleteSetHandler(result.setId)"
+              />
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

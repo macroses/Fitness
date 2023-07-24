@@ -55,7 +55,7 @@ onBeforeRouteLeave(() => {
   workoutsStore.$reset()
 })
 
-watch(workoutsStore.$state, (val) => {
+watch(workoutsStore.$state, val => {
   if (val) {
     isStateChanged.value = true
   }

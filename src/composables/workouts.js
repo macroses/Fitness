@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabaseClient'
 import dayjs from 'dayjs'
+import { supabase } from '@/lib/supabaseClient'
 
 const pushEvent = async (tableName, userData, loading) => {
   const {
@@ -42,12 +42,10 @@ const getWorkouts = async (userData, loading) => {
 
     if (error) throw new Error(error.message)
 
-    userData.value = workouts.map(workout => {
-      return {
-        ...workout,
-        date: dayjs(workout.date),
-      }
-    })
+    userData.value = workouts.map(workout => ({
+      ...workout,
+      date: dayjs(workout.date)
+    }))
   } catch (error) {
     console.log(error.message)
   } finally {

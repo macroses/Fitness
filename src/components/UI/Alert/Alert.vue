@@ -10,7 +10,7 @@ defineProps({
 <template>
   <div
     class="alert"
-    :class="{ 'alert--sm': sm}"
+    :class="{ 'alert--sm': sm }"
   >
     <div class="alert__header">
       <slot name="alert-header" />

@@ -1,4 +1,7 @@
 <script setup>
+import { gsap } from 'gsap'
+import { CSSPlugin } from 'gsap/CSSPlugin'
+import { onMounted, ref } from 'vue'
 import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
 
 defineProps({
@@ -8,6 +11,32 @@ defineProps({
   }
 })
 
+const modalLayer = ref(null)
+const modalContent = ref(null)
+
+gsap.registerPlugin(CSSPlugin)
+
+const unmountTimer = () => setTimeout(() => {
+  close()
+}, 500)
+
+onMounted(() => {
+  const t1 = gsap.timeline()
+  t1.from(modalLayer.value, { autoAlpha: 0, duration: 0.25 })
+  t1.from(modalContent.value, {autoAlpha: 0, scale: 0.8, y: '-100', duration: 0.25, ease: 'power2' })
+  t1.play()
+})
+
+const animateBeforeClose = () => {
+  const t2 = gsap.timeline()
+  t2.to(modalContent.value, { autoAlpha: 0, y: '+200', duration: 0.5, ease: 'power2' })
+  t2.to(modalLayer.value, { autoAlpha: 0, duration: 0.5 }, 0)
+  t2.play()
+
+  unmountTimer()
+  clearTimeout(unmountTimer)
+}
+
 const emit = defineEmits(['close'])
 
 const close = () => emit('close')
@@ -15,17 +44,24 @@ const close = () => emit('close')
 
 <template>
   <Teleport to="body">
-    <div class='modal-layer' @click.self="close">
-      <div class='modal' :style='{ maxWidth: width }'>
-        <div class='modal__header'>
-          <ButtonClose @click="close"/>
-          <slot name='modal-header'></slot>
+    <div
+      class="modal"
+    >
+      <div ref='modalLayer' class='modal__layer' @click.self="animateBeforeClose"/>
+      <div
+        ref="modalContent"
+        class="modal__content"
+        :style="{ maxWidth: width }"
+      >
+        <div class="modal__header">
+          <ButtonClose @click="animateBeforeClose" />
+          <slot name="modal-header" />
         </div>
-        <div class='modal__body'>
-          <slot name='modal-body'></slot>
+        <div class="modal__body">
+          <slot name="modal-body" />
         </div>
-        <div class='modal__footer'>
-          <slot name='modal-footer'></slot>
+        <div class="modal__footer">
+          <slot name="modal-footer" />
         </div>
       </div>
     </div>

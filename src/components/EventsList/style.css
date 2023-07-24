@@ -39,7 +39,8 @@
 
 .reschedule-form {
 	margin-block: 12px;
-	display: grid;
-	gap: 12px;
-	grid-template-columns: 1fr 1fr;
+}
+
+.modal__footer .group {
+	justify-content: space-between;
 }

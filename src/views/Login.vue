@@ -29,7 +29,6 @@ const login = async () => {
     router.push('/')
 
     await userEvents.fetchEventHandler()
-
   } catch (error) {
     toast.error(error.message, { position: toast.POSITION.TOP_RIGHT })
   } finally {

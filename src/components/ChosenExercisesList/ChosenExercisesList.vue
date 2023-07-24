@@ -31,7 +31,7 @@ const toggleParameters = id => {
     <template #item="{ element }">
       <li
         class="chosen-exercises__item"
-        tabindex='0'
+        tabindex="0"
       >
         <div
           class="chosen-exercises__item-header"

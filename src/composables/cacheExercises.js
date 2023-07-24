@@ -7,7 +7,7 @@ const cacheExercises = async (cacheKey, dataExercises, loading) => {
     await getAndCacheCollection()
   }
 
-  async function getAndCacheCollection () {
+  async function getAndCacheCollection() {
     const dataExercises = await getCollection('exercises', '*', loading)
     sessionStorage.setItem(cacheKey, JSON.stringify(dataExercises))
   }

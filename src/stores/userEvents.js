@@ -95,27 +95,26 @@ export const useEventsStore = defineStore('userEvents', () => {
         effort: set.effort,
         prevWeight: prevSet.weight ?? null,
         prevRepeats: prevSet.repeats ?? null,
-        prevEffort: prevSet.effort ?? null,
+        prevEffort: prevSet.effort ?? null
       }
     })
 
     combined.push(
       ...previous
         .slice(exerciseSets.length)
-        .map((prevSet) => ({
+        .map(prevSet => ({
           setId: null,
           weight: null,
           repeats: null,
           effort: null,
           prevWeight: prevSet.weight,
           prevRepeats: prevSet.repeats,
-          prevEffort: prevSet.effort,
+          prevEffort: prevSet.effort
         }))
     )
 
     return combined
   })
-
 
   return {
     events,

@@ -6,6 +6,9 @@ import router from '@/router'
 import Modal from '@/components/UI/Modal/Modal.vue'
 import Alert from '@/components/UI/Alert/Alert.vue'
 import Input from '@/components/UI/Input/Input.vue'
+import Button from '@/components/UI/Button/Button.vue'
+import { chosenDateStore } from '@/stores/chosenDate'
+import { useEventsStore } from '@/stores/userEvents'
 
 defineProps({
   events: {
@@ -16,11 +19,14 @@ defineProps({
 })
 
 const emit = defineEmits(['deleteEvent'])
-const userEvents = workoutStore()
+const workoutsStore = workoutStore()
+const dateStore = chosenDateStore()
+const userEvents = useEventsStore()
 
 const isFutureEventsMove = ref(false)
-const rescheduleDaysCounter = ref(3)
 const isRescheduleModal = ref(false)
+
+const chosenEvent = ref(null)
 
 const deleteEvent = eventId => emit('deleteEvent', eventId)
 
@@ -29,13 +35,24 @@ const dropdownList = ref(null)
 
 const toggleMenu = index => activeIndex.value = (activeIndex.value === index) ? null : index
 
-const modalHandler = () => {}
-
 onClickOutside(dropdownList, () => activeIndex.value = null)
 
-const editEvent = event => {
-  userEvents.editUsersEvent(event)
+const editEvent = (event) => {
+  workoutsStore.editUsersEvent(event)
   router.push('/workout')
+}
+
+const openRescheduleModule = event => {
+  chosenEvent.value = event
+  isRescheduleModal.value = true
+}
+
+const rescheduleEvent = async () => {
+  workoutsStore.editUsersEvent(chosenEvent.value)
+  dateStore.date = dateStore.rescheduledEventDate
+  await userEvents.updateEventHandler()
+  workoutsStore.$reset()
+  isRescheduleModal.value = false
 }
 </script>
 
@@ -72,7 +89,7 @@ const editEvent = event => {
             <ul class="user-dropdown">
               <li
                 class="user-dropdown__item"
-                @click="isRescheduleModal = true"
+                @click="openRescheduleModule(event)"
               >
                 Reschedule an event
               </li>
@@ -106,14 +123,28 @@ const editEvent = event => {
       >
       There are no events
     </div>
-    <Modal v-if='isRescheduleModal' width='500px' @close='isRescheduleModal = false'>
+    <Modal
+      v-if="isRescheduleModal"
+      width="400px"
+      @close="isRescheduleModal = false"
+    >
       <template #modal-header>Reschedule event</template>
       <template #modal-body>
-        <Alert sm>To move this event in the calendar for how many days. Positive value - forward, negative - backward</Alert>
+        <Alert sm>
+          To move this event in the calendar for how many days. Positive value - forward, negative - backward
+        </Alert>
         <form class="reschedule-form">
-          <Input v-model="rescheduleDaysCounter"/>
-          <Checkbox label="Move all future events" v-model="isFutureEventsMove" />
+          <Input v-model.number="dateStore.rescheduleCounter" />
         </form>
+      </template>
+      <template #modal-footer>
+        <div class='group'>
+          <Checkbox
+            label="Move all future events"
+            v-model="isFutureEventsMove"
+          />
+          <Button @click="rescheduleEvent">Reschedule</Button>
+        </div>
       </template>
     </Modal>
   </div>
