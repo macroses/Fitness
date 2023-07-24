@@ -3,6 +3,9 @@ import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { workoutStore } from '@/stores/workout'
 import router from '@/router'
+import Modal from '@/components/UI/Modal/Modal.vue'
+import Alert from '@/components/UI/Alert/Alert.vue'
+import Input from '@/components/UI/Input/Input.vue'
 
 defineProps({
   events: {
@@ -15,12 +18,18 @@ defineProps({
 const emit = defineEmits(['deleteEvent'])
 const userEvents = workoutStore()
 
+const isFutureEventsMove = ref(false)
+const rescheduleDaysCounter = ref(3)
+const isRescheduleModal = ref(false)
+
 const deleteEvent = eventId => emit('deleteEvent', eventId)
 
 const activeIndex = ref(null)
 const dropdownList = ref(null)
 
 const toggleMenu = index => activeIndex.value = (activeIndex.value === index) ? null : index
+
+const modalHandler = () => {}
 
 onClickOutside(dropdownList, () => activeIndex.value = null)
 
@@ -63,7 +72,7 @@ const editEvent = event => {
             <ul class="user-dropdown">
               <li
                 class="user-dropdown__item"
-                @click="editEvent(event)"
+                @click="isRescheduleModal = true"
               >
                 Reschedule an event
               </li>
@@ -97,6 +106,16 @@ const editEvent = event => {
       >
       There are no events
     </div>
+    <Modal v-if='isRescheduleModal' width='500px' @close='isRescheduleModal = false'>
+      <template #modal-header>Reschedule event</template>
+      <template #modal-body>
+        <Alert sm>To move this event in the calendar for how many days. Positive value - forward, negative - backward</Alert>
+        <form class="reschedule-form">
+          <Input v-model="rescheduleDaysCounter"/>
+          <Checkbox label="Move all future events" v-model="isFutureEventsMove" />
+        </form>
+      </template>
+    </Modal>
   </div>
 </template>
 

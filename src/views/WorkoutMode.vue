@@ -53,7 +53,6 @@ const workoutToBase = async () => {
 onBeforeRouteLeave(() => {
   localStorage.removeItem('wId')
   workoutsStore.$reset()
-  console.log(123)
 })
 
 watch(workoutsStore.$state, (val) => {

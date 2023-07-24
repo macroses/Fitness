@@ -4,4 +4,11 @@
 	border-left: 5px solid var(--accent-color);
 	color: var(--accent-color);
 	border-radius: 0 12px 12px 0;
+
+	&.alert--sm {
+		padding: 4px 8px;
+		font-size: 12px;
+		border-left: 2px solid var(--accent-color);
+	}
 }
+

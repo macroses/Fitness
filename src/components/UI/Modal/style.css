@@ -1,0 +1,29 @@
+.modal-layer {
+	position: fixed;
+	inset: 0;
+	backdrop-filter: saturate(180%) blur(15px);
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.modal {
+	background-color: var(--main-bg);
+	min-width: 320px;
+	max-width: 100%;
+	border-radius: 20px;
+	border: 1px solid rgba(26,92,255, 0.2);
+}
+
+.modal__header {
+	position: relative;
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.modal__body {
+	padding: 0 20px;
+}
