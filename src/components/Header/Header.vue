@@ -4,16 +4,19 @@ import { onClickOutside } from '@vueuse/core'
 import { signOut } from '@/composables/profile'
 import { getSession } from '@/composables/getSession'
 import router from '@/router'
+import { useEventsStore } from '@/stores/userEvents'
 
 const { session } = getSession()
 
 const loading = ref(true)
 const userMenu = ref(null)
 const isDropdownVisible = ref(false)
+const userEvents = useEventsStore()
 
 const handleSignOut = async () => {
   await signOut(loading)
   isDropdownVisible.value = false
+  userEvents.events = []
   router.push('/login')
 }
 const redirectToAccount = () => {
@@ -22,16 +25,6 @@ const redirectToAccount = () => {
 }
 
 onClickOutside(userMenu, () => (isDropdownVisible.value = false))
-
-// onMounted(() => {
-//   window.addEventListener('online',  updateOnlineStatus);
-//   window.addEventListener('offline', updateOnlineStatus);
-//
-//   function updateOnlineStatus() {
-//     const condition = navigator.onLine ? "online" : "offline";
-//     console.log(condition)
-//   }
-// })
 </script>
 
 <template>

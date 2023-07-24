@@ -5,6 +5,7 @@ import { toast } from 'vue3-toastify'
 import { supabase } from '@/lib/supabaseClient'
 import Button from '@/components/UI/Button/Button.vue'
 import Input from '@/components/UI/Input/Input.vue'
+import { useEventsStore } from '@/stores/userEvents'
 
 const router = useRouter()
 const formState = reactive({
@@ -13,6 +14,7 @@ const formState = reactive({
   errorMessage: null
 })
 
+const userEvents = useEventsStore()
 const loading = ref(false)
 
 const login = async () => {
@@ -25,6 +27,9 @@ const login = async () => {
 
     if (error) throw error
     router.push('/')
+
+    await userEvents.fetchEventHandler()
+
   } catch (error) {
     toast.error(error.message, { position: toast.POSITION.TOP_RIGHT })
   } finally {

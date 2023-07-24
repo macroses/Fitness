@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed} from 'vue'
+import { ref, computed } from 'vue'
 import dayjs from 'dayjs'
 import { uid } from 'uid'
 import { workoutStore } from '@/stores/workout'
