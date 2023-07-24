@@ -11,7 +11,7 @@ export const workoutStore = defineStore({
     color: '213, 0, 0',
     weight: null,
     repeats: null,
-    effort: null,
+    effort: 0,
     exercises: [],
     tonnage: 0,
     exercisesParamsCollection: [],
@@ -46,19 +46,17 @@ export const workoutStore = defineStore({
         effort: this.effort
       }
 
-      const existingIndex = this.exercisesParamsCollection.findIndex(item => item.exerciseId === exerciseId)
+      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === exerciseId);
 
-      if (existingIndex === -1) {
-        const newExerciseParams = {
+      if (!exerciseParams) {
+        this.exercisesParamsCollection.push({
           exerciseId,
           sets: [set],
           setTonnage: set.weight * set.repeats
-        }
-
-        this.exercisesParamsCollection.push(newExerciseParams)
+        });
       } else {
-        this.exercisesParamsCollection[existingIndex].sets.push(set)
-        this.exercisesParamsCollection[existingIndex].setTonnage += set.weight * set.repeats
+        exerciseParams.sets.push(set);
+        exerciseParams.setTonnage += set.weight * set.repeats;
       }
 
       this.updateTonnage()
@@ -83,7 +81,8 @@ export const workoutStore = defineStore({
       this.tonnage = event.tonnage
       this.exercisesParamsCollection = event.exercisesParamsCollection
 
-      this.exercises = JSON.parse(sessionStorage.getItem('exercisesCache')).filter(sessionExercise => event.exercisesParamsCollection.some(exercise => sessionExercise.id === exercise.exerciseId
+      this.exercises = JSON.parse(sessionStorage.getItem('exercisesCache'))
+        .filter(sessionExercise => event.exercisesParamsCollection.some(exercise => sessionExercise.id === exercise.exerciseId
           || sessionExercise.exerciseId === exercise.exerciseId))
     },
     getSetTonnage(id) {

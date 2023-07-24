@@ -21,6 +21,7 @@ const homeCalendar = ref(null)
 const userWorkoutEl = ref(null)
 const exList = ref(null)
 const isCalendarVisible = ref(false)
+const isStateChanged = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
@@ -52,6 +53,13 @@ const workoutToBase = async () => {
 onBeforeRouteLeave(() => {
   localStorage.removeItem('wId')
   workoutsStore.$reset()
+  console.log(123)
+})
+
+watch(workoutsStore.$state, (val) => {
+  if (val) {
+    isStateChanged.value = true
+  }
 })
 </script>
 

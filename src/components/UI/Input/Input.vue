@@ -1,5 +1,6 @@
 <script setup>
 import { uid } from 'uid'
+import { ref } from 'vue'
 
 const uniqueId = uid(10)
 
@@ -35,6 +36,8 @@ const props = defineProps({
     type: [String, Number]
   }
 })
+
+const inp = ref(null)
 </script>
 
 <template>
@@ -44,6 +47,7 @@ const props = defineProps({
   >
     <div class="input-content">
       <input
+        ref="inp"
         class="input-component"
         :type="type"
         :id="uniqueId"
@@ -66,7 +70,7 @@ const props = defineProps({
       <button
         v-if="modelValue"
         class="input-clear"
-        @click="$emit('clear')"
+        @click="$emit('clear'); inp.focus()"
         type="button"
       >
         <Icon

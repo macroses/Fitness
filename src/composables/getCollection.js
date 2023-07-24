@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabaseClient'
 
-const getCollection = async (table, column, loading, arrayContainer) => {
+const getCollection = async (table, column, loading) => {
   try {
     loading.value = true
     const { data: array, error } = await supabase.from(table).select(column)

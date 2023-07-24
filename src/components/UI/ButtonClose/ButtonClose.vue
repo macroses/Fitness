@@ -1,5 +1,4 @@
 <script setup>
-import Icon from '@/components/UI/Icon/Icon.vue'
 
 defineProps({
   leftPosition: {
