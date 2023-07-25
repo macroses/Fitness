@@ -19,11 +19,9 @@ const currentDate = ref(dayjs())
 const today = ref(dayjs())
 const calendarCells = ref([])
 const transitionName = ref('')
-const activeDate = ref(dateStore.date)
 
 const handleClickCell = cellDate => {
   emit('getDate', cellDate)
-  activeDate.value = cellDate
   transitionName.value = ''
 }
 
@@ -124,7 +122,7 @@ watch(props.events, val => {
             {
               'calendar__cell--other-month': cell.isOtherMonth,
               'calendar__cell--current-day': cell.isCurrentDay,
-              active: dayjs(cell.date).isSame(activeDate, 'day'),
+              active: dayjs(cell.date).isSame(dateStore.date, 'day'),
             },
           ]"
 

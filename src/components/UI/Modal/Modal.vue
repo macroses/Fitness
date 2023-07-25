@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import { onMounted, ref } from 'vue'
 import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
+import Button from '@/components/UI/Button/Button.vue'
 
 defineProps({
   width: {
@@ -29,7 +30,7 @@ onMounted(() => {
 
 const animateBeforeClose = () => {
   const t2 = gsap.timeline()
-  t2.to(modalContent.value, { autoAlpha: 0, y: '+200', duration: 0.5, ease: 'power2' })
+  t2.to(modalContent.value, { autoAlpha: 0, y: '+100', duration: 0.5, ease: 'power2' })
   t2.to(modalLayer.value, { autoAlpha: 0, duration: 0.5 }, 0)
   t2.play()
 
@@ -37,16 +38,18 @@ const animateBeforeClose = () => {
   clearTimeout(unmountTimer)
 }
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'confirm'])
 
 const close = () => emit('close')
+const confirm = () => {
+  animateBeforeClose()
+  emit('confirm')
+}
 </script>
 
 <template>
   <Teleport to="body">
-    <div
-      class="modal"
-    >
+    <div class="modal">
       <div ref='modalLayer' class='modal__layer' @click.self="animateBeforeClose"/>
       <div
         ref="modalContent"
@@ -61,7 +64,11 @@ const close = () => emit('close')
           <slot name="modal-body" />
         </div>
         <div class="modal__footer">
-          <slot name="modal-footer" />
+          <div class='group'>
+            <slot name="modal-footer" />
+            <Button @click="confirm">Reschedule</Button>
+          </div>
+
         </div>
       </div>
     </div>

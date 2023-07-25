@@ -100,4 +100,27 @@ const updateEvent = async (tableName, nameOfId, eventId, updatedObject, loading)
   }
 }
 
-export { pushEvent, getWorkouts, deleteEvent, updateEvent }
+const updateSeveralRows = async (tableName, rowsArray, loading) => {
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
+  try {
+    loading.value = true
+    const { user } = session
+
+    const { error } = await supabase
+      .from(tableName)
+      .update(rowsArray)
+      .eq('user_id', user.id)
+      .select()
+
+    if (error) throw new Error(error.message)
+  } catch (error) {
+    console.log(error.message)
+  } finally {
+    loading.value = false
+  }
+}
+
+export { pushEvent, getWorkouts, deleteEvent, updateEvent, updateSeveralRows }

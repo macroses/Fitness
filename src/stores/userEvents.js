@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { deleteEvent, getWorkouts, pushEvent, updateEvent } from '@/composables/workouts'
+import { computed, ref } from 'vue'
+import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
 
@@ -57,6 +57,10 @@ export const useEventsStore = defineStore('userEvents', () => {
     if (index !== -1) {
       events.value.splice(index, 1, workoutObject)
     }
+  }
+
+  const updateAllEvents = async () => {
+    await updateSeveralRows('workouts', events, loading)
   }
 
   const getExerciseSets = () => {

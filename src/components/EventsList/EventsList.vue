@@ -52,7 +52,6 @@ const rescheduleEvent = async () => {
   dateStore.date = dateStore.rescheduledEventDate
   await userEvents.updateEventHandler()
   workoutsStore.$reset()
-  isRescheduleModal.value = false
 }
 </script>
 
@@ -127,6 +126,7 @@ const rescheduleEvent = async () => {
       v-if="isRescheduleModal"
       width="400px"
       @close="isRescheduleModal = false"
+      @confirm='rescheduleEvent'
     >
       <template #modal-header>Reschedule event</template>
       <template #modal-body>
@@ -138,13 +138,10 @@ const rescheduleEvent = async () => {
         </form>
       </template>
       <template #modal-footer>
-        <div class='group'>
-          <Checkbox
-            label="Move all future events"
-            v-model="isFutureEventsMove"
-          />
-          <Button @click="rescheduleEvent">Reschedule</Button>
-        </div>
+        <Checkbox
+          label="Move all future events"
+          v-model="isFutureEventsMove"
+        />
       </template>
     </Modal>
   </div>
