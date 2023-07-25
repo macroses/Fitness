@@ -24,7 +24,7 @@ const showExercise = exercise => {
         @click="showExercise(exercise)"
       >
         {{ exercise.name }}
-<!--        <Icon icon-name='star' width='20px'/>-->
+        <Icon icon-name='star' width='20px'/>
       </li>
     </ul>
   </div>
