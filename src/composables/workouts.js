@@ -111,7 +111,7 @@ const updateSeveralRows = async (tableName, rowsArray, loading) => {
 
     const { error } = await supabase
       .from(tableName)
-      .update(rowsArray)
+      .upsert(rowsArray.value)
       .eq('user_id', user.id)
       .select()
 

@@ -48,6 +48,15 @@ const openRescheduleModule = event => {
 }
 
 const rescheduleEvent = async () => {
+  if (isFutureEventsMove.value) {
+    userEvents.events.forEach(event => {
+      event.date = event.date.add(dateStore.rescheduleCounter, 'day')
+    })
+
+    await userEvents.updateAllEvents()
+
+    return
+  }
   workoutsStore.editUsersEvent(chosenEvent.value)
   dateStore.date = dateStore.rescheduledEventDate
   await userEvents.updateEventHandler()
@@ -125,7 +134,10 @@ const rescheduleEvent = async () => {
     <Modal
       v-if="isRescheduleModal"
       width="400px"
-      @close="isRescheduleModal = false"
+      @close="
+        isRescheduleModal = false;
+        isFutureEventsMove = false
+      "
       @confirm='rescheduleEvent'
     >
       <template #modal-header>Reschedule event</template>

@@ -60,7 +60,7 @@ export const useEventsStore = defineStore('userEvents', () => {
   }
 
   const updateAllEvents = async () => {
-    await updateSeveralRows('workouts', events, loading)
+    await updateSeveralRows('workouts', events, eventsLoading)
   }
 
   const getExerciseSets = () => {
@@ -127,6 +127,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     deleteEventHandler,
     pushEventHandler,
     updateEventHandler,
-    combinedResults
+    combinedResults,
+    updateAllEvents
   }
 })
