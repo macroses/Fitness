@@ -49,7 +49,9 @@ const openRescheduleModule = event => {
 
 const rescheduleEvent = async () => {
   if (isFutureEventsMove.value) {
-    userEvents.events.forEach(event => {
+    const eventsToUpdate = userEvents.events.filter(event => event.date >= dateStore.date)
+
+    eventsToUpdate.forEach(event => {
       event.date = event.date.add(dateStore.rescheduleCounter, 'day')
     })
 
