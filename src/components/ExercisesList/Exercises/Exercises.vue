@@ -1,4 +1,6 @@
 <script setup>
+import Loading from '@/components/UI/Loading/Loading.vue'
+
 const props = defineProps({
   exercises: {
     type: Array,
@@ -21,7 +23,8 @@ const isFavorite = id => props.favorites.includes(id)
 
 <template>
   <div class="exercises-wr">
-    <ul class="exercises">
+    <Loading v-if='!favorites.length' />
+    <ul class="exercises" v-else>
       <li
         v-for="exercise in exercises"
         :key="exercise.id"

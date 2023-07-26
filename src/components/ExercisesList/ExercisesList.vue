@@ -1,6 +1,5 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import { gsap } from 'gsap'
 import { exerciseStore } from '@/stores/exercise'
 import SearchExercises from '@/components/SearchExercises/SearchExercises.vue'
 import Exercises from '@/components/ExercisesList/Exercises/Exercises.vue'
@@ -48,15 +47,6 @@ onMounted(async () => {
     isFavoriteLoading,
     'favorite_exercises'
   )
-
-  gsap.from(muscles.value.children, {
-    delay: 0.3,
-    duration: 1,
-    autoAlpha: 0,
-    stagger: 0.1,
-    y: '-20',
-    ease: 'back.out(1.7)'
-  })
 })
 </script>
 

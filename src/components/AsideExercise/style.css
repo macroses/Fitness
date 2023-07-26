@@ -30,7 +30,9 @@ body:has(.aside) {
 	position: fixed;
 	z-index: 199;
 	inset: 0;
-	backdrop-filter: saturate(180%) blur(15px);
+	backdrop-filter: blur(15px);
+	-webkit-backdrop-filter: blur(15px);
+	will-change: -webkit-backdrop-filter;
 }
 
 .title {

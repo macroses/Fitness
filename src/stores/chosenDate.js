@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export const chosenDateStore = defineStore('chosenDate', () => {
   const date = ref(dayjs())
@@ -8,6 +8,11 @@ export const chosenDateStore = defineStore('chosenDate', () => {
 
   const rescheduledEventDate = computed(() => date.value.add(rescheduleCounter.value, 'day'))
 
+  watch(rescheduleCounter, val => {
+    if (val > 30) rescheduleCounter.value = 30
+    if (val < -30) rescheduleCounter.value = -30
+  })
+  
   return {
     date,
     rescheduleCounter,
