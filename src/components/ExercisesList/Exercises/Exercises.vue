@@ -1,8 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import { getProfileColumn, updateProfile } from '@/composables/profile'
-
-defineProps({
+const props = defineProps({
   exercises: {
     type: Array,
     required: true
@@ -13,36 +10,13 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['showChosenExercises'])
-const favoriteIds = ref([])
-const isFavoriteLoading = ref(false)
+const emit = defineEmits(['showChosenExercises', 'getFavoriteId'])
 
 const showExercise = exercise => emit('showChosenExercises', exercise)
 
-const toggleToFavoriteExercise = async (id) => {
-  favoriteIds.value.includes(id)
-    ? favoriteIds.value = favoriteIds.value.filter((favoriteId) => favoriteId !== id)
-    : favoriteIds.value.push(id)
+const toggleToFavoriteExercise = async (id) => emit('getFavoriteId', id)
 
-  await updateProfile(
-    null,
-    isFavoriteLoading,
-    'favorite_exercises',
-    favoriteIds.value,
-  )
-}
-
-const isFavorite = id => {
-  return favoriteIds.value.includes(id)
-}
-
-onMounted(async () => {
-  await getProfileColumn(
-    favoriteIds,
-    isFavoriteLoading,
-    'favorite_exercises'
-  )
-})
+const isFavorite = id => props.favorites.includes(id)
 </script>
 
 <template>

@@ -11,7 +11,7 @@
 	padding: 8px 12px;
 	cursor: pointer;
 	border-radius: 12px;
-	transition: all var(--base-transition);
+	transition: background var(--base-transition), border var(--base-transition);
 	position: relative;
 	display: flex;
 	align-items: center;

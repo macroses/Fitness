@@ -5,12 +5,15 @@ import { exerciseStore } from '@/stores/exercise'
 import SearchExercises from '@/components/SearchExercises/SearchExercises.vue'
 import Exercises from '@/components/ExercisesList/Exercises/Exercises.vue'
 import MuscleItemHeader from '@/components/ExercisesList/MuscleItemHeader/MuscleItemHeader.vue'
+import { getProfileColumn, updateProfile } from '@/composables/profile'
 
 const exercisesStore = exerciseStore()
 
 const activeMuscle = ref(null)
 const sessionExercises = ref(JSON.parse(sessionStorage.getItem('exercisesCache')))
 const muscles = ref(null)
+const favoriteIds = ref([])
+const isFavoriteLoading = ref(false)
 
 const uniqueMainMuscles = computed(() => {
   const mainMuscles = new Set(sessionExercises.value.map(exercise => exercise.main_muscle))
@@ -26,7 +29,26 @@ const selectMuscle = index => activeMuscle.value = activeMuscle.value === index 
 
 const showExercise = exercise => exercisesStore.exercise = exercise
 
-onMounted(() => {
+const getFavoriteId = async (id) => {
+  favoriteIds.value.includes(id)
+    ? favoriteIds.value = favoriteIds.value.filter((favoriteId) => favoriteId !== id)
+    : favoriteIds.value.push(id)
+
+  await updateProfile(
+    null,
+    isFavoriteLoading,
+    'favorite_exercises',
+    favoriteIds.value,
+  )
+}
+
+onMounted(async () => {
+  await getProfileColumn(
+    favoriteIds,
+    isFavoriteLoading,
+    'favorite_exercises'
+  )
+
   gsap.from(muscles.value.children, {
     delay: 0.3,
     duration: 1,
@@ -57,7 +79,9 @@ onMounted(() => {
         />
         <Exercises
           :exercises="item.exercises"
+          :favorites="favoriteIds"
           @showChosenExercises="showExercise"
+          @getFavoriteId="getFavoriteId"
         />
       </li>
     </ul>

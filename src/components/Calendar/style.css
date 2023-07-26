@@ -41,7 +41,7 @@
 	font-size: 14px;
 	height: 50px;
 	border-radius: 9px;
-	transition: all var(--base-transition);
+	transition: transform var(--base-transition), box-shadow var(--base-transition);
 
 	&:not(.calendar__cell--other-month):focus {
 		box-shadow: 0 10px 20px -10px rgba(26,92,255, 0.5);
@@ -52,7 +52,7 @@
 	&.active {
 		background-color: rgba(26,92,255,.2);
 		transform: translateY(-3px);
-		transition: all var(--base-transition);
+		transition: transform var(--base-transition), box-shadow var(--base-transition);
 	}
 }
 
@@ -94,7 +94,7 @@
 
 .slideMonth-enter-active,
 .slideMonth-leave-active {
-	transition: all 0.3s ease;
+	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .slideMonth-enter-from {
@@ -110,7 +110,7 @@
 
 .slideMonthRight-enter-active,
 .slideMonthRight-leave-active {
-	transition: all 0.3s ease;
+	transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .slideMonthRight-enter-from {
