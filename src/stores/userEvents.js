@@ -120,6 +120,24 @@ export const useEventsStore = defineStore('userEvents', () => {
     return combined
   })
 
+  const rescheduleEvent = async (chosenEvent, isFutureEventsMove) => {
+    if (isFutureEventsMove.value) {
+      const eventsToUpdate = events.value.filter(event => event.date >= dateStore.date)
+
+      eventsToUpdate.forEach(event => {
+        event.date = event.date.add(dateStore.rescheduleCounter, 'day')
+      })
+
+      await updateAllEvents()
+
+      return
+    }
+    workoutData.editUsersEvent(chosenEvent.value)
+    dateStore.date = dateStore.rescheduledEventDate
+    await updateEventHandler()
+    workoutData.$reset()
+  }
+
   return {
     events,
     eventsLoading,
@@ -128,6 +146,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     pushEventHandler,
     updateEventHandler,
     combinedResults,
-    updateAllEvents
+    updateAllEvents,
+    rescheduleEvent
   }
 })

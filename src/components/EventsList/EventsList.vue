@@ -3,10 +3,6 @@ import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { workoutStore } from '@/stores/workout'
 import router from '@/router'
-import Modal from '@/components/UI/Modal/Modal.vue'
-import Alert from '@/components/UI/Alert/Alert.vue'
-import Input from '@/components/UI/Input/Input.vue'
-import Button from '@/components/UI/Button/Button.vue'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
 
@@ -47,23 +43,7 @@ const openRescheduleModule = event => {
   isRescheduleModal.value = true
 }
 
-const rescheduleEvent = async () => {
-  if (isFutureEventsMove.value) {
-    const eventsToUpdate = userEvents.events.filter(event => event.date >= dateStore.date)
-
-    eventsToUpdate.forEach(event => {
-      event.date = event.date.add(dateStore.rescheduleCounter, 'day')
-    })
-
-    await userEvents.updateAllEvents()
-
-    return
-  }
-  workoutsStore.editUsersEvent(chosenEvent.value)
-  dateStore.date = dateStore.rescheduledEventDate
-  await userEvents.updateEventHandler()
-  workoutsStore.$reset()
-}
+const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isFutureEventsMove)
 </script>
 
 <template>
@@ -140,7 +120,7 @@ const rescheduleEvent = async () => {
         isRescheduleModal = false;
         isFutureEventsMove = false
       "
-      @confirm='rescheduleEvent'
+      @confirm='rescheduleEventHandler'
     >
       <template #modal-header>Reschedule event</template>
       <template #modal-body>
