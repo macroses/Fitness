@@ -31,7 +31,32 @@ const getProfile = async (userData, isLoading) => {
   }
 }
 
-const updateProfile = async (userData, isLoading) => {
+const getProfileColumn = async (userData, loading, columnName) => {
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
+  try {
+    loading.value = true
+    const { user } = session
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .select(columnName)
+      .eq('id', user.id)
+      .single()
+
+    if (error) throw error
+
+    userData.value = data[columnName]
+  } catch (error) {
+    console.log(error.message)
+  } finally {
+    loading.value = false
+  }
+}
+
+const updateProfile = async (userData, isLoading, columnName, data) => {
   const {
     data: { session }
   } = await supabase.auth.getSession()
@@ -42,8 +67,15 @@ const updateProfile = async (userData, isLoading) => {
 
     const updates = {
       id: user.id,
-      ...userData,
       updated_at: new Date()
+    }
+
+    if (userData) {
+      updates = {...updates, ...userData}
+    }
+
+    if (columnName) {
+      updates[columnName] = data
     }
 
     const { error } = await supabase.from('profiles').upsert(updates)
@@ -68,4 +100,4 @@ const signOut = async loading => {
   }
 }
 
-export { getProfile, updateProfile, signOut }
+export { getProfile, updateProfile, getProfileColumn, signOut }

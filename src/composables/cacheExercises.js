@@ -3,7 +3,7 @@ import { getCollection } from '@/composables/getCollection'
 const cacheExercises = async (cacheKey, dataExercises, loading) => {
   const cachedData = sessionStorage.getItem(cacheKey)
 
-  if (!cachedData) {
+  if (!cachedData || cachedData[cacheKey] === undefined) {
     await getAndCacheCollection()
   }
 
