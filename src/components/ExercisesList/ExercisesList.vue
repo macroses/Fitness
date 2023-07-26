@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, readonly, ref } from 'vue'
 import { exerciseStore } from '@/stores/exercise'
 import SearchExercises from '@/components/SearchExercises/SearchExercises.vue'
 import Exercises from '@/components/ExercisesList/Exercises/Exercises.vue'
@@ -13,6 +13,7 @@ const sessionExercises = ref(JSON.parse(sessionStorage.getItem('exercisesCache')
 const muscles = ref(null)
 const favoriteIds = ref([])
 const isFavoriteLoading = ref(false)
+const activeTabId = ref(0)
 
 const uniqueMainMuscles = computed(() => {
   const mainMuscles = new Set(sessionExercises.value.map(exercise => exercise.main_muscle))
@@ -23,6 +24,12 @@ const filteredExercisesByMuscle = computed(() => uniqueMainMuscles.value.map(mus
   muscle,
   exercises: sessionExercises.value.filter(exercise => exercise.main_muscle === muscle)
 })))
+
+const filteredExercisesByFavorite = computed(() => {
+  // if (!favoriteIds.value.length) return []
+
+  return sessionExercises.value.filter(exercise => favoriteIds.value.includes(exercise.id));
+})
 
 const selectMuscle = index => activeMuscle.value = activeMuscle.value === index ? null : index
 
@@ -48,12 +55,23 @@ onMounted(async () => {
     'favorite_exercises'
   )
 })
+
+const tabs = readonly([
+  { id: 0, tabTitle: 'All' },
+  { id: 1, tabTitle: 'Favorites' },
+])
+
+const getActiveTab = (id) => {
+  activeTabId.value = id
+}
 </script>
 
 <template>
   <div class="exercises-list">
     <SearchExercises />
+    <Tabs :tabs="tabs" @activeTab="getActiveTab"/>
     <ul
+      v-if='activeTabId === 0'
       ref="muscles"
       class="muscles"
     >
@@ -75,6 +93,15 @@ onMounted(async () => {
         />
       </li>
     </ul>
+    <div v-if='activeTabId === 1'>
+      <Exercises
+        :exercises="filteredExercisesByFavorite"
+        :favorites="favoriteIds"
+        class="active"
+        @showChosenExercises="showExercise"
+        @getFavoriteId="getFavoriteId"
+      />
+    </div>
   </div>
 </template>
 

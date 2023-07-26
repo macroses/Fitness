@@ -72,11 +72,20 @@
 	overflow: hidden;
 	transition: grid-template-rows 0.5s ease;
 	will-change: transform;
+
+	&.active {
+		grid-template-rows: 1fr
+	}
 }
 .exercises {
 	min-height: 0;
 	max-height: 300px;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	.exercises-wr.active & {
+		max-height: max-content;
+	}
 }
 
 .muscle__item-length {
