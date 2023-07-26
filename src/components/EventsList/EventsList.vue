@@ -125,11 +125,11 @@ const rescheduleEvent = async () => {
       class="events__empty"
     >
       <img
-        src="Box.svg"
+        src="/Box.webp"
         alt="There are no events"
         class="events__empty-img"
-        width="150"
-        height="150"
+        width="335"
+        height="240"
       >
       There are no events
     </div>
