@@ -10,6 +10,23 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	border-radius: 12px 12px 0 0;
+	border: 1px solid transparent;
+	border-bottom: 0;
+	transition: border-color 0.25s ease;
+
+	&.superset .chosen-exercises__item-name {
+		padding-left: 0;
+	}
+
+	&.superset .chosen-exercises__item-header {
+		border: 1px solid rgba(26, 92, 255, 0.6);
+	}
+
+	&.active {
+		border: 1px solid rgba(26, 92, 255, 0.6);
+		border-bottom: none;
+	}
 }
 
 .chosen-exercises__item-header {
@@ -22,7 +39,6 @@
 	display: flex;
 	align-items: center;
 	border: 1px solid transparent;
-	border-bottom: 0;
 	flex-grow: 1;
 
 	&.active {
@@ -38,12 +54,10 @@
 		transition: transform var(--base-transition);
 	}
 
-	&.supersets {
-		border: 1px solid rgba(26, 92, 255, 0.6);
-	}
-
-	&.supersets .chosen-exercises__item-name {
-		padding-left: 0;
+	&.disabledExercise {
+		pointer-events: none;
+		cursor: not-allowed;
+		opacity: 0.5;
 	}
 }
 
