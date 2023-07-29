@@ -23,7 +23,6 @@ const homeCalendar = ref(null)
 const userWorkoutEl = ref(null)
 const exList = ref(null)
 const isCalendarVisible = ref(false)
-const isSuperSets = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
@@ -102,11 +101,11 @@ onBeforeRouteLeave(() => {
               </div>
               <Checkbox
                 v-if="workoutsStore.exercises.length > 1"
-                v-model="isSuperSets"
+                v-model="workoutsStore.isSuperset"
                 label="Supersets"
               />
             </div>
-            <ChosenExercisesList :is-superset="isSuperSets" />
+            <ChosenExercisesList />
           </div>
 
           <div class='group'>
