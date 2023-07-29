@@ -4,6 +4,12 @@
 	gap: 6px;
 }
 
+.chosen-exercises__element {
+	&.superset-merged {
+		padding-left: 24px;
+	}
+}
+
 .chosen-exercises__item {
 	background-color: var(--main-bg);
 	border-radius: 12px;
