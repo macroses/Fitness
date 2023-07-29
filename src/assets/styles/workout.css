@@ -46,11 +46,14 @@
 	align-items: center;
 	border-radius: 9px;
 	overflow: hidden;
-	transition: height 0.25s ease;
-	height: 0;
+	height: 35px;
+	flex-grow: 1;
 }
 
-.total-tonnage.active {
-	height: 35px;
+.user-workout__funcs {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 12px;
 	margin-bottom: 12px;
 }

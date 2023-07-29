@@ -1,6 +1,5 @@
 <script setup>
 import { computed, ref } from 'vue'
-import dayjs from 'dayjs'
 import { uid } from 'uid'
 import { workoutStore } from '@/stores/workout'
 import router from '@/router'
@@ -13,7 +12,6 @@ import EventsMode from '@/components/EventsMode/EventsMode.vue'
 const workoutsStore = workoutStore()
 const dateStore = chosenDateStore()
 const userEvents = useEventsStore()
-const chosenDate = ref(dayjs())
 
 const workoutId = ref(uid(50))
 

@@ -52,7 +52,7 @@
 	opacity: 1;
 	visibility: visible;
 	pointer-events: auto;
-	transform: translate(-2%,-77%);
+	transform: translate(-13px,-77%);
 	font-size: .75rem;
 }
 
@@ -60,7 +60,7 @@
 	opacity: 1;
 	visibility: visible;
 	pointer-events: auto;
-	transform: translate(-3px,-80%);
+	transform: translate(-13px,-77%);
 	font-size: .75rem;
 }
 

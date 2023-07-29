@@ -6,6 +6,12 @@
 	margin-bottom: 8px;
 }
 
+.chosen-exercises__item-top {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
 .chosen-exercises__item-header {
 	font-size: 13px;
 	padding: 8px 12px;
@@ -17,6 +23,7 @@
 	align-items: center;
 	border: 1px solid transparent;
 	border-bottom: 0;
+	flex-grow: 1;
 
 	&.active {
 		background: rgba(244,247,248,1);
@@ -29,6 +36,14 @@
 	&.active .collapse__icon {
 		transform: rotate(-315deg);
 		transition: transform var(--base-transition);
+	}
+
+	&.supersets {
+		border: 1px solid rgba(26, 92, 255, 0.6);
+	}
+
+	&.supersets .chosen-exercises__item-name {
+		padding-left: 0;
 	}
 }
 

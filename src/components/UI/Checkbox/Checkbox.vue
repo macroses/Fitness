@@ -6,15 +6,15 @@ import { computed } from 'vue'
 
 const props = defineProps({
   value: {
-    type: Boolean,
-    default: false
+    type: String,
+    default: ''
   },
   modelValue: {
     type: Boolean
   },
   label: {
     type: String,
-    required: true
+    default: ''
   }
 })
 
@@ -54,6 +54,7 @@ const model = computed({
       </div>
 
       <label
+        v-if="label"
         :for="uniqueId"
         class="checkbox-label"
       >{{ label }}</label>

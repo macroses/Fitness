@@ -71,7 +71,7 @@ const updateProfile = async (userData, isLoading, columnName, data) => {
     }
 
     if (userData) {
-      updates = {...updates, ...userData}
+      updates = { ...updates, ...userData }
     }
 
     if (columnName) {

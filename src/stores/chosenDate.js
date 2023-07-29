@@ -12,7 +12,7 @@ export const chosenDateStore = defineStore('chosenDate', () => {
     if (val > 30) rescheduleCounter.value = 30
     if (val < -30) rescheduleCounter.value = -30
   })
-  
+
   return {
     date,
     rescheduleCounter,

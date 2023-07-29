@@ -15,7 +15,7 @@ const emit = defineEmits(['showChosenExercises', 'getFavoriteId'])
 
 const showExercise = exercise => emit('showChosenExercises', exercise)
 
-const toggleToFavoriteExercise = async (id) => emit('getFavoriteId', id)
+const toggleToFavoriteExercise = async id => emit('getFavoriteId', id)
 
 const isFavorite = id => props.favorites.includes(id)
 </script>
@@ -30,8 +30,15 @@ const isFavorite = id => props.favorites.includes(id)
         @click="showExercise(exercise)"
       >
         {{ exercise.name }}
-        <button type='button' class='favorite-icon' @click.stop="toggleToFavoriteExercise(exercise.id)">
-          <Icon :icon-name="isFavorite(exercise.id) ? 'star-fill' : 'star'" width='15px'/>
+        <button
+          type="button"
+          class="favorite-icon"
+          @click.stop="toggleToFavoriteExercise(exercise.id)"
+        >
+          <Icon
+            :icon-name="isFavorite(exercise.id) ? 'star-fill' : 'star'"
+            width="15px"
+          />
         </button>
       </li>
     </ul>

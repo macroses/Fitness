@@ -182,4 +182,8 @@
 	position: absolute;
 	right: 0;
 	top: 5px;
+
+	&:hover {
+		box-shadow: none;
+	}
 }

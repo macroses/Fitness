@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import dayjs from 'dayjs'
 import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
@@ -11,6 +11,8 @@ import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
 import Loading from '@/components/UI/Loading/Loading.vue'
+import Checkbox from '@/components/UI/Checkbox/Checkbox.vue'
+import Icon from '@/components/UI/Icon/Icon.vue'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()
@@ -21,7 +23,7 @@ const homeCalendar = ref(null)
 const userWorkoutEl = ref(null)
 const exList = ref(null)
 const isCalendarVisible = ref(false)
-const isStateChanged = ref(false)
+const isSuperSets = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
@@ -54,12 +56,6 @@ onBeforeRouteLeave(() => {
   localStorage.removeItem('wId')
   workoutsStore.$reset()
 })
-
-watch(workoutsStore.$state, val => {
-  if (val) {
-    isStateChanged.value = true
-  }
-})
 </script>
 
 <template>
@@ -85,12 +81,11 @@ watch(workoutsStore.$state, val => {
               <span>{{ dateStore.date.format('dddd') }}</span>
             </div>
             <Button
-              size="small"
               class="hide-calendar__button"
               :class="{ active: isCalendarVisible }"
               @click="isCalendarVisible = !isCalendarVisible"
             >
-              {{ isCalendarVisible ? 'Hide calendar' : 'Show calendar' }}
+              <Icon width="20px" :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"/>
             </Button>
           </div>
 
@@ -99,22 +94,30 @@ watch(workoutsStore.$state, val => {
             class="user-workout"
           >
             <WorkoutDescription />
-            <div
-              class="total-tonnage"
-              :class="{ active: workoutsStore.tonnage !== 0 }"
-            >
-              Total tonnage: <b>{{ workoutsStore.tonnage / 1000 }} T</b>
+            <div class="user-workout__funcs">
+              <div
+                class="total-tonnage"
+              >
+                Total tonnage:&nbsp; <b>{{ workoutsStore.tonnage / 1000 }} T</b>
+              </div>
+              <Checkbox
+                v-if="workoutsStore.exercises.length > 1"
+                v-model="isSuperSets"
+                label="Supersets"
+              />
             </div>
-            <ChosenExercisesList />
+            <ChosenExercisesList :is-superset="isSuperSets" />
           </div>
 
-          <Button
-            bordered
-            full
-            @click="workoutToBase"
-          >
-            {{ workoutsStore.isWorkoutEdit ? 'Update workout' : 'Save workout' }}
-          </Button>
+          <div class='group'>
+            <Button bordered full @click="router.push('/')">Back</Button>
+            <Button
+              full
+              @click="workoutToBase"
+            >
+              {{ workoutsStore.isWorkoutEdit ? 'Update workout' : 'Save workout' }}
+            </Button>
+          </div>
         </div>
 
         <div class="main__layout-right">

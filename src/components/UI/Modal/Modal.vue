@@ -24,7 +24,7 @@ const unmountTimer = () => setTimeout(() => {
 onMounted(() => {
   const t1 = gsap.timeline()
   t1.from(modalLayer.value, { autoAlpha: 0, duration: 0.25 })
-  t1.from(modalContent.value, {autoAlpha: 0, scale: 0.8, y: '-100', duration: 0.25, ease: 'power2' })
+  t1.from(modalContent.value, { autoAlpha: 0, scale: 0.8, y: '-100', duration: 0.25, ease: 'power2' })
   t1.play()
 })
 
@@ -50,7 +50,11 @@ const confirm = () => {
 <template>
   <Teleport to="body">
     <div class="modal">
-      <div ref='modalLayer' class='modal__layer' @click.self="animateBeforeClose"/>
+      <div
+        ref="modalLayer"
+        class="modal__layer"
+        @click.self="animateBeforeClose"
+      />
       <div
         ref="modalContent"
         class="modal__content"
@@ -64,11 +68,12 @@ const confirm = () => {
           <slot name="modal-body" />
         </div>
         <div class="modal__footer">
-          <div class='group'>
+          <div class="group">
             <slot name="modal-footer" />
-            <Button @click="confirm">Reschedule</Button>
+            <Button @click="confirm">
+              Reschedule
+            </Button>
           </div>
-
         </div>
       </div>
     </div>

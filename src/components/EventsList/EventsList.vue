@@ -33,7 +33,7 @@ const toggleMenu = index => activeIndex.value = (activeIndex.value === index) ? 
 
 onClickOutside(dropdownList, () => activeIndex.value = null)
 
-const editEvent = (event) => {
+const editEvent = event => {
   workoutsStore.editUsersEvent(event)
   router.push('/workout')
 }
@@ -120,15 +120,20 @@ const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isF
         isRescheduleModal = false;
         isFutureEventsMove = false
       "
-      @confirm='rescheduleEventHandler'
+      @confirm="rescheduleEventHandler"
     >
-      <template #modal-header>Reschedule event</template>
+      <template #modal-header>
+        Reschedule event
+      </template>
       <template #modal-body>
         <Alert sm>
           To move this event in the calendar for how many days. Positive value - forward, negative - backward. (from -30 to +30 days)
         </Alert>
         <form class="reschedule-form">
-          <Input v-model.number="dateStore.rescheduleCounter" min='-30'/>
+          <Input
+            v-model.number="dateStore.rescheduleCounter"
+            min="-30"
+          />
         </form>
       </template>
       <template #modal-footer>
