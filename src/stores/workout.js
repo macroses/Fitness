@@ -8,7 +8,7 @@ export const workoutStore = defineStore({
     openedExerciseId: null,
     isWorkoutEdit: false,
     isSuperset: false,
-    supersetExercises: [],
+    supersets: [],
     title: null,
     color: '213, 0, 0',
     weight: null,
