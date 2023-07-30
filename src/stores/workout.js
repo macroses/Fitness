@@ -20,15 +20,20 @@ export const workoutStore = defineStore({
     previousResults: []
   }),
   actions: {
-    addExerciseToWorkout(exerciseId) {
-      if (!this.exercises.includes(exerciseId)) {
-        this.exercises.push(exerciseId)
+    addExerciseToWorkout(exercise) {
+      const isExerciseExist = this.exercises.some(item => item.id === exercise.id)
+      const isSupersetExist = this.supersets.some(superset => {
+        return superset.superset.some(item => item.id === exercise.id)
+      })
+
+      if (!isExerciseExist && !isSupersetExist) {
+        this.exercises.push(exercise)
       }
     },
     deleteExercise(id) {
       this.exercises = this.exercises.filter(exercise => exercise.id !== id)
 
-      const index = this.exercisesParamsCollection.findIndex(item => item.exerciseId === id);
+      const index = this.exercisesParamsCollection.findIndex(item => item.exerciseId === id)
 
       if (index !== -1) {
         this.exercisesParamsCollection.splice(index, 1)
@@ -48,28 +53,28 @@ export const workoutStore = defineStore({
         effort: this.effort
       }
 
-      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === exerciseId);
+      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === exerciseId)
 
       if (!exerciseParams) {
         this.exercisesParamsCollection.push({
           exerciseId,
           sets: [set],
           setTonnage: set.weight * set.repeats
-        });
+        })
       } else {
-        exerciseParams.sets.push(set);
-        exerciseParams.setTonnage += set.weight * set.repeats;
+        exerciseParams.sets.push(set)
+        exerciseParams.setTonnage += set.weight * set.repeats
       }
 
       this.updateTonnage()
     },
     deleteSet(setId) {
-      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === this.openedExerciseId);
+      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === this.openedExerciseId)
       if (exerciseParams) {
-        exerciseParams.sets = exerciseParams.sets.filter(set => set.setId !== setId);
+        exerciseParams.sets = exerciseParams.sets.filter(set => set.setId !== setId)
 
-        const tonnage = exerciseParams.sets.reduce((acc, curSet) => acc + (curSet.weight * curSet.repeats), 0);
-        exerciseParams.setTonnage = tonnage;
+        const tonnage = exerciseParams.sets.reduce((acc, curSet) => acc + (curSet.weight * curSet.repeats), 0)
+        exerciseParams.setTonnage = tonnage
       }
 
       this.updateTonnage()
@@ -82,19 +87,26 @@ export const workoutStore = defineStore({
       this.color = event.color
       this.tonnage = event.tonnage
       this.exercisesParamsCollection = event.exercisesParamsCollection
+      this.supersets = event.supersets
 
-      this.exercises = JSON.parse(sessionStorage.getItem('exercisesCache'))
-        .filter(sessionExercise => event.exercisesParamsCollection.some(exercise => sessionExercise.id === exercise.exerciseId
-          || sessionExercise.exerciseId === exercise.exerciseId))
+      function isInSupersets(exerciseId) {
+        return event.supersets.some(superset => superset.exerciseId === exerciseId)
+      }
+
+      const exercisesCache = JSON.parse(sessionStorage.getItem('exercisesCache'))
+
+      this.exercises = exercisesCache.filter(sessionExercise => {
+        return !isInSupersets(sessionExercise.id) && !isInSupersets(sessionExercise.exerciseId)
+      })
     },
     getSetTonnage(id) {
-      const exercise = this.exercisesParamsCollection.find(item => item.exerciseId === id);
-      return exercise ? exercise.setTonnage : 0;
+      const exercise = this.exercisesParamsCollection.find(item => item.exerciseId === id)
+      return exercise ? exercise.setTonnage : 0
     },
     updateTonnage() {
-      const sumTonnage = this.exercisesParamsCollection.reduce((acc, exerciseParams) => acc + (exerciseParams.setTonnage || 0), 0);
+      const sumTonnage = this.exercisesParamsCollection.reduce((acc, exerciseParams) => acc + (exerciseParams.setTonnage || 0), 0)
 
-      this.tonnage = sumTonnage;
+      this.tonnage = sumTonnage
     }
   }
 })

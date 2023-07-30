@@ -8,8 +8,6 @@ import Checkbox from '@/components/UI/Checkbox/Checkbox.vue'
 const store = workoutStore()
 const activeExerciseId = ref(null)
 const supersetExercises = ref([])
-const btnMerge = ref(null)
-const draggableList = ref(null)
 
 const toggleParameters = id => {
   activeExerciseId.value === id
@@ -42,6 +40,7 @@ const handleCheckboxChange = (exercise, isChecked) => {
 
 const merged = () => {
   const addedExerciseIds = supersetExercises.value.map(ex => ex.id)
+
   store.exercises = store.exercises.filter(ex => !addedExerciseIds.includes(ex.id))
 
   store.supersets.push({
@@ -54,15 +53,15 @@ const merged = () => {
 }
 
 const splitSuperset = (supersetId) => {
-  const supersetIndex = store.supersets.findIndex((item) => item.supersetId === supersetId);
+  const supersetIndex = store.supersets.findIndex((item) => item.supersetId === supersetId)
 
   if (supersetIndex === -1) return
 
-  const exercisesToMove = store.supersets[supersetIndex].superset;
+  const exercisesToMove = store.supersets[supersetIndex].superset
 
-  store.exercises.push(...exercisesToMove);
-  store.supersets.splice(supersetIndex, 1);
-};
+  store.exercises.push(...exercisesToMove)
+  store.supersets.splice(supersetIndex, 1)
+}
 
 watch(() => store.isSuperset, val => val && (activeExerciseId.value = null))
 </script>
@@ -138,7 +137,6 @@ watch(() => store.isSuperset, val => val && (activeExerciseId.value = null))
     <draggable
       v-model="store.exercises"
       tag="ul"
-      ref="draggableList"
       handle=".chosen-exercises__item-header"
       class="chosen-exercises"
       :class="{ 'superset-mode': store.isSuperset }"
@@ -201,20 +199,20 @@ watch(() => store.isSuperset, val => val && (activeExerciseId.value = null))
     </draggable>
   </div>
 
-  <div
-    v-if="!store.exercises.length && !store.supersets.length"
-    class="chosen-exercises__empty"
-  >
-    <div class="chosen-exercises__img-wr">
-      <img
-        src="/Folder.svg"
-        alt="add exercises"
-        width="100"
-        height="100"
-      >
-    </div>
-    <span>Add exercises</span>
-  </div>
+<!--  <div-->
+<!--    v-if="!store.exercises.length && !store.supersets.length"-->
+<!--    class="chosen-exercises__empty"-->
+<!--  >-->
+<!--    <div class="chosen-exercises__img-wr">-->
+<!--      <img-->
+<!--        src="/Folder.svg"-->
+<!--        alt="add exercises"-->
+<!--        width="100"-->
+<!--        height="100"-->
+<!--      >-->
+<!--    </div>-->
+<!--    <span>Add exercises</span>-->
+<!--  </div>-->
 </template>
 
 <style src="./style.css" />
