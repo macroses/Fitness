@@ -1,14 +1,16 @@
 import { getCollection } from '@/composables/getCollection'
 
-const cacheExercises = async (cacheKey, dataExercises, loading) => {
+const cacheExercises = async (cacheKey) => {
   const cachedData = sessionStorage.getItem(cacheKey)
 
   if (!cachedData || !cachedData[cacheKey]) {
-    await getAndCacheCollection()
+    setTimeout(() => {
+      getAndCacheCollection()
+    }, 100)
   }
 
   async function getAndCacheCollection() {
-    const dataExercises = await getCollection('exercises', '*', loading)
+    const dataExercises = await getCollection('exercises', '*')
     sessionStorage.setItem(cacheKey, JSON.stringify(dataExercises))
   }
 }
