@@ -2,7 +2,6 @@
 import { ref, watch } from 'vue'
 import draggable from 'vuedraggable'
 import { workoutStore } from '@/stores/workout'
-import Checkbox from '@/components/UI/Checkbox/Checkbox.vue'
 
 const props = defineProps({
   isSuperset: {
@@ -13,7 +12,6 @@ const props = defineProps({
 
 const store = workoutStore()
 const activeExerciseId = ref(null)
-const supersetExercises = ref([])
 
 const toggleParameters = id => {
   activeExerciseId.value === id
@@ -24,12 +22,6 @@ const toggleParameters = id => {
   store.weight = null
   store.repeats = null
   store.openedExerciseId = activeExerciseId.value
-}
-
-const handleCheckboxChange = (exerciseId, isChecked) => {
-  isChecked
-    ? supersetExercises.value = [...supersetExercises.value, exerciseId]
-    : supersetExercises.value = supersetExercises.value.filter(id => id !== exerciseId)
 }
 
 watch(() => props.isSuperset, val => {
@@ -59,11 +51,6 @@ watch(() => props.isSuperset, val => {
             superset: isSuperset
           }"
         >
-          <Checkbox
-            v-if="isSuperset"
-            :modelValue="supersetExercises.includes(element.id)"
-            @update:modelValue="value => handleCheckboxChange(element.id, value)"
-          />
           <div
             class="chosen-exercises__item-header"
             :class="{disabledExercise : isSuperset}"

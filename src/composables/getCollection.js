@@ -1,8 +1,7 @@
 import { supabase } from '@/lib/supabaseClient'
 
-const getCollection = async (table, column, loading) => {
+const getCollection = async (table, column) => {
   try {
-    loading.value = true
     const { data: array, error } = await supabase.from(table).select(column)
 
     if (error) throw error
