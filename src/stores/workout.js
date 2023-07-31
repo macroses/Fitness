@@ -107,6 +107,47 @@ export const workoutStore = defineStore({
       const sumTonnage = this.exercisesParamsCollection.reduce((acc, exerciseParams) => acc + (exerciseParams.setTonnage || 0), 0)
 
       this.tonnage = sumTonnage
+    },
+    checkSupersetExercises (supersetExercises,exercise, isChecked)  {
+      if (isChecked) {
+        if (!supersetExercises.value.some(ex => ex.id === exercise.id)) {
+          supersetExercises.value.push(exercise)
+        }
+      } else {
+        supersetExercises.value = supersetExercises.value.filter(ex => ex.id !== exercise.id)
+      }
+
+      const exercisePositions = {}
+      supersetExercises.value.forEach((ex, index) => (exercisePositions[ex.id] = index))
+
+      this.exercises.sort((a, b) => {
+        const aIndex = exercisePositions[a.id] ?? Infinity
+        const bIndex = exercisePositions[b.id] ?? Infinity
+        return aIndex - bIndex
+      })
+    },
+    mergeExerciseToSuperset (supersetExercises) {
+      const addedExerciseIds = supersetExercises.value.map(ex => ex.id)
+
+      this.exercises = this.exercises.filter(ex => !addedExerciseIds.includes(ex.id))
+
+      this.supersets.push({
+        supersetId: uid(10),
+        superset: [...supersetExercises.value]
+      })
+
+      supersetExercises.value = []
+      this.isSuperset = false
+    },
+    splitSupersetToExercise (supersetId) {
+      const supersetIndex = this.supersets.findIndex((item) => item.supersetId === supersetId)
+
+      if (supersetIndex === -1) return
+
+      const exercisesToMove = this.supersets[supersetIndex].superset
+
+      this.exercises.push(...exercisesToMove)
+      this.supersets.splice(supersetIndex, 1)
     }
   }
 })

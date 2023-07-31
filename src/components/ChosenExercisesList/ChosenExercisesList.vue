@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
 import draggable from 'vuedraggable'
-import { uid } from 'uid'
 import { workoutStore } from '@/stores/workout'
 import Checkbox from '@/components/UI/Checkbox/Checkbox.vue'
 
@@ -19,49 +18,12 @@ const toggleParameters = id => {
   store.repeats = null
   store.openedExerciseId = activeExerciseId.value
 }
-const handleCheckboxChange = (exercise, isChecked) => {
-  if (isChecked) {
-    if (!supersetExercises.value.some(ex => ex.id === exercise.id)) {
-      supersetExercises.value.push(exercise)
-    }
-  } else {
-    supersetExercises.value = supersetExercises.value.filter(ex => ex.id !== exercise.id)
-  }
 
-  const exercisePositions = {}
-  supersetExercises.value.forEach((ex, index) => (exercisePositions[ex.id] = index))
+const handleCheckbox = (exercise, isChecked) => store.checkSupersetExercises(supersetExercises, exercise, isChecked)
 
-  store.exercises.sort((a, b) => {
-    const aIndex = exercisePositions[a.id] ?? Infinity
-    const bIndex = exercisePositions[b.id] ?? Infinity
-    return aIndex - bIndex
-  })
-}
+const handleMerge = () => store.mergeExerciseToSuperset(supersetExercises)
 
-const merged = () => {
-  const addedExerciseIds = supersetExercises.value.map(ex => ex.id)
-
-  store.exercises = store.exercises.filter(ex => !addedExerciseIds.includes(ex.id))
-
-  store.supersets.push({
-    supersetId: uid(10),
-    superset: [...supersetExercises.value]
-  })
-
-  supersetExercises.value = []
-  store.isSuperset = false
-}
-
-const splitSuperset = (supersetId) => {
-  const supersetIndex = store.supersets.findIndex((item) => item.supersetId === supersetId)
-
-  if (supersetIndex === -1) return
-
-  const exercisesToMove = store.supersets[supersetIndex].superset
-
-  store.exercises.push(...exercisesToMove)
-  store.supersets.splice(supersetIndex, 1)
-}
+const handleSplit = (supersetId) => store.splitSupersetToExercise(supersetId)
 
 watch(() => store.isSuperset, val => val && (activeExerciseId.value = null))
 </script>
@@ -76,7 +38,7 @@ watch(() => store.isSuperset, val => val && (activeExerciseId.value = null))
     <Button
       transparent
       v-if="!activeExerciseId"
-      @click="splitSuperset(superset.supersetId)"
+      @click="handleSplit(superset.supersetId)"
       class="btn-split"
     >
       <Icon
@@ -125,7 +87,7 @@ watch(() => store.isSuperset, val => val && (activeExerciseId.value = null))
   <div v-if="store.exercises.length" class='chosen-exercises__wrap'>
     <Button
       v-if="store.isSuperset"
-      @click="merged"
+      @click="handleMerge"
       class="btn-merge"
       :disabled="supersetExercises.length < 2"
     >
@@ -163,7 +125,7 @@ watch(() => store.isSuperset, val => val && (activeExerciseId.value = null))
               <Checkbox
                 v-if="store.isSuperset"
                 :model-value="supersetExercises.includes(element)"
-                @update:modelValue="value => handleCheckboxChange(element, value)"
+                @update:modelValue="value => handleCheckbox(element, value)"
               />
               <div
                 class="chosen-exercises__item-header"
@@ -199,20 +161,20 @@ watch(() => store.isSuperset, val => val && (activeExerciseId.value = null))
     </draggable>
   </div>
 
-<!--  <div-->
-<!--    v-if="!store.exercises.length && !store.supersets.length"-->
-<!--    class="chosen-exercises__empty"-->
-<!--  >-->
-<!--    <div class="chosen-exercises__img-wr">-->
-<!--      <img-->
-<!--        src="/Folder.svg"-->
-<!--        alt="add exercises"-->
-<!--        width="100"-->
-<!--        height="100"-->
-<!--      >-->
-<!--    </div>-->
-<!--    <span>Add exercises</span>-->
-<!--  </div>-->
+  <div
+    v-if="!store.exercises.length && !store.supersets.length"
+    class="chosen-exercises__empty"
+  >
+    <div class="chosen-exercises__img-wr">
+      <img
+        src="/Folder.svg"
+        alt="add exercises"
+        width="100"
+        height="100"
+      >
+    </div>
+    <span>Add exercises</span>
+  </div>
 </template>
 
 <style src="./style.css" />
