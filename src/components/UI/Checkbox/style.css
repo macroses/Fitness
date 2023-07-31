@@ -55,7 +55,7 @@
 }
 
 .checkbox-label {
-	margin: 0 6px;
+	padding: 0 6px;
 	cursor: pointer;
 	user-select: none;
 }

@@ -62,7 +62,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  // TODO: продумать редирект на изменении состояния авторизации, когда юзер разлогинивается
   const {
     data: { session }
   } = await supabase.auth.getSession()
