@@ -44,6 +44,10 @@ const openRescheduleModule = event => {
 }
 
 const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isFutureEventsMove)
+
+const copyEventHandler = () => {
+
+}
 </script>
 
 <template>
@@ -77,6 +81,12 @@ const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isF
             style="width: max-content"
           >
             <ul class="user-dropdown">
+              <li
+                class="user-dropdown__item"
+                @click="openRescheduleModule(event)"
+              >
+                Copy an event
+              </li>
               <li
                 class="user-dropdown__item"
                 @click="openRescheduleModule(event)"

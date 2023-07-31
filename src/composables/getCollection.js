@@ -13,4 +13,3 @@ const getCollection = async (table, column) => {
 }
 
 export { getCollection }
-

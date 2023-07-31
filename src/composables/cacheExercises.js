@@ -16,4 +16,3 @@ const cacheExercises = async (cacheKey) => {
 }
 
 export { cacheExercises }
-
