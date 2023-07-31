@@ -23,7 +23,6 @@ const homeCalendar = ref(null)
 const userWorkoutEl = ref(null)
 const exList = ref(null)
 const isCalendarVisible = ref(false)
-const isSuperSets = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
@@ -48,6 +47,11 @@ const workoutToBase = async () => {
   }
 
   await userEvents.pushEventHandler()
+  workoutsStore.$reset()
+  router.push('/')
+}
+
+const backToMain = () => {
   workoutsStore.$reset()
   router.push('/')
 }
@@ -85,7 +89,10 @@ onBeforeRouteLeave(() => {
               :class="{ active: isCalendarVisible }"
               @click="isCalendarVisible = !isCalendarVisible"
             >
-              <Icon width="20px" :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"/>
+              <Icon
+                width="20px"
+                :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"
+              />
             </Button>
           </div>
 
@@ -95,22 +102,26 @@ onBeforeRouteLeave(() => {
           >
             <WorkoutDescription />
             <div class="user-workout__funcs">
-              <div
-                class="total-tonnage"
-              >
+              <div class="total-tonnage">
                 Total tonnage:&nbsp; <b>{{ workoutsStore.tonnage / 1000 }} T</b>
               </div>
               <Checkbox
                 v-if="workoutsStore.exercises.length > 1"
-                v-model="isSuperSets"
+                v-model="workoutsStore.isSuperset"
                 label="Supersets"
               />
             </div>
-            <ChosenExercisesList :is-superset="isSuperSets" />
+            <ChosenExercisesList />
           </div>
 
-          <div class='group'>
-            <Button bordered full @click="router.push('/')">Back</Button>
+          <div class="group">
+            <Button
+              bordered
+              full
+              @click="backToMain"
+            >
+              Back
+            </Button>
             <Button
               full
               @click="workoutToBase"
