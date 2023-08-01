@@ -1,15 +1,13 @@
 <script setup>
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { onBeforeMount } from 'vue'
 import { cacheExercises } from '@/composables/cacheExercises'
 import { useEventsStore } from '@/stores/userEvents'
 
-const dataExercises = ref([])
-const loadingExercise = ref(false)
 const userEvents = useEventsStore()
 
 onBeforeMount(async () => {
   await userEvents.fetchEventHandler()
-  cacheExercises('exercisesCache', dataExercises, loadingExercise)
+  cacheExercises('exercisesCache')
 })
 </script>
 

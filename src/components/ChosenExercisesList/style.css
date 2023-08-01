@@ -1,15 +1,125 @@
+.chosen-exercises {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.chosen-exercises__wrap {
+	position: relative;
+}
+
+.chosen-exercises.superset-mode {
+	margin-right: 60px;
+}
+
+.btn-merge {
+	position: absolute;
+	top: calc(50% - 20px);
+	right: 0;
+}
+
 .chosen-exercises__item {
 	background-color: var(--main-bg);
+	border-radius: 12px;
 }
 
 .chosen-exercises__item:not(:last-child) {
 	margin-bottom: 8px;
 }
 
+.chosen-exercises__supersets {
+	margin-left: 12px;
+	background-color: rgba(26, 92, 255, 0.02);
+	border: 1px solid rgba(26, 92, 255, 0.1);
+	border-radius: 12px;
+	margin-bottom: 6px;
+	position: relative;
+
+	& .chosen-exercises__item {
+		background-color: transparent;
+	}
+
+	& .chosen-exercises__item-top.active {
+		border-color: transparent;
+	}
+
+	& .chosen-exercises__form-parent {
+		border-color: transparent;
+	}
+
+	&.superset-mode .chosen-exercises__item-top.superset .chosen-exercises__item-header {
+		border-color: transparent;
+	}
+}
+
+.btn-split {
+	position: absolute;
+	top: calc(50% - 20px);
+	right: 12px;
+}
+
+.chosen-exercises__supersets .chosen-exercises__element {
+	position: relative;
+
+	&:not(:first-of-type) .chosen-exercises__item-top::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -12px;
+		width: 12px;
+		height: 100%;
+		border-left: 1px solid rgba(26, 92, 255, 0.6);
+		border-top: 0;
+		border-bottom: 0;
+	}
+
+	&:first-of-type .chosen-exercises__item-top::before {
+		content: '';
+		position: absolute;
+		top: 20px;
+		left: -12px;
+		width: 12px;
+		height: calc(100% - 20px);
+		border-left: 1px solid rgba(26, 92, 255, 0.6);
+		border-top: 1px solid rgba(26, 92, 255, 0.6);
+		border-top-left-radius: 9px;
+	}
+
+	&:last-of-type .chosen-exercises__item-top::before {
+		content: '';
+		position: absolute;
+		bottom: 20px;
+		top: auto;
+		left: -12px;
+		width: 12px;
+		height: calc(100% - 20px);
+		border-left: 1px solid rgba(26, 92, 255, 0.6);
+		border-bottom: 1px solid rgba(26, 92, 255, 0.6);
+		border-bottom-left-radius: 9px;
+	}
+}
+
 .chosen-exercises__item-top {
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	border-radius: 12px 12px 0 0;
+	border: 1px solid transparent;
+	border-bottom: 0;
+	transition: border-color 0.25s ease;
+
+	&.superset .chosen-exercises__item-name {
+		padding-left: 0;
+	}
+
+	&.superset .chosen-exercises__item-header {
+		border: 1px solid rgba(26, 92, 255, 0.6);
+	}
+
+	&.active {
+		border: 1px solid rgba(26, 92, 255, 0.6);
+		border-bottom: none;
+	}
 }
 
 .chosen-exercises__item-header {
@@ -22,7 +132,6 @@
 	display: flex;
 	align-items: center;
 	border: 1px solid transparent;
-	border-bottom: 0;
 	flex-grow: 1;
 
 	&.active {
@@ -38,12 +147,10 @@
 		transition: transform var(--base-transition);
 	}
 
-	&.supersets {
-		border: 1px solid rgba(26, 92, 255, 0.6);
-	}
-
-	&.supersets .chosen-exercises__item-name {
-		padding-left: 0;
+	&.disabledExercise {
+		pointer-events: none;
+		cursor: not-allowed;
+		opacity: 0.5;
 	}
 }
 
@@ -207,4 +314,24 @@
 
 .chosen-exercises__add {
 	height: 40px;
+}
+
+/**/
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+	transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+/* 2. declare enter from and leave to state */
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+	transform: scaleY(0.01) translate(30px, 0);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.fade-leave-active {
+	position: absolute;
 }

@@ -2,15 +2,14 @@
 import { uid } from 'uid'
 import { computed } from 'vue'
 
-// <Checkbox label="test checkbox" v-model="testCheckbox" />
-
 const props = defineProps({
   value: {
-    type: String,
+    type: [String, Number],
     default: ''
   },
   modelValue: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   label: {
     type: String,
