@@ -101,7 +101,7 @@ onBeforeRouteLeave(() => {
                 Total tonnage:&nbsp; <b>{{ workoutsStore.tonnage / 1000 }} T</b>
               </div>
               <Checkbox
-                v-if="workoutsStore.exercises.length > 1"
+                v-if="workoutsStore.exercisesParamsCollection.length > 1"
                 v-model="isSuperSets"
                 label="Supersets"
               />

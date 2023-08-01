@@ -14,8 +14,8 @@ const workoutsStore = workoutStore()
 const asideExercise = ref(null)
 const asideLayout = ref(null)
 
-const addExerciseToWorkout = exercise => {
-  workoutsStore.addExerciseToWorkout(exercise)
+const addExerciseToWorkout = exerciseId => {
+  workoutsStore.addExerciseToWorkout(exerciseId)
   store.exercise = null
 }
 
@@ -49,7 +49,7 @@ onClickOutside(asideExercise, () => (store.exercise = null))
       </ButtonClose>
       <Button
         class="button_to-workout"
-        @click="addExerciseToWorkout(store.exercise)"
+        @click="addExerciseToWorkout(store.exercise?.id)"
       >
         Add to workout
       </Button>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import draggable from 'vuedraggable'
 import { workoutStore } from '@/stores/workout'
 
@@ -17,12 +17,19 @@ const toggleParameters = id => {
 
   store.openedExerciseId = activeExerciseId.value
 }
+
+const filteredCacheExercises = computed(() => {
+  const cache = JSON.parse(sessionStorage.getItem('exercisesCache'))
+  return cache.filter(sessionExercise => store.exercisesParamsCollection.some(exercise => {
+    return sessionExercise.id === exercise.exerciseId
+  }))
+})
 </script>
 
 <template>
   <draggable
-    v-if="store.exercises.length"
-    v-model="store.exercises"
+    v-if="filteredCacheExercises.length"
+    v-model="filteredCacheExercises"
     tag="ul"
     handle=".chosen-exercises__item-header"
     :animation="300"

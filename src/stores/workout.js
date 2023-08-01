@@ -12,28 +12,23 @@ export const workoutStore = defineStore({
     weight: null,
     repeats: null,
     effort: 0,
-    exercises: [],
     tonnage: 0,
     exercisesParamsCollection: [],
     previousResults: []
   }),
   actions: {
     addExerciseToWorkout(exerciseId) {
-      if (!this.exercises.includes(exerciseId)) {
-        this.exercises.push(exerciseId)
+      if (!this.exercisesParamsCollection.includes(exerciseId)) {
+        this.exercisesParamsCollection.push({
+          exerciseId
+        })
       }
     },
     deleteExercise(id) {
-      this.exercises = this.exercises.filter(exercise => exercise.id !== id)
-
       const index = this.exercisesParamsCollection.findIndex(item => item.exerciseId === id);
 
       if (index !== -1) {
         this.exercisesParamsCollection.splice(index, 1)
-
-        this.exercisesParamsCollection.forEach(exerciseParams => {
-          exerciseParams.setTonnage = exerciseParams.sets.reduce((acc, curSet) => acc + (curSet.weight * curSet.repeats), 0)
-        })
 
         this.updateTonnage()
       }
@@ -46,14 +41,12 @@ export const workoutStore = defineStore({
         effort: this.effort
       }
 
-      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === exerciseId);
+      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === exerciseId)
 
-      if (!exerciseParams) {
-        this.exercisesParamsCollection.push({
-          exerciseId,
-          sets: [set],
-          setTonnage: set.weight * set.repeats
-        });
+      if (!exerciseParams.sets) {
+        exerciseParams.sets = [set]
+        exerciseParams.setTonnage = set.weight * set.repeats
+
       } else {
         exerciseParams.sets.push(set);
         exerciseParams.setTonnage += set.weight * set.repeats;
@@ -80,19 +73,15 @@ export const workoutStore = defineStore({
       this.color = event.color
       this.tonnage = event.tonnage
       this.exercisesParamsCollection = event.exercisesParamsCollection
-
-      this.exercises = JSON.parse(sessionStorage.getItem('exercisesCache'))
-        .filter(sessionExercise => event.exercisesParamsCollection.some(exercise => sessionExercise.id === exercise.exerciseId
-          || sessionExercise.exerciseId === exercise.exerciseId))
     },
     getSetTonnage(id) {
       const exercise = this.exercisesParamsCollection.find(item => item.exerciseId === id);
-      return exercise ? exercise.setTonnage : 0;
+      return exercise.setTonnage ? exercise.setTonnage : 0;
     },
     updateTonnage() {
       const sumTonnage = this.exercisesParamsCollection.reduce((acc, exerciseParams) => acc + (exerciseParams.setTonnage || 0), 0);
 
-      this.tonnage = sumTonnage;
+      this.tonnage = sumTonnage
     }
   }
 })
