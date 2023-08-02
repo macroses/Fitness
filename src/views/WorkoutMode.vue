@@ -23,7 +23,6 @@ const homeCalendar = ref(null)
 const userWorkoutEl = ref(null)
 const exList = ref(null)
 const isCalendarVisible = ref(false)
-const isSuperSets = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
@@ -49,6 +48,10 @@ const workoutToBase = async () => {
 
   await userEvents.pushEventHandler()
   workoutsStore.$reset()
+  router.push('/')
+}
+
+const toPrev = () => {
   router.push('/')
 }
 
@@ -104,7 +107,7 @@ onBeforeRouteLeave(() => {
                 Total tonnage:&nbsp; <b>{{ workoutsStore.tonnage / 1000 }} T</b>
               </div>
               <Checkbox
-                v-if="workoutsStore.exercisesParamsCollection.length > 1"
+                v-if="workoutsStore.filteredCacheExercises.length > 1"
                 v-model="workoutsStore.isSuperset"
                 label="Supersets"
               />
@@ -116,7 +119,7 @@ onBeforeRouteLeave(() => {
             <Button
               bordered
               full
-              @click="router.push('/')"
+              @click="toPrev"
             >
               Back
             </Button>

@@ -1,6 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { uid } from 'uid'
+import { ref } from 'vue'
 import { workoutStore } from '@/stores/workout'
 import Icon from '@/components/UI/Icon/Icon.vue'
 
@@ -21,76 +20,21 @@ const toggleParameters = id => {
 }
 
 const handleCheckbox = (exerciseId, isChecked) => {
-  if (isChecked) {
-    if (!supersetExercises.value.some(ex => ex.id === exerciseId)) {
-      supersetExercises.value.push(exerciseId)
-    }
-  } else {
-    supersetExercises.value = supersetExercises.value.filter(exId => exId !== exerciseId)
-  }
+  store.checkExercisesForSuperset(supersetExercises, exerciseId, isChecked)
 }
 
-const handleMerge = () => {
-  if (supersetExercises.value.length < 2) return
+const handleMerge = () => store.mergeToSuperset(supersetExercises)
 
-  const uidValue = uid(7);
-
-  store.exercisesParamsCollection.forEach(exercise => {
-    if (supersetExercises.value.includes(exercise.exerciseId)) {
-      exercise.superset = uidValue;
-    }
-  })
-
-  supersetExercises.value = []
-  store.isSuperset = false
-}
-
-const filteredCacheExercises = computed(() => {
-  const cache = JSON.parse(sessionStorage.getItem('exercisesCache'))
-  return cache.filter(sessionExercise => store.exercisesParamsCollection.some(exercise => (sessionExercise.id === exercise.exerciseId) && !exercise.hasOwnProperty('superset')))
-})
-
-const supersetsArray = computed(() => {
-  const exercises = JSON.parse(JSON.stringify(store.exercisesParamsCollection));
-  const cache = JSON.parse(sessionStorage.getItem('exercisesCache'));
-
-  return exercises.reduce((supersetGroups, exercise) => {
-    const { superset } = exercise;
-    if (superset) {
-      const cachedExercise = cache.find(sessionExercise => sessionExercise.id === exercise.exerciseId);
-
-      if (cachedExercise) {
-        const cachedExerciseCopy = { ...cachedExercise, superset };
-        const groupIndex = supersetGroups.findIndex(group => group.superset === superset);
-
-        groupIndex !== -1
-          ? supersetGroups[groupIndex].exercises.push(cachedExerciseCopy)
-          : supersetGroups.push({ superset, exercises: [cachedExerciseCopy] });
-      }
-    }
-
-    return supersetGroups;
-  }, []);
-});
-
-const handleSplit = supersetId => {
-  const exercisesToUpdate = store.exercisesParamsCollection.filter(exercise => exercise.superset === supersetId);
-
-  exercisesToUpdate.forEach(exercise => {
-    delete exercise.superset;
-  });
-}
-
-watch(() => store.isSuperset, value => {
-  if (value) activeExerciseId.value = null
-  else supersetExercises.value = []
-})
+const handleSplit = supersetId => store.splitToExercises(supersetId)
 </script>
 
 <template>
-  <div class="chosen-exercises__wrap">
+  <div
+    v-if="store.supersetsArray.length || store.exercisesParamsCollection.length"
+    class="chosen-exercises__wrap"
+  >
     <div
-      v-for="group in supersetsArray"
+      v-for="group in store.supersetsArray"
       :key="group.superset"
       class="chosen-exercises__supersets"
       :class="{ 'superset-mode': store.isSuperset }"
@@ -143,8 +87,11 @@ watch(() => store.isSuperset, value => {
       </ul>
     </div>
 
-    <div class="chosen-exercises__filtered">
-      <Button
+    <div
+      v-if="store.filteredCacheExercises.length"
+      class="chosen-exercises__filtered"
+    >
+      <button
         v-if="store.isSuperset"
         @click="handleMerge"
         class="btn-merge"
@@ -153,7 +100,7 @@ watch(() => store.isSuperset, value => {
           icon-name="merge"
           width="18px"
         />
-      </Button>
+      </button>
       <TransitionGroup
         tag="ul"
         name="fade"
@@ -161,7 +108,7 @@ watch(() => store.isSuperset, value => {
         :class="{ 'superset-mode': store.isSuperset }"
       >
         <li
-          v-for="element in filteredCacheExercises"
+          v-for="element in store.filteredCacheExercises"
           :key="element.id"
           class="chosen-exercises__item"
           tabindex="0"

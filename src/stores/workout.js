@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { uid } from 'uid'
+import { EXERCISES_CACHE } from '@/constants/CACHE'
 
 export const workoutStore = defineStore({
   id: 'workout',
@@ -82,6 +83,68 @@ export const workoutStore = defineStore({
       const sumTonnage = this.exercisesParamsCollection.reduce((acc, exerciseParams) => acc + (exerciseParams.setTonnage || 0), 0);
 
       this.tonnage = sumTonnage
+    },
+    mergeToSuperset (supersetsIdArray) {
+      if (supersetsIdArray.value.length < 2) return
+
+      const uidValue = uid(7)
+
+      this.exercisesParamsCollection.forEach(exercise => {
+        if (supersetsIdArray.value.includes(exercise.exerciseId)) {
+          exercise.superset = uidValue;
+        }
+      })
+
+      supersetsIdArray.value = []
+      this.isSuperset = false
+    },
+    splitToExercises (supersetId) {
+      const exercisesToUpdate = this.exercisesParamsCollection.filter(exercise => exercise.superset === supersetId)
+
+      exercisesToUpdate.forEach(exercise => {
+        delete exercise.superset
+      })
+    },
+    checkExercisesForSuperset (supersetIdCollection, exerciseId, isChecked) {
+      if (isChecked) {
+        if (!supersetIdCollection.value.some(ex => ex.id === exerciseId)) {
+          supersetIdCollection.value.push(exerciseId)
+        }
+      } else {
+        supersetIdCollection.value = supersetIdCollection.value.filter(exId => exId !== exerciseId)
+      }
     }
+  },
+
+  getters: {
+    supersetsArray () {
+      const exercises = JSON.parse(JSON.stringify(this.exercisesParamsCollection))
+      const cache = JSON.parse(sessionStorage.getItem('exercisesCache'))
+
+      return exercises.reduce((supersetGroups, exercise) => {
+        const { superset } = exercise
+        if (superset) {
+          const cachedExercise = cache.find(sessionExercise => sessionExercise.id === exercise.exerciseId)
+
+          if (cachedExercise) {
+            const cachedExerciseCopy = { ...cachedExercise, superset }
+            const groupIndex = supersetGroups.findIndex(group => group.superset === superset)
+
+            groupIndex !== -1
+              ? supersetGroups[groupIndex].exercises.push(cachedExerciseCopy)
+              : supersetGroups.push({ superset, exercises: [cachedExerciseCopy] })
+          }
+        }
+
+        return supersetGroups
+      }, [])
+    },
+    filteredCacheExercises(){
+      return EXERCISES_CACHE.filter(sessionExercise => {
+        return this.exercisesParamsCollection.some(exercise => {
+          return (sessionExercise.id === exercise.exerciseId) && !exercise.hasOwnProperty('superset')
+        })
+      })
+    },
   }
 })
