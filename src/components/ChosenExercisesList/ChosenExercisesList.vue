@@ -96,18 +96,16 @@ watch(() => store.isSuperset, value => {
       :class="{ 'superset-mode': store.isSuperset }"
     >
       <span class="superset-legend">Superset</span>
-      <Transition>
-        <Button
-          v-if="!activeExerciseId"
-          @click="handleSplit(group.superset)"
-          class="btn-split"
-        >
-          <Icon
-            icon-name="split"
-            width="18px"
-          />
-        </Button>
-      </Transition>
+      <Button
+        v-if="!activeExerciseId"
+        @click="handleSplit(group.superset)"
+        class="btn-split"
+      >
+        <Icon
+          icon-name="split"
+          width="18px"
+        />
+      </Button>
       <ul>
         <li
           v-for="element in group.exercises"
