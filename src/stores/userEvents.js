@@ -65,7 +65,7 @@ export const useEventsStore = defineStore('userEvents', () => {
 
   const getExerciseSets = () => {
     const exerciseParams = workoutData.exercisesParamsCollection.find(item => item.exerciseId === workoutData.openedExerciseId)
-    return exerciseParams.sets ? exerciseParams.sets : []
+    return exerciseParams ? (exerciseParams.sets ? exerciseParams.sets : []) : []
   }
 
   const previousResults = computed(() => {
