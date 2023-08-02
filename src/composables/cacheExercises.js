@@ -1,6 +1,6 @@
 import { getCollection } from '@/composables/getCollection'
 
-const cacheExercises = async (cacheKey) => {
+const cacheExercises = async cacheKey => {
   const cachedData = sessionStorage.getItem(cacheKey)
 
   if (!cachedData || !cachedData[cacheKey]) {

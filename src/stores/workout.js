@@ -47,7 +47,6 @@ export const workoutStore = defineStore({
       if (!exerciseParams.sets) {
         exerciseParams.sets = [set]
         exerciseParams.setTonnage = set.weight * set.repeats
-
       } else {
         exerciseParams.sets.push(set);
         exerciseParams.setTonnage += set.weight * set.repeats;

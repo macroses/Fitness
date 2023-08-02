@@ -85,7 +85,10 @@ onBeforeRouteLeave(() => {
               :class="{ active: isCalendarVisible }"
               @click="isCalendarVisible = !isCalendarVisible"
             >
-              <Icon width="20px" :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"/>
+              <Icon
+                width="20px"
+                :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"
+              />
             </Button>
           </div>
 
@@ -109,8 +112,14 @@ onBeforeRouteLeave(() => {
             <ChosenExercisesList />
           </div>
 
-          <div class='group'>
-            <Button bordered full @click="router.push('/')">Back</Button>
+          <div class="group">
+            <Button
+              bordered
+              full
+              @click="router.push('/')"
+            >
+              Back
+            </Button>
             <Button
               full
               @click="workoutToBase"

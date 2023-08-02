@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
-import { workoutStore } from '@/stores/workout'
 import { uid } from 'uid'
+import { workoutStore } from '@/stores/workout'
 import Icon from '@/components/UI/Icon/Icon.vue'
 
 const store = workoutStore()
@@ -47,18 +47,15 @@ const handleMerge = () => {
 
 const filteredCacheExercises = computed(() => {
   const cache = JSON.parse(sessionStorage.getItem('exercisesCache'))
-  return cache.filter(sessionExercise => store.exercisesParamsCollection.some(exercise => {
-    return (sessionExercise.id === exercise.exerciseId) && !exercise.hasOwnProperty('superset')
-  }))
+  return cache.filter(sessionExercise => store.exercisesParamsCollection.some(exercise => (sessionExercise.id === exercise.exerciseId) && !exercise.hasOwnProperty('superset')))
 })
-
 
 const supersetsArray = computed(() => {
   const exercises = JSON.parse(JSON.stringify(store.exercisesParamsCollection));
   const cache = JSON.parse(sessionStorage.getItem('exercisesCache'));
 
   return exercises.reduce((supersetGroups, exercise) => {
-    const superset = exercise.superset;
+    const { superset } = exercise;
     if (superset) {
       const cachedExercise = cache.find(sessionExercise => sessionExercise.id === exercise.exerciseId);
 
@@ -91,17 +88,26 @@ watch(() => store.isSuperset, value => {
 </script>
 
 <template>
-  <div class='chosen-exercises__wrap'>
+  <div class="chosen-exercises__wrap">
     <div
       v-for="group in supersetsArray"
       :key="group.superset"
-      class='chosen-exercises__supersets'
+      class="chosen-exercises__supersets"
       :class="{ 'superset-mode': store.isSuperset }"
     >
-      <span class='superset-legend'>Superset</span>
-      <Button @click="handleSplit(group.superset)" class="btn-split">
-        <Icon icon-name="split" width='18px'/>
-      </Button>
+      <span class="superset-legend">Superset</span>
+      <Transition>
+        <Button
+          v-if="!activeExerciseId"
+          @click="handleSplit(group.superset)"
+          class="btn-split"
+        >
+          <Icon
+            icon-name="split"
+            width="18px"
+          />
+        </Button>
+      </Transition>
       <ul>
         <li
           v-for="element in group.exercises"
@@ -111,9 +117,9 @@ watch(() => store.isSuperset, value => {
           <div
             class="chosen-exercises__item-top"
             :class="{
-            active: activeExerciseId === element.id,
-            superset: store.isSuperset,
-          }"
+              active: activeExerciseId === element.id,
+              superset: store.isSuperset,
+            }"
           >
             <div
               class="chosen-exercises__item-header"
@@ -139,9 +145,16 @@ watch(() => store.isSuperset, value => {
       </ul>
     </div>
 
-    <div class='chosen-exercises__filtered'>
-      <Button v-if="store.isSuperset" @click="handleMerge" class="btn-merge">
-        <Icon icon-name="merge" width='18px'/>
+    <div class="chosen-exercises__filtered">
+      <Button
+        v-if="store.isSuperset"
+        @click="handleMerge"
+        class="btn-merge"
+      >
+        <Icon
+          icon-name="merge"
+          width="18px"
+        />
       </Button>
       <TransitionGroup
         tag="ul"
@@ -179,7 +192,10 @@ watch(() => store.isSuperset, value => {
               <div class="chosen-exercises__item-name">
                 {{ element.name }}
               </div>
-              <div v-if="!store.isSuperset" class="chosen-exercises__item-tonnage">
+              <div
+                v-if="!store.isSuperset"
+                class="chosen-exercises__item-tonnage"
+              >
                 {{ store.getSetTonnage(element.id) / 1000 }} T
               </div>
               <button
