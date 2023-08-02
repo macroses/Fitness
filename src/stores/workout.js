@@ -7,6 +7,7 @@ export const workoutStore = defineStore({
     workoutId: localStorage.getItem('wId') || null,
     openedExerciseId: null,
     isWorkoutEdit: false,
+    isSuperset: false,
     title: null,
     color: '213, 0, 0',
     weight: null,

@@ -102,11 +102,11 @@ onBeforeRouteLeave(() => {
               </div>
               <Checkbox
                 v-if="workoutsStore.exercisesParamsCollection.length > 1"
-                v-model="isSuperSets"
+                v-model="workoutsStore.isSuperset"
                 label="Supersets"
               />
             </div>
-            <ChosenExercisesList :is-superset="isSuperSets" />
+            <ChosenExercisesList />
           </div>
 
           <div class='group'>
