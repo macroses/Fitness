@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import { onMounted, ref, watch } from 'vue'
 import { updateCalendar } from '@/helpers/calendarHelper'
 import { chosenDateStore } from '@/stores/chosenDate'
+import { useEventsStore } from '@/stores/userEvents'
 
 const props = defineProps({
   events: {
@@ -14,6 +15,7 @@ const props = defineProps({
 const emit = defineEmits(['getDate'])
 
 const dateStore = chosenDateStore()
+const userStore = useEventsStore()
 
 const currentDate = ref(dayjs())
 const today = ref(dayjs())
@@ -62,7 +64,7 @@ watch(props.events, val => {
 </script>
 
 <template>
-  <div class="calendar">
+  <div class="calendar" :class="{ copyMode: userStore.isCopyMode }">
     <div class="calendar__controls">
       <Button
         transparent

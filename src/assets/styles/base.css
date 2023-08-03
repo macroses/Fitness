@@ -58,6 +58,7 @@ body {
   grid-auto-columns: 1fr;
   padding-top: 16px;
   gap: 24px;
+  position: relative;
 }
 
 .group {
@@ -69,6 +70,12 @@ body {
 
 .group.efforts {
   margin-bottom: 12px;
+}
+
+.copy-message {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
 }
 
 @media (width > 768px) {

@@ -92,8 +92,9 @@ const handleSplit = supersetId => store.splitToExercises(supersetId)
       v-if="store.filteredCacheExercises.length"
       class="chosen-exercises__filtered"
     >
-      <button
+      <Button
         v-if="store.isSuperset"
+        :disabled="supersetExercises.length < 2"
         @click="handleMerge"
         class="btn-merge"
       >
@@ -101,7 +102,7 @@ const handleSplit = supersetId => store.splitToExercises(supersetId)
           icon-name="merge"
           width="18px"
         />
-      </button>
+      </Button>
       <TransitionGroup
         tag="ul"
         name="fade"

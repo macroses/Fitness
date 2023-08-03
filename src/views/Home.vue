@@ -8,6 +8,7 @@ import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
 import EventsList from '@/components/EventsList/EventsList.vue'
 import EventsMode from '@/components/EventsMode/EventsMode.vue'
+import Button from '@/components/UI/Button/Button.vue'
 
 const workoutsStore = workoutStore()
 const dateStore = chosenDateStore()
@@ -16,6 +17,12 @@ const userEvents = useEventsStore()
 const workoutId = ref(uid(50))
 
 const getDate = date => {
+  if (userEvents.isCopyMode) {
+    dateStore.copyDate = date
+
+    return
+  }
+
   dateStore.date = date
 }
 
@@ -48,12 +55,30 @@ const deleteHandler = workoutId => {
       />
       <div class="main__layout">
         <div class="main__layout-left">
+          <p
+            v-if="userEvents.isCopyMode"
+            class="copy-message"
+          >
+            Please select a date for copying
+          </p>
           <Calendar
             @get-date="getDate"
             :events="userEvents.events"
           />
-          <EventsMode @workoutMode="toWorkoutMode" />
+          <EventsMode
+            v-if="!userEvents.isCopyMode"
+            @workoutMode="toWorkoutMode"
+          />
+          <div
+            v-else
+            class='group'
+          >
+            <Button @click="userEvents.isCopyMode = false">
+              Cancel copying
+            </Button>
+          </div>
           <EventsList
+            v-if="!userEvents.isCopyMode"
             :events="filteredEvents"
             @deleteEvent="deleteHandler"
           />

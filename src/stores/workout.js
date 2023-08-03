@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { uid } from 'uid'
-import { EXERCISES_CACHE } from '@/constants/CACHE'
 
 export const workoutStore = defineStore({
   id: 'workout',
@@ -140,7 +139,7 @@ export const workoutStore = defineStore({
       }, [])
     },
     filteredCacheExercises(){
-      return EXERCISES_CACHE.filter(sessionExercise => {
+      return JSON.parse(sessionStorage.getItem('exercisesCache')).filter(sessionExercise => {
         return this.exercisesParamsCollection.some(exercise => {
           return (sessionExercise.id === exercise.exerciseId) && !exercise.hasOwnProperty('superset')
         })

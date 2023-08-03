@@ -22,9 +22,13 @@
 .calendar {
 	position: relative;
 	overflow-x: hidden;
-	padding-bottom: 12px;
+	padding:0 1px 12px;
 	max-width: 500px;
-	margin: 0 auto;
+	margin: 50px auto 0;
+
+	.workout-mode & {
+		margin-top: 0;
+	}
 }
 
 .calendar__days {
@@ -32,6 +36,7 @@
 	gap: 1px;
 	grid-template-columns: repeat(7, 1fr);
 	grid-auto-rows: minmax(min-content, 1fr);
+	position: relative;
 }
 
 .calendar__cell {
@@ -72,6 +77,10 @@
 		box-shadow: 0 10px 20px -10px rgba(26,92,255, 0.5);
 		transform: translateY(-3px);
 		cursor: pointer;
+	}
+
+	.copyMode .calendar__cell:hover {
+		outline: 1px dashed;
 	}
 }
 

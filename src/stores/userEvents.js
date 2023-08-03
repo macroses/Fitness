@@ -8,6 +8,7 @@ import { cacheExercises } from '@/composables/cacheExercises'
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
   const eventsLoading = ref(false)
+  const isCopyMode = ref(false)
   const workoutData = workoutStore()
   const dateStore = chosenDateStore()
 
@@ -21,10 +22,27 @@ export const useEventsStore = defineStore('userEvents', () => {
     events.value = events.value.filter(event => event.workoutId !== id)
   }
 
-  const pushEventHandler = async () => {
+  const pushEventHandler = async (event = null) => {
     if (!workoutData.workoutId) return
 
-    const workoutObject = {
+    const workoutObject = {}
+
+    if (event) {
+      workoutObject = {
+        ...event,
+        date: dateStore.date
+      }
+
+      await pushEvent(
+        'workouts',
+        workoutObject,
+        eventsLoading
+      )
+
+      events.value.push(workoutObject)
+    }
+
+    workoutObject = {
       title: workoutData.title,
       color: workoutData.color,
       date: dateStore.date,
@@ -33,7 +51,12 @@ export const useEventsStore = defineStore('userEvents', () => {
       tonnage: workoutData.tonnage
     }
 
-    await pushEvent('workouts', workoutObject, eventsLoading)
+    await pushEvent(
+      'workouts',
+      event || workoutObject,
+      eventsLoading
+    )
+
     events.value.push(workoutObject)
   }
 
@@ -77,7 +100,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     for (const workout of userWorkouts.reverse()) {
       const exerciseParams = workout.exercisesParamsCollection.find(item => item.exerciseId === workoutData.openedExerciseId)
 
-      if (exerciseParams && exerciseParams.sets.length > 0) {
+      if (exerciseParams && exerciseParams.sets?.length > 0) {
         previousSets.push(...exerciseParams.sets)
         break
       }
@@ -143,6 +166,7 @@ export const useEventsStore = defineStore('userEvents', () => {
   return {
     events,
     eventsLoading,
+    isCopyMode,
     fetchEventHandler,
     deleteEventHandler,
     pushEventHandler,

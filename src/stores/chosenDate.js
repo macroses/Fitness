@@ -4,6 +4,7 @@ import { computed, ref, watch } from 'vue'
 
 export const chosenDateStore = defineStore('chosenDate', () => {
   const date = ref(dayjs())
+  const copyDate = ref(null)
   const rescheduleCounter = ref(0)
 
   const rescheduledEventDate = computed(() => date.value.add(rescheduleCounter.value, 'day'))
@@ -15,6 +16,7 @@ export const chosenDateStore = defineStore('chosenDate', () => {
 
   return {
     date,
+    copyDate,
     rescheduleCounter,
     rescheduledEventDate
   }
