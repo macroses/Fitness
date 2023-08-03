@@ -42,12 +42,13 @@ const handleSplit = supersetId => store.splitToExercises(supersetId)
       <span class="superset-legend">Superset</span>
       <Button
         v-if="!activeExerciseId"
+        transparent
         @click="handleSplit(group.superset)"
         class="btn-split"
       >
         <Icon
           icon-name="split"
-          width="18px"
+          width="20px"
         />
       </Button>
       <ul>

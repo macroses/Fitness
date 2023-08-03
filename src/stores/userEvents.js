@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
+import { cacheExercises } from '@/composables/cacheExercises'
 
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
@@ -12,6 +13,7 @@ export const useEventsStore = defineStore('userEvents', () => {
 
   const fetchEventHandler = async () => {
     await getWorkouts(events, eventsLoading)
+    await cacheExercises('exercisesCache')
   }
 
   const deleteEventHandler = async (tableName, columnName, id) => {
