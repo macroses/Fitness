@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 defineProps({
   tabs: {
@@ -42,6 +42,7 @@ const tabStyle = computed(() => {
         :class="{ active: activeTab === index }"
         @click="changeActiveTab(index)"
       >
+        <Icon v-if='tab?.icon' width='15px' :icon-name="tab.icon"/>
         {{ tab.tabTitle }}
       </li>
     </ul>

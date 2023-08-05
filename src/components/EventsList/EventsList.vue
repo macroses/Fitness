@@ -45,7 +45,10 @@ const openRescheduleModule = event => {
 
 const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isFutureEventsMove)
 
-const copyEventHandler = () => userEvents.isCopyMode = true
+const copyEventHandler = (event) => {
+  userEvents.isCopyMode = true
+  userEvents.copyObject = event
+}
 </script>
 
 <template>

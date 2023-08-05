@@ -54,9 +54,9 @@ onMounted(async () => {
 })
 
 const tabs = readonly([
-  { id: 0, tabTitle: 'All' },
-  { id: 1, tabTitle: 'Favorites' },
-  { id: 2, tabTitle: 'My Exercises' }
+  { id: 0, tabTitle: 'All', icon: 'folder' },
+  { id: 1, tabTitle: 'Favorites', icon: 'star' },
+  { id: 2, tabTitle: 'Recent', icon: 'clock-rotate-left' }
 ])
 
 const getActiveTab = id => activeTabId.value = id

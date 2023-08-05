@@ -1,5 +1,8 @@
 <script setup>
+import dayjs from 'dayjs'
+import { chosenDateStore } from '@/stores/chosenDate'
 
+const dateStore = chosenDateStore()
 </script>
 
 <template>
@@ -10,7 +13,7 @@
       Create workout
     </Button>
     <Button>Program</Button>
-    <Button>
+    <Button :disabled="dateStore.date > dayjs()">
       Body parameters
     </Button>
   </div>

@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { cacheExercises } from '@/composables/cacheExercises'
+import { uid } from 'uid'
 
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
   const eventsLoading = ref(false)
+  const copyObject = ref(null)
   const isCopyMode = ref(false)
   const workoutData = workoutStore()
   const dateStore = chosenDateStore()
@@ -22,15 +24,19 @@ export const useEventsStore = defineStore('userEvents', () => {
     events.value = events.value.filter(event => event.workoutId !== id)
   }
 
-  const pushEventHandler = async (event = null) => {
-    if (!workoutData.workoutId) return
+  const pushEventHandler = async () => {
+    let workoutObject = {}
 
-    const workoutObject = {}
+    if (copyObject.value) {
+      const { title, color, exercisesParamsCollection, tonnage } = copyObject.value
 
-    if (event) {
       workoutObject = {
-        ...event,
-        date: dateStore.date
+        workoutId: uid(50),
+        date: dateStore.copyDate,
+        title,
+        color,
+        exercisesParamsCollection,
+        tonnage
       }
 
       await pushEvent(
@@ -40,7 +46,10 @@ export const useEventsStore = defineStore('userEvents', () => {
       )
 
       events.value.push(workoutObject)
+      return
     }
+
+    if (!workoutData.workoutId) return
 
     workoutObject = {
       title: workoutData.title,
@@ -53,7 +62,7 @@ export const useEventsStore = defineStore('userEvents', () => {
 
     await pushEvent(
       'workouts',
-      event || workoutObject,
+      workoutObject,
       eventsLoading
     )
 
@@ -109,7 +118,6 @@ export const useEventsStore = defineStore('userEvents', () => {
     return previousSets
   })
 
-  // Новое вычисляемое свойство для получения комбинированных результатов
   const combinedResults = computed(() => {
     const previous = previousResults.value.slice()
     const exerciseSets = getExerciseSets()
@@ -163,9 +171,28 @@ export const useEventsStore = defineStore('userEvents', () => {
     workoutData.$reset()
   }
 
+  watch(() => dateStore.copyDate, async (val) => {
+    if (val) {
+      // if copyDate and copyObject is defined and filled
+      await pushEventHandler()
+      copyObject.value = null
+      isCopyMode.value = false
+      dateStore.copyDate = null
+    }
+  })
+
+  watch(() => isCopyMode.value, async (val) => {
+    if (!val) {
+      copyObject.value = null
+      isCopyMode.value = false
+      dateStore.copyDate = null
+    }
+  })
+
   return {
     events,
     eventsLoading,
+    copyObject,
     isCopyMode,
     fetchEventHandler,
     deleteEventHandler,

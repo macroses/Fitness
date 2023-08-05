@@ -19,7 +19,6 @@ const workoutId = ref(uid(50))
 const getDate = date => {
   if (userEvents.isCopyMode) {
     dateStore.copyDate = date
-
     return
   }
 
