@@ -1,17 +1,21 @@
 import { getCollection } from '@/composables/getCollection'
+import { tableSubscriber } from './tableSubscriber'
 
 const cacheExercises = async cacheKey => {
-  const cachedData = sessionStorage.getItem(cacheKey)
+  const cachedData = localStorage.getItem(cacheKey)
 
-  if (!cachedData || !cachedData[cacheKey]) {
-    setTimeout(() => {
-      getAndCacheCollection()
-    }, 100)
-  }
+  !cachedData
+    ? await getAndCacheCollection()
+    : tableSubscriber(
+      '*',
+      'public',
+      'exercises',
+      'exercisesCache'
+    )
 
   async function getAndCacheCollection() {
-    const dataExercises = await getCollection('exercises', '*')
-    sessionStorage.setItem(cacheKey, JSON.stringify(dataExercises))
+    const data = await getCollection('exercises', '*')
+    localStorage.setItem(cacheKey, JSON.stringify(data))
   }
 }
 

@@ -1,13 +1,13 @@
 <script setup>
-import { onBeforeMount } from 'vue'
-import { cacheExercises } from '@/composables/cacheExercises'
+import { onMounted } from 'vue'
 import { useEventsStore } from '@/stores/userEvents'
+import { cacheExercises } from '@/composables/cacheExercises'
 
 const userEvents = useEventsStore()
 
-onBeforeMount(async () => {
-  await userEvents.fetchEventHandler()
+onMounted(async () => {
   cacheExercises('exercisesCache')
+  await userEvents.fetchEventHandler()
 })
 </script>
 

@@ -1,5 +1,6 @@
-import dayjs from 'dayjs'
 import { supabase } from '@/lib/supabaseClient'
+import dayjs from 'dayjs'
+import { tableSubscriber } from '@/composables/tableSubscriber'
 
 const pushEvent = async (tableName, userData, loading) => {
   const {
@@ -25,27 +26,45 @@ const pushEvent = async (tableName, userData, loading) => {
   }
 }
 
-const getWorkouts = async (userData, loading) => {
-  const {
-    data: { session }
-  } = await supabase.auth.getSession()
+const updateStorage = (data, storageName, userData) => {
+
+  localStorage.setItem(storageName, JSON.stringify(data))
+  userData.value = data.map(el => ({
+    ...el,
+    date: dayjs(el.date)
+  }))
+}
+
+const getWorkouts = async (userData, loading, userId) => {
+  tableSubscriber(
+    'workouts-channel',
+    '*',
+    'public',
+    'workouts',
+    'workouts'
+  )
 
   try {
     loading.value = true
 
-    const { user } = session
+    const localStorageWorkouts = localStorage.getItem('workouts');
+    if (localStorageWorkouts) {
+      userData.value = JSON.parse(localStorageWorkouts).map(el => ({
+        ...el,
+        date: dayjs(el.date)
+      }))
+      
+    } else {
+      const { data: workouts, error } = await supabase
+        .from('workouts')
+        .select('*')
+        .eq('user_id', userId)
 
-    const { data: workouts, error } = await supabase
-      .from('workouts')
-      .select('*')
-      .eq('user_id', user.id)
+      if (error) throw new Error(error.message)
 
-    if (error) throw new Error(error.message)
+      updateStorage(workouts, 'workouts', userData);
+    }
 
-    userData.value = workouts.map(workout => ({
-      ...workout,
-      date: dayjs(workout.date)
-    }))
   } catch (error) {
     console.log(error.message)
   } finally {

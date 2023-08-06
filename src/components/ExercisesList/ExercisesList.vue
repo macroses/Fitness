@@ -9,7 +9,7 @@ import { getProfileColumn, updateProfile } from '@/composables/profile'
 const exercisesStore = exerciseStore()
 
 const activeMuscle = ref(null)
-const sessionExercises = ref(JSON.parse(sessionStorage.getItem('exercisesCache')))
+const sessionExercises = ref(JSON.parse(localStorage.getItem('exercisesCache')))
 const muscles = ref(null)
 const favoriteIds = ref([])
 const isFavoriteLoading = ref(false)

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { signOut } from '@/composables/profile'
 import { getSession } from '@/composables/getSession'
@@ -17,6 +17,7 @@ const handleSignOut = async () => {
   await signOut(loading)
   isDropdownVisible.value = false
   userEvents.events = []
+  localStorage.removeItem('workouts')
   router.push('/login')
 }
 const redirectToAccount = () => {

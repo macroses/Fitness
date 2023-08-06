@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { onClickOutside, useDebounceFn } from '@vueuse/core'
+import { useDebounceFn } from '@vueuse/core'
 import Input from '@/components/UI/Input/Input.vue'
 import { exerciseStore } from '@/stores/exercise'
 
@@ -8,7 +8,7 @@ const exercisesStore = exerciseStore()
 
 const isSearchInFocus = ref(false)
 const search = ref(null)
-const sessionExercises = ref(JSON.parse(sessionStorage.getItem('exercisesCache')))
+const sessionExercises = ref(JSON.parse(localStorage.getItem('exercisesCache')))
 
 const searchResults = ref(null)
 const resultList = ref(null)

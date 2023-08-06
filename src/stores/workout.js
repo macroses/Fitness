@@ -118,7 +118,7 @@ export const workoutStore = defineStore({
   getters: {
     supersetsArray () {
       const exercises = JSON.parse(JSON.stringify(this.exercisesParamsCollection))
-      const cache = JSON.parse(sessionStorage.getItem('exercisesCache'))
+      const cache = JSON.parse(localStorage.getItem('exercisesCache'))
 
       return exercises.reduce((supersetGroups, exercise) => {
         const { superset } = exercise
@@ -139,7 +139,7 @@ export const workoutStore = defineStore({
       }, [])
     },
     filteredCacheExercises(){
-      return JSON.parse(sessionStorage.getItem('exercisesCache')).filter(sessionExercise => {
+      return JSON.parse(localStorage.getItem('exercisesCache')).filter(sessionExercise => {
         return this.exercisesParamsCollection.some(exercise => {
           return (sessionExercise.id === exercise.exerciseId) && !exercise.hasOwnProperty('superset')
         })

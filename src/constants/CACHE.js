@@ -1,1 +1,1 @@
-export const EXERCISES_CACHE = JSON.parse(sessionStorage.getItem('exercisesCache'))
+export const EXERCISES_CACHE = JSON.parse(localStorage.getItem('exercisesCache'))
