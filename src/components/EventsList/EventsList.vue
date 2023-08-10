@@ -116,7 +116,7 @@ const copyEventHandler = (event) => {
       class="events__empty"
     >
       <img
-        src="/Box.webp"
+        src="/Box.svg"
         alt="There are no events"
         class="events__empty-img"
         width="335"

@@ -11,7 +11,7 @@
 	justify-content: center;
 	outline: none;
 	background: var(--accent-color);
-	color: var(--main-bg);
+	color: var(--btn-color);
 	padding: 8px 12px;
 	cursor: pointer;
 }
@@ -52,7 +52,7 @@
 
 .button--bordered {
 	background-color: transparent;
-	color: var(--accent-color);
+	color: var(--btn-color-transparent);
 
 	&::before {
 		content: '';

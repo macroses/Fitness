@@ -14,7 +14,6 @@ const muscles = ref(null)
 const favoriteIds = ref([])
 const isFavoriteLoading = ref(false)
 const activeTabId = ref(0)
-const transitionName = ref('')
 
 const uniqueMainMuscles = computed(() => {
   const mainMuscles = new Set(sessionExercises.value.map(exercise => exercise.main_muscle))
@@ -72,51 +71,53 @@ const getActiveTab = id => activeTabId.value = id
     <Transition
       mode="out-in"
     >
-      <ul
-        v-if="activeTabId === 0"
-        ref="muscles"
-        class="muscles"
-      >
-        <li
-          v-for="(item, index) in filteredExercisesByMuscle"
-          :key="item.muscle"
-          class="muscles__item"
-          :class="{ active: activeMuscle === index }"
+      <keep-alive>
+        <ul
+          v-if="activeTabId === 0"
+          ref="muscles"
+          class="muscles"
         >
-          <MuscleItemHeader
-            :muscle-item="item"
-            @click="selectMuscle(index)"
-          />
+          <li
+            v-for="(item, index) in filteredExercisesByMuscle"
+            :key="item.muscle"
+            class="muscles__item"
+            :class="{ active: activeMuscle === index }"
+          >
+            <MuscleItemHeader
+              :muscle-item="item"
+              @click="selectMuscle(index)"
+            />
+            <Exercises
+              :exercises="item.exercises"
+              :favorites="favoriteIds"
+              @showChosenExercises="showExercise"
+              @getFavoriteId="getFavoriteId"
+            />
+          </li>
+        </ul>
+        <div v-else-if="activeTabId === 1">
           <Exercises
-            :exercises="item.exercises"
+            v-if="filteredExercisesByFavorite.length"
+            :exercises="filteredExercisesByFavorite"
             :favorites="favoriteIds"
+            class="active"
             @showChosenExercises="showExercise"
             @getFavoriteId="getFavoriteId"
           />
-        </li>
-      </ul>
-      <div v-else-if="activeTabId === 1">
-        <Exercises
-          v-if="filteredExercisesByFavorite.length"
-          :exercises="filteredExercisesByFavorite"
-          :favorites="favoriteIds"
-          class="active"
-          @showChosenExercises="showExercise"
-          @getFavoriteId="getFavoriteId"
-        />
-        <div
-          v-else
-          class="empty__favorites"
-        >
-          <img
-            src="/Star.webp"
-            alt="empty favorites"
-            width="170"
-            height="93"
+          <div
+            v-else
+            class="empty__favorites"
           >
-          <p>Add a few exercises to favorites</p>
+            <img
+              src="/Star.webp"
+              alt="empty favorites"
+              width="170"
+              height="93"
+            >
+            <p>Add a few exercises to favorites</p>
+          </div>
         </div>
-      </div>
+      </keep-alive>
     </Transition>
   </div>
 </template>

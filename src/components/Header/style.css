@@ -1,5 +1,5 @@
 .header {
-	background-color: var(--main-bg);
+	background-color: var(--header-bg);
 }
 
 .header__user {

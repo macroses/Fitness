@@ -54,12 +54,6 @@ const deleteHandler = workoutId => {
       />
       <div class="main__layout">
         <div class="main__layout-left">
-          <p
-            v-if="userEvents.isCopyMode"
-            class="copy-message"
-          >
-            Please select a date for copying
-          </p>
           <Calendar
             @get-date="getDate"
             :events="userEvents.events"
@@ -76,6 +70,12 @@ const deleteHandler = workoutId => {
               Cancel copying
             </Button>
           </div>
+          <p
+            v-if="userEvents.isCopyMode"
+            class="copy-message"
+          >
+            Please select a date for copying
+          </p>
           <EventsList
             v-if="!userEvents.isCopyMode"
             :events="filteredEvents"

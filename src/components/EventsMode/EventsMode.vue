@@ -6,7 +6,7 @@ const dateStore = chosenDateStore()
 </script>
 
 <template>
-  <div class="group">
+  <div class="group home">
     <Button
       @click="$emit('workoutMode')"
     >

@@ -9,17 +9,51 @@ import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
 import Button from '@/components/UI/Button/Button.vue'
 import { workoutStore } from '@/stores/workout'
 
+gsap.registerPlugin(CSSPlugin)
+
 const store = exerciseStore()
 const workoutsStore = workoutStore()
 const asideExercise = ref(null)
 const asideLayout = ref(null)
 
+const touchStartX = ref(0)
+const touchEndX = ref(0)
+
 const addExerciseToWorkout = exerciseId => {
   workoutsStore.addExerciseToWorkout(exerciseId)
-  store.exercise = null
+  closeAside()
 }
 
-gsap.registerPlugin(CSSPlugin)
+const handleTouchMove = event => {
+  const swipeDistance = event.touches[0].clientX - touchStartX.value;
+
+  if (swipeDistance < 0) {
+    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' });
+  } else {
+    gsap.to(asideExercise.value, { x: swipeDistance, duration: 0.1, ease: 'none' });
+  }
+}
+
+const handleTouchStart = event => touchStartX.value = event.touches[0].clientX
+
+const handleTouchEnd = event => {
+  touchEndX.value = event.changedTouches[0].clientX
+  const swipeDistance = touchEndX.value - touchStartX.value
+
+  if (swipeDistance >= 100) {
+    closeAside()
+  } else {
+    console.log(swipeDistance)
+    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' });
+  }
+}
+
+const closeAside = () => {
+  const t1 = gsap.timeline();
+  t1.to(asideExercise.value, { autoAlpha: 0, x: '+350', duration: 0.25, ease: 'sine' });
+  t1.to(asideLayout.value, { autoAlpha: 0, duration: 0.25 });
+  t1.call(() => (store.exercise = null));
+}
 
 onMounted(() => {
   const t1 = gsap.timeline()
@@ -28,7 +62,7 @@ onMounted(() => {
   t1.play()
 })
 
-onClickOutside(asideExercise, () => (store.exercise = null))
+onClickOutside(asideExercise, () => closeAside())
 </script>
 
 <template>
@@ -40,10 +74,13 @@ onClickOutside(asideExercise, () => (store.exercise = null))
     <div
       ref="asideExercise"
       class="aside"
+      @touchstart.passive='handleTouchStart'
+      @touchmove.passive="handleTouchMove"
+      @touchend.passive='handleTouchEnd'
     >
       <ButtonClose
         left-position
-        @click="store.exercise = null"
+        @click="closeAside"
       >
         close
       </ButtonClose>

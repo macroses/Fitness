@@ -1,24 +1,23 @@
-/*!* color palette from <https://github.com/vuejs/theme> *!*/
 :root {
   --accent-color: rgba(26,92,255,1);
   --text-color: rgba(44,62,80,1);
+
   --main-bg: #fff;
+  --header-bg: #fff;
+
+  --btn-color: #fff;
+  --btn-color-transparent: var(--accent-color);
 
   --base-transition: 0.25s ease;
 
+  --hgjh: rgb(31, 100, 231, );
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /*--color-background: var(--vt-c-black);*/
-    /*--color-background-soft: var(--vt-c-black-soft);*/
-    /*--color-background-mute: var(--vt-c-black-mute);*/
-
-    /*--color-border: var(--vt-c-divider-dark-2);*/
-    /*--color-border-hover: var(--vt-c-divider-dark-1);*/
-
-    /*--color-heading: var(--vt-c-text-dark-1);*/
-    /*--color-text: var(--vt-c-text-dark-2);*/
+    --main-bg: rgb(26 26 26);
+    --text-color: rgb(204, 204, 204);
+    --header-bg: rgb(46 46 46);
   }
 }
 
@@ -40,7 +39,8 @@ body {
   line-height: 1.6;
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
-  color: rgba(44,62,80,1);
+  color: var(--text-color);
+  background-color: var(--main-bg);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -50,7 +50,7 @@ body {
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 8px;
 }
 
 .main__layout {
@@ -66,6 +66,17 @@ body {
   gap: 12px;
   align-items: center;
   justify-content: center;
+
+  &.home {
+    @media (width < 475px) {
+      flex-direction: column;
+      gap: 8px;
+
+      & button {
+        width: 100%;
+      }
+    }
+  }
 }
 
 .group.efforts {
@@ -73,9 +84,8 @@ body {
 }
 
 .copy-message {
-  position: absolute;
-  left: 50%;
-  translate: -50%;
+  margin-top: 24px;
+  text-align: center;
 }
 
 @media (width > 768px) {
@@ -89,6 +99,16 @@ body {
 
   .main__layout.workout-mode .calendar {
     max-width: 100%;
+  }
+
+  .copy-message {
+    position: absolute;
+    left: 50%;
+    translate: -50%;
+  }
+
+  .calendar {
+    margin-top: 50px;
   }
 }
 

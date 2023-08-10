@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { workoutStore } from '@/stores/workout'
 import Icon from '@/components/UI/Icon/Icon.vue'
 
@@ -26,6 +26,8 @@ const handleCheckbox = (exerciseId, isChecked) => {
 const handleMerge = () => store.mergeToSuperset(supersetExercises)
 
 const handleSplit = supersetId => store.splitToExercises(supersetId)
+
+watch(() => store.isSuperset, () => activeExerciseId.value = null)
 </script>
 
 <template>
@@ -137,13 +139,13 @@ const handleSplit = supersetId => store.splitToExercises(supersetId)
                 v-if="!store.isSuperset"
               />
               <div class="chosen-exercises__item-name">
-                {{ element.name }}
+                <div class='chosen-exercises__item-value'>{{ element.name }}</div>
               </div>
               <div
                 v-if="!store.isSuperset"
                 class="chosen-exercises__item-tonnage"
               >
-                {{ store.getSetTonnage(element.id) / 1000 }} T
+                {{ (store.getSetTonnage(element.id) / 1000).toFixed(2) }} T
               </div>
               <button
                 v-if="!store.isSuperset"
@@ -172,7 +174,7 @@ const handleSplit = supersetId => store.splitToExercises(supersetId)
         src="/Folder.svg"
         alt="add exercises"
         width="100"
-        height="100"
+        height="150"
       >
     </div>
     <span>Add exercises</span>

@@ -21,6 +21,8 @@ const currentDate = ref(dayjs())
 const today = ref(dayjs())
 const calendarCells = ref([])
 const transitionName = ref('')
+const calendarParent = ref(null)
+const SWIPE_THRESHOLD = 20
 
 const handleClickCell = cellDate => {
   emit('getDate', cellDate)
@@ -50,6 +52,28 @@ const isMarker = date => props.events.some(event => event.date.isSame(date, 'day
 const getCellColor = date => {
   const matchingEvent = props.events.find(event => event.date.isSame(date, 'day'))
   return matchingEvent ? matchingEvent.color : ''
+}
+
+const touchStartX = ref(0)
+const touchEndX = ref(0)
+
+const handleTouchStart = event => {
+  touchStartX.value = event.touches[0].clientX
+}
+
+const handleTouchEnd = event => {
+  touchEndX.value = event.changedTouches[0].clientX
+  const swipeDistance = touchEndX.value - touchStartX.value
+
+  if (Math.abs(swipeDistance) >= SWIPE_THRESHOLD) {
+    if (swipeDistance > 0) {
+      goToPreviousMonth()
+      transitionName.value = 'slideMonthRight'
+    } else {
+      goToNextMonth()
+      transitionName.value = 'slideMonth'
+    }
+  }
 }
 
 onMounted(() => {
@@ -113,8 +137,11 @@ watch(props.events, val => {
       appear
     >
       <div
+        ref='calendarParent'
         class="calendar__days"
         :key="new Date()"
+        @touchstart.passive='handleTouchStart'
+        @touchend.passive='handleTouchEnd'
       >
         <div
           v-for="cell in calendarCells"
