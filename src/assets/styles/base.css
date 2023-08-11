@@ -81,6 +81,9 @@ body {
 
 .group.efforts {
   margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  gap: 0;
 }
 
 .copy-message {
@@ -110,6 +113,11 @@ body {
   .calendar {
     margin-top: 50px;
   }
+}
+
+.main__layout-left {
+  max-width: 100%;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {

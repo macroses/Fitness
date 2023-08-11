@@ -52,6 +52,12 @@
 	&.superset-mode .chosen-exercises__item-top.superset .chosen-exercises__item-header {
 		border-color: transparent;
 	}
+
+	@media (width < 500px) {
+		& .chosen-exercises__item-name {
+			max-width: 90%;
+		}
+	}
 }
 
 .btn-split {
@@ -308,6 +314,12 @@
 	border-radius: 12px;
 }
 
+/*@media (width < 500px) {*/
+/*	.chosen-exercises__effort {*/
+/*		width: auto;*/
+/*	}*/
+/*}*/
+
 .button__effort-type {
 	flex: 1 0 auto;
 	font-size: 12px;
@@ -334,10 +346,15 @@
 		border-bottom-right-radius: 12px;
 		border-top-right-radius: 12px;
 	}
+
+	@media (width < 500px) {
+		font-size: 11px;
+	}
 }
 
 .chosen-exercises__add {
 	height: 40px;
+	margin-left: 12px;
 }
 
 /* Стили для SVG-контейнера */

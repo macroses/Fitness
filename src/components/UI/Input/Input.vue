@@ -29,6 +29,10 @@ const props = defineProps({
     type: String,
     default: 'text'
   },
+  mode: {
+    type: String,
+    default: 'text'
+  },
   value: {
     type: [String, Number]
   },
@@ -50,6 +54,7 @@ const inp = ref(null)
         ref="inp"
         class="input-component"
         :type="type"
+        :inputmode="mode"
         :id="uniqueId"
         autocomplete="off"
         @input="$emit('update:modelValue', $event.target.value)"
