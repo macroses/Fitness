@@ -83,7 +83,7 @@ export const workoutStore = defineStore({
 
       this.tonnage = sumTonnage
     },
-    mergeToSuperset (supersetsIdArray) {
+    mergeToSuperset(supersetsIdArray) {
       if (supersetsIdArray.value.length < 2) return
 
       const uidValue = uid(7)
@@ -97,14 +97,14 @@ export const workoutStore = defineStore({
       supersetsIdArray.value = []
       this.isSuperset = false
     },
-    splitToExercises (supersetId) {
+    splitToExercises(supersetId) {
       const exercisesToUpdate = this.exercisesParamsCollection.filter(exercise => exercise.superset === supersetId)
 
       exercisesToUpdate.forEach(exercise => {
         delete exercise.superset
       })
     },
-    checkExercisesForSuperset (supersetIdCollection, exerciseId, isChecked) {
+    checkExercisesForSuperset(supersetIdCollection, exerciseId, isChecked) {
       if (isChecked) {
         if (!supersetIdCollection.value.some(ex => ex.id === exerciseId)) {
           supersetIdCollection.value.push(exerciseId)
@@ -116,7 +116,7 @@ export const workoutStore = defineStore({
   },
 
   getters: {
-    supersetsArray () {
+    supersetsArray() {
       const exercises = JSON.parse(JSON.stringify(this.exercisesParamsCollection))
       const cache = JSON.parse(localStorage.getItem('exercisesCache'))
 
@@ -138,12 +138,8 @@ export const workoutStore = defineStore({
         return supersetGroups
       }, [])
     },
-    filteredCacheExercises(){
-      return JSON.parse(localStorage.getItem('exercisesCache')).filter(sessionExercise => {
-        return this.exercisesParamsCollection.some(exercise => {
-          return (sessionExercise.id === exercise.exerciseId) && !exercise.hasOwnProperty('superset')
-        })
-      })
-    },
+    filteredCacheExercises() {
+      return JSON.parse(localStorage.getItem('exercisesCache')).filter(sessionExercise => this.exercisesParamsCollection.some(exercise => (sessionExercise.id === exercise.exerciseId) && !exercise.hasOwnProperty('superset')))
+    }
   }
 })

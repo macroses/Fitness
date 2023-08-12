@@ -30,7 +30,7 @@ watch(() => store.repeats, newValue => {
         <div class="group">
           <Input
             v-model.number="store.weight"
-            mode='decimal'
+            mode="decimal"
             label-fade
             label-placeholder="Weight (kg)"
             @clear="store.weight = null"
@@ -38,7 +38,7 @@ watch(() => store.repeats, newValue => {
           />
           <Input
             v-model.number="store.repeats"
-            mode='decimal'
+            mode="decimal"
             label-fade
             label-placeholder="Repeats"
             @clear="store.repeats = null"

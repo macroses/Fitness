@@ -42,7 +42,11 @@ const tabStyle = computed(() => {
         :class="{ active: activeTab === index }"
         @click="changeActiveTab(index)"
       >
-        <Icon v-if='tab?.icon' width='15px' :icon-name="tab.icon"/>
+        <Icon
+          v-if="tab?.icon"
+          width="15px"
+          :icon-name="tab.icon"
+        />
         {{ tab.tabTitle }}
       </li>
     </ul>

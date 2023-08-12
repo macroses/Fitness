@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabaseClient'
 import dayjs from 'dayjs'
+import { supabase } from '@/lib/supabaseClient'
 
 const pushEvent = async (tableName, userData, loading) => {
   const {
@@ -60,14 +60,12 @@ const getWorkouts = async (userData, loading, userId) => {
     } else {
       updateStorage(updatedWorkouts, 'workouts', userData)
     }
-
   } catch (error) {
     console.log(error.message)
   } finally {
     loading.value = false
   }
 }
-
 
 const deleteEvent = async (tableName, nameOfId, id, loading) => {
   const {

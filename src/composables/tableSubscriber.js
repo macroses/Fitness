@@ -6,9 +6,8 @@ const tableSubscriber = (channel, event, schema, tableName, storageName) => {
   supabase.channel(channel)
     .on(
       'postgres_changes',
-      { event: event, schema: schema, table: tableName },
-      (payload) => {
-
+      { event, schema, table: tableName },
+      payload => {
         if (payload.eventType === 'DELETE') {
           const updatedStorage = cache.filter(column => column.id !== payload.old.id)
           localStorage.setItem(storageName, JSON.stringify(updatedStorage))

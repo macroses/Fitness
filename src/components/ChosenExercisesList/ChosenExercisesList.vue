@@ -76,7 +76,9 @@ watch(() => store.isSuperset, () => activeExerciseId.value = null)
                 v-if="!store.isSuperset"
               />
               <div class="chosen-exercises__item-name">
-                <div class='chosen-exercises__item-value'>{{ element.name }}</div>
+                <div class="chosen-exercises__item-value">
+                  {{ element.name }}
+                </div>
               </div>
             </div>
           </div>
@@ -139,7 +141,9 @@ watch(() => store.isSuperset, () => activeExerciseId.value = null)
                 v-if="!store.isSuperset"
               />
               <div class="chosen-exercises__item-name">
-                <div class='chosen-exercises__item-value'>{{ element.name }}</div>
+                <div class="chosen-exercises__item-value">
+                  {{ element.name }}
+                </div>
               </div>
               <div
                 v-if="!store.isSuperset"

@@ -88,7 +88,10 @@ watch(props.events, val => {
 </script>
 
 <template>
-  <div class="calendar" :class="{ copyMode: userStore.isCopyMode }">
+  <div
+    class="calendar"
+    :class="{ copyMode: userStore.isCopyMode }"
+  >
     <div class="calendar__controls">
       <Button
         transparent
@@ -137,11 +140,11 @@ watch(props.events, val => {
       appear
     >
       <div
-        ref='calendarParent'
+        ref="calendarParent"
         class="calendar__days"
         :key="new Date()"
-        @touchstart.passive='handleTouchStart'
-        @touchend.passive='handleTouchEnd'
+        @touchstart.passive="handleTouchStart"
+        @touchend.passive="handleTouchEnd"
       >
         <div
           v-for="cell in calendarCells"

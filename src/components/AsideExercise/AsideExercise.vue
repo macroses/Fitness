@@ -74,9 +74,9 @@ onClickOutside(asideExercise, () => closeAside())
     <div
       ref="asideExercise"
       class="aside"
-      @touchstart.passive='handleTouchStart'
+      @touchstart.passive="handleTouchStart"
       @touchmove.passive="handleTouchMove"
-      @touchend.passive='handleTouchEnd'
+      @touchend.passive="handleTouchEnd"
     >
       <ButtonClose
         left-position

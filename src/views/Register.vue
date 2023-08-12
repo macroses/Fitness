@@ -36,12 +36,11 @@ const register = async () => {
   toast.error('Password do not match', { position: toast.POSITION.TOP_CENTER })
 }
 
-
-  async function signInWithGitHub() {
-    await supabase.auth.signInWithOAuth({
-      provider: 'github',
-    })
-  }
+async function signInWithGitHub() {
+  await supabase.auth.signInWithOAuth({
+    provider: 'github'
+  })
+}
 </script>
 
 <template>
@@ -68,7 +67,12 @@ const register = async () => {
       width="350px"
     />
 
-    <button type='button' @click="signInWithGitHub">github</button>
+    <button
+      type="button"
+      @click="signInWithGitHub"
+    >
+      github
+    </button>
 
     <div class="form__submit">
       <Button

@@ -64,7 +64,7 @@ const deleteHandler = workoutId => {
           />
           <div
             v-else
-            class='group'
+            class="group"
           >
             <Button @click="userEvents.isCopyMode = false">
               Cancel copying

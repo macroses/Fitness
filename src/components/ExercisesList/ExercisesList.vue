@@ -1,18 +1,18 @@
 <script setup>
-import { computed, onMounted, readonly, ref } from 'vue'
+import { computed, readonly, ref } from 'vue'
 import { exerciseStore } from '@/stores/exercise'
 import SearchExercises from '@/components/SearchExercises/SearchExercises.vue'
 import Exercises from '@/components/ExercisesList/Exercises/Exercises.vue'
 import MuscleItemHeader from '@/components/ExercisesList/MuscleItemHeader/MuscleItemHeader.vue'
-import { getProfileColumn, updateProfile } from '@/composables/profile'
-import { loadCachedData, saveDataToCache } from '@/composables/cacheResponses'
+import { updateProfile } from '@/composables/profile'
+import { useEventsStore } from '@/stores/userEvents'
 
 const exercisesStore = exerciseStore()
+const userEvents = useEventsStore()
 
 const activeMuscle = ref(null)
 const sessionExercises = ref(JSON.parse(localStorage.getItem('exercisesCache')))
 const muscles = ref(null)
-const favoriteIds = ref([])
 const isFavoriteLoading = ref(false)
 const activeTabId = ref(0)
 let scrollTimeout = null
@@ -27,7 +27,7 @@ const filteredExercisesByMuscle = computed(() => uniqueMainMuscles.value.map(mus
   exercises: sessionExercises.value.filter(exercise => exercise.main_muscle === muscle)
 })))
 
-const filteredExercisesByFavorite = computed(() => sessionExercises.value.filter(exercise => favoriteIds.value.includes(exercise.id)))
+const filteredExercisesByFavorite = computed(() => sessionExercises.value.filter(exercise => userEvents.favoritesFromBase.includes(exercise.id)))
 
 const selectMuscle = async index => {
   activeMuscle.value = activeMuscle.value === index ? null : index
@@ -48,47 +48,17 @@ const selectMuscle = async index => {
 const showExercise = exercise => exercisesStore.exercise = exercise
 
 const getFavoriteId = async id => {
-  favoriteIds.value.includes(id)
-    ? favoriteIds.value = favoriteIds.value.filter(favoriteId => favoriteId !== id)
-    : favoriteIds.value.push(id)
+  userEvents.favoritesFromBase.includes(id)
+    ? userEvents.favoritesFromBase = userEvents.favoritesFromBase.filter(favoriteId => favoriteId !== id)
+    : userEvents.favoritesFromBase.push(id)
 
   await updateProfile(
     null,
     isFavoriteLoading,
     'favorite_exercises',
-    favoriteIds.value
-  )
-
-  saveDataToCache(
-    'favorite-exercises-cache',
-    'favorite-exercises',
-    favoriteIds
+    userEvents.favoritesFromBase
   )
 }
-
-onMounted(async () => {
-  const cachedData = await loadCachedData(
-    'favorite-exercises-cache',
-    'favorite-exercises'
-  )
-
-  if (cachedData !== null) {
-    favoriteIds.value = cachedData;
-  } else {
-    // No data from cache?
-    await getProfileColumn(
-      favoriteIds,
-      isFavoriteLoading,
-      'favorite_exercises'
-    )
-
-    saveDataToCache(
-      'favorite-exercises-cache',
-      'favorite-exercises',
-      favoriteIds
-    )
-  }
-})
 
 const tabs = readonly([
   { id: 0, tabTitle: 'All', icon: 'folder' },
@@ -127,7 +97,7 @@ const getActiveTab = id => activeTabId.value = id
             />
             <Exercises
               :exercises="item.exercises"
-              :favorites="favoriteIds"
+              :favorites="userEvents.favoritesFromBase"
               @showChosenExercises="showExercise"
               @getFavoriteId="getFavoriteId"
             />
@@ -137,7 +107,7 @@ const getActiveTab = id => activeTabId.value = id
           <Exercises
             v-if="filteredExercisesByFavorite.length"
             :exercises="filteredExercisesByFavorite"
-            :favorites="favoriteIds"
+            :favorites="userEvents.favoritesFromBase"
             class="active"
             @showChosenExercises="showExercise"
             @getFavoriteId="getFavoriteId"

@@ -1,13 +1,12 @@
-async function loadCachedData (cacheName, cacheKey) {
+async function loadCachedData(cacheName, cacheKey) {
   try {
     const cache = await caches.open(cacheName)
     const cachedResponse = await cache.match(cacheKey)
 
     if (cachedResponse) {
       return await cachedResponse.json()
-    } else {
-      return null
     }
+    return null
   } catch (error) {
     console.error('Error loading data from cache:', error)
     throw error

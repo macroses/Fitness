@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
+import { uid } from 'uid'
 import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { uid } from 'uid'
 import { userIdFromStorage } from '@/composables/userIdFromStorage'
+import { getProfileColumn } from '@/composables/profile'
 
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
+  const favoritesFromBase = ref([])
   const eventsLoading = ref(false)
   const copyObject = ref(null)
   const isCopyMode = ref(false)
@@ -16,6 +18,11 @@ export const useEventsStore = defineStore('userEvents', () => {
 
   const fetchEventHandler = async () => {
     await getWorkouts(events, eventsLoading, userIdFromStorage())
+    await getProfileColumn(
+      favoritesFromBase,
+      eventsLoading,
+      'favorite_exercises'
+    )
   }
 
   const deleteEventHandler = async (tableName, columnName, id) => {
@@ -170,7 +177,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     workoutData.$reset()
   }
 
-  watch(() => dateStore.copyDate, async (val) => {
+  watch(() => dateStore.copyDate, async val => {
     if (val) {
       // if copyDate and copyObject is defined and filled
       await pushEventHandler()
@@ -180,7 +187,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     }
   })
 
-  watch(() => isCopyMode.value, async (val) => {
+  watch(() => isCopyMode.value, async val => {
     if (!val) {
       copyObject.value = null
       isCopyMode.value = false
@@ -190,6 +197,7 @@ export const useEventsStore = defineStore('userEvents', () => {
 
   return {
     events,
+    favoritesFromBase,
     eventsLoading,
     copyObject,
     isCopyMode,

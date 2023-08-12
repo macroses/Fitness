@@ -45,7 +45,7 @@ const openRescheduleModule = event => {
 
 const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isFutureEventsMove)
 
-const copyEventHandler = (event) => {
+const copyEventHandler = event => {
   userEvents.isCopyMode = true
   userEvents.copyObject = event
 }
@@ -141,7 +141,7 @@ const copyEventHandler = (event) => {
           To move this event in the calendar for how many days. Positive value - forward, negative - backward. (from -30 to +30 days)
         </Alert>
         <form class="reschedule-form">
-          <Input v-model.number="dateStore.rescheduleCounter"/>
+          <Input v-model.number="dateStore.rescheduleCounter" />
         </form>
       </template>
       <template #modal-footer>
