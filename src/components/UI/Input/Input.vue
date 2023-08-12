@@ -41,7 +41,14 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['focus', 'blur'])
+
 const inp = ref(null)
+
+const inpFocus = () => {
+  inp.value.select()
+  emit('focus')
+}
 </script>
 
 <template>
@@ -59,7 +66,7 @@ const inp = ref(null)
         autocomplete="off"
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
-        @focus="$emit('focus')"
+        @focus="inpFocus"
         @blur="$emit('blur')"
       >
       <label

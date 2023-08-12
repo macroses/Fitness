@@ -1,6 +1,5 @@
 import { supabase } from '@/lib/supabaseClient'
 import dayjs from 'dayjs'
-import { tableSubscriber } from '@/composables/tableSubscriber'
 
 const pushEvent = async (tableName, userData, loading) => {
   const {
@@ -36,14 +35,6 @@ const updateStorage = (data, storageName, userData) => {
 }
 
 const getWorkouts = async (userData, loading, userId) => {
-  tableSubscriber(
-    'workouts-channel',
-    '*',
-    'public',
-    'workouts',
-    'workouts'
-  )
-
   try {
     loading.value = true
 

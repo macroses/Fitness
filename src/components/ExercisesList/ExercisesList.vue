@@ -14,6 +14,7 @@ const muscles = ref(null)
 const favoriteIds = ref([])
 const isFavoriteLoading = ref(false)
 const activeTabId = ref(0)
+let scrollTimeout = null
 
 const uniqueMainMuscles = computed(() => {
   const mainMuscles = new Set(sessionExercises.value.map(exercise => exercise.main_muscle))
@@ -27,7 +28,21 @@ const filteredExercisesByMuscle = computed(() => uniqueMainMuscles.value.map(mus
 
 const filteredExercisesByFavorite = computed(() => sessionExercises.value.filter(exercise => favoriteIds.value.includes(exercise.id)))
 
-const selectMuscle = index => activeMuscle.value = activeMuscle.value === index ? null : index
+const selectMuscle = async index => {
+  activeMuscle.value = activeMuscle.value === index ? null : index
+
+  if (activeMuscle.value !== null) {
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+
+    scrollTimeout = setTimeout(() => {
+      const targetElement = muscles.value.children[index];
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollTimeout = null;
+    }, 250)
+  }
+}
 
 const showExercise = exercise => exercisesStore.exercise = exercise
 

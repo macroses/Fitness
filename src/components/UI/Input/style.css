@@ -25,6 +25,8 @@
 	transition: all .25s ease;
 	padding: 7px 13px 7px 10px;
 	width: 100%;
+	appearance: none;
+	-webkit-appearance: none;
 }
 
 .input-label {
