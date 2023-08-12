@@ -26,7 +26,6 @@ const pushEvent = async (tableName, userData, loading) => {
 }
 
 const updateStorage = (data, storageName, userData) => {
-
   localStorage.setItem(storageName, JSON.stringify(data))
   userData.value = data.map(el => ({
     ...el,
