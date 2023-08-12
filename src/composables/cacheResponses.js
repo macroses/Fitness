@@ -1,17 +1,11 @@
 async function loadCachedData (cacheName, cacheKey) {
-  // const cacheName = 'favorite-exercises-cache'
-
   try {
     const cache = await caches.open(cacheName)
-    // const cacheKey = 'favorite-exercises'
     const cachedResponse = await cache.match(cacheKey)
 
     if (cachedResponse) {
-      const cachedData = await cachedResponse.json()
-
-      return cachedData
+      return await cachedResponse.json()
     } else {
-      // return null if no data
       return null
     }
   } catch (error) {
