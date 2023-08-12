@@ -37,22 +37,28 @@ const getWorkouts = async (userData, loading, userId) => {
   try {
     loading.value = true
 
-    const localStorageWorkouts = localStorage.getItem('workouts');
+    const localStorageWorkouts = localStorage.getItem('workouts')
+
+    const { data: workouts, error } = await supabase
+      .from('workouts')
+      .select('*')
+      .eq('user_id', userId)
+
+    if (error) throw new Error(error.message)
+
+    const updatedWorkouts = workouts.map(el => ({
+      ...el,
+      date: dayjs(el.date)
+    }))
+
     if (localStorageWorkouts) {
-      userData.value = JSON.parse(localStorageWorkouts).map(el => ({
-        ...el,
-        date: dayjs(el.date)
-      }))
-      
+      if (localStorageWorkouts !== JSON.stringify(updatedWorkouts)) {
+        updateStorage(updatedWorkouts, 'workouts', userData)
+      } else {
+        userData.value = updatedWorkouts
+      }
     } else {
-      const { data: workouts, error } = await supabase
-        .from('workouts')
-        .select('*')
-        .eq('user_id', userId)
-
-      if (error) throw new Error(error.message)
-
-      updateStorage(workouts, 'workouts', userData);
+      updateStorage(updatedWorkouts, 'workouts', userData)
     }
 
   } catch (error) {
@@ -61,6 +67,7 @@ const getWorkouts = async (userData, loading, userId) => {
     loading.value = false
   }
 }
+
 
 const deleteEvent = async (tableName, nameOfId, id, loading) => {
   const {
