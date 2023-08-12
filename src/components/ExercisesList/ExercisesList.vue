@@ -5,6 +5,7 @@ import SearchExercises from '@/components/SearchExercises/SearchExercises.vue'
 import Exercises from '@/components/ExercisesList/Exercises/Exercises.vue'
 import MuscleItemHeader from '@/components/ExercisesList/MuscleItemHeader/MuscleItemHeader.vue'
 import { getProfileColumn, updateProfile } from '@/composables/profile'
+import { loadCachedData, saveDataToCache } from '@/composables/cacheResponses'
 
 const exercisesStore = exerciseStore()
 
@@ -57,14 +58,36 @@ const getFavoriteId = async id => {
     'favorite_exercises',
     favoriteIds.value
   )
+
+  saveDataToCache(
+    'favorite-exercises-cache',
+    'favorite-exercises',
+    favoriteIds
+  )
 }
 
 onMounted(async () => {
-  await getProfileColumn(
-    favoriteIds,
-    isFavoriteLoading,
-    'favorite_exercises'
+  const cachedData = await loadCachedData(
+    'favorite-exercises-cache',
+    'favorite-exercises'
   )
+
+  if (cachedData !== null) {
+    favoriteIds.value = cachedData;
+  } else {
+    // No data from cache?
+    await getProfileColumn(
+      favoriteIds,
+      isFavoriteLoading,
+      'favorite_exercises'
+    )
+
+    saveDataToCache(
+      'favorite-exercises-cache',
+      'favorite-exercises',
+      favoriteIds
+    )
+  }
 })
 
 const tabs = readonly([
