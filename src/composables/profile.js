@@ -65,7 +65,7 @@ const updateProfile = async (userData, isLoading, columnName, data) => {
     isLoading.value = true
     const { user } = session
 
-    const updates = {
+    let updates = {
       id: user.id,
       updated_at: new Date()
     }
