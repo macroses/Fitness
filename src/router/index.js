@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
-import Docs from '@/views/Docs.vue'
 import Register from '@/views/Register.vue'
 import { supabase } from '@/lib/supabaseClient'
 import Account from '@/views/Account.vue'
 import WorkoutMode from '@/views/WorkoutMode.vue'
+import ReadWorkout from '@/views/ReadWorkout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,14 +35,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/docs',
-      name: 'Docs',
-      component: Docs,
-      meta: {
-        auth: true
-      }
-    },
-    {
       path: '/account',
       name: 'Account',
       component: Account,
@@ -57,6 +49,12 @@ const router = createRouter({
       meta: {
         auth: true
       }
+    },
+    {
+      path: '/read/:id',
+      name: 'read',
+      component: ReadWorkout,
+      props: true
     }
   ]
 })

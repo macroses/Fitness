@@ -39,7 +39,7 @@ const editEvent = event => {
 }
 
 const openRescheduleModule = event => {
-  chosenEvent.value = event
+  chosenEvent.value = event.value
   isRescheduleModal.value = true
 }
 
@@ -48,6 +48,15 @@ const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isF
 const copyEventHandler = event => {
   userEvents.isCopyMode = true
   userEvents.copyObject = event
+}
+
+const routeToReadPage = (event) => {
+  router.push({
+    name: 'read',
+    params: {
+      events: {...event}
+    }
+  })
 }
 </script>
 
@@ -64,9 +73,9 @@ const copyEventHandler = event => {
         v-for="(event, index) in events"
         :key="event.id"
         class="events__item"
+        @click.self="router.push(`/read/${event.workoutId}`)"
       >
         {{ event.title || 'without name' }}
-
         <div class="events__functions">
           <Button
             transparent
