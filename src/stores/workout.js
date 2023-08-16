@@ -37,8 +37,8 @@ export const workoutStore = defineStore({
     addSet(exerciseId) {
       const set = {
         setId: uid(10),
-        weight: this.weight,
-        repeats: this.repeats,
+        weight: this.weight || 0,
+        repeats: this.repeats || 0,
         effort: this.effort
       }
 

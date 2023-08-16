@@ -2,7 +2,7 @@ table {
 	text-align: center;
 	width: 100%;
 	border-collapse: collapse;
-	color: var(--text-color);
+	color: rgb(var(--text-color));
 }
 
 thead {
@@ -23,7 +23,7 @@ tbody tr:nth-child(even) {
 .table-parent {
 	overflow: hidden;
 	border-radius: 9px;
-	border: 1px solid rgba(26, 92, 255, 0.1);
+	border: 1px solid rgb(var(--accent-color) / 0.1);
 	margin-bottom: 12px;
 }
 

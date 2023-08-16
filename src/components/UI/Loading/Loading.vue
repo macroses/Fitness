@@ -46,7 +46,7 @@ defineProps({
   height: 17px;
   position: absolute;
   border: 2px solid hsla(0, 0%, 100%, 0);
-  border-left-color: rgba(26, 92, 255, 1);
+  border-left-color: rgb(var(--accent-color));
   border-radius: 50%;
   animation: load 0.6s ease infinite;
 }
@@ -56,7 +56,7 @@ defineProps({
   width: 17px;
   height: 17px;
   border: 2px solid rgba(255, 255, 255, 0);
-  border-left: dotted rgba(26, 92, 255, 1);
+  border-left: dotted rgb(var(--accent-color));
   border-radius: 50%;
   position: absolute;
   animation: load 0.6s linear infinite;

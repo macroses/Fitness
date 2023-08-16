@@ -5,7 +5,7 @@
 .select-input {
 	border: 2px solid transparent;
 	background: rgba(244,247,248,1);
-	color: rgba(44,62,80,1);
+	color: rgb(var(--text-color));
 	border-radius: 12px;
 	transition: all .25s ease;
 	padding: 7px 13px 7px 10px;

@@ -22,7 +22,7 @@ button {
 }
 
 button::after {
-	background: var(--text-color);
+	background: rgb(var(--text-color));
 	content: "";
 	position: absolute;
 	width: 14px;
@@ -33,7 +33,7 @@ button::after {
 }
 
 button::before {
-	background: var(--text-color);
+	background: rgb(var(--text-color));
 	content: "";
 	position: absolute;
 	width: 2px;

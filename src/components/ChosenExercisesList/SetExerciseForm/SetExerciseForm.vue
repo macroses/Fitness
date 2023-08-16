@@ -59,6 +59,7 @@ watch(() => store.repeats, newValue => {
             </button>
           </div>
           <Button
+            :disabled="!store.repeats"
             class="chosen-exercises__add"
             @click="addSetHandler(exerciseId)"
           >

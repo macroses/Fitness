@@ -50,11 +50,11 @@ const copyEventHandler = event => {
   userEvents.copyObject = event
 }
 
-const routeToReadPage = (event) => {
+const routeToReadPage = event => {
   router.push({
     name: 'read',
     params: {
-      events: {...event}
+      events: { ...event }
     }
   })
 }

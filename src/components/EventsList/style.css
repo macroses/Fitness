@@ -1,5 +1,5 @@
 .events__list {
-	border: 1px solid rgba(26, 92, 255, 0.1);
+	border: 1px solid rgb(var(--accent-color) / 0.1);
 	border-radius: 12px;
 }
 
@@ -22,7 +22,7 @@
 		width: 3px;
 		height: 3px;
 		border-radius: 50px;
-		background-color: var(--accent-color);
+		background-color: rgb(var(--accent-color));
 	}
 }
 

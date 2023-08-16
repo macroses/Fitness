@@ -49,9 +49,9 @@
 }
 
 .checkbox-effect.active {
-	border: 2px solid rgba(26,92,255 ,1);
-	background-color: rgba(26,92,255 ,1);
-	box-shadow: 0 3px 12px 0 rgba(26,92,255,.3);
+	border: 2px solid rgb(var(--accent-color));
+	background-color: rgb(var(--accent-color));
+	box-shadow: 0 3px 12px 0 rgb(var(--accent-color) / 0.3);
 }
 
 .checkbox-label {

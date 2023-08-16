@@ -38,7 +38,7 @@ const isPositive = num => ({
             :key="result.setId"
           >
             <td
-              style="width: 10px"
+              style="width: 15px"
               :style="[
                 getEffortColor(result.effort).length
                   ? `background: ${getEffortColor(result.effort)}`
@@ -46,11 +46,11 @@ const isPositive = num => ({
               ]"
             />
             <td
-              style="width: 5px"
+              style="width: 8px"
               :style="{
                 background: getEffortColor(result.prevEffort),
                 opacity: 0.5,
-                borderLeft: '1px solid rgba(26, 92, 255, 0.1)',
+                borderLeft: '1px solid rgb(var(--text-color) / 0.2)',
               }"
             />
 

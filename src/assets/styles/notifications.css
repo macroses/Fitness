@@ -15,10 +15,10 @@ body .Toastify__toast--success {
 }
 
 body .Toastify__toast--info {
-	background: linear-gradient(to bottom, rgba(26,92,255, 0.3), #fff);
-	color: rgba(26,92,255, 1);
+	background: linear-gradient(to bottom, rgb(var(--accent-color) / 0.3), #fff);
+	color: rgb(var(--accent-color));
 }
 
 body .Toastify__progress-bar--info {
-	background: rgba(26,92,255, 1);
+	background: rgb(var(--accent-color));
 }

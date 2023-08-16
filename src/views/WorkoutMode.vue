@@ -51,10 +51,6 @@ const workoutToBase = async () => {
   router.push('/')
 }
 
-const toPrev = () => {
-  router.push('/')
-}
-
 onBeforeRouteLeave(() => {
   localStorage.removeItem('wId')
   workoutsStore.$reset()
@@ -119,7 +115,7 @@ onBeforeRouteLeave(() => {
             <Button
               bordered
               full
-              @click="toPrev"
+              @click="router.push('/')"
             >
               Back
             </Button>

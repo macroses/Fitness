@@ -5,6 +5,7 @@ import { signOut } from '@/composables/profile'
 import { getSession } from '@/composables/getSession'
 import router from '@/router'
 import { useEventsStore } from '@/stores/userEvents'
+import ColorTheme from '@/components/ColorTheme/ColorTheme.vue'
 
 const { session } = getSession()
 
@@ -20,8 +21,8 @@ const handleSignOut = async () => {
   localStorage.removeItem('workouts')
   router.push('/login')
 }
-const redirectToAccount = () => {
-  router.push('/account')
+const redirectToPage = page => {
+  router.push(page)
   isDropdownVisible.value = false
 }
 
@@ -45,6 +46,7 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
         </RouterLink>
 
         <div class="header__user">
+          <ColorTheme />
           <nav class="header__nav">
             <RouterLink to="/">
               Blog
@@ -61,7 +63,7 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           >
             <ul class="user-dropdown">
               <li
-                @click="redirectToAccount"
+                @click="redirectToPage('/account')"
                 class="user-dropdown__item"
               >
                 <Icon
@@ -69,6 +71,16 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
                   width="20px"
                 />
                 Account
+              </li>
+              <li
+                @click="redirectToPage('/settings')"
+                class="user-dropdown__item"
+              >
+                <Icon
+                  icon-name="gear"
+                  width="20px"
+                />
+                Settings
               </li>
               <li
                 @click="handleSignOut"

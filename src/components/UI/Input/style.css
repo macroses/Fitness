@@ -20,7 +20,7 @@
 .input-component {
 	border: 2px solid transparent;
 	background: rgba(244,247,248,1);
-	color: rgba(44,62,80,1);
+	color: rgb(var(--text-color));
 	border-radius: inherit;
 	transition: all .25s ease;
 	padding: 7px 13px 7px 10px;
@@ -88,12 +88,12 @@
 	background: transparent;
 	display: flex;
 	align-items: center;
-	height: 42px;
-	width: 42px;
+	height: 40px;
+	width: 40px;
 	justify-content: center;
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 1px;
+	right: 1px;
 	border: 0;
 	cursor: pointer;
 	border-radius: 9px;

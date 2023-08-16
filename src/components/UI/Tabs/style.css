@@ -18,13 +18,13 @@
 
 @media(hover: hover) and (pointer: fine) {
 	.tabs__item:hover {
-		color: var(--accent-color);
+		color: rgb(var(--accent-color));
 	}
 }
 
 .tabs__item.active {
 	cursor: default;
-	color: var(--accent-color);
+	color: rgb(var(--accent-color));
 }
 
 .tabs-line {
@@ -32,5 +32,5 @@
 	will-change: left, right;
 	position: absolute;
 	height: 2px;
-	background-color: var(--accent-color);
+	background-color: rgb(var(--accent-color));
 }

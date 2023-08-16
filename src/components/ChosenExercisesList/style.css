@@ -32,8 +32,8 @@
 
 .chosen-exercises__supersets {
 	margin-left: 12px;
-	background-color: rgba(26, 92, 255, 0.02);
-	border: 1px solid rgba(26, 92, 255, 0.1);
+	background-color: rgb(var(--accent-color) / 0.02);
+	border: 1px solid rgb(var(--accent-color) / 0.1);
 	border-radius: 12px;
 	position: relative;
 
@@ -72,7 +72,7 @@
 	position: absolute;
 	left: 12px;
 	top: -9px;
-	background-color: rgba(26, 92, 255, 0.7);
+	background-color: rgb(var(--accent-color) / 0.7);
 	color: var(--main-bg);
 	z-index: 5;
 	padding: 0 4px;
@@ -89,7 +89,7 @@
 		left: -12px;
 		width: 12px;
 		height: 100%;
-		border-left: 1px solid rgba(26, 92, 255, 0.6);
+		border-left: 1px solid rgb(var(--accent-color) / 0.7);
 		border-top: 0;
 		border-bottom: 0;
 	}
@@ -101,8 +101,8 @@
 		left: -12px;
 		width: 12px;
 		height: calc(100% - 20px);
-		border-left: 1px solid rgba(26, 92, 255, 0.6);
-		border-top: 1px solid rgba(26, 92, 255, 0.6);
+		border-left: 1px solid rgb(var(--accent-color) / 0.6);
+		border-top: 1px solid rgb(var(--accent-color) / 0.6);
 		border-top-left-radius: 9px;
 	}
 
@@ -114,8 +114,8 @@
 		left: -12px;
 		width: 12px;
 		height: calc(100% - 20px);
-		border-left: 1px solid rgba(26, 92, 255, 0.6);
-		border-bottom: 1px solid rgba(26, 92, 255, 0.6);
+		border-left: 1px solid rgb(var(--accent-color) / 0.6);
+		border-bottom: 1px solid rgb(var(--accent-color) / 0.6);
 		border-bottom-left-radius: 9px;
 	}
 }
@@ -134,11 +134,11 @@
 	}
 
 	&.superset .chosen-exercises__item-header {
-		border: 1px solid rgba(26, 92, 255, 0.6);
+		border: 1px solid rgb(var(--accent-color) / 0.6);
 	}
 
 	&.active {
-		border: 1px solid rgba(26, 92, 255, 0.6);
+		border: 1px solid rgb(var(--accent-color) / 0.6);
 		border-bottom: none;
 	}
 }
@@ -157,7 +157,7 @@
 
 	&.active {
 		background: rgba(244,247,248,1);
-		border: 1px solid rgba(26, 92, 255, 0.6);
+		border: 1px solid rgb(var(--accent-color) / 0.6);
 		border-bottom: 0;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
@@ -206,14 +206,14 @@
 	& span {
 		margin-top: 5px;
 		opacity: 0.8;
-		color: var(--accent-color);
+		color: rgb(var(--accent-color));
 	}
 }
 
 .chosen-exercises__item-tonnage {
 	margin-left: auto;
 	transform: translateX(-35px);
-	color: var(--text-color);
+	color: rgb(var(--text-color));
 	opacity: 0.5;
 }
 
@@ -246,7 +246,7 @@
 	transition: opacity var(--base-transition);
 
 	&::after {
-		background: var(--text-color);
+		background: rgb(var(--text-color));
 		content: "";
 		position: absolute;
 		width: 10px;
@@ -256,7 +256,7 @@
 	}
 
 	&::before {
-		background: var(--text-color);
+		background: rgb(var(--text-color));
 		content: "";
 		position: absolute;
 		width: 2px;
@@ -270,7 +270,7 @@
 	display: grid;
 	overflow: hidden;
 	grid-template-rows: 0fr;
-	border: 1px solid rgba(26, 92, 255, 0.6);
+	border: 1px solid rgb(var(--accent-color) / 0.6);
 	border-top: 0;
 	transition: all 0.5s ease;
 	padding: 0 12px;
@@ -325,15 +325,15 @@
 	font-size: 12px;
 	border: none;
 	height: 40px;
-	color: var(--text-color);
-	opacity: 0.7;
+	color: rgb(var(--text-color));
+	opacity: 0.8;
 	cursor: pointer;
+
 	transition: all var(--base-transition);
 
 	&.active {
-		font-weight: bold;
 		transform: translateY(-3px);
-		box-shadow: inset 0 0 0 1px rgba(44,62,80,0.3);
+		box-shadow: inset 0 0 0 1px rgb(var(--text-color) / 0.3);
 		opacity: 1;
 	}
 
