@@ -83,17 +83,15 @@ module.exports = {
       skipHTMLAttributeValues: false,
       skipHTMLTextContents: false
     }],
-    'vue/component-definition-name-casing': ['error', 'PascalCase'],
-    'vue/match-component-file-name': ['error', {
-      extensions: ['vue'],
-      shouldMatchCase: false
-    }],
     'vue/no-dupe-keys': ['error', {
       groups: []
     }],
-    'vue/component-name-in-template-casing': ['error', 'PascalCase', {
-      registeredComponentsOnly: true
-    }],
+    'import/no-unresolved': [
+      'error',
+      {
+        ignore: ['^src/.+']
+      }
+    ],
     'comma-dangle': ['error', {
       arrays: 'never',
       objects: 'never',
@@ -140,4 +138,4 @@ module.exports = {
     }],
     'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }]
   }
-};
+}

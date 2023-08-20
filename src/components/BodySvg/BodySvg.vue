@@ -105,8 +105,7 @@ onMounted(() => {
           class="adductors"
         />
       </g>
-      <g
-        class="Shoulders"
+      <g class="Shoulders"
         style="display: inline; stroke: #000"
       >
         <path
@@ -120,8 +119,7 @@ onMounted(() => {
           class="shoulder-left"
         />
       </g>
-      <g
-        class="Abdominals"
+      <g class="Abdominals"
         style="display: inline; stroke: #000"
       >
         <path

@@ -5,7 +5,6 @@ import { signOut } from '@/composables/profile'
 import { getSession } from '@/composables/getSession'
 import router from '@/router'
 import { useEventsStore } from '@/stores/userEvents'
-import ColorTheme from '@/components/ColorTheme/ColorTheme.vue'
 
 const { session } = getSession()
 
@@ -46,7 +45,6 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
         </RouterLink>
 
         <div class="header__user">
-          <ColorTheme />
           <nav class="header__nav">
             <RouterLink to="/">
               Blog
