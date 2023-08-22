@@ -9,6 +9,10 @@ defineProps({
   width: {
     type: String,
     required: true
+  },
+  confirmLabel: {
+    type: String,
+    default: ''
   }
 })
 
@@ -70,8 +74,8 @@ const confirm = () => {
         <div class="modal__footer">
           <div class="group">
             <slot name="modal-footer" />
-            <Button @click="confirm">
-              Reschedule
+            <Button v-if="confirmLabel" @click="confirm">
+              {{ confirmLabel }}
             </Button>
           </div>
         </div>

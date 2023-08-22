@@ -5,6 +5,7 @@ import { workoutStore } from '@/stores/workout'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
+import Button from '@/components/UI/Button/Button.vue'
 
 defineProps({
   events: {
@@ -21,6 +22,8 @@ const userEvents = useEventsStore()
 
 const isFutureEventsMove = ref(false)
 const isRescheduleModal = ref(false)
+const isReadModal = ref(false)
+const readableEvent = ref(null)
 
 const chosenEvent = ref(null)
 
@@ -50,13 +53,15 @@ const copyEventHandler = event => {
   userEvents.copyObject = event
 }
 
-const routeToReadPage = event => {
-  router.push({
-    name: 'read',
-    params: {
-      events: { ...event }
-    }
-  })
+const readEventModal = (event) => {
+  isReadModal.value = true
+  readableEvent.value = event
+}
+
+const closeReadModal = () => {
+  isReadModal.value = false
+  readableEvent.value = null
+  workoutsStore.openedExerciseId = null
 }
 </script>
 
@@ -73,7 +78,7 @@ const routeToReadPage = event => {
         v-for="(event, index) in events"
         :key="event.id"
         class="events__item"
-        @click.self="router.push(`/read/${event.workoutId}`)"
+        @click.self="readEventModal(event)"
       >
         {{ event.title || 'without name' }}
         <div class="events__functions">
@@ -141,6 +146,7 @@ const routeToReadPage = event => {
         isFutureEventsMove = false
       "
       @confirm="rescheduleEventHandler"
+      confirmLabel="Reschedule"
     >
       <template #modal-header>
         Reschedule event
@@ -158,6 +164,51 @@ const routeToReadPage = event => {
           label="Move all future events"
           v-model="isFutureEventsMove"
         />
+      </template>
+    </Modal>
+    <Modal
+      v-if="isReadModal"
+      width="500px"
+      @close="closeReadModal"
+    >
+      <template #modal-header>
+        <div class="read-event__header">
+          {{ readableEvent.title }}
+          <button class="read-event__edit" @click="editEvent(readableEvent)">edit</button>
+        </div>
+      </template>
+      <template #modal-body>
+        <ul>
+          <li
+            v-for="exercise in readableEvent.exercisesParamsCollection"
+            :key="exercise.exerciseId"
+          >
+            <div class="exercise__title">{{ exercise.exerciseName }}</div>
+            <div class="read-event__table-parent">
+              <table class="read-event__table">
+                <thead>
+                <tr>
+                  <th>Effort</th>
+                  <th>Weight</th>
+                  <th>Repeats</th>
+                  <th>1 PM</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="set in exercise.sets"
+                    :key="set.setId"
+                    class="read-event__list"
+                >
+                  <td>{{ set.effort }}</td>
+                  <td>{{ set.weight }}</td>
+                  <td>{{ set.repeats }}</td>
+                  <td>pm</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </li>
+        </ul>
       </template>
     </Modal>
   </div>

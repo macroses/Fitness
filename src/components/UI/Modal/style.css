@@ -24,7 +24,7 @@
 .modal__content {
 	background-color: var(--main-bg);
 	min-width: 320px;
-	max-width: 100%;
+	width: 100%;
 	border-radius: 20px;
 	border: 1px solid rgb(var(--accent-color) / 0.2);
 	box-shadow: 0 0 25px 0 rgba(0,0,0, 0.05);
@@ -42,9 +42,10 @@
 }
 
 .modal__footer {
-	padding: 0 20px 20px;
+	padding: 0 20px 0px;
 }
 
 .modal__footer .group {
 	justify-content: space-between;
+	padding-bottom: 12px;
 }

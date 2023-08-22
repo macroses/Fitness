@@ -205,6 +205,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     deleteEventHandler,
     pushEventHandler,
     updateEventHandler,
+    previousResults,
     combinedResults,
     updateAllEvents,
     rescheduleEvent

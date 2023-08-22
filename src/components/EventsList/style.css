@@ -49,3 +49,54 @@
 .modal__footer .group {
 	justify-content: space-between;
 }
+
+.exercise__title {
+	font-weight: 500;
+	font-size: 13px;
+	margin-bottom: 4px;
+}
+
+.read-event__table-parent {
+	overflow: hidden;
+	border-radius: 9px;
+	border: 1px solid rgb(var(--accent-color) / 0.1);
+	margin-bottom: 12px;
+}
+
+.read-event__table {
+	text-align: center;
+	width: 100%;
+	border-collapse: collapse;
+	color: rgb(var(--text-color));
+
+	& thead {
+		background-color: rgba(244,247,248,1);
+		font-size: 12px;
+	}
+
+	& td {
+		padding: 4px 0;
+		font-size: 13px;
+		position: relative;
+	}
+
+	& tr:nth-child(even) {
+		background-color: rgba(249,252,253,1);
+	}
+}
+
+.read-event__header {
+	display: flex;
+}
+
+.read-event__edit {
+	border: 0;
+	color: rgb(var(--accent-color));
+	font-size: 13px;
+	background-color: transparent;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

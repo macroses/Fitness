@@ -18,10 +18,11 @@ export const workoutStore = defineStore({
     previousResults: []
   }),
   actions: {
-    addExerciseToWorkout(exerciseId) {
+    addExerciseToWorkout(exerciseId, exerciseName) {
       if (!this.exercisesParamsCollection.includes(exerciseId)) {
         this.exercisesParamsCollection.push({
-          exerciseId
+          exerciseId,
+          exerciseName
         })
       }
     },
