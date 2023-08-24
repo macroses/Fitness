@@ -169,6 +169,7 @@ const closeReadModal = () => {
     <Modal
       v-if="isReadModal"
       width="500px"
+      withoutFooter
       @close="closeReadModal"
     >
       <template #modal-header>
@@ -196,7 +197,7 @@ const closeReadModal = () => {
             :key="exercise.exerciseId"
           >
             <div class="exercise__title">
-              {{ exercise.exerciseName }} -
+              <div class="exercise__title-value">{{ exercise.exerciseName }}</div> -
                 <Icon icon-name="weight-hanging" width="15px"/>
                 {{ (exercise.setTonnage) / 1000 }} T
             </div>

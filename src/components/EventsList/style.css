@@ -80,7 +80,6 @@
 }
 
 .exercise__title {
-	font-weight: 500;
 	font-size: 12px;
 	margin-bottom: 4px;
 	display: flex;
@@ -92,10 +91,19 @@
 	}
 }
 
+.exercise__title-value {
+	font-weight: 500;
+	max-width: 65%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .read-event__header {
 	display: flex;
 	margin-bottom: 4px;
 	align-items: baseline;
+	margin-right: 35px;
 }
 
 .read-event__header-title {
@@ -167,4 +175,8 @@
 		cursor: pointer;
 		color: var(--accent-color);
 	}
+}
+
+.read-modal .modal__footer .group {
+	margin-bottom: 0;
 }

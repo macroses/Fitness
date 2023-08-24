@@ -13,6 +13,10 @@ defineProps({
   confirmLabel: {
     type: String,
     default: ''
+  },
+  withoutFooter: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -77,7 +81,7 @@ const confirm = () => {
         <div class="modal__body">
           <slot name="modal-body" />
         </div>
-        <div class="modal__footer">
+        <div v-if="!withoutFooter" class="modal__footer">
           <div class="group">
             <slot name="modal-footer" />
             <Button v-if="confirmLabel" @click="confirm">
