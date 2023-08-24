@@ -5,7 +5,7 @@ import { workoutStore } from '@/stores/workout'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
-import Button from '@/components/UI/Button/Button.vue'
+import { EFFORTS } from '@/constants/EFFORTS'
 
 defineProps({
   events: {
@@ -93,7 +93,7 @@ const closeReadModal = () => {
           <div
             class="user-dropdown__content"
             :class="{ 'user-menu__funcs--visible': activeIndex === index }"
-            style="width: max-content"
+            style="width: 240px"
           >
             <ul class="user-dropdown">
               <li
@@ -173,17 +173,33 @@ const closeReadModal = () => {
     >
       <template #modal-header>
         <div class="read-event__header">
-          {{ readableEvent.title }}
-          <button class="read-event__edit" @click="editEvent(readableEvent)">edit</button>
+          <div class="read-event__header-title">{{ readableEvent.title }}</div>
+          <div class="read-event__header-date">({{ readableEvent.date.format('DD.MM.YYYY') }})</div>
+          <button
+            class="read-event__edit"
+            @click="editEvent(readableEvent)"
+          >
+            <Icon icon-name="pen-to-square" width="12px"/>
+            edit
+          </button>
         </div>
       </template>
       <template #modal-body>
+        <div class="read-event__total">
+          <Icon icon-name="weight-hanging" width="13px"/>
+          <span>Total tonnage</span>
+           - {{ readableEvent.tonnage / 1000 }} T
+        </div>
         <ul>
           <li
             v-for="exercise in readableEvent.exercisesParamsCollection"
             :key="exercise.exerciseId"
           >
-            <div class="exercise__title">{{ exercise.exerciseName }}</div>
+            <div class="exercise__title">
+              {{ exercise.exerciseName }} -
+                <Icon icon-name="weight-hanging" width="15px"/>
+                {{ (exercise.setTonnage) / 1000 }} T
+            </div>
             <div class="read-event__table-parent">
               <table class="read-event__table">
                 <thead>
@@ -191,7 +207,12 @@ const closeReadModal = () => {
                   <th>Effort</th>
                   <th>Weight</th>
                   <th>Repeats</th>
-                  <th>1 PM</th>
+                  <th>
+                    <div class="read-event__rm">
+                      1 RM
+                      <Icon icon-name="circle-question" width="14px"/>
+                    </div>
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -199,10 +220,22 @@ const closeReadModal = () => {
                     :key="set.setId"
                     class="read-event__list"
                 >
-                  <td>{{ set.effort }}</td>
+                  <td>
+                    <div
+                      :style="{
+                        background: EFFORTS[set.effort].color,
+                        color: set.effort === 4 && '#fff'
+                      }"
+                      class="read-event__effort"
+                    >
+                      {{ EFFORTS[set.effort].text }}
+                    </div>
+                  </td>
                   <td>{{ set.weight }}</td>
                   <td>{{ set.repeats }}</td>
-                  <td>pm</td>
+                  <td>
+                    {{ Math.round(set.weight * (1 + 0.025 * set.repeats)) }} kg
+                  </td>
                 </tr>
                 </tbody>
               </table>

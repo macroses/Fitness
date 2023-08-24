@@ -30,6 +30,8 @@ onMounted(() => {
   t1.from(modalLayer.value, { autoAlpha: 0, duration: 0.25 })
   t1.from(modalContent.value, { autoAlpha: 0, scale: 0.8, y: '-100', duration: 0.25, ease: 'power2' })
   t1.play()
+
+  document.body.style.overflow = 'hidden'
 })
 
 const animateBeforeClose = () => {
@@ -44,10 +46,14 @@ const animateBeforeClose = () => {
 
 const emit = defineEmits(['close', 'confirm'])
 
-const close = () => emit('close')
+const close = () => {
+  emit('close')
+  document.body.style.overflow = 'visible'
+}
 const confirm = () => {
   animateBeforeClose()
   emit('confirm')
+  document.body.style.overflow = 'visible'
 }
 </script>
 

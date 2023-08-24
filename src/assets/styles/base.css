@@ -5,6 +5,7 @@
 
   --main-bg: #fff;
   --header-bg: #fff;
+  --block-bg: rgba(244,247,248,1);
 
   --btn-color: #fff;
   --btn-color-transparent: rgb(var(--accent-color));
@@ -50,6 +51,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
 }
 
 .container {
@@ -74,7 +76,7 @@ body {
   justify-content: center;
 
   &.home {
-    @media (width < 475px) {
+    @media (max-width: 475px) {
       flex-direction: column;
       gap: 8px;
 
