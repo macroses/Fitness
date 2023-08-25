@@ -42,7 +42,7 @@ const editEvent = event => {
 }
 
 const openRescheduleModule = event => {
-  chosenEvent.value = event.value
+  chosenEvent.value = event
   isRescheduleModal.value = true
 }
 

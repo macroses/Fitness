@@ -99,7 +99,7 @@ body {
   text-align: center;
 }
 
-@media (width > 768px) {
+@media (min-width: 768px) {
   .container {
     padding: 0 32px;
   }

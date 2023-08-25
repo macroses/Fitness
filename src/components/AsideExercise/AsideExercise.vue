@@ -43,7 +43,6 @@ const handleTouchEnd = event => {
   if (swipeDistance >= 100) {
     closeAside()
   } else {
-    console.log(swipeDistance)
     gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' });
   }
 }
