@@ -36,6 +36,7 @@ declare module 'vue' {
     Popup: typeof import('./src/components/UI/Popup/Popup.vue')['default']
     Program: typeof import('./src/components/Program/Program.vue')['default']
     Radio: typeof import('./src/components/UI/Radio/Radio.vue')['default']
+    ReadModal: typeof import('./src/components/ReadModal/ReadModal.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchExercises: typeof import('./src/components/SearchExercises/SearchExercises.vue')['default']
