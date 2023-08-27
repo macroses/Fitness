@@ -52,7 +52,7 @@ const copyEventHandler = event => {
   userEvents.copyObject = event
 }
 
-const readEventModal = (event) => {
+const readEventModal = event => {
   isReadModal.value = true
   readableEvent.value = event
 }
@@ -145,7 +145,7 @@ const closeReadModal = () => {
         isFutureEventsMove = false
       "
       @confirm="rescheduleEventHandler"
-      confirmLabel="Reschedule"
+      confirm-label="Reschedule"
     >
       <template #modal-header>
         Reschedule event

@@ -25,6 +25,10 @@
 	& tr:nth-child(even) {
 		background-color: rgba(249,252,253,1);
 	}
+
+	& tr:nth-child(odd) {
+		background-color: var(--main-bg);
+	}
 }
 
 .exercise__title {
@@ -127,4 +131,46 @@
 
 .read-modal .modal__footer .group {
 	margin-bottom: 0;
+}
+
+/* supersets */
+
+.superset-list {
+	padding: 8px 16px 0;
+	border: 1px solid rgba(var(--accent-color) / 30%);
+	border-radius: 9px;
+	background-color: rgba(var(--accent-color) / 5%);
+	margin-bottom: 8px;
+	position: relative;
+
+	&:after {
+		content: 'Superset';
+		position: absolute;
+		display: block;
+		color: #fff;
+		background-color: rgb(var(--accent-color));
+		font-size: 11px;
+		border-radius: 6px;
+		top: -8px;
+		right: 16px;
+		padding: 0 4px;
+	}
+}
+
+.chart__parent {
+	border: 1px solid rgba(var(--accent-color) / 30%);
+	border-radius: 12px;
+	padding: 16px 16px 16px 8px;
+	margin-bottom: 16px;
+	height: 250px;
+}
+
+@media (max-width: 768px) {
+	.superset-list {
+		padding: 8px 8px 0;
+	}
+
+	.chart__parent {
+		margin-bottom: 8px;
+	}
 }

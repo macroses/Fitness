@@ -81,10 +81,16 @@ const confirm = () => {
         <div class="modal__body">
           <slot name="modal-body" />
         </div>
-        <div v-if="!withoutFooter" class="modal__footer">
+        <div
+          v-if="!withoutFooter"
+          class="modal__footer"
+        >
           <div class="group">
             <slot name="modal-footer" />
-            <Button v-if="confirmLabel" @click="confirm">
+            <Button
+              v-if="confirmLabel"
+              @click="confirm"
+            >
               {{ confirmLabel }}
             </Button>
           </div>

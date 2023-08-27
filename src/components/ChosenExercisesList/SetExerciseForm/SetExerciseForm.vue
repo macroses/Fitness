@@ -54,7 +54,7 @@ watch(() => store.repeats, newValue => {
               :class="{ active: index === store.effort }"
               :style="{
                 backgroundColor: effort.color,
-                color: effort.id === 4 && '#fff'
+                color: effort.id === 4 && '#fff',
               }"
               @click="addEffortType(effort.id)"
             >

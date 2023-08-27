@@ -14,7 +14,7 @@ defineProps({
       top: position === 'top',
       right: position === 'right',
       bottom: position === 'bottom',
-      left: position === 'left'
+      left: position === 'left',
     }"
   >
     <slot />
