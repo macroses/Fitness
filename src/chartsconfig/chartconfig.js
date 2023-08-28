@@ -1,19 +1,6 @@
 import { computed } from 'vue'
 
-export const workoutOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'left',
-      labels: {
-        boxWidth: 15
-      }
-    }
-  }
-}
-
-export const chartData = (propData) => {
+export const chartData = (propData, isMobile) => {
   const percentageData = computed(() => {
     const percentageData = []
     const totalTonnage = propData.tonnage
@@ -47,5 +34,21 @@ export const chartData = (propData) => {
     ]
   }
 
-  return { workoutData }
+  const workoutOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: isMobile.value ? 'top' : 'left',
+        padding: {
+          bottom: 60
+        },
+        labels: {
+          boxWidth: 15
+        }
+      }
+    }
+  }
+
+  return { workoutData, workoutOptions }
 }

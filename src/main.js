@@ -16,7 +16,7 @@ app.use(Vue3Toasity, {
   autoClose: 3000,
   limit: 3,
   style: {
-    fontSize: '15px'
+    fontSize: '14px'
   }
 })
 app.mount('#app')

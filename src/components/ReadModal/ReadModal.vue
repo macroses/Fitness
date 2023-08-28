@@ -1,9 +1,9 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
 import { Pie } from 'vue-chartjs'
 import { EFFORTS } from '@/constants/EFFORTS'
-import { chartData, workoutOptions } from '@/chartsconfig/chartconfig'
+import { chartData } from '@/chartsconfig/chartconfig'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -16,11 +16,13 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['toEditPage', 'closeReadModal'])
+const mediaQuery = window.matchMedia('(max-width: 768px)')
+const isMobile = ref(mediaQuery.matches)
 
 const toEditPage = event => emit('toEditPage', event)
 const closeReadModal = () => emit('closeReadModal')
 
-const { workoutData } = chartData(props.readableEvent)
+const { workoutData, workoutOptions } = chartData(props.readableEvent, isMobile)
 
 const groupedExercises = computed(() => {
   const groups = {}
@@ -36,6 +38,14 @@ const groupedExercises = computed(() => {
 
   return groups
 })
+
+const updateIsMobile = () => {
+  isMobile.value = mediaQuery.matches
+  console.log(isMobile.value)
+}
+
+onMounted(() => window.addEventListener('resize', updateIsMobile))
+onBeforeUnmount(() => window.removeEventListener('resize', updateIsMobile))
 </script>
 
 <template>

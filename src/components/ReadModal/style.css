@@ -172,5 +172,6 @@
 
 	.chart__parent {
 		margin-bottom: 8px;
+		padding: 8px;
 	}
 }
