@@ -1,27 +1,18 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import dayjs from 'dayjs'
-import { gsap } from 'gsap'
-import { CSSPlugin } from 'gsap/CSSPlugin'
 import { onBeforeRouteLeave } from 'vue-router'
-import Button from '@/components/UI/Button/Button.vue'
 import { workoutStore } from '@/stores/workout'
 import { exerciseStore } from '@/stores/exercise'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
-import Loading from '@/components/UI/Loading/Loading.vue'
-import Checkbox from '@/components/UI/Checkbox/Checkbox.vue'
-import Icon from '@/components/UI/Icon/Icon.vue'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()
 const dateStore = chosenDateStore()
 const userEvents = useEventsStore()
 const chosenDate = ref(dayjs())
-const homeCalendar = ref(null)
-const userWorkoutEl = ref(null)
-const exList = ref(null)
 const isCalendarVisible = ref(false)
 
 const getDate = date => {
@@ -29,15 +20,6 @@ const getDate = date => {
   dateStore.date = date
   isCalendarVisible.value = false
 }
-
-gsap.registerPlugin(CSSPlugin)
-
-onMounted(() => {
-  const settings = { autoAlpha: 0, scale: 0.8, duration: 0.3, ease: 'sine', delay: 0 }
-  gsap.from(homeCalendar.value, { x: '+100', ...settings })
-  gsap.from(userWorkoutEl.value, { y: '-100', ...settings })
-  gsap.from(exList.value, { x: '-100', ...settings })
-})
 
 const workoutToBase = async () => {
   if (workoutsStore.isWorkoutEdit) {
@@ -65,80 +47,103 @@ onBeforeRouteLeave(() => {
           large
           v-if="userEvents.eventsLoading"
         />
-        <div class="main__layout-left">
-          <div
-            ref="homeCalendar"
-            class="calendar-wr"
-            :class="{ hidden: !isCalendarVisible }"
-          >
-            <Calendar @get-date="getDate" />
+        <Transition
+          name="slideFromRight"
+          appear
+        >
+          <div class="main__layout-left">
             <div
-              v-if="!isCalendarVisible"
-              class="calendar-chosen-date"
+              class="calendar-wr"
+              :class="{ hidden: !isCalendarVisible }"
             >
-              {{ dateStore.date.format('DD MMMM YYYY') }}
-              <span>{{ dateStore.date.format('dddd') }}</span>
-            </div>
-            <Button
-              class="hide-calendar__button"
-              :class="{ active: isCalendarVisible }"
-              @click="isCalendarVisible = !isCalendarVisible"
-            >
-              <Icon
-                width="20px"
-                :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"
-              />
-            </Button>
-          </div>
-
-          <div
-            ref="userWorkoutEl"
-            class="user-workout"
-          >
-            <WorkoutDescription />
-            <div class="user-workout__funcs">
+              <Calendar @get-date="getDate" />
               <div
-                class="total-tonnage"
+                v-if="!isCalendarVisible"
+                class="calendar-chosen-date"
               >
-                Total tonnage:&nbsp; <b>{{ workoutsStore.tonnage / 1000 }} T</b>
+                {{ dateStore.date.format('DD MMMM YYYY') }}
+                <span>{{ dateStore.date.format('dddd') }}</span>
               </div>
-              <Checkbox
-                v-if="workoutsStore.filteredCacheExercises.length > 1"
-                v-model="workoutsStore.isSuperset"
-                label="Supersets"
-              />
+              <Button
+                class="hide-calendar__button"
+                :class="{ active: isCalendarVisible }"
+                @click="isCalendarVisible = !isCalendarVisible"
+              >
+                <Icon
+                  width="20px"
+                  :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"
+                />
+              </Button>
             </div>
-            <ChosenExercisesList />
-          </div>
 
-          <div class="group">
-            <Button
-              bordered
-              full
-              @click="router.push('/')"
-            >
-              Back
-            </Button>
-            <Button
-              full
-              @click="workoutToBase"
-            >
-              {{ workoutsStore.isWorkoutEdit ? 'Update workout' : 'Save workout' }}
-            </Button>
-          </div>
-        </div>
+            <div class="user-workout">
+              <WorkoutDescription />
+              <div class="user-workout__funcs">
+                <div class="total-tonnage">
+                  Total tonnage:&nbsp; <b>{{ workoutsStore.tonnage / 1000 }} T</b>
+                </div>
+                <Checkbox
+                  v-if="workoutsStore.filteredCacheExercises.length > 1"
+                  v-model="workoutsStore.isSuperset"
+                  label="Supersets"
+                />
+              </div>
+              <ChosenExercisesList />
+            </div>
 
-        <div class="main__layout-right">
-          <div
-            ref="exList"
-            class="exercises-list__wr"
-          >
-            <ExercisesList />
+            <div class="group">
+              <Button
+                bordered
+                full
+                @click="router.push('/')"
+              >
+                Back
+              </Button>
+              <Button
+                full
+                @click="workoutToBase"
+              >
+                {{ workoutsStore.isWorkoutEdit ? 'Update workout' : 'Save workout' }}
+              </Button>
+            </div>
           </div>
-        </div>
+        </Transition>
+
+        <Transition
+          name="slideFromLeft"
+          appear
+        >
+          <div class="main__layout-right">
+            <div class="exercises-list__wr">
+              <ExercisesList />
+            </div>
+          </div>
+        </Transition>
       </div>
     </div>
 
     <AsideExercise v-if="exercisesStore.exercise" />
   </main>
 </template>
+
+<style>
+.slideFromRight-enter-from,
+.slideFromRight-leave-to {
+  opacity: 0;
+  transform: translateX(100px) scale(0.8);
+}
+.slideFromRight-enter-active,
+.slideFromRight-leave-active {
+  transition: all 0.3s ease
+}
+
+.slideFromLeft-enter-from,
+.slideFromLeft-leave-to {
+  opacity: 0;
+  transform: translateX(-100px) scale(0.8);
+}
+.slideFromLeft-enter-active,
+.slideFromLeft-leave-active {
+  transition: all 0.3s ease
+}
+</style>

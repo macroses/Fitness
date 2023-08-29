@@ -41,7 +41,6 @@ const groupedExercises = computed(() => {
 
 const updateIsMobile = () => {
   isMobile.value = mediaQuery.matches
-  console.log(isMobile.value)
 }
 
 onMounted(() => window.addEventListener('resize', updateIsMobile))

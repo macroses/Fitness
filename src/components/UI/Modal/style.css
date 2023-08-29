@@ -32,6 +32,7 @@
 	max-height: 97dvh;
 	overflow-y: auto;
 	-webkit-overflow-scrolling:touch;
+	view-transition-name: modalContent;
 
 	&::-webkit-scrollbar {
 		display: none;

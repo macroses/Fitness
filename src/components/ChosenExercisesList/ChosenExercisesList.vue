@@ -155,7 +155,9 @@ watch(() => store.isSuperset, () => activeExerciseId.value = null)
                 v-if="!store.isSuperset"
                 @click="store.deleteExercise(element.id)"
                 class="chosen-exercises__delete"
-              />
+              >
+                <Icon icon-name="xmark" width="14px"/>
+              </button>
             </div>
           </div>
           <TransitionSlideY>

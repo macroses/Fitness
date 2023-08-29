@@ -87,7 +87,7 @@ const inpFocus = () => {
       >
         <Icon
           icon-name="xmark"
-          width="18px"
+          width="14px"
         />
       </button>
     </div>

@@ -17,14 +17,11 @@
   color-scheme: dark;
   --main-bg: rgb(37 37 46);
   --text-color: 224 224 224;
-  /*--header-bg: rgb(46 46 46);*/
 }
 
 @media (prefers-color-scheme: dark) {
   :root.prefer {
     --main-bg: rgb(37 37 46);
-    /*--text-color: rgb(204  204  204);*/
-    /*--header-bg: rgb(46 46 46);*/
   }
 }
 
@@ -126,6 +123,7 @@ body {
 .main__layout-left {
   max-width: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 ::-webkit-scrollbar {

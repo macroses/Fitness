@@ -37,10 +37,10 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           class="header__logo"
         >
           <img
-            src="/Sports.svg"
+            src="logo.svg"
             alt="logo"
-            width="100"
-            height="64"
+            width="150"
+            height="29"
           >
         </RouterLink>
 
