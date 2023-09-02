@@ -1,6 +1,7 @@
 :root {
   color-scheme: light;
   --accent-color: 26 92 255;
+  /*--accent-color: #1a5cff;*/
   --text-color: 44 62 80;
 
   --main-bg: #fff;

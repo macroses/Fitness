@@ -5,8 +5,8 @@ import Register from '@/views/Register.vue'
 import { supabase } from '@/lib/supabaseClient'
 import Account from '@/views/Account.vue'
 import WorkoutMode from '@/views/WorkoutMode.vue'
-import ReadWorkout from '@/views/ReadWorkout.vue'
 import AccountSettings from '@/views/AccountSettings.vue'
+import BodyParameters from '@/views/BodyParameters.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -60,10 +60,12 @@ const router = createRouter({
       }
     },
     {
-      path: '/read/:id',
-      name: 'read',
-      component: ReadWorkout,
-      props: true
+      path: '/body-parameters',
+      name: 'bodyParameters',
+      component: BodyParameters,
+      meta: {
+        auth: true
+      }
     }
   ]
 })

@@ -65,7 +65,6 @@ defineProps({
     v-else
     :to="path"
     ref="btn"
-    @click="buttonPress"
     class="button"
     :disabled="disabled"
     :class="{

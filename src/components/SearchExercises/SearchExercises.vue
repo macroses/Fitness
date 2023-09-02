@@ -20,7 +20,7 @@ const debouncedSearch = useDebounceFn(() => {
 
   const query = search.value.toLowerCase()
   searchResults.value = sessionExercises.value.filter(exercise => exercise.name.toLowerCase().includes(query))
-}, 0)
+}, 100)
 
 const highlightText = text => {
   if (!search.value) return text

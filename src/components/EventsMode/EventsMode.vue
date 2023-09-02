@@ -13,7 +13,7 @@ const dateStore = chosenDateStore()
       Create workout
     </Button>
     <Button>Program</Button>
-    <Button :disabled="dateStore.date > dayjs()">
+    <Button is-link :disabled="dateStore.date > dayjs()" path="/body-parameters">
       Body parameters
     </Button>
   </div>
