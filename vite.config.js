@@ -21,7 +21,7 @@ export default defineConfig({
         postcssNesting
       ]
     }
-  },
+  }
   // build: {
   //   chunkSizeWarningLimit: 300,
   //   rollupOptions: {

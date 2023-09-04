@@ -9,8 +9,8 @@ test('Tabs', () => {
 
   const wrapper = mount(Tabs, {
     props: {
-      tabs: tabs,
-    },
+      tabs
+    }
   })
 
   expect(wrapper.text()).toContain('All')

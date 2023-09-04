@@ -101,7 +101,10 @@ const isPositive = num => ({
                 class="chosen-exercises__delete"
                 @click="deleteSetHandler(result.setId)"
               >
-                <Icon icon-name="xmark" width="14px"/>
+                <Icon
+                  icon-name="xmark"
+                  width="14px"
+                />
               </button>
             </td>
           </tr>

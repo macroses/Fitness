@@ -156,7 +156,10 @@ watch(() => store.isSuperset, () => activeExerciseId.value = null)
                 @click="store.deleteExercise(element.id)"
                 class="chosen-exercises__delete"
               >
-                <Icon icon-name="xmark" width="14px"/>
+                <Icon
+                  icon-name="xmark"
+                  width="14px"
+                />
               </button>
             </div>
           </div>

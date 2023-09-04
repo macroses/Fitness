@@ -1,9 +1,9 @@
 <script setup>
 import { computed, readonly, ref } from 'vue'
+import { uid } from 'uid'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 // import { updateProfile } from '@/composables/profile.js'
 import { useEventsStore } from '@/stores/userEvents.js'
-import { uid } from 'uid'
 import { chosenDateStore } from '@/stores/chosenDate.js'
 
 const userEvents = useEventsStore()
@@ -33,12 +33,10 @@ const params = readonly([
   { id: 12, label: 'Left Calf' }, // голень
   { id: 13, label: 'Right Calf' },
   { id: 14, label: 'Neck' }, // шея
-  { id: 15, label: 'Pelvis' }, // таз
+  { id: 15, label: 'Pelvis' } // таз
 ])
 
-const activeParam = computed(() => {
-  return params.find(param => param.id === activeField.value)
-})
+const activeParam = computed(() => params.find(param => param.id === activeField.value))
 
 const tabStyle = computed(() => {
   if (activeListItem.value) {
@@ -51,32 +49,42 @@ const tabStyle = computed(() => {
 })
 
 const submitBodyParams = async () => {
-  // создаем объект. Который будет состоять из id для всех параметров,
-  // самих параметров
-  // даты заполнения
-  // если дата заполнения уже есть, тогда заменим значение
-  // если нет, то добавим новый объект/массив
+  const currentDate = dateStore.date;
+  const existingDataIndex = userEvents.bodyParams.findIndex(item => item.date === currentDate);
 
-  const collectedData = {
-    id: uid(10),
-    date: dateStore.date,
-    params: {
-      label: activeParam.value.label,
-      value: inputValue.value
+  if (existingDataIndex !== -1) {
+    // Дата уже существует в массиве, найдем параметр с таким же label
+    const existingParamIndex = userEvents.bodyParams[existingDataIndex].params.findIndex(param => param.label === activeParam.value.label);
+
+    if (existingParamIndex !== -1) {
+      // Параметр с таким label уже существует, обновим его значение
+      userEvents.bodyParams[existingDataIndex].params[existingParamIndex].value = inputValue.value;
+    } else {
+      // Параметр с таким label не существует, добавим новый объект параметра
+      userEvents.bodyParams[existingDataIndex].params.push({
+        label: activeParam.value.label,
+        value: inputValue.value
+      });
     }
+  } else {
+    // Дата не существует в массиве, добавим новый объект данных
+    const collectedData = {
+      id: uid(15),
+      date: currentDate,
+      params: [
+        {
+          label: activeParam.value.label,
+          value: inputValue.value
+        }
+      ]
+    };
+
+    userEvents.bodyParams.push(collectedData);
   }
 
-  // userEvents.bodyParams.includes(params)
-  //   ? userEvents.bodyParams = userEvents.bodyParams.filter(favoriteId => favoriteId !== id)
-  //   : userEvents.bodyParams.push(params)
-
-  // await updateProfile(
-  //   null,
-  //   isLoading,
-  //   'body_params',
-  //   userEvents.bodyParams
-  // )
+  inputValue.value = null;
 }
+
 </script>
 
 <template>
@@ -93,7 +101,9 @@ const submitBodyParams = async () => {
               :class="{ active: param.id === activeParam.id }"
               @click="setActiveField(param.id)"
             >
-              <button class="body-params__aside-button">{{ param.label }}</button>
+              <button class="body-params__aside-button">
+                {{ param.label }}
+              </button>
             </li>
           </ul>
           <div
@@ -104,8 +114,10 @@ const submitBodyParams = async () => {
         </div>
       </div>
       <div class="body-params__content">
-        <Loading v-if="isLoading"/>
-        <h1 class="body-params__header">{{ activeParam.label }}</h1>
+        <Loading v-if="isLoading" />
+        <h1 class="body-params__header">
+          {{ activeParam.label }}
+        </h1>
         <form
           class="body-params__form"
           @submit.prevent="submitBodyParams"
@@ -120,9 +132,7 @@ const submitBodyParams = async () => {
           <Button>Submit</Button>
         </form>
 
-        <div class="body-params__chart">
-
-        </div>
+        <div class="body-params__chart" />
       </div>
     </div>
   </div>

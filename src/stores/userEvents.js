@@ -25,11 +25,11 @@ export const useEventsStore = defineStore('userEvents', () => {
       'favorite_exercises'
     )
 
-    await getProfileColumn(
-      bodyParams,
-      eventsLoading,
-      'body_params'
-    )
+    // await getProfileColumn(
+    //   bodyParams,
+    //   eventsLoading,
+    //   'body_params'
+    // )
   }
 
   const deleteEventHandler = async (tableName, columnName, id) => {
