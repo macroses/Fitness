@@ -10,6 +10,7 @@ import { getProfileColumn } from '@/composables/profile'
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
   const favoritesFromBase = ref([])
+  const bodyParams = ref([])
   const eventsLoading = ref(false)
   const copyObject = ref(null)
   const isCopyMode = ref(false)
@@ -22,6 +23,12 @@ export const useEventsStore = defineStore('userEvents', () => {
       favoritesFromBase,
       eventsLoading,
       'favorite_exercises'
+    )
+
+    await getProfileColumn(
+      bodyParams,
+      eventsLoading,
+      'body_params'
     )
   }
 
@@ -198,6 +205,7 @@ export const useEventsStore = defineStore('userEvents', () => {
   return {
     events,
     favoritesFromBase,
+    bodyParams,
     eventsLoading,
     copyObject,
     isCopyMode,

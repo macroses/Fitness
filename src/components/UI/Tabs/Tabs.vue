@@ -1,10 +1,9 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-defineProps({
+const props = defineProps({
   tabs: {
-    type: Array,
-    required: true
+    type: Array
   }
 })
 
