@@ -107,20 +107,14 @@ watch(userEvents.bodyParams, (val) => {
 </script>
 
 <template>
-<!--  <div><div>{{ filteredParamsByProp }}</div></div>-->
   <div class="body-params__chart" >
-<!--    {{ bodyParamType }}-->
-
-<!--    <div v-for="date in filteredParamsByProp"> {{ dayjs(date.date).format('DD.MM.YYYY') }}</div>-->
-<!--    {{ userEvents.bodyParams }}-->
+    <Loading large v-if="!filteredParamsByProp"/>
     <Line
-      v-if="filteredParamsByProp.length"
+      v-if="filteredParamsByProp?.length"
       :data="chartData"
       :options="options"
       style="height: 300px;"
     />
     <div v-else>empty</div>
-
-
   </div>
 </template>
