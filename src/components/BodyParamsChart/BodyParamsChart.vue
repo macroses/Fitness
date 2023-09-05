@@ -4,6 +4,7 @@ import { useEventsStore } from '@/stores/userEvents.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
 import { computed, ref, watch } from 'vue'
+import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
 
 ChartJS.register(Legend, LineElement, CategoryScale, LinearScale, PointElement, Tooltip)
 
@@ -39,71 +40,21 @@ const chartData = ref({
   }],
 })
 
-const options = {
-  responsive: true,
-  maintainAspectRatio: false,
-  circular: true,
-  scales: {
-    x: {
-      grid: {
-        display: false
-      }
-    },
-    y: {
-      grid: {
-        color: 'rgba(0,0,0, 0.03)'
-      },
-      ticks: {
-        stepSize: 10,
-        beginAtZero: true,
-        callback: value => `${value}`
-      }
-    }
-  },
-  elements: {
-    line: {
-      borderWidth: 2
-    },
-    point: {
-      radius: 4
-    }
-  },
-  plugins: {
-    legend: {
-      display: false
-    }
+const updateChartData = () => {
+  chartData.value = {
+    labels: filteredParamsByProp.value?.map(el => dayjs(el.date).format('DD.MM')),
+    datasets: [{
+      label: '',
+      borderColor: '#1a5cff',
+      backgroundColor: '#fff',
+      data: filteredParamsByProp.value?.map(el => el.params[0].value),
+      tension: 0.4,
+    }]
   }
 }
 
-watch(filteredParamsByProp, (val) => {
-  if (val) {
-    chartData.value = {
-      labels: filteredParamsByProp.value?.map(el => dayjs(el.date).format('DD.MM')),
-      datasets: [{
-        label: '',
-        borderColor: '#1a5cff',
-        backgroundColor: '#fff',
-        data: filteredParamsByProp.value?.map(el => el.params[0].value),
-        tension: 0.4,
-      }]
-    }
-  }
-})
-
-watch(userEvents.bodyParams, (val) => {
-  if (val) {
-    chartData.value = {
-      labels: filteredParamsByProp.value?.map(el => dayjs(el.date).format('DD.MM')),
-      datasets: [{
-        label: '',
-        borderColor: '#1a5cff',
-        backgroundColor: '#fff',
-        data: filteredParamsByProp.value?.map(el => el.params[0].value),
-        tension: 0.4,
-      }]
-    }
-  }
-})
+watch(filteredParamsByProp, val => val && updateChartData())
+watch(userEvents.bodyParams, val => val && updateChartData())
 </script>
 
 <template>
@@ -112,7 +63,7 @@ watch(userEvents.bodyParams, (val) => {
     <Line
       v-if="filteredParamsByProp?.length"
       :data="chartData"
-      :options="options"
+      :options="bodyParamsOptions"
       style="height: 300px;"
     />
     <div v-else>empty</div>
