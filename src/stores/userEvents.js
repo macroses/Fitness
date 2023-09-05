@@ -5,12 +5,13 @@ import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } f
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { userIdFromStorage } from '@/composables/userIdFromStorage'
-import { getProfileColumn } from '@/composables/profile'
+import { getProfileColumn, updateProfile } from '@/composables/profile'
+import dayjs from 'dayjs'
 
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
   const favoritesFromBase = ref([])
-  const bodyParams = ref([])
+  const bodyParams = ref(null)
   const eventsLoading = ref(false)
   const copyObject = ref(null)
   const isCopyMode = ref(false)
@@ -25,11 +26,11 @@ export const useEventsStore = defineStore('userEvents', () => {
       'favorite_exercises'
     )
 
-    // await getProfileColumn(
-    //   bodyParams,
-    //   eventsLoading,
-    //   'body_params'
-    // )
+    await getProfileColumn(
+      bodyParams,
+      eventsLoading,
+      'body_params'
+    )
   }
 
   const deleteEventHandler = async (tableName, columnName, id) => {
@@ -184,6 +185,45 @@ export const useEventsStore = defineStore('userEvents', () => {
     workoutData.$reset()
   }
 
+  const pushBodyParamsToBase = async (inputValue, activeParam, isLoading) => {
+    const existingData = bodyParams.value.find(item => dayjs(item.date).isSame(dateStore.date, 'day'))
+
+    if (existingData) {
+      // Дата уже существует в массиве
+      const hasExistingParam = existingData.params.some(param => param.label === activeParam.value.label)
+
+      if (hasExistingParam) {
+        // Параметр с таким label уже существует, обновим его значение
+        existingData.params.find(param => param.label === activeParam.value.label).value = inputValue.value
+      } else {
+        // Параметр с таким label не существует, добавим новый объект параметра
+        existingData.params.push({
+          label: activeParam.value.label,
+          value: inputValue.value
+        })
+      }
+    } else {
+      // Дата не существует в массиве, добавим новый объект данных
+      const collectedData = {
+        id: uid(15),
+        date: dateStore.date,
+        params: [{
+          label: activeParam.value.label,
+          value: inputValue.value
+        }]
+      }
+
+      bodyParams.value.push(collectedData)
+    }
+
+    await updateProfile(
+      null,
+      isLoading,
+      'body_params',
+      bodyParams.value
+    )
+  }
+
   watch(() => dateStore.copyDate, async val => {
     if (val) {
       // if copyDate and copyObject is defined and filled
@@ -216,6 +256,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     previousResults,
     combinedResults,
     updateAllEvents,
-    rescheduleEvent
+    rescheduleEvent,
+    pushBodyParamsToBase
   }
 })

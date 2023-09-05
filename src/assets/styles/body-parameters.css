@@ -46,10 +46,15 @@
 	border: none;
 	padding: 8px;
 	border-radius: 9px;
+	color: var(--text-color);
 }
 
 .body-params__form {
 	display: flex;
 	gap: 12px;
+	margin-top: 24px;
+}
+
+.body-params__chart {
 	margin-top: 24px;
 }

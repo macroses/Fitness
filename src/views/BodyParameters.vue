@@ -1,10 +1,9 @@
 <script setup>
 import { computed, readonly, ref } from 'vue'
-import { uid } from 'uid'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
-// import { updateProfile } from '@/composables/profile.js'
 import { useEventsStore } from '@/stores/userEvents.js'
-import { chosenDateStore } from '@/stores/chosenDate.js'
+import BodyParamsChart from '@/components/BodyParamsChart/BodyParamsChart.vue'
+import { chosenDateStore } from '../stores/chosenDate.js'
 
 const userEvents = useEventsStore()
 const dateStore = chosenDateStore()
@@ -43,48 +42,17 @@ const tabStyle = computed(() => {
     const activeLiRect = activeListItem.value[activeField.value].getBoundingClientRect()
     const parentRect = blockMove.value.parentNode.getBoundingClientRect()
     const top = `${activeLiRect.top - parentRect.top}px`
-    return `top: ${top};`
+
+    return `top: ${top}`
   }
+
   return ''
 })
 
 const submitBodyParams = async () => {
-  const currentDate = dateStore.date;
-  const existingDataIndex = userEvents.bodyParams.findIndex(item => item.date === currentDate);
-
-  if (existingDataIndex !== -1) {
-    // Дата уже существует в массиве, найдем параметр с таким же label
-    const existingParamIndex = userEvents.bodyParams[existingDataIndex].params.findIndex(param => param.label === activeParam.value.label);
-
-    if (existingParamIndex !== -1) {
-      // Параметр с таким label уже существует, обновим его значение
-      userEvents.bodyParams[existingDataIndex].params[existingParamIndex].value = inputValue.value;
-    } else {
-      // Параметр с таким label не существует, добавим новый объект параметра
-      userEvents.bodyParams[existingDataIndex].params.push({
-        label: activeParam.value.label,
-        value: inputValue.value
-      });
-    }
-  } else {
-    // Дата не существует в массиве, добавим новый объект данных
-    const collectedData = {
-      id: uid(15),
-      date: currentDate,
-      params: [
-        {
-          label: activeParam.value.label,
-          value: inputValue.value
-        }
-      ]
-    };
-
-    userEvents.bodyParams.push(collectedData);
-  }
-
-  inputValue.value = null;
+  await userEvents.pushBodyParamsToBase(inputValue, activeParam, isLoading)
+  inputValue.value = null
 }
-
 </script>
 
 <template>
@@ -114,7 +82,7 @@ const submitBodyParams = async () => {
         </div>
       </div>
       <div class="body-params__content">
-        <Loading v-if="isLoading" />
+        {{ dateStore.date.format('DD MMMM') }}
         <h1 class="body-params__header">
           {{ activeParam.label }}
         </h1>
@@ -131,8 +99,8 @@ const submitBodyParams = async () => {
           />
           <Button>Submit</Button>
         </form>
-
-        <div class="body-params__chart" />
+<!--        {{ filteredParamsByProp }}-->
+        <BodyParamsChart :body-param-type="activeParam"/>
       </div>
     </div>
   </div>
