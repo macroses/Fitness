@@ -16,14 +16,7 @@ const props = defineProps({
 
 const userEvents = useEventsStore()
 const currentDate = dayjs()
-const chartDataValues = ref(Array(30).fill(0))
 
-const last30Days = ref([])
-
-for (let i = 0; i < 30; i++) {
-  const date = currentDate.subtract(i, 'day')
-  last30Days.value.unshift(date.format('DD.MM'))
-}
 
 const filteredParamsByProp = computed(() => {
   const resultArray = userEvents.bodyParams?.filter(item => {
@@ -39,42 +32,31 @@ const filteredParamsByProp = computed(() => {
 })
 
 const chartData = ref({
-  labels: last30Days.value,
+  labels: filteredParamsByProp.value?.map(el => dayjs(el.date).format('DD.MM')),
   datasets: [{
     label: '',
     borderColor: '#1a5cff',
     backgroundColor: '#fff',
-    data: last30Days.value.map(date => {
-      const dataPoint = filteredParamsByProp.value?.find(item => dayjs(item.date).format('DD.MM') === date);
-      return dataPoint ? dataPoint.params[0].value : 0
-    }),
+    data: filteredParamsByProp.value?.map(el => el.params[0].value),
     tension: 0.4,
-  }]
+  }],
 })
 
 const updateChartData = () => {
-  const filteredData = filteredParamsByProp.value;
-
-  chartDataValues.value = last30Days.value.map(date => {
-    const dataPoint = filteredData.find(item => dayjs(item.date).format('DD.MM') === date)
-    return dataPoint ? dataPoint.params[0].value : 0
-  })
-
-  // Обновите данные графика
   chartData.value = {
-    labels: last30Days,
+    labels: filteredParamsByProp.value?.map(el => dayjs(el.date).format('DD.MM')),
     datasets: [{
       label: '',
       borderColor: '#1a5cff',
       backgroundColor: '#fff',
-      data: chartDataValues.value,
+      data: filteredParamsByProp.value?.map(el => el.params[0].value),
       tension: 0.4,
     }]
   }
 }
 
-watch(filteredParamsByProp, val => val && updateChartData())
-watch(userEvents.bodyParams, val => val && updateChartData())
+watch(() => filteredParamsByProp, val => val && updateChartData())
+watch(() => userEvents.bodyParams, val => val && updateChartData())
 </script>
 
 <template>
