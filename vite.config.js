@@ -21,17 +21,15 @@ export default defineConfig({
         postcssNesting
       ]
     }
-  }
-  // build: {
-  //   chunkSizeWarningLimit: 300,
-  //   rollupOptions: {
-  //     output: {
-  //       manualChunks: {
-  //         home: ['./src/views/Home.vue'],
-  //         chartjs: ['chart.js'],
-  //         gsap: ['gsap']
-  //       },
-  //     },
-  //   },
-  // },
+  },
+  build: {
+    chunkSizeWarningLimit: 300,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          bodyParams: ['./src/views/BodyParameters.vue'],
+        },
+      },
+    },
+  },
 });

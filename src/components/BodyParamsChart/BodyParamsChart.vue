@@ -16,14 +16,16 @@ const props = defineProps({
 
 const userEvents = useEventsStore()
 const currentDate = dayjs()
-const last30Days = [];
+const last30Days = []
+const thirtyDaysAgo = currentDate.subtract(30, 'days')
 
 for (let i = 0; i < 30; i++) {
-  const date = currentDate.subtract(i, 'day');
-  last30Days.unshift(date.format('DD.MM'));
+  const date = currentDate.subtract(i, 'day')
+  last30Days.unshift(date.format('DD.MM'))
 }
 
 const filteredParamsByProp = computed(() => {
+  // отфильтровали по типу (вес, рост итд)
   const resultArray = userEvents.bodyParams?.filter(item => {
     return item.params.some(param => param.label === props.bodyParamType.label)
   })
@@ -36,18 +38,25 @@ const filteredParamsByProp = computed(() => {
     .sort((a, b) => dayjs(a.date) - dayjs(b.date))
 })
 
+const filteredData = computed(() => {
+  return filteredParamsByProp.value?.filter(el => {
+    // отфильтровали по последним 30 дням
+    return dayjs(el.date).isAfter(thirtyDaysAgo)
+  })
+})
+
 const chartData = ref({
   labels: last30Days,
   datasets: [{
     borderColor: '#1a5cff',
     backgroundColor: '#fff',
-    data: filteredParamsByProp.value?.map(el => ({
+    data: filteredData?.value?.map(el => ({
       x: dayjs(el.date).format('DD.MM'),
       y: el.params[0].value
     })),
     fill: false,
     tension: 0.4,
-  }],
+  }]
 })
 
 const updateChartData = () => {
@@ -56,7 +65,7 @@ const updateChartData = () => {
     datasets: [{
       borderColor: '#1a5cff',
       backgroundColor: '#fff',
-      data: filteredParamsByProp.value?.map(el => ({
+      data: filteredData?.value?.map(el => ({
         x: dayjs(el.date).format('DD.MM'),
         y: el.params[0].value
       })),

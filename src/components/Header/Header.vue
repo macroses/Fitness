@@ -37,7 +37,7 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           class="header__logo"
         >
           <img
-            src="logo.svg"
+            src="/logo.svg"
             alt="logo"
             width="150"
             height="29"
