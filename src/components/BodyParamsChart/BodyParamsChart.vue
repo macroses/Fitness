@@ -16,7 +16,12 @@ const props = defineProps({
 
 const userEvents = useEventsStore()
 const currentDate = dayjs()
+const last30Days = [];
 
+for (let i = 0; i < 30; i++) {
+  const date = currentDate.subtract(i, 'day');
+  last30Days.unshift(date.format('DD.MM'));
+}
 
 const filteredParamsByProp = computed(() => {
   const resultArray = userEvents.bodyParams?.filter(item => {
@@ -32,31 +37,36 @@ const filteredParamsByProp = computed(() => {
 })
 
 const chartData = ref({
-  labels: filteredParamsByProp.value?.map(el => dayjs(el.date).format('DD.MM')),
+  labels: last30Days,
   datasets: [{
-    label: '',
     borderColor: '#1a5cff',
     backgroundColor: '#fff',
-    data: filteredParamsByProp.value?.map(el => el.params[0].value),
+    data: filteredParamsByProp.value?.map(el => ({
+      x: dayjs(el.date).format('DD.MM'),
+      y: el.params[0].value
+    })),
+    fill: false,
     tension: 0.4,
   }],
 })
 
 const updateChartData = () => {
   chartData.value = {
-    labels: filteredParamsByProp.value?.map(el => dayjs(el.date).format('DD.MM')),
+    labels: last30Days,
     datasets: [{
-      label: '',
       borderColor: '#1a5cff',
       backgroundColor: '#fff',
-      data: filteredParamsByProp.value?.map(el => el.params[0].value),
+      data: filteredParamsByProp.value?.map(el => ({
+        x: dayjs(el.date).format('DD.MM'),
+        y: el.params[0].value
+      })),
       tension: 0.4,
     }]
   }
 }
 
-watch(() => filteredParamsByProp, val => val && updateChartData())
-watch(() => userEvents.bodyParams, val => val && updateChartData())
+watch(filteredParamsByProp, val => val && updateChartData())
+watch(userEvents.bodyParams, val => val && updateChartData())
 </script>
 
 <template>
