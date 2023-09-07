@@ -75,18 +75,19 @@ const updateChartData = () => {
 }
 
 watch(filteredParamsByProp, val => val && updateChartData())
-watch(userEvents.bodyParams, val => val && updateChartData())
+watch(() => userEvents.bodyParams, val => val && updateChartData())
 </script>
 
 <template>
-  <div class="body-params__chart" >
-    <Loading large v-if="!filteredParamsByProp"/>
-    <Line
-      v-if="filteredParamsByProp?.length"
-      :data="chartData"
-      :options="bodyParamsOptions"
-      style="height: 300px;"
-    />
-    <div v-else>empty</div>
+  <div class="body-params__container">
+    <div class="body-params__chart">
+      <Loading large v-if="!filteredParamsByProp"/>
+      <Line
+        v-if="filteredParamsByProp?.length"
+        :data="chartData"
+        :options="bodyParamsOptions"
+      />
+      <div v-else>empty</div>
+    </div>
   </div>
 </template>

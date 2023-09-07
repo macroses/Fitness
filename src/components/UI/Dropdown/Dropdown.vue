@@ -1,9 +1,55 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import { onClickOutside } from '@vueuse/core'
+
+const props = defineProps({
+  dropdownList: {
+    type: Array
+  }
+})
+
+const emit = defineEmits(['activeValue'])
+
+const dropdownParent = ref(null)
+const isDropdownOpened = ref(false)
+const activeItem = ref(props.dropdownList[0])
+const toggleDropdown = () => isDropdownOpened.value = !isDropdownOpened.value
+
+const activeValue = item => {
+  activeItem.value = item
+  isDropdownOpened.value = false
+  emit('activeValue', item)
+}
+
+onClickOutside(dropdownParent, () => isDropdownOpened.value = false)
+</script>
 
 <template>
-  <ul class="dropdown">
-    <li class="dropdown__item">
-      <slot />
-    </li>
-  </ul>
+  <div ref="dropdownParent" class="dropdown">
+    <p
+      class="dropdown__value"
+      @click="toggleDropdown"
+    >
+      {{ activeItem.value }}
+      <Icon icon-name="angle-down" width="14px" />
+    </p>
+    <div
+      class="dropdown__parent"
+      :class="{ active: isDropdownOpened }"
+    >
+      <ul class="dropdown__list">
+        <li
+          v-for="item in dropdownList"
+          :key="item.id"
+          class="dropdown__item"
+          :class="{ activeItem: item.id === activeItem.id }"
+          @click="activeValue(item)"
+        >
+          {{ item.value }}
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
+
+<style src="./style.css" />
