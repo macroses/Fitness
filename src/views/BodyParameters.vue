@@ -1,14 +1,16 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 import { useEventsStore } from '@/stores/userEvents.js'
 import BodyParamsChart from '@/components/BodyParamsChart/BodyParamsChart.vue'
 import { chosenDateStore } from '../stores/chosenDate.js'
 import { FILTER_LIST } from '@/constants/FILTER_LIST.js'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
+import { bodyParamsStore } from '@/stores/bodyParams.js'
 import dayjs from 'dayjs'
 
 const userEvents = useEventsStore()
+const paramsStore = bodyParamsStore()
 const dateStore = chosenDateStore()
 
 const activeListItem = ref(null)
@@ -17,11 +19,11 @@ const isLoading = ref(false)
 const inputValue = ref(null)
 const filterType = ref(0)
 
-const setActiveField = id => userEvents.activeBodyField = id
+const setActiveField = id => paramsStore.activeBodyField = id
 
 const tabStyle = computed(() => {
   if (activeListItem.value) {
-    const activeLiRect = activeListItem.value[userEvents.activeBodyField].getBoundingClientRect()
+    const activeLiRect = activeListItem.value[paramsStore.activeBodyField].getBoundingClientRect()
     const parentRect = blockMove.value.parentNode.getBoundingClientRect()
     const top = `${activeLiRect.top - parentRect.top}px`
 
@@ -32,13 +34,17 @@ const tabStyle = computed(() => {
 })
 
 const submitBodyParams = async () => {
-  await userEvents.pushBodyParamsToBase(inputValue, userEvents.activeParam, isLoading)
+  await paramsStore.pushBodyParamsToBase(inputValue, paramsStore.activeParam, isLoading)
   inputValue.value = null
 }
 
 const getFilter = filter => {
   console.log(filter)
 }
+
+onMounted(async () => {
+  await paramsStore.fetchEventHandler()
+})
 </script>
 
 <template>
@@ -52,7 +58,7 @@ const getFilter = filter => {
               v-for="param in BODY_PARAMS"
               :key="param.id"
               class="body-params__aside-item"
-              :class="{ active: param.id === userEvents.activeParam.id }"
+              :class="{ active: param.id === paramsStore.activeParam.id }"
               @click="setActiveField(param.id)"
             >
               <button class="body-params__aside-button">
@@ -70,7 +76,7 @@ const getFilter = filter => {
       <div class="body-params__content">
         {{ dateStore.date.format('DD MMMM') }}
         <h1 class="body-params__header">
-          {{ userEvents.activeParam.label }}
+          {{ paramsStore.activeParam.label }}
         </h1>
         <form
           class="body-params__form"
@@ -79,7 +85,7 @@ const getFilter = filter => {
           <Input
             v-model.number="inputValue"
             mode="decimal"
-            :label-placeholder="userEvents.activeParam.label"
+            :label-placeholder="paramsStore.activeParam.label"
             @clear="inputValue = null"
             @keydown="useOnlyNumbers($event)"
           />
@@ -102,7 +108,7 @@ const getFilter = filter => {
                 </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="param in userEvents.filteredParamsByProp" :key="param.id">
+                  <tr v-for="param in paramsStore.filteredParamsByProp" :key="param.id">
                     <td>{{ dayjs(param.date).format('DD.MM.YYYY') }}</td>
                     <td>{{ param.params[0].value }}</td>
                   </tr>

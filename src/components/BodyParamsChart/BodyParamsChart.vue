@@ -1,14 +1,14 @@
 <script setup>
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js'
-import { useEventsStore } from '@/stores/userEvents.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
 import { computed, ref, watch } from 'vue'
 import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
+import { bodyParamsStore } from '@/stores/bodyParams.js'
 
 ChartJS.register(Legend, LineElement, CategoryScale, LinearScale, PointElement, Tooltip)
 
-const userEvents = useEventsStore()
+const paramsStore = bodyParamsStore()
 const currentDate = dayjs()
 const last30Days = []
 const thirtyDaysAgo = currentDate.subtract(30, 'days')
@@ -19,7 +19,7 @@ for (let i = 0; i < 30; i++) {
 }
 
 const filteredData = computed(() => {
-  return userEvents.filteredParamsByProp?.filter(el => {
+  return paramsStore.filteredParamsByProp?.filter(el => {
     // отфильтровали по последним 30 дням
     return dayjs(el.date).isAfter(thirtyDaysAgo)
   })
@@ -54,16 +54,16 @@ const updateChartData = () => {
   }
 }
 
-watch(() => userEvents.filteredParamsByProp, val => val && updateChartData())
-watch(() => userEvents.bodyParams, val => val && updateChartData())
+watch(() => paramsStore.filteredParamsByProp, val => val && updateChartData())
+watch(paramsStore.bodyParams, val => val && updateChartData())
 </script>
 
 <template>
   <div class="body-params__container">
     <div class="body-params__chart">
-      <Loading large v-if="!userEvents.filteredParamsByProp"/>
+      <Loading large v-if="!paramsStore.filteredParamsByProp"/>
       <Line
-        v-if="userEvents.filteredParamsByProp?.length"
+        v-if="paramsStore.filteredParamsByProp?.length"
         :data="chartData"
         :options="bodyParamsOptions"
       />

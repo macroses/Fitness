@@ -4,9 +4,12 @@ import { getProfileColumn, updateProfile } from '@/composables/profile.js'
 import dayjs from 'dayjs'
 import { uid } from 'uid'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
+import { chosenDateStore } from '@/stores/chosenDate.js'
 
 export const bodyParamsStore = defineStore('bodyParams', () => {
-  const bodyParams = ref(null)
+  const dateStore = chosenDateStore()
+
+  const bodyParams = ref([])
   const activeBodyField = ref(0)
   const eventsLoading = ref(false)
 
@@ -23,15 +26,15 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
 
     if (existingData) {
       // Дата уже существует в массиве
-      const hasExistingParam = existingData.params.some(param => param.label === activeParam.value.label)
+      const hasExistingParam = existingData.params.some(param => param.label === activeParam.label)
 
       if (hasExistingParam) {
         // Параметр с таким label уже существует, обновим его значение
-        existingData.params.find(param => param.label === activeParam.value.label).value = inputValue.value
+        existingData.params.find(param => param.label === activeParam.label).value = inputValue.value
       } else {
         // Параметр с таким label не существует, добавим новый объект параметра
         existingData.params.push({
-          label: activeParam.value.label,
+          label: activeParam.label,
           value: inputValue.value
         })
       }
@@ -77,6 +80,8 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
     bodyParams,
     fetchEventHandler,
     pushBodyParamsToBase,
+    activeBodyField,
+    activeParam,
     filteredParamsByProp
   }
 })
