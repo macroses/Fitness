@@ -46,8 +46,6 @@ const chartData = ref({
 })
 
 const updateChartData = () => {
-  if (props.filter === 1)
-
   chartData.value = {
     labels: last30Days,
     datasets: [{
@@ -64,7 +62,7 @@ const updateChartData = () => {
 
 watch(() => paramsStore.filteredParamsByProp, val => val && updateChartData())
 watch(paramsStore?.bodyParams, val => val && updateChartData())
-watch(() => props.filter, val => val && updateChartData())
+watch(() => props?.filter, val => val && updateChartData())
 </script>
 
 <template>
