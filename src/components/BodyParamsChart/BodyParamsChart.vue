@@ -2,7 +2,7 @@
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
 
@@ -26,27 +26,12 @@ for (let i = 0; i < 30; i++) {
 
 const filteredData = computed(() => {
   return paramsStore.filteredParamsByProp?.filter(el => {
-    // отфильтровали по последним 30 дням
     return dayjs(el.date).isAfter(thirtyDaysAgo)
   })
 })
 
-const chartData = ref({
-  labels: last30Days,
-  datasets: [{
-    borderColor: '#1a5cff',
-    backgroundColor: '#fff',
-    data: filteredData?.value?.map(el => ({
-      x: dayjs(el.date).format('DD.MM'),
-      y: el.params[0].value
-    })),
-    fill: false,
-    tension: 0.4,
-  }]
-})
-
-const updateChartData = () => {
-  chartData.value = {
+const chartData = computed(() => {
+  return {
     labels: last30Days,
     datasets: [{
       borderColor: '#1a5cff',
@@ -58,11 +43,7 @@ const updateChartData = () => {
       tension: 0.4,
     }]
   }
-}
-
-watch(() => paramsStore.filteredParamsByProp, val => val && updateChartData())
-watch(paramsStore?.bodyParams, val => val && updateChartData())
-watch(() => props?.filter, val => val && updateChartData())
+})
 </script>
 
 <template>

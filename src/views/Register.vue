@@ -67,12 +67,14 @@ async function signInWithGitHub() {
       width="350px"
     />
 
-    <button
-      type="button"
-      @click="signInWithGitHub"
-    >
-      github
-    </button>
+    <div class="social-auth">
+      <button
+        type="button"
+        @click="signInWithGitHub"
+      >
+        <Icon icon-name="github" width="28px"/>
+      </button>
+    </div>
 
     <div class="form__submit">
       <Button
