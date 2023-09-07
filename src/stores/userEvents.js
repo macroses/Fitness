@@ -7,11 +7,13 @@ import { chosenDateStore } from '@/stores/chosenDate'
 import { userIdFromStorage } from '@/composables/userIdFromStorage'
 import { getProfileColumn, updateProfile } from '@/composables/profile'
 import dayjs from 'dayjs'
+import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
   const favoritesFromBase = ref([])
   const bodyParams = ref(null)
+  const activeBodyField = ref(0)
   const eventsLoading = ref(false)
   const copyObject = ref(null)
   const isCopyMode = ref(false)
@@ -224,6 +226,22 @@ export const useEventsStore = defineStore('userEvents', () => {
     )
   }
 
+  const activeParam = computed(() => BODY_PARAMS.find(param => param.id === activeBodyField.value))
+
+  const filteredParamsByProp = computed(() => {
+    // отфильтровали по типу (вес, рост итд)
+    const resultArray = bodyParams.value?.filter(item => {
+      return item.params.some(param => param.label === activeParam.value?.label)
+    })
+
+    return resultArray?.map(item => ({
+      id: item.id,
+      date: item.date,
+      params: item.params.filter(param => param.label === activeParam.value?.label)
+    }))
+      .sort((a, b) => dayjs(b.date) - dayjs(a.date))
+  })
+
   watch(() => dateStore.copyDate, async val => {
     if (val) {
       // if copyDate and copyObject is defined and filled
@@ -246,6 +264,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     events,
     favoritesFromBase,
     bodyParams,
+    activeBodyField,
     eventsLoading,
     copyObject,
     isCopyMode,
@@ -257,6 +276,8 @@ export const useEventsStore = defineStore('userEvents', () => {
     combinedResults,
     updateAllEvents,
     rescheduleEvent,
-    pushBodyParamsToBase
+    pushBodyParamsToBase,
+    filteredParamsByProp,
+    activeParam
   }
 })

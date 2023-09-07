@@ -8,12 +8,6 @@ import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
 
 ChartJS.register(Legend, LineElement, CategoryScale, LinearScale, PointElement, Tooltip)
 
-const props = defineProps({
-  bodyParamType: {
-    type: Object
-  }
-})
-
 const userEvents = useEventsStore()
 const currentDate = dayjs()
 const last30Days = []
@@ -24,22 +18,8 @@ for (let i = 0; i < 30; i++) {
   last30Days.unshift(date.format('DD.MM'))
 }
 
-const filteredParamsByProp = computed(() => {
-  // отфильтровали по типу (вес, рост итд)
-  const resultArray = userEvents.bodyParams?.filter(item => {
-    return item.params.some(param => param.label === props.bodyParamType.label)
-  })
-
-  return resultArray?.map(item => ({
-    id: item.id,
-    date: item.date,
-    params: item.params.filter(param => param.label === props.bodyParamType.label)
-  }))
-    .sort((a, b) => dayjs(a.date) - dayjs(b.date))
-})
-
 const filteredData = computed(() => {
-  return filteredParamsByProp.value?.filter(el => {
+  return userEvents.filteredParamsByProp?.filter(el => {
     // отфильтровали по последним 30 дням
     return dayjs(el.date).isAfter(thirtyDaysAgo)
   })
@@ -74,16 +54,16 @@ const updateChartData = () => {
   }
 }
 
-watch(filteredParamsByProp, val => val && updateChartData())
+watch(() => userEvents.filteredParamsByProp, val => val && updateChartData())
 watch(() => userEvents.bodyParams, val => val && updateChartData())
 </script>
 
 <template>
   <div class="body-params__container">
     <div class="body-params__chart">
-      <Loading large v-if="!filteredParamsByProp"/>
+      <Loading large v-if="!userEvents.filteredParamsByProp"/>
       <Line
-        v-if="filteredParamsByProp?.length"
+        v-if="userEvents.filteredParamsByProp?.length"
         :data="chartData"
         :options="bodyParamsOptions"
       />

@@ -11,19 +11,17 @@ import dayjs from 'dayjs'
 const userEvents = useEventsStore()
 const dateStore = chosenDateStore()
 
-const activeField = ref(0)
 const activeListItem = ref(null)
 const blockMove = ref(null)
 const isLoading = ref(false)
 const inputValue = ref(null)
+const filterType = ref(0)
 
-const setActiveField = id => activeField.value = id
-
-const activeParam = computed(() => BODY_PARAMS.find(param => param.id === activeField.value))
+const setActiveField = id => userEvents.activeBodyField = id
 
 const tabStyle = computed(() => {
   if (activeListItem.value) {
-    const activeLiRect = activeListItem.value[activeField.value].getBoundingClientRect()
+    const activeLiRect = activeListItem.value[userEvents.activeBodyField].getBoundingClientRect()
     const parentRect = blockMove.value.parentNode.getBoundingClientRect()
     const top = `${activeLiRect.top - parentRect.top}px`
 
@@ -33,23 +31,13 @@ const tabStyle = computed(() => {
   return ''
 })
 
-const filteredParamsByProp = computed(() => {
-  // отфильтровали по типу (вес, рост итд)
-  const resultArray = userEvents.bodyParams?.filter(item => {
-    return item.params.some(param => param.label === activeParam.value.label)
-  })
-
-  return resultArray?.map(item => ({
-    id: item.id,
-    date: item.date,
-    params: item.params.filter(param => param.label === activeParam.value.label)
-  }))
-    .sort((a, b) => dayjs(b.date) - dayjs(a.date))
-})
-
 const submitBodyParams = async () => {
-  await userEvents.pushBodyParamsToBase(inputValue, activeParam, isLoading)
+  await userEvents.pushBodyParamsToBase(inputValue, userEvents.activeParam, isLoading)
   inputValue.value = null
+}
+
+const getFilter = filter => {
+  console.log(filter)
 }
 </script>
 
@@ -64,7 +52,7 @@ const submitBodyParams = async () => {
               v-for="param in BODY_PARAMS"
               :key="param.id"
               class="body-params__aside-item"
-              :class="{ active: param.id === activeParam.id }"
+              :class="{ active: param.id === userEvents.activeParam.id }"
               @click="setActiveField(param.id)"
             >
               <button class="body-params__aside-button">
@@ -82,7 +70,7 @@ const submitBodyParams = async () => {
       <div class="body-params__content">
         {{ dateStore.date.format('DD MMMM') }}
         <h1 class="body-params__header">
-          {{ activeParam.label }}
+          {{ userEvents.activeParam.label }}
         </h1>
         <form
           class="body-params__form"
@@ -91,7 +79,7 @@ const submitBodyParams = async () => {
           <Input
             v-model.number="inputValue"
             mode="decimal"
-            :label-placeholder="activeParam.label"
+            :label-placeholder="userEvents.activeParam.label"
             @clear="inputValue = null"
             @keydown="useOnlyNumbers($event)"
           />
@@ -100,7 +88,10 @@ const submitBodyParams = async () => {
 
         <div class="body-params__content-wrap">
           <div class="body-params__data">
-            <Dropdown :dropdown-list="FILTER_LIST"/>
+            <Dropdown
+              :dropdown-list="FILTER_LIST"
+              @active-value="getFilter"
+            />
 
             <div class="body-params__table-parent">
               <table class="body-params__table">
@@ -111,7 +102,7 @@ const submitBodyParams = async () => {
                 </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="param in filteredParamsByProp" :key="param.id">
+                  <tr v-for="param in userEvents.filteredParamsByProp" :key="param.id">
                     <td>{{ dayjs(param.date).format('DD.MM.YYYY') }}</td>
                     <td>{{ param.params[0].value }}</td>
                   </tr>
@@ -119,7 +110,9 @@ const submitBodyParams = async () => {
               </table>
             </div>
           </div>
-          <BodyParamsChart :body-param-type="activeParam"/>
+          <BodyParamsChart
+            :filter="filterType"
+          />
         </div>
       </div>
     </div>
