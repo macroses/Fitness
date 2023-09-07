@@ -1,7 +1,6 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
-import { useEventsStore } from '@/stores/userEvents.js'
 import BodyParamsChart from '@/components/BodyParamsChart/BodyParamsChart.vue'
 import { chosenDateStore } from '../stores/chosenDate.js'
 import { FILTER_LIST } from '@/constants/FILTER_LIST.js'
@@ -9,7 +8,6 @@ import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
 import dayjs from 'dayjs'
 
-const userEvents = useEventsStore()
 const paramsStore = bodyParamsStore()
 const dateStore = chosenDateStore()
 
@@ -18,6 +16,7 @@ const blockMove = ref(null)
 const isLoading = ref(false)
 const inputValue = ref(null)
 const filterType = ref(0)
+const isCalendarVisible = ref(false)
 
 const setActiveField = id => paramsStore.activeBodyField = id
 
@@ -38,13 +37,14 @@ const submitBodyParams = async () => {
   inputValue.value = null
 }
 
-const getFilter = filter => {
-  console.log(filter)
+const getDate = date => {
+  dateStore.date = date
+  isCalendarVisible.value = false
 }
 
-onMounted(async () => {
-  await paramsStore.fetchEventHandler()
-})
+const getFilter = filter => filterType.value = filter.id
+
+onMounted(async () => await paramsStore.fetchEventHandler())
 </script>
 
 <template>
@@ -74,7 +74,33 @@ onMounted(async () => {
         </div>
       </div>
       <div class="body-params__content">
-        {{ dateStore.date.format('DD MMMM') }}
+        <!---->
+        <div class="body-params__calendar">
+          <div
+            class="calendar-wr"
+            :class="{ hidden: !isCalendarVisible }"
+          >
+            <Calendar @get-date="getDate" />
+            <div
+              v-if="!isCalendarVisible"
+              class="calendar-chosen-date"
+            >
+              {{ dateStore.date.format('DD MMMM YYYY') }}
+              <span>{{ dateStore.date.format('dddd') }}</span>
+            </div>
+            <Button
+              class="hide-calendar__button"
+              :class="{ active: isCalendarVisible }"
+              @click="isCalendarVisible = !isCalendarVisible"
+            >
+              <Icon
+                width="20px"
+                :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"
+              />
+            </Button>
+          </div>
+        </div>
+        <!--        -->
         <h1 class="body-params__header">
           {{ paramsStore.activeParam.label }}
         </h1>
@@ -116,9 +142,7 @@ onMounted(async () => {
               </table>
             </div>
           </div>
-          <BodyParamsChart
-            :filter="filterType"
-          />
+          <BodyParamsChart :filter="filterType" />
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@
 .body-params__header {
 	font-size: 22px;
 	font-weight: 500;
+	margin-bottom: 16px;
 }
 
 .body-params__aside-wrap {
@@ -57,7 +58,6 @@
 .body-params__form {
 	display: flex;
 	gap: 12px;
-	margin-top: 24px;
 	margin-bottom: 12px;
 }
 
@@ -112,4 +112,16 @@
 
 .body-params__chart {
 	height: 100%;
+}
+
+.body-params__calendar {
+	position: relative;
+	width: 100%;
+
+	& .calendar {
+		width: 100%;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
 }

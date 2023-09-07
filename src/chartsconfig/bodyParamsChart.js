@@ -6,7 +6,7 @@ export const bodyParamsOptions = {
     x: {
       grid: {
         display: false
-      }
+      },
     },
     y: {
       grid: {

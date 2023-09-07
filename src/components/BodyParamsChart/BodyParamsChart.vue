@@ -8,6 +8,12 @@ import { bodyParamsStore } from '@/stores/bodyParams.js'
 
 ChartJS.register(Legend, LineElement, CategoryScale, LinearScale, PointElement, Tooltip)
 
+const props = defineProps({
+  filter: {
+    type: Number
+  }
+})
+
 const paramsStore = bodyParamsStore()
 const currentDate = dayjs()
 const last30Days = []
@@ -40,6 +46,8 @@ const chartData = ref({
 })
 
 const updateChartData = () => {
+  if (props.filter === 1)
+
   chartData.value = {
     labels: last30Days,
     datasets: [{
@@ -55,7 +63,8 @@ const updateChartData = () => {
 }
 
 watch(() => paramsStore.filteredParamsByProp, val => val && updateChartData())
-watch(paramsStore.bodyParams, val => val && updateChartData())
+watch(paramsStore?.bodyParams, val => val && updateChartData())
+watch(() => props.filter, val => val && updateChartData())
 </script>
 
 <template>

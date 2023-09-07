@@ -44,7 +44,7 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
         id: uid(15),
         date: dateStore.date,
         params: [{
-          label: activeParam.value.label,
+          label: activeParam.label,
           value: inputValue.value
         }]
       }
