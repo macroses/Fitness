@@ -5,7 +5,14 @@ export const bodyParamsOptions = {
   scales: {
     x: {
       grid: {
-        display: false
+        display: false,
+      },
+      ticks: {
+        maxTicksLimit: 5,
+        // beginAtZero: true,
+        // stepSize: 1,
+        // max: 12,
+        align: 'inner',
       },
     },
     y: {
