@@ -8,9 +8,12 @@
 	margin-top: 24px;
 	grid-template-columns: 220px 1fr;
 	gap: 16px;
-	border: 1px solid rgba(var(--accent-color) / 10%);
-	padding: 16px;
-	border-radius: 20px;
+
+	@media (min-width: 1024px) {
+		border: 1px solid rgba(var(--accent-color) / 10%);
+		padding: 16px;
+		border-radius: 20px;
+	}
 }
 
 .body-params__header {

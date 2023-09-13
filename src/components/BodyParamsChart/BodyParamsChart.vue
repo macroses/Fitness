@@ -19,7 +19,7 @@ const paramsStore = bodyParamsStore()
 const currentDate = dayjs()
 const daysCounterByFilter = ref(30)
 const daysAgo = currentDate.subtract(daysCounterByFilter.value, 'days')
-const numPoints = ref(30)
+const numPoints = ref(30) // число точек на графике, для их замены при аггрегации
 let datesCollection = []
 
 const fillDateCollection = computed(() => {
@@ -32,28 +32,6 @@ const fillDateCollection = computed(() => {
 
   return datesCollection
 })
-
-// const aggregateData = (data, numPoints) => {
-//   const aggregatedData = []
-//   const interval = Math.ceil(data.length / numPoints)
-//
-//   for (let i = 0; i < numPoints; i++) {
-//     const startIndex = i * interval
-//     const endIndex = Math.min((i + 1) * interval, data.length)
-//
-//     if (startIndex < endIndex) {
-//       const intervalData = data.slice(startIndex, endIndex);
-//       const average = intervalData.reduce((sum, item) => sum + item.y, 0) / intervalData.length
-//       aggregatedData.push({
-//         x: intervalData[Math.floor(intervalData.length / 2)].x, // серединная дата интервала
-//         y: average
-//       })
-//     }
-//   }
-//
-//   return aggregatedData;
-// }
-
 
 const filteredData = computed(() => {
   return paramsStore.filteredParamsByProp?.filter(el => {
