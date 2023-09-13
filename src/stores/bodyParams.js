@@ -76,12 +76,34 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
       .sort((a, b) => dayjs(b.date) - dayjs(a.date))
   })
 
+  const aggregateData = (data, numPoints) => {
+    const aggregatedData = []
+    const interval = Math.ceil(data.length / numPoints)
+
+    for (let i = 0; i < numPoints; i++) {
+      const startIndex = i * interval
+      const endIndex = Math.min((i + 1) * interval, data.length)
+
+      if (startIndex < endIndex) {
+        const intervalData = data.slice(startIndex, endIndex);
+        const average = intervalData.reduce((sum, item) => sum + item.y, 0) / intervalData.length
+        aggregatedData.push({
+          x: intervalData[Math.floor(intervalData.length / 2)].x, // серединная дата интервала
+          y: average
+        })
+      }
+    }
+
+    return aggregatedData;
+  }
+
   return {
     bodyParams,
     fetchEventHandler,
     pushBodyParamsToBase,
     activeBodyField,
     activeParam,
-    filteredParamsByProp
+    filteredParamsByProp,
+    aggregateData
   }
 })

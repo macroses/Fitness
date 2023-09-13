@@ -19,8 +19,8 @@ const paramsStore = bodyParamsStore()
 const currentDate = dayjs()
 const daysCounterByFilter = ref(30)
 const daysAgo = currentDate.subtract(daysCounterByFilter.value, 'days')
+const numPoints = ref(30)
 let datesCollection = []
-
 
 const fillDateCollection = computed(() => {
   datesCollection = []
@@ -33,6 +33,28 @@ const fillDateCollection = computed(() => {
   return datesCollection
 })
 
+// const aggregateData = (data, numPoints) => {
+//   const aggregatedData = []
+//   const interval = Math.ceil(data.length / numPoints)
+//
+//   for (let i = 0; i < numPoints; i++) {
+//     const startIndex = i * interval
+//     const endIndex = Math.min((i + 1) * interval, data.length)
+//
+//     if (startIndex < endIndex) {
+//       const intervalData = data.slice(startIndex, endIndex);
+//       const average = intervalData.reduce((sum, item) => sum + item.y, 0) / intervalData.length
+//       aggregatedData.push({
+//         x: intervalData[Math.floor(intervalData.length / 2)].x, // серединная дата интервала
+//         y: average
+//       })
+//     }
+//   }
+//
+//   return aggregatedData;
+// }
+
+
 const filteredData = computed(() => {
   return paramsStore.filteredParamsByProp?.filter(el => {
     return dayjs(el.date).isAfter(daysAgo)
@@ -40,26 +62,37 @@ const filteredData = computed(() => {
 })
 
 const chartData = computed(() => {
+  const rawData = filteredData?.value?.map(el => ({
+    x: dayjs(el.date).format('DD.MM'),
+    y: el.params[0].value
+  }))
+
+  const aggregatedData = paramsStore.aggregateData(rawData, numPoints.value)
+
   return {
     labels: fillDateCollection.value,
     datasets: [{
       borderColor: '#1a5cff',
       backgroundColor: '#fff',
-      data: filteredData?.value?.map(el => ({
-        x: dayjs(el.date).format('DD.MM'),
-        y: el.params[0].value
-      })),
+      data: aggregatedData,
       tension: 0.4,
     }]
   }
 })
 
 watch(() => props.filter, (val) => {
-  if (val === 0) daysCounterByFilter.value = 30
-  if (val === 1) daysCounterByFilter.value = 90
-  if (val === 2) daysCounterByFilter.value = 180
-  if (val === 3) daysCounterByFilter.value = 365
-})
+  const values = [
+    { days: 30, points: 30 },
+    { days: 90, points: 10 },
+    { days: 180, points: 10 },
+    { days: 365, points: 5 }
+  ];
+
+  const selectedValue = values[val] || values[0]; // По умолчанию, если val не соответствует ни одному из вариантов
+
+  daysCounterByFilter.value = selectedValue.days;
+  numPoints.value = selectedValue.points;
+});
 </script>
 
 <template>
