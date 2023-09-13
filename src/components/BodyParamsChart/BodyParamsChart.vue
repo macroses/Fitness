@@ -18,9 +18,8 @@ const props = defineProps({
 const paramsStore = bodyParamsStore()
 const currentDate = dayjs()
 const daysCounterByFilter = ref(30)
-let datesCollection = []
 const daysAgo = currentDate.subtract(daysCounterByFilter.value, 'days')
-
+let datesCollection = []
 
 
 const fillDateCollection = computed(() => {
