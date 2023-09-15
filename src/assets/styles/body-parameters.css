@@ -6,13 +6,13 @@
 .body-params {
 	display: grid;
 	margin-top: 24px;
-	grid-template-columns: 220px 1fr;
 	gap: 16px;
 
 	@media (min-width: 1024px) {
 		border: 1px solid rgba(var(--accent-color) / 10%);
 		padding: 16px;
 		border-radius: 20px;
+		grid-template-columns: 220px 1fr;
 	}
 }
 
@@ -20,6 +20,14 @@
 	font-size: 22px;
 	font-weight: 500;
 	margin-bottom: 16px;
+}
+
+.body-params__aside {
+	display: none;
+
+	@media (min-width: 1024px) {
+		display: initial;
+	}
 }
 
 .body-params__aside-wrap {
@@ -65,14 +73,30 @@
 }
 
 .body-params__content-wrap {
-	display: flex;
-	gap: 16px;
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	grid-template-areas: 'dropdown chart' 'data chart';
+	column-gap: 16px;
 	flex-grow: 1;
+
+	& .dropdown {
+		grid-area: dropdown;
+		margin-bottom: 12px;
+	}
+
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr;
+		grid-template-areas: 'dropdown' 'chart' 'data';
+		row-gap: 8px;
+
+		& .dropdown {
+			width: 100%;
+		}
+	}
 }
 
 .body-params__table-parent {
 	border: 1px solid rgba(var(--accent-color) / 10%);
-	margin-top: 12px;
 	border-radius: 12px;
 	flex-grow: 1;
 	overflow: hidden;
@@ -107,10 +131,16 @@
 .body-params__data {
 	display: flex;
 	flex-direction: column;
+	grid-area: data;
 }
 
 .body-params__container {
 	flex-grow: 1;
+	grid-area: chart;
+
+	@media (max-width: 768px) {
+		order: -1;
+	}
 }
 
 .body-params__chart {

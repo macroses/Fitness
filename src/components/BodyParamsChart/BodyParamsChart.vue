@@ -74,7 +74,7 @@ watch(() => props.filter, (val) => {
 </script>
 
 <template>
-  <div class="body-params__container">
+  <div class="body-params__container" style="height: 300px;">
 
     <div class="body-params__chart">
       <Loading large v-if="!paramsStore.filteredParamsByProp"/>
