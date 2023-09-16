@@ -75,8 +75,9 @@
 .body-params__content-wrap {
 	display: grid;
 	grid-template-columns: 200px 1fr;
+	grid-template-rows: 42px 1fr;
 	grid-template-areas: 'dropdown chart' 'data chart';
-	column-gap: 16px;
+	gap: 16px 12px;
 	flex-grow: 1;
 
 	& .dropdown {
@@ -99,7 +100,8 @@
 	border: 1px solid rgba(var(--accent-color) / 10%);
 	border-radius: 12px;
 	flex-grow: 1;
-	overflow: hidden;
+	overflow: auto;
+	max-height: 432px;
 }
 
 .body-params__table {
@@ -125,6 +127,11 @@
 
 	& tbody tr:nth-child(even) {
 		background-color: var(--block-bg);
+	}
+
+	& thead {
+		position: sticky;
+		top: 0;
 	}
 }
 
@@ -153,6 +160,7 @@
 
 	& .calendar {
 		width: 100%;
+
 		&::-webkit-scrollbar {
 			display: none;
 		}

@@ -119,12 +119,11 @@ onMounted(async () => await paramsStore.fetchEventHandler())
         </form>
 
         <div class="body-params__content-wrap">
+          <Dropdown
+            :dropdown-list="FILTER_LIST"
+            @active-value="getFilter"
+          />
           <div class="body-params__data">
-            <Dropdown
-              :dropdown-list="FILTER_LIST"
-              @active-value="getFilter"
-            />
-
             <div class="body-params__table-parent">
               <table class="body-params__table">
                 <thead>
