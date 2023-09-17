@@ -100,7 +100,6 @@ onMounted(async () => await paramsStore.fetchEventHandler())
             </Button>
           </div>
         </div>
-        <!--        -->
         <h1 class="body-params__header">
           {{ paramsStore.activeParam.label }}
         </h1>
@@ -135,10 +134,21 @@ onMounted(async () => await paramsStore.fetchEventHandler())
                 </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="param in paramsStore.filteredParamsByProp" :key="param.date">
-                    <td>{{ dayjs(param.date).format('DD.MM.YYYY') }}</td>
-                    <td>{{ param.params[0].value }}</td>
-                  </tr>
+                <tr v-for="(param, index) in paramsStore.filteredParamsByProp" :key="param.date">
+                  <td>{{ dayjs(param.date).format('DD.MM.YYYY') }}</td>
+                  <td>
+                    {{ param.params && param.params[0] && param.params[0].value !== undefined ? param.params[0].value : '' }}
+                    <span :class="{
+                        'positive': (param.params && param.params[0] && param.params[0].value !== undefined && param.params[0].value > (paramsStore.filteredParamsByProp[index + 1]?.params[0]?.value || 0)),
+                        'negative': index !== 0 && (param.params && param.params[0] && param.params[0].value !== undefined && param.params[0].value < (paramsStore.filteredParamsByProp[index + 1]?.params[0]?.value || 0))
+                      }"
+                    >
+                    {{
+                      (param.params && param.params[0] && param.params[0].value !== undefined && param.params[0].value > (paramsStore.filteredParamsByProp[index + 1]?.params[0]?.value || 0)) ? '+' : '-'
+                    }}
+                    </span>
+                  </td>
+                </tr>
                 </tbody>
               </table>
             </div>
