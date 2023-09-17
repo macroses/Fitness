@@ -44,6 +44,26 @@ const getDate = date => {
 
 const getFilter = filter => filterType.value = filter.id
 
+const calculateTableCellContent = computed(() => {
+  return paramsStore.filteredParamsByProp.map((param, index) => {
+    const currentValue = param.params[0].value;
+    const nextValue = paramsStore.filteredParamsByProp[index + 1]?.params[0].value;
+    const isPositive = currentValue !== undefined && currentValue > (nextValue || 0);
+    const isNegative = index !== 0 && currentValue !== undefined && currentValue < (nextValue || 0);
+    const sign = isPositive ? 'angle-up' : (isNegative ? 'angle-down' : '');
+
+    return {
+      content: currentValue !== undefined ? currentValue : '',
+      class: {
+        'positive': isPositive,
+        'negative': isNegative
+      },
+      date: param.date,
+      sign: sign
+    };
+  });
+})
+
 onMounted(async () => await paramsStore.fetchEventHandler())
 </script>
 
@@ -134,19 +154,20 @@ onMounted(async () => await paramsStore.fetchEventHandler())
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(param, index) in paramsStore.filteredParamsByProp" :key="param.date">
+                <tr
+                  v-for="param in calculateTableCellContent"
+                  :key="param.date"
+                >
                   <td>{{ dayjs(param.date).format('DD.MM.YYYY') }}</td>
                   <td>
-                    {{ param.params && param.params[0] && param.params[0].value !== undefined ? param.params[0].value : '' }}
-                    <span :class="{
-                        'positive': (param.params && param.params[0] && param.params[0].value !== undefined && param.params[0].value > (paramsStore.filteredParamsByProp[index + 1]?.params[0]?.value || 0)),
-                        'negative': index !== 0 && (param.params && param.params[0] && param.params[0].value !== undefined && param.params[0].value < (paramsStore.filteredParamsByProp[index + 1]?.params[0]?.value || 0))
-                      }"
-                    >
-                    {{
-                      (param.params && param.params[0] && param.params[0].value !== undefined && param.params[0].value > (paramsStore.filteredParamsByProp[index + 1]?.params[0]?.value || 0)) ? '+' : '-'
-                    }}
-                    </span>
+                    <div class="body-params__table-value">
+                      {{ param.content }}
+                      <Icon
+                        :icon-name="param.sign"
+                        :class="param.class"
+                        width="15px"
+                      />
+                    </div>
                   </td>
                 </tr>
                 </tbody>

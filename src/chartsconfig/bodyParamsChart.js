@@ -8,7 +8,7 @@ export const bodyParamsOptions = {
         color: 'rgba(0,0,0, 0.05)'
       },
       ticks: {
-        maxTicksLimit: 5,
+        // maxTicksLimit: 5,
         beginAtZero: true,
         // stepSize: 1,
         // max: 12,
@@ -16,13 +16,15 @@ export const bodyParamsOptions = {
       },
     },
     y: {
+      suggestedMax: 120,
+      suggestedMin: 30,
       grid: {
         color: 'rgba(0,0,0, 0.05)'
       },
       ticks: {
-        // stepSize: 10,
+        stepSize: 10,
         beginAtZero: true,
-        callback: value => `${value}`
+
       }
     }
   },

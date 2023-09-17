@@ -112,7 +112,7 @@
 
 	& th {
 		font-weight: bold;
-		background-color: rgba(var(--accent-color) / 10%);
+		background-color: #e9eeff;
 	}
 
 	& td {
@@ -164,5 +164,19 @@
 		&::-webkit-scrollbar {
 			display: none;
 		}
+	}
+}
+
+.body-params__table-value {
+	display: flex;
+	justify-content: center;
+	gap: 4px;
+
+	& .positive {
+		color: #50c850;
+	}
+
+	& .negative {
+		color: red;
 	}
 }
