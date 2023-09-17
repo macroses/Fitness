@@ -69,7 +69,6 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
     })
 
     return resultArray?.map(item => ({
-      id: item.id,
       date: item.date,
       params: item.params.filter(param => param.label === activeParam.value?.label)
     }))

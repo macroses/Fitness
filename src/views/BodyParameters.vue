@@ -118,7 +118,9 @@ onMounted(async () => await paramsStore.fetchEventHandler())
           <Button>Submit</Button>
         </form>
 
-        <div class="body-params__content-wrap">
+        <div
+          v-if="paramsStore.filteredParamsByProp.length"
+          class="body-params__content-wrap">
           <Dropdown
             :dropdown-list="FILTER_LIST"
             @active-value="getFilter"
@@ -133,7 +135,7 @@ onMounted(async () => await paramsStore.fetchEventHandler())
                 </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="param in paramsStore.filteredParamsByProp" :key="param.id">
+                  <tr v-for="param in paramsStore.filteredParamsByProp" :key="param.date">
                     <td>{{ dayjs(param.date).format('DD.MM.YYYY') }}</td>
                     <td>{{ param.params[0].value }}</td>
                   </tr>
@@ -143,6 +145,7 @@ onMounted(async () => await paramsStore.fetchEventHandler())
           </div>
           <BodyParamsChart :filter="filterType" />
         </div>
+        <div v-else class="empty">pusto</div>
       </div>
     </div>
   </div>

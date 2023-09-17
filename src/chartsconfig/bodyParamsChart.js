@@ -5,22 +5,22 @@ export const bodyParamsOptions = {
   scales: {
     x: {
       grid: {
-        display: false,
+        color: 'rgba(0,0,0, 0.05)'
       },
       ticks: {
         maxTicksLimit: 5,
-        // beginAtZero: true,
+        beginAtZero: true,
         // stepSize: 1,
         // max: 12,
-        align: 'inner',
+        // align: 'inner',
       },
     },
     y: {
       grid: {
-        color: 'rgba(0,0,0, 0.03)'
+        color: 'rgba(0,0,0, 0.05)'
       },
       ticks: {
-        stepSize: 10,
+        // stepSize: 10,
         beginAtZero: true,
         callback: value => `${value}`
       }
@@ -31,7 +31,7 @@ export const bodyParamsOptions = {
       borderWidth: 2
     },
     point: {
-      radius: 4
+      radius: 3
     }
   },
   plugins: {

@@ -75,9 +75,9 @@
 .body-params__content-wrap {
 	display: grid;
 	grid-template-columns: 200px 1fr;
-	grid-template-rows: 42px 1fr;
+	grid-template-rows: 54px 1fr;
 	grid-template-areas: 'dropdown chart' 'data chart';
-	gap: 16px 12px;
+	gap: 0 16px;
 	flex-grow: 1;
 
 	& .dropdown {

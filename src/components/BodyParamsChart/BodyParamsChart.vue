@@ -18,7 +18,6 @@ const props = defineProps({
 const paramsStore = bodyParamsStore()
 const currentDate = dayjs()
 const daysCounterByFilter = ref(30)
-const daysAgo = currentDate.subtract(daysCounterByFilter.value, 'days')
 const numPoints = ref(30) // число точек на графике, для их замены при аггрегации
 let datesCollection = []
 
@@ -35,12 +34,12 @@ const fillDateCollection = computed(() => {
 
 const filteredData = computed(() => {
   return paramsStore.filteredParamsByProp?.filter(el => {
-    return dayjs(el.date).isAfter(daysAgo)
+    return dayjs(el.date).isAfter(currentDate.subtract(daysCounterByFilter.value, 'days'))
   })
 })
 
 const chartData = computed(() => {
-  const rawData = filteredData?.value?.map(el => ({
+  const rawData = filteredData.value.map(el => ({
     x: dayjs(el.date).format('DD.MM'),
     y: el.params[0].value
   }))
@@ -50,7 +49,7 @@ const chartData = computed(() => {
   return {
     labels: fillDateCollection.value,
     datasets: [{
-      borderColor: '#1a5cff',
+      borderColor: '#ff5f1a',
       backgroundColor: '#fff',
       data: aggregatedData,
       tension: 0.4,
@@ -64,13 +63,11 @@ watch(() => props.filter, (val) => {
     { days: 90, points: 10 },
     { days: 180, points: 10 },
     { days: 365, points: 5 }
-  ];
+  ]
 
-  const selectedValue = values[val] || values[0]; // По умолчанию, если val не соответствует ни одному из вариантов
-
-  daysCounterByFilter.value = selectedValue.days;
-  numPoints.value = selectedValue.points;
-});
+  daysCounterByFilter.value = values[val].days;
+  numPoints.value = values[val].points;
+})
 </script>
 
 <template>
@@ -83,7 +80,6 @@ watch(() => props.filter, (val) => {
         :data="chartData"
         :options="bodyParamsOptions"
       />
-      <div v-else>empty</div>
     </div>
   </div>
 </template>
