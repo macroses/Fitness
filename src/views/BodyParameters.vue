@@ -13,7 +13,6 @@ const paramsStore = bodyParamsStore()
 const dateStore = chosenDateStore()
 
 const activeListItem = ref(null)
-const blockMove = ref(null)
 const isLoading = ref(false)
 const inputValue = ref(null)
 const filterType = ref(0)
@@ -22,20 +21,6 @@ const draggableList = ref(null)
 const paramsLocalStorage = ref(JSON.parse(localStorage.getItem('bodyParams')))
 
 const setActiveField = id => paramsStore.activeBodyField = id
-
-const tabStyle = computed(() => {
-
-  console.log(activeListItem.value)
-  if (activeListItem.value) {
-    const activeLiRect = activeListItem.value[paramsStore.activeBodyField].getBoundingClientRect()
-    const parentRect = blockMove.value.parentNode.getBoundingClientRect()
-    const top = `${activeLiRect.top - parentRect.top}px`
-
-    return `top: ${top}`
-  }
-
-  return ''
-})
 
 const submitBodyParams = async () => {
   await paramsStore.pushBodyParamsToBase(inputValue, paramsStore.activeParam, isLoading)
@@ -120,11 +105,6 @@ const dragOptions = {
               </li>
             </template>
           </draggable>
-<!--          <div-->
-<!--            ref="blockMove"-->
-<!--            class="body-params__block-move"-->
-<!--            :style="tabStyle"-->
-<!--          />-->
         </div>
       </div>
       <div class="body-params__content">

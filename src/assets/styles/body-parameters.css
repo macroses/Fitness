@@ -40,24 +40,17 @@
 	border-radius: 9px;
 	display: flex;
 	justify-content: space-between;
-	padding-right: 16px;
+	padding-right: 12px;
 
 	&:not(.active):hover {
 		outline-color: rgba(var(--accent-color) / 50%);
 		cursor: grab;
 	}
-}
 
-.body-params__block-move {
-	--expo-out: linear( 0, 0.1684 2.66%, 0.3165 5.49%, 0.446 8.52%, 0.5581 11.78%, 0.6535 15.29%, 0.7341 19.11%, 0.8011 23.3%, 0.8557 27.93%, 0.8962 32.68%, 0.9283 38.01%, 0.9529 44.08%, 0.9711 51.14%, 0.9833 59.06%, 0.9915 68.74%, 1 );
-	transition: top 0.7s var(--expo-out);
-	height: 40px;
-	width: 100%;
-	position: absolute;
-	left: 0;
-	will-change: top, bottom;
-	background-color: rgba(var(--accent-color) / 10%);
-	border-radius: 9px;
+	&.active {
+		background-color: rgba(var(--accent-color) / 10%);
+		border-radius: 9px;
+	}
 }
 
 .body-params__aside-button {
