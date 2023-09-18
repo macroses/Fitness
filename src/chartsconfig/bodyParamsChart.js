@@ -8,7 +8,7 @@ export const bodyParamsOptions = {
         color: 'rgba(0,0,0, 0.05)'
       },
       ticks: {
-        // maxTicksLimit: 5,
+        maxTicksLimit: 10,
         beginAtZero: true,
         // stepSize: 1,
         // max: 12,

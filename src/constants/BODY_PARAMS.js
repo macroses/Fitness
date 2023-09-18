@@ -1,4 +1,6 @@
-export const BODY_PARAMS = [
+import { reactive } from 'vue'
+
+export const BODY_PARAMS = reactive([
   { id: 0, label: 'Weight' },
   { id: 1, label: 'Height' },
   { id: 2, label: 'Fat Percent' }, // процент жира
@@ -15,4 +17,4 @@ export const BODY_PARAMS = [
   { id: 13, label: 'Right Calf' },
   { id: 14, label: 'Neck' }, // шея
   { id: 15, label: 'Pelvis' } // таз
-]
+])

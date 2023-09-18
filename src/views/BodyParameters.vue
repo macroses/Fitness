@@ -6,6 +6,7 @@ import { chosenDateStore } from '../stores/chosenDate.js'
 import { FILTER_LIST } from '@/constants/FILTER_LIST.js'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
+import draggable from 'vuedraggable'
 import dayjs from 'dayjs'
 
 const paramsStore = bodyParamsStore()
@@ -17,10 +18,14 @@ const isLoading = ref(false)
 const inputValue = ref(null)
 const filterType = ref(0)
 const isCalendarVisible = ref(false)
+const draggableList = ref(null)
+const paramsLocalStorage = ref(JSON.parse(localStorage.getItem('bodyParams')))
 
 const setActiveField = id => paramsStore.activeBodyField = id
 
 const tabStyle = computed(() => {
+
+  console.log(activeListItem.value)
   if (activeListItem.value) {
     const activeLiRect = activeListItem.value[paramsStore.activeBodyField].getBoundingClientRect()
     const parentRect = blockMove.value.parentNode.getBoundingClientRect()
@@ -64,7 +69,22 @@ const calculateTableCellContent = computed(() => {
   });
 })
 
-onMounted(async () => await paramsStore.fetchEventHandler())
+onMounted(async () => {
+  await paramsStore.fetchEventHandler()
+
+  if(!localStorage.getItem('bodyParams')) {
+    localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
+  }
+})
+
+const handleDragEnd = () => localStorage.setItem('bodyParams', JSON.stringify(paramsLocalStorage.value))
+
+const dragOptions = {
+  animation: 200,
+  group: "description",
+  disabled: false,
+  ghostClass: "ghost"
+}
 </script>
 
 <template>
@@ -72,29 +92,42 @@ onMounted(async () => await paramsStore.fetchEventHandler())
     <div class="body-params">
       <div class="body-params__aside">
         <div class="body-params__aside-wrap">
-          <ul class="body-params__aside-list">
-            <li
-              ref="activeListItem"
-              v-for="param in BODY_PARAMS"
-              :key="param.id"
-              class="body-params__aside-item"
-              :class="{ active: param.id === paramsStore.activeParam.id }"
-              @click="setActiveField(param.id)"
-            >
-              <button class="body-params__aside-button">
-                {{ param.label }}
-              </button>
-            </li>
-          </ul>
-          <div
-            ref="blockMove"
-            class="body-params__block-move"
-            :style="tabStyle"
-          />
+          <draggable
+            v-model="paramsLocalStorage"
+            tag="ul"
+            ref="draggableList"
+            class="body-params__aside-list"
+            handle=".handle-move"
+            :item-key="item => item.id"
+            v-bind="dragOptions"
+            @end="handleDragEnd"
+          >
+            <template #item="{ element }">
+              <li
+                ref="activeListItem"
+                class="body-params__aside-item"
+                :class="{ active: element.id === paramsStore.activeParam.id }"
+                @click="setActiveField(element.id)"
+              >
+                <button class="body-params__aside-button">
+                  {{ element.label }}
+                </button>
+                <Icon
+                  icon-name="grip-dots-vertical"
+                  width="15px"
+                  class="handle-move"
+                />
+              </li>
+            </template>
+          </draggable>
+<!--          <div-->
+<!--            ref="blockMove"-->
+<!--            class="body-params__block-move"-->
+<!--            :style="tabStyle"-->
+<!--          />-->
         </div>
       </div>
       <div class="body-params__content">
-        <!---->
         <div class="body-params__calendar">
           <div
             class="calendar-wr"

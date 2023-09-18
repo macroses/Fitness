@@ -38,9 +38,13 @@
 	outline: 1px solid transparent;
 	transition: outline-color 0.25s ease;
 	border-radius: 9px;
+	display: flex;
+	justify-content: space-between;
+	padding-right: 16px;
 
 	&:not(.active):hover {
 		outline-color: rgba(var(--accent-color) / 50%);
+		cursor: grab;
 	}
 }
 

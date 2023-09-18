@@ -3,14 +3,13 @@ import { computed, ref } from 'vue'
 import { getProfileColumn, updateProfile } from '@/composables/profile.js'
 import dayjs from 'dayjs'
 import { uid } from 'uid'
-import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { chosenDateStore } from '@/stores/chosenDate.js'
 
 export const bodyParamsStore = defineStore('bodyParams', () => {
   const dateStore = chosenDateStore()
 
   const bodyParams = ref([])
-  const activeBodyField = ref(0)
+  const activeBodyField = ref(JSON.parse(localStorage.getItem('bodyParams'))?.[0].id)
   const eventsLoading = ref(false)
 
   const fetchEventHandler = async () => {
@@ -60,7 +59,9 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
     )
   }
 
-  const activeParam = computed(() => BODY_PARAMS.find(param => param.id === activeBodyField.value))
+  const activeParam = computed(() => {
+    return JSON.parse(localStorage.getItem('bodyParams')).find(param => param.id === activeBodyField.value)
+  })
 
   const filteredParamsByProp = computed(() => {
     // отфильтровали по типу (вес, рост итд)
