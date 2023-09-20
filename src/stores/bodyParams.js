@@ -76,6 +76,22 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
       .sort((a, b) => dayjs(b.date) - dayjs(a.date))
   })
 
+  const sortedByValue = computed(() => {
+    // макс и мин значение из отфильтрованного по лейблу массива
+    const resultArray = bodyParams.value?.filter(item =>
+      item.params.some(param => param.label === activeParam.value?.label)
+    )
+
+    const { min, max } = resultArray.reduce((acc, curr) => {
+      const value = curr.params.find(param => param.label === activeParam.value.label).value
+      acc.min = Math.min(acc.min ?? value, value)
+      acc.max = Math.max(acc.max ?? value, value)
+      return acc
+    }, { min: null, max: null })
+
+    return { min, max }
+  })
+
   const aggregateData = (data, numPoints) => {
     const aggregatedData = []
     const interval = Math.ceil(data.length / numPoints)
@@ -104,6 +120,7 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
     activeBodyField,
     activeParam,
     filteredParamsByProp,
+    sortedByValue,
     aggregateData
   }
 })
