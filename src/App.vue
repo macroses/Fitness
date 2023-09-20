@@ -19,7 +19,9 @@ onMounted(async () => {
     'workouts'
   )
 
-  localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
+  if (!localStorage.getItem('bodyParams')) {
+    localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
+  }
 })
 </script>
 

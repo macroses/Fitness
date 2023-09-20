@@ -1,12 +1,12 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
-import BodyParamsChart from '@/components/BodyParamsChart/BodyParamsChart.vue'
+import BodyParamsChart from '@/components/BodyParams/BodyParamsChart/BodyParamsChart.vue'
 import { chosenDateStore } from '../stores/chosenDate.js'
 import { FILTER_LIST } from '@/constants/FILTER_LIST.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
 import draggable from 'vuedraggable'
-import dayjs from 'dayjs'
+import ParamsTable from '@/components/BodyParams/ParamsTable/ParamsTable.vue'
 
 const paramsStore = bodyParamsStore()
 const dateStore = chosenDateStore()
@@ -37,22 +37,6 @@ const getDate = date => {
 
 const getFilter = filter => filterType.value = filter.id
 
-const calculateTableCellContent = computed(() => {
-  return paramsStore.filteredParamsByProp.map((param, index) => {
-    const currentValue = param.params[0].value;
-    const nextValue = paramsStore.filteredParamsByProp[index + 1]?.params[0].value;
-    const isPositive = currentValue !== undefined && currentValue > (nextValue || 0);
-    const isNegative = index !== 0 && currentValue !== undefined && currentValue < (nextValue || 0);
-    const sign = isPositive ? 'arrow-up-right' : (isNegative ? 'arrow-down-right' : '');
-
-    return {
-      content: currentValue !== undefined ? currentValue : '',
-      date: param.date,
-      sign: sign
-    };
-  });
-})
-
 onMounted(async () => await paramsStore.fetchEventHandler())
 
 const handleDragEnd = () => {
@@ -71,6 +55,22 @@ function handleDragStart(event) {
   event.dataTransfer.setDragImage(blankCanvas, 0, 0);
   document.body.appendChild(blankCanvas)
 }
+
+const calculateTableCellContent = computed(() => {
+  return paramsStore.filteredParamsByProp.map((param, index) => {
+    const currentValue = param.params[0].value
+    const nextValue = paramsStore.filteredParamsByProp[index + 1]?.params[0].value
+    const isPositive = currentValue !== undefined && currentValue > (nextValue || 0)
+    const isNegative = index !== 0 && currentValue !== undefined && currentValue < (nextValue || 0)
+    const sign = isPositive ? 'arrow-up-right' : (isNegative ? 'arrow-down-right' : '')
+
+    return {
+      content: currentValue !== undefined ? currentValue : '',
+      date: param.date,
+      sign: sign
+    }
+  })
+})
 </script>
 
 <template>
@@ -146,7 +146,7 @@ function handleDragStart(event) {
           <Input
             v-model.number="inputValue"
             mode="decimal"
-            :label-placeholder="paramsStore.activeParam.label"
+            :label-placeholder="paramsStore.activeParam.unit"
             @clear="inputValue = null"
             @keydown="useOnlyNumbers($event)"
           />
@@ -162,34 +162,14 @@ function handleDragStart(event) {
           />
           <div class="body-params__data">
             <div class="body-params__table-parent">
-              <table class="body-params__table">
-                <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Value</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr
-                  v-for="param in calculateTableCellContent"
-                  :key="param.date"
-                >
-                  <td>{{ dayjs(param.date).format('DD.MM.YYYY') }}</td>
-                  <td>
-                    <div class="body-params__table-value">
-                      {{ param.content }}
-                      <Icon
-                        :icon-name="param.sign"
-                        width="11px"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+              <ParamsTable :params="calculateTableCellContent"/>
             </div>
           </div>
-          <BodyParamsChart :filter="filterType" />
+          <BodyParamsChart
+            :filter="filterType"
+            :last-param="calculateTableCellContent[0]"
+            :unit="paramsStore.activeParam.unit"
+          />
         </div>
         <div v-else class="empty">pusto</div>
       </div>

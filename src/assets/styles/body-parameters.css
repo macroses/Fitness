@@ -178,3 +178,34 @@
 		color: rgb(var(--accent-color));
 	}
 }
+
+.body-params__last-value {
+	background-color: var(--block-bg);
+	padding: 8px;
+	border-radius: 12px;
+	border: 1px solid rgb(var(--accent-color) / 20%);
+	width: max-content;
+	margin-left: auto;
+	display: flex;
+	gap: 8px;
+	align-items: baseline;
+}
+
+.body-params__last-content {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.body-params__last-unit {
+	font-size: 13px;
+	text-transform: uppercase;
+	font-weight: 500;
+	color: rgb(var(--text-color) / 40%);
+}
+
+.body-params__last-date {
+	font-size: 13px;
+	font-weight: 500;
+	text-transform: uppercase;
+	color: rgb(var(--text-color) / 40%);
+}

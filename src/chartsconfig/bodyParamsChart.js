@@ -14,17 +14,22 @@ export const bodyParamsOptions = {
         // max: 12,
         // align: 'inner',
       },
+      border: {
+        dash: [5, 5],
+      }
     },
     y: {
-      suggestedMax: 120,
-      suggestedMin: 30,
+      // suggestedMax: 120,
+      // suggestedMin: 30,
       grid: {
-        color: 'rgba(0,0,0, 0.05)'
+        color: 'rgba(0,0,0, 0.05)',
       },
       ticks: {
         stepSize: 10,
         beginAtZero: true,
-
+      },
+      border: {
+        dash: [5, 5],
       }
     }
   },
