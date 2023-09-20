@@ -4,7 +4,6 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 import BodyParamsChart from '@/components/BodyParamsChart/BodyParamsChart.vue'
 import { chosenDateStore } from '../stores/chosenDate.js'
 import { FILTER_LIST } from '@/constants/FILTER_LIST.js'
-import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
 import draggable from 'vuedraggable'
 import dayjs from 'dayjs'
@@ -19,6 +18,10 @@ const filterType = ref(0)
 const isCalendarVisible = ref(false)
 const draggableList = ref(null)
 const paramsLocalStorage = ref(JSON.parse(localStorage.getItem('bodyParams')))
+
+const blankCanvas = document.createElement('canvas');
+blankCanvas.classList.add('pseudo')
+blankCanvas.style.opacity = '0';
 
 const setActiveField = id => paramsStore.activeBodyField = id
 
@@ -40,35 +43,33 @@ const calculateTableCellContent = computed(() => {
     const nextValue = paramsStore.filteredParamsByProp[index + 1]?.params[0].value;
     const isPositive = currentValue !== undefined && currentValue > (nextValue || 0);
     const isNegative = index !== 0 && currentValue !== undefined && currentValue < (nextValue || 0);
-    const sign = isPositive ? 'angle-up' : (isNegative ? 'angle-down' : '');
+    const sign = isPositive ? 'arrow-up-right' : (isNegative ? 'arrow-down-right' : '');
 
     return {
       content: currentValue !== undefined ? currentValue : '',
-      class: {
-        'positive': isPositive,
-        'negative': isNegative
-      },
       date: param.date,
       sign: sign
     };
   });
 })
 
-onMounted(async () => {
-  await paramsStore.fetchEventHandler()
+onMounted(async () => await paramsStore.fetchEventHandler())
 
-  if(!localStorage.getItem('bodyParams')) {
-    localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
-  }
-})
-
-const handleDragEnd = () => localStorage.setItem('bodyParams', JSON.stringify(paramsLocalStorage.value))
+const handleDragEnd = () => {
+  localStorage.setItem('bodyParams', JSON.stringify(paramsLocalStorage.value))
+  document.querySelector('.pseudo').remove()
+}
 
 const dragOptions = {
   animation: 200,
   group: "description",
   disabled: false,
   ghostClass: "ghost"
+}
+
+function handleDragStart(event) {
+  event.dataTransfer.setDragImage(blankCanvas, 0, 0);
+  document.body.appendChild(blankCanvas)
 }
 </script>
 
@@ -93,6 +94,8 @@ const dragOptions = {
                 class="body-params__aside-item"
                 :class="{ active: element.id === paramsStore.activeParam.id }"
                 @click="setActiveField(element.id)"
+                draggable="true"
+                @dragstart="handleDragStart"
               >
                 <button class="body-params__aside-button">
                   {{ element.label }}
@@ -177,8 +180,7 @@ const dragOptions = {
                       {{ param.content }}
                       <Icon
                         :icon-name="param.sign"
-                        :class="param.class"
-                        width="15px"
+                        width="11px"
                       />
                     </div>
                   </td>

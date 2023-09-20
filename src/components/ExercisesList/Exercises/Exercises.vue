@@ -1,5 +1,7 @@
 <script setup>
 
+import { workoutStore } from '@/stores/workout.js'
+
 const props = defineProps({
   exercises: {
     type: Array,
@@ -12,6 +14,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['showChosenExercises', 'getFavoriteId'])
+const workoutsStore = workoutStore()
 
 const showExercise = exercise => emit('showChosenExercises', exercise)
 
@@ -30,6 +33,11 @@ const isFavorite = id => props.favorites.includes(id)
         @click="showExercise(exercise)"
       >
         {{ exercise.name }}
+        <button
+          type="button"
+          class="exercises__item-add"
+          @click.stop="workoutsStore.addExerciseToWorkout(exercise.id, exercise.name)"
+        >+</button>
         <button
           type="button"
           class="favorite-icon"

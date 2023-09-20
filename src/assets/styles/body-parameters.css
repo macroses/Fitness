@@ -51,6 +51,11 @@
 		background-color: rgba(var(--accent-color) / 10%);
 		border-radius: 9px;
 	}
+
+	&.ghost {
+		background-color: rgba(var(--accent-color));
+		color: #fff;
+	}
 }
 
 .body-params__aside-button {
@@ -169,11 +174,7 @@
 	justify-content: center;
 	gap: 4px;
 
-	& .positive {
-		color: #50c850;
-	}
-
-	& .negative {
-		color: red;
+	& svg {
+		color: rgb(var(--accent-color));
 	}
 }

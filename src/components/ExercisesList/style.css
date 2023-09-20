@@ -133,12 +133,33 @@
 
 	.favorite-icon:hover svg {
 		transform: scale(1.3);
-		color: gray;
+		color: grey;
+	}
+}
+
+.exercises__item-add {
+	margin-left: auto;
+	border-color: rgb(var(--accent-color) / 10%);
+	background-color: transparent;
+	border-radius: 9px;
+	font-size: 18px;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: rgb(var(--accent-color));
+	transition: color 0.25s ease, background-color 0.25s ease;
+
+	&:hover {
+		color: #fff;
+		background-color: rgb(var(--accent-color));
 	}
 }
 
 .favorite-icon svg {
-	color: lightgray;
+	color: lightgrey;
 	transition: transform 0.25s ease;
 }
 

@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import { useEventsStore } from '@/stores/userEvents'
 import { cacheExercises } from '@/composables/cacheExercises'
 import { tableSubscriber } from '@/composables/tableSubscriber'
+import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 
 const userEvents = useEventsStore()
 
@@ -17,6 +18,8 @@ onMounted(async () => {
     'workouts',
     'workouts'
   )
+
+  localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
 })
 </script>
 

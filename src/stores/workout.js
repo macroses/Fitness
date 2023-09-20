@@ -19,7 +19,7 @@ export const workoutStore = defineStore({
   }),
   actions: {
     addExerciseToWorkout(exerciseId, exerciseName) {
-      if (!this.exercisesParamsCollection.includes(exerciseId)) {
+      if (!this.exercisesParamsCollection.some(e => e.exerciseId === exerciseId)) {
         this.exercisesParamsCollection.push({
           exerciseId,
           exerciseName
