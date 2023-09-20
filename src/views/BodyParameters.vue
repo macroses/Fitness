@@ -116,7 +116,10 @@ const calculateTableCellContent = computed(() => {
             class="calendar-wr"
             :class="{ hidden: !isCalendarVisible }"
           >
-            <Calendar @get-date="getDate" />
+            <Calendar
+              @get-date="getDate"
+              is-after-days-off
+            />
             <div
               v-if="!isCalendarVisible"
               class="calendar-chosen-date"

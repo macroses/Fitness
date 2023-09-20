@@ -181,7 +181,7 @@
 
 .body-params__last-value {
 	background-color: var(--block-bg);
-	padding: 8px;
+	padding: 6px 8px;
 	border-radius: 12px;
 	border: 1px solid rgb(var(--accent-color) / 20%);
 	width: max-content;
@@ -189,6 +189,7 @@
 	display: flex;
 	gap: 8px;
 	align-items: baseline;
+	margin-bottom: 4px;
 }
 
 .body-params__last-content {

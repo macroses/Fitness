@@ -9,6 +9,10 @@ const props = defineProps({
   events: {
     type: Array,
     default: () => []
+  },
+  isAfterDaysOff: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -25,6 +29,10 @@ const calendarParent = ref(null)
 const SWIPE_THRESHOLD = 20
 
 const handleClickCell = cellDate => {
+  if (props.isAfterDaysOff && dayjs(cellDate).isAfter(today.value, 'day')) {
+    return
+  }
+
   emit('getDate', cellDate)
   transitionName.value = ''
 }
@@ -155,9 +163,9 @@ watch(props.events, val => {
               'calendar__cell--other-month': cell.isOtherMonth,
               'calendar__cell--current-day': cell.isCurrentDay,
               active: dayjs(cell.date).isSame(dateStore.date, 'day'),
+              disabled: isAfterDaysOff && dayjs(cell.date).isAfter(today, 'day')
             },
           ]"
-
           @click="handleClickCell(cell.date)"
         >
           <span class="calendar__cell-text">{{ dayjs(cell.date).format('D') }}</span>
