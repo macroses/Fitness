@@ -3,7 +3,7 @@ import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, Poin
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
 import { computed, ref, watch } from 'vue'
-import { bodyParamsFunc } from '@/chartsconfig/bodyParamsChart.js'
+import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
 
 ChartJS.register(Legend, LineElement, CategoryScale, LinearScale, PointElement, Tooltip)
@@ -76,12 +76,10 @@ watch(() => props.filter, (val) => {
   daysCounterByFilter.value = values[val].days;
   numPoints.value = values[val].points;
 })
-
-const { bodyParamsOptions } = bodyParamsFunc(paramsStore.sortedByValue.max, paramsStore.sortedByValue.min)
 </script>
 
 <template>
-  <div class="body-params__container" style="height: 300px;">
+  <div class="body-params__container">
     <div class="body-params__last-value">
       <div class="body-params__last-data">
         <div class="body-params__last-content">
