@@ -1,12 +1,8 @@
 <script setup>
 import dayjs from 'dayjs'
+import { bodyParamsStore } from '@/stores/bodyParams.js'
 
-const props = defineProps({
-  params: {
-    type: Array,
-    default: () => []
-  }
-})
+const paramsStore = bodyParamsStore()
 </script>
 
 <template>
@@ -19,7 +15,7 @@ const props = defineProps({
     </thead>
     <tbody>
     <tr
-      v-for="param in params"
+      v-for="param in paramsStore.calculateTableCellContent"
       :key="param.date"
     >
       <td>{{ dayjs(param.date).format('DD.MM.YYYY') }}</td>

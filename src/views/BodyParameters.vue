@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 import BodyParamsChart from '@/components/BodyParams/BodyParamsChart/BodyParamsChart.vue'
 import { chosenDateStore } from '../stores/chosenDate.js'
@@ -7,6 +7,8 @@ import { FILTER_LIST } from '@/constants/FILTER_LIST.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
 import draggable from 'vuedraggable'
 import ParamsTable from '@/components/BodyParams/ParamsTable/ParamsTable.vue'
+import { toast } from 'vue3-toastify'
+import dayjs from 'dayjs'
 
 const paramsStore = bodyParamsStore()
 const dateStore = chosenDateStore()
@@ -26,15 +28,24 @@ blankCanvas.style.opacity = '0';
 const setActiveField = id => paramsStore.activeBodyField = id
 
 const submitBodyParams = async () => {
-  if (!inputValue.value) return
+  if (!inputValue.value) {
+    toast.error('Field is empty', { position: toast.POSITION.TOP_RIGHT })
+    return
+  }
 
   await paramsStore.pushBodyParamsToBase(inputValue, paramsStore.activeParam, isLoading)
   inputValue.value = null
+
+  toast.success('Saved', { position: toast.POSITION.TOP_RIGHT })
 }
 
 const getDate = date => {
   dateStore.date = date
   isCalendarVisible.value = false
+  toast.info(
+    `Actual date is ${dayjs(date).format('DD.MM.YYYY')}`,
+    { position: toast.POSITION.TOP_RIGHT }
+  )
 }
 
 const getFilter = filter => filterType.value = filter.id
@@ -57,22 +68,6 @@ function handleDragStart(event) {
   event.dataTransfer.setDragImage(blankCanvas, 0, 0);
   document.body.appendChild(blankCanvas)
 }
-
-const calculateTableCellContent = computed(() => {
-  return paramsStore.filteredParamsByProp.map((param, index) => {
-    const currentValue = param.params[0].value
-    const nextValue = paramsStore.filteredParamsByProp[index + 1]?.params[0].value
-    const isPositive = currentValue !== undefined && currentValue > (nextValue || 0)
-    const isNegative = index !== 0 && currentValue !== undefined && currentValue < (nextValue || 0)
-    const sign = isPositive ? 'arrow-up-right' : (isNegative ? 'arrow-down-right' : '')
-
-    return {
-      content: currentValue !== undefined ? currentValue : '',
-      date: param.date,
-      sign: sign
-    }
-  })
-})
 </script>
 
 <template>
@@ -167,12 +162,11 @@ const calculateTableCellContent = computed(() => {
           />
           <div class="body-params__data">
             <div class="body-params__table-parent">
-              <ParamsTable :params="calculateTableCellContent"/>
+              <ParamsTable />
             </div>
           </div>
           <BodyParamsChart
             :filter="filterType"
-            :last-param="calculateTableCellContent[0]"
             :unit="paramsStore.activeParam.unit"
           />
         </div>

@@ -97,6 +97,22 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
     return aggregatedData;
   }
 
+  const calculateTableCellContent = computed(() => {
+    return filteredParamsByProp.value.map((param, index) => {
+      const currentValue = param.params[0].value
+      const nextValue = filteredParamsByProp.value[index + 1]?.params[0].value
+      const isPositive = currentValue !== undefined && currentValue > (nextValue || 0)
+      const isNegative = index !== 0 && currentValue !== undefined && currentValue < (nextValue || 0)
+      const sign = isPositive ? 'arrow-up-right' : (isNegative ? 'arrow-down-right' : '')
+
+      return {
+        content: currentValue !== undefined ? currentValue : '',
+        date: param.date,
+        sign: sign
+      }
+    })
+  })
+
   return {
     bodyParams,
     fetchEventHandler,
@@ -104,6 +120,7 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
     activeBodyField,
     activeParam,
     filteredParamsByProp,
+    calculateTableCellContent,
     aggregateData
   }
 })

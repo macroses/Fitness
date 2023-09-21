@@ -13,10 +13,6 @@ const props = defineProps({
     type: Number,
     default: 0
   },
-  lastParam: {
-    type: Object,
-    default: () => {}
-  },
   unit: {
     type: String,
     default: ''
@@ -83,12 +79,12 @@ watch(() => props.filter, (val) => {
     <div class="body-params__last-value">
       <div class="body-params__last-data">
         <div class="body-params__last-content">
-          {{ lastParam.content }}
+          {{ paramsStore.calculateTableCellContent[0].content }}
           <span class="body-params__last-unit">{{ unit }}</span>
         </div>
       </div>
       <div class="body-params__last-date">
-        {{ dayjs(lastParam.date).format('dddd DD.MM.YYYY') }}
+        {{ dayjs(paramsStore.calculateTableCellContent[0].date).format('dddd DD.MM.YYYY') }}
       </div>
     </div>
     <div class="body-params__chart" style="height: 432px">
