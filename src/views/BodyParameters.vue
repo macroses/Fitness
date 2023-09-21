@@ -26,6 +26,8 @@ blankCanvas.style.opacity = '0';
 const setActiveField = id => paramsStore.activeBodyField = id
 
 const submitBodyParams = async () => {
+  if (!inputValue.value) return
+
   await paramsStore.pushBodyParamsToBase(inputValue, paramsStore.activeParam, isLoading)
   inputValue.value = null
 }
