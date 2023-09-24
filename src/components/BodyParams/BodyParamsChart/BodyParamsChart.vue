@@ -12,10 +12,6 @@ const props = defineProps({
   filter: {
     type: Number,
     default: 0
-  },
-  unit: {
-    type: String,
-    default: ''
   }
 })
 
@@ -56,7 +52,7 @@ const chartData = computed(() => {
       borderColor: '#1a5cff',
       backgroundColor: '#fff',
       data: aggregatedData,
-      tension: 0.4,
+      tension: 0.4
     }]
   }
 })
@@ -76,18 +72,7 @@ watch(() => props.filter, (val) => {
 
 <template>
   <div class="body-params__container">
-    <div class="body-params__last-value">
-      <div class="body-params__last-data">
-        <div class="body-params__last-content">
-          {{ paramsStore.calculateTableCellContent[0].content }}
-          <span class="body-params__last-unit">{{ unit }}</span>
-        </div>
-      </div>
-      <div class="body-params__last-date">
-        {{ dayjs(paramsStore.calculateTableCellContent[0].date).format('dddd DD.MM.YYYY') }}
-      </div>
-    </div>
-    <div class="body-params__chart" style="height: 432px">
+    <div class="body-params__chart">
       <Loading large v-if="!paramsStore.filteredParamsByProp"/>
       <Line
         v-if="paramsStore.filteredParamsByProp?.length"

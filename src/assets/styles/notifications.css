@@ -7,6 +7,12 @@ body .Toastify__toast {
 
 body .Toastify__toast-container {
 	--toastify-toast-width: 250px;
+
+	@media (max-width: 480px) {
+		width: 250px;
+		left: initial;
+		top: 12px;
+	}
 }
 
 body .Toastify__toast--error {

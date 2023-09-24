@@ -9,6 +9,8 @@ import draggable from 'vuedraggable'
 import ParamsTable from '@/components/BodyParams/ParamsTable/ParamsTable.vue'
 import { toast } from 'vue3-toastify'
 import dayjs from 'dayjs'
+import { onClickOutside } from '@vueuse/core'
+import ButtonGroup from '@/components/UI/ButtonGroup/ButtonGroup.vue'
 
 const paramsStore = bodyParamsStore()
 const dateStore = chosenDateStore()
@@ -20,12 +22,18 @@ const filterType = ref(0)
 const isCalendarVisible = ref(false)
 const draggableList = ref(null)
 const paramsLocalStorage = ref(JSON.parse(localStorage.getItem('bodyParams')))
+const isAsideVisible = ref(false)
+const aside = ref(null)
 
 const blankCanvas = document.createElement('canvas');
 blankCanvas.classList.add('pseudo')
 blankCanvas.style.opacity = '0';
 
-const setActiveField = id => paramsStore.activeBodyField = id
+const setActiveField = id => {
+  paramsStore.activeBodyField = id
+  isAsideVisible.value = false
+  document.body.classList.remove('blured')
+}
 
 const submitBodyParams = async () => {
   if (!inputValue.value) {
@@ -43,12 +51,12 @@ const getDate = date => {
   dateStore.date = date
   isCalendarVisible.value = false
   toast.info(
-    `Actual date is ${dayjs(date).format('DD.MM.YYYY')}`,
+    `Selected date is ${dayjs(date).format('DD.MM.YYYY')}`,
     { position: toast.POSITION.TOP_RIGHT }
   )
 }
 
-const getFilter = filter => filterType.value = filter.id
+const getFilter = filterId => filterType.value = filterId
 
 onMounted(async () => await paramsStore.fetchEventHandler())
 
@@ -64,16 +72,33 @@ const dragOptions = {
   ghostClass: "ghost"
 }
 
-function handleDragStart(event) {
+const handleDragStart = event => {
   event.dataTransfer.setDragImage(blankCanvas, 0, 0);
   document.body.appendChild(blankCanvas)
 }
+
+const toggleAside = () => {
+  isAsideVisible.value = true
+  document.body.classList.add('blured')
+}
+
+onClickOutside(aside, () => {
+  isAsideVisible.value = false
+  document.body.classList.remove('blured')
+})
 </script>
 
 <template>
   <div class="container">
-    <div class="body-params">
-      <div class="body-params__aside">
+    <div
+      class="body-params"
+      :class="{ blured: isAsideVisible }"
+    >
+      <div
+        ref="aside"
+        class="body-params__aside"
+        :class="{ active: isAsideVisible }"
+      >
         <div class="body-params__aside-wrap">
           <draggable
             v-model="paramsLocalStorage"
@@ -97,11 +122,12 @@ function handleDragStart(event) {
                 <button class="body-params__aside-button">
                   {{ element.label }}
                 </button>
-                <Icon
-                  icon-name="grip-dots-vertical"
-                  width="15px"
-                  class="handle-move"
-                />
+                <div class="handle-move">
+                  <Icon
+                    icon-name="grip-dots-vertical"
+                    width="15px"
+                  />
+                </div>
               </li>
             </template>
           </draggable>
@@ -122,7 +148,6 @@ function handleDragStart(event) {
               class="calendar-chosen-date"
             >
               {{ dateStore.date.format('DD MMMM YYYY') }}
-              <span>{{ dateStore.date.format('dddd') }}</span>
             </div>
             <Button
               class="hide-calendar__button"
@@ -136,9 +161,14 @@ function handleDragStart(event) {
             </Button>
           </div>
         </div>
-        <h1 class="body-params__header">
-          {{ paramsStore.activeParam.label }}
-        </h1>
+        <div class="body-params__top">
+          <Button @click="toggleAside">
+            <Icon icon-name="bars" width="15px"/>
+          </Button>
+          <h1 class="body-params__header">
+            {{ paramsStore.activeParam.label }}
+          </h1>
+        </div>
         <form
           class="body-params__form"
           @submit.prevent="submitBodyParams"
@@ -156,10 +186,21 @@ function handleDragStart(event) {
         <div
           v-if="paramsStore.filteredParamsByProp.length"
           class="body-params__content-wrap">
-          <Dropdown
-            :dropdown-list="FILTER_LIST"
-            @active-value="getFilter"
-          />
+          <div class="button-group body-params__content-group">
+            <ButtonGroup
+              :buttons="FILTER_LIST"
+              @getButton="getFilter"
+            />
+          </div>
+          <div class="body-params__last-data">
+            <div class="body-params__last-content">
+              {{ paramsStore.calculateTableCellContent[0].content }}
+              <span class="body-params__last-unit">{{ paramsStore.activeParam.unit }}</span>
+            </div>
+            <div class="body-params__last-date">
+              {{ dayjs(paramsStore.calculateTableCellContent[0].date).format('dddd DD.MM.YYYY') }}
+            </div>
+          </div>
           <div class="body-params__data">
             <div class="body-params__table-parent">
               <ParamsTable />
@@ -167,7 +208,6 @@ function handleDragStart(event) {
           </div>
           <BodyParamsChart
             :filter="filterType"
-            :unit="paramsStore.activeParam.unit"
           />
         </div>
         <div v-else class="empty">pusto</div>
