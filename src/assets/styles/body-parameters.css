@@ -60,6 +60,7 @@ body.blured::after {
 	padding-inline: 12px;
 	translate: -100%;
 	transition: translate 0.25s ease;
+	border-right: 1px solid rgb(var(--accent-color) / 10%);
 
 	&.active {
 		translate: 0;
@@ -70,6 +71,7 @@ body.blured::after {
 		position: static;
 		translate: 0;
 		padding-top: 0;
+		padding-inline: 0;
 		width: 220px;
 	}
 }
@@ -280,4 +282,9 @@ body.blured::after {
 	@media (min-width: 768px) {
 		width: max-content;
 	}
+}
+
+.body-params__empty {
+	text-align: center;
+	font-weight: 500;
 }

@@ -50,9 +50,10 @@
 
 .shadow-btn {
 	position: absolute;
-	top: 0;
+	top: 2px;
+	border-radius: 9px;
 	background-color: rgb(var(--accent-color));
 	transition: all 0.25s ease;
-	height: 100%;
+	height: calc(100% - 4px);
 	z-index: -1;
 }

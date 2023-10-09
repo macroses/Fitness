@@ -12,7 +12,7 @@ const dateStore = chosenDateStore()
     >
       Create workout
     </Button>
-    <Button>Program</Button>
+    <Button is-link path="/program">Program</Button>
     <Button
       is-link
       :disabled="dateStore.date > dayjs()"

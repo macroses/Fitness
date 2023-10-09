@@ -128,13 +128,11 @@ const closeReadModal = () => {
       v-else
       class="events__empty"
     >
-      <img
-        src="/Box.svg"
-        alt="There are no events"
-        class="events__empty-img"
-        width="335"
-        height="240"
-      >
+      <Vue3Lottie
+        animation-link="lottie/box.json"
+        :height="150"
+        :width="200"
+      />
       There are no events
     </div>
     <Modal

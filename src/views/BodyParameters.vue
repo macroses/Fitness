@@ -210,7 +210,13 @@ onClickOutside(aside, () => {
             :filter="filterType"
           />
         </div>
-        <div v-else class="empty">pusto</div>
+        <div v-else class="body-params__empty">
+          <Vue3Lottie
+            animation-link="lottie/box.json"
+            :height="300"
+          />
+          No data, add something to start
+        </div>
       </div>
     </div>
   </div>
