@@ -10,7 +10,7 @@ const dateStore = chosenDateStore()
     <Button
       @click="$emit('workoutMode')"
     >
-      Create workout
+      Workout
     </Button>
     <Button is-link path="/program">Program</Button>
     <Button
@@ -18,7 +18,7 @@ const dateStore = chosenDateStore()
       :disabled="dateStore.date > dayjs()"
       path="/body-parameters"
     >
-      Body parameters
+      Parameters
     </Button>
   </div>
 </template>

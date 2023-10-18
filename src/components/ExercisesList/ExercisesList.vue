@@ -61,9 +61,9 @@ const getFavoriteId = async id => {
 }
 
 const tabs = readonly([
-  { id: 0, tabTitle: 'All', icon: 'folder' },
-  { id: 1, tabTitle: 'Favorites', icon: 'star' },
-  { id: 2, tabTitle: 'Recent', icon: 'clock-rotate-left' }
+  { id: 0, tabTitle: 'All', icon: 'lottie/folder.json', size: 18 },
+  { id: 1, tabTitle: 'Favorites', icon: 'lottie/star.json', size: 18 },
+  { id: 2, tabTitle: 'Recent', icon: 'lottie/clock.json', size: 18 }
 ])
 
 const getActiveTab = id => activeTabId.value = id

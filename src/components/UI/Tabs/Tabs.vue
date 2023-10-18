@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps({
   tabs: {
@@ -12,10 +12,17 @@ const emit = defineEmits(['activeTab'])
 const activeTab = ref(0)
 const tabRect = ref(null)
 const tabsLine = ref(null)
+const lottieAnimation = ref([])
 
 const changeActiveTab = index => {
   activeTab.value = index
   emit('activeTab', activeTab.value)
+
+  lottieAnimation.value.forEach(el => {
+    el.stop()
+  })
+
+  lottieAnimation.value[activeTab.value].play()
 }
 
 const tabStyle = computed(() => {
@@ -26,7 +33,12 @@ const tabStyle = computed(() => {
     const left = `${activeTabRect.left - parentRect.left}px`
     return `width: ${width}; left: ${left};`
   }
+
   return ''
+})
+
+onMounted( async () => {
+  setTimeout(() => lottieAnimation.value[activeTab.value].play(), 100)
 })
 </script>
 
@@ -41,10 +53,13 @@ const tabStyle = computed(() => {
         :class="{ active: activeTab === index }"
         @click="changeActiveTab(index)"
       >
-        <Icon
-          v-if="tab?.icon"
-          width="15px"
-          :icon-name="tab.icon"
+        <Vue3Lottie
+          :ref="(el) => { lottieAnimation[index] = el }"
+          :animation-link="tab.icon"
+          :height="tab.size"
+          :width="tab.size"
+          :auto-play="false"
+          :loop="false"
         />
         {{ tab.tabTitle }}
       </li>

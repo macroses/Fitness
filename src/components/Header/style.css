@@ -13,11 +13,10 @@
 }
 
 .header__logo {
-	color: green;
-}
-
-.header__logo img {
-	width: 150px;
+	color: rgb(var(--accent-color));
+	text-transform: uppercase;
+	font-size: 20px;
+	font-weight: 500;
 }
 
 .header__user .ant-avatar {

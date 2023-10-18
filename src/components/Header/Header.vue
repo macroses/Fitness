@@ -36,12 +36,7 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           to="/"
           class="header__logo"
         >
-          <img
-            src="/logo.svg"
-            alt="logo"
-            width="150"
-            height="29"
-          >
+          Plinx
         </RouterLink>
 
         <div class="header__user">
