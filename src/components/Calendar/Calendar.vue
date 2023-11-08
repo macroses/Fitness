@@ -100,7 +100,10 @@ watch(props.events, val => {
     class="calendar"
     :class="{ copyMode: userStore.isCopyMode }"
   >
-    <div class="calendar__controls">
+    <div
+      class="calendar__controls"
+      data-test="controls"
+    >
       <Button
         transparent
         @click="goToPreviousMonth"
@@ -114,6 +117,7 @@ watch(props.events, val => {
       <Button
         transparent
         @click="goToNextMonth"
+        data-test="next"
       >
         <Icon
           icon-name="angle-right"
@@ -126,6 +130,7 @@ watch(props.events, val => {
         aria-label="current month"
         @click="goToCurrentMonth"
         :disabled="currentDate.isSame(today, 'month')"
+        data-test="prev"
       >
         Current
       </Button>

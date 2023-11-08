@@ -1,49 +1,53 @@
 <script setup>
 import programs from '../../content/programs.json'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
-const isShowAllPrograms = ref(false)
-const programsList = ref(null);
+const emits = defineEmits(['getProgramId'])
 
-const getClassByLevel = computed(() => {
-  return programs.map(program => {
-    if (program.level === 'beginner') {
-      return 'programs-list__item-lvl-beginner';
-    } else if (program.level === 'intermediate') {
-      return 'programs-list__item-lvl-intermediate';
-    } else if (program.level === 'pro') {
-      return 'programs-list__item-lvl-pro';
-    }
-    return '';
-  })
-})
+const programsList = ref(null)
+const activeProgramId = ref(null)
 
-const toggleProgramList = () => {
-  isShowAllPrograms.value = !isShowAllPrograms.value
+const toggleProgramList = (id) => {
+  if (activeProgramId.value === id) {
+    activeProgramId.value = null
+    return
+  }
+
+  activeProgramId.value = id
 }
+
+const getProgramId = (program) => emits('getProgramId', program)
 </script>
 
 <template>
-  <section class="programs">
+  <section
+    v-for="(category) in programs"
+    :key="category.id"
+    class="programs"
+  >
     <div class="programs__category">
-      <h2 class="programs__category-title">Strength and mass</h2>
-      <button
-        class="button button--sm button--bordered"
-        @click="toggleProgramList"
+      <h2 class="programs__category-title">{{ category.type }}</h2>
+      <Button
+        v-if="category.collection.length > 3"
+        class="button button--sm programs__showall"
+        :class="{ active: activeProgramId === category.id }"
+        @click="toggleProgramList(category.id)"
       >
-        Show all
-      </button>
+        {{ activeProgramId === category.id ? "Hide" : "Show all" }}
+        <Icon width="15px" icon-name="angle-down"/>
+      </Button>
     </div>
 
     <ul
       ref="programsList"
       class="programs-list"
-      :class="{ opened: isShowAllPrograms }"
+      :class="{ opened: activeProgramId === category.id }"
     >
       <li
-        v-for="(program, index) in programs"
+        v-for="program in category.collection"
         :key="program.id"
         class="programs-list__item"
+        @click="getProgramId(program)"
       >
         <h3 class="programs-list__item-title">{{ program.title }}</h3>
         <p
@@ -53,13 +57,17 @@ const toggleProgramList = () => {
         <div class="programs-list__item-details">
           <div
             class="programs-list__item-lvl"
-            :class="getClassByLevel[index]"
+            :class="[
+              {'programs-list__item-lvl-beginner': program.level === 'beginner'},
+              {'programs-list__item-lvl-intermediate': program.level === 'intermediate'},
+              {'programs-list__item-lvl-pro': program.level === 'pro'},
+            ]"
           >
             {{ program.level }}
           </div>
           <div class="programs-list__item-repeats">
             <Icon width="15px" icon-name="arrows-repeat"/>
-            {{ program.perWeek }} per/week
+            <span>{{ program.perWeek }}</span> per/week
           </div>
         </div>
       </li>
@@ -68,13 +76,3 @@ const toggleProgramList = () => {
 </template>
 
 <style scoped src="./style.css" />
-
-<style>
-.programs-list {
-  grid-template-columns: repeat(v-bind(programs.length), 300px);
-
-  &.opened {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-}
-</style>

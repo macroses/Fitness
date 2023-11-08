@@ -28,8 +28,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           bodyParams: ['./src/views/BodyParameters.vue'],
-        },
-      },
-    },
-  },
-});
+        }
+      }
+    }
+  }
+})
