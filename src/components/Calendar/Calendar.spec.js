@@ -1,16 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import Calendar from '@/components/Calendar/Calendar.vue'
-import { describe, expect, it, vi } from 'vitest'
-import { createTestingPinia } from '@pinia/testing'
 import { useEventsStore } from '@/stores/userEvents.js'
-
-const wrapper = shallowMount(Calendar, {
-  global: {
-    plugins: [createTestingPinia({
-      createSpy: vi.fn()
-    })]
-  }
-})
 
 const store = useEventsStore()
 store.isCopyMode = false
