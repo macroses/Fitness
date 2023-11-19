@@ -1,7 +1,6 @@
 .read-event__table-parent {
 	overflow: hidden;
 	border-radius: 9px;
-	border: 1px solid rgb(var(--accent-color) / 0.1);
 	margin-bottom: 12px;
 }
 
@@ -31,6 +30,15 @@
 	}
 }
 
+.read-event__table-empty {
+	font-size: 12px;
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	align-items: center;
+	padding-block: 4px;
+}
+
 .exercise__title {
 	font-size: 12px;
 	margin-bottom: 4px;
@@ -49,6 +57,12 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.exercise__title-weight {
+	display: flex;
+	align-items: center;
+	gap: 6px;
 }
 
 .read-event__header {
@@ -158,9 +172,8 @@
 }
 
 .chart__parent {
-	border: 1px solid rgba(var(--accent-color) / 30%);
 	border-radius: 12px;
-	padding: 16px 16px 16px 8px;
+	padding: 16px 0 16px 0;
 	margin-bottom: 16px;
 	height: 250px;
 }

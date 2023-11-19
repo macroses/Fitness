@@ -30,6 +30,7 @@
 	font-size: 12px;
 	min-height: 50px;
 	position: relative;
+	padding-bottom: 20px;
 
 	&::before {
 		content: '';
@@ -39,6 +40,20 @@
 		height: 40px;
 		bottom: 0;
 		left: 0;
+		pointer-events: none;
+	}
+
+	&::after {
+		content: '';
+		width: 13px;
+		height: 13px;
+		position: absolute;
+		transform: rotate(45deg);
+		border: 2px solid rgb(var(--accent-color) / 30%);
+		border-top: none;
+		border-left: none;
+		bottom: 5px;
+		left: calc(50% - 10px);
 		pointer-events: none;
 	}
 }
@@ -55,6 +70,10 @@
 
 		& .program-item__description::before {
 			display: none;
+		}
+
+		& .program-item__description::after {
+			transform: rotate(225deg);
 		}
 	}
 }

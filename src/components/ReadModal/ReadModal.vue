@@ -94,15 +94,28 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateIsMobile))
           <div class="exercise__title">
             <div class="exercise__title-value">
               {{ exercise.exerciseName }}
-            </div> -
-            <Icon
-              icon-name="weight-hanging"
-              width="15px"
-            />
+            </div>
+            <div
+              class="exercise__title-weight"
+              v-if="!isNaN(exercise.setTonnage)"
+            >
+              -
+              <Icon
+                icon-name="weight-hanging"
+                width="15px"
+              />
             {{ (exercise.setTonnage) / 1000 }} T
+            </div>
           </div>
           <div class="read-event__table-parent">
-            <table class="read-event__table">
+            <div
+              v-if="!exercise.sets"
+              class="read-event__table-empty"
+            >
+              <Icon width="13px" icon-name="triangle-exclamation" />
+              No data
+            </div>
+            <table v-else class="read-event__table">
               <thead>
                 <tr>
                   <th>Effort</th>
@@ -144,7 +157,10 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateIsMobile))
         </li>
       </ul>
 
-      <div class="chart">
+      <div
+        class="chart"
+        v-if="readableEvent.tonnage"
+      >
         <h3>Percentage of total tonnage</h3>
         <div class="chart__parent">
           <Pie
