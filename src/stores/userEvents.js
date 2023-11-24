@@ -23,6 +23,11 @@ export const useEventsStore = defineStore('userEvents', () => {
       eventsLoading,
       'favorite_exercises'
     )
+
+    if (favoritesFromBase.value === null) {
+      // if it null from base, so create empty array
+      favoritesFromBase.value = []
+    }
   }
 
   const deleteEventHandler = async (tableName, columnName, id) => {
@@ -51,7 +56,10 @@ export const useEventsStore = defineStore('userEvents', () => {
         eventsLoading
       )
 
+      console.log('pushed')
+
       events.value.push(workoutObject)
+
       return
     }
 

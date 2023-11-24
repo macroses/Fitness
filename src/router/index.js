@@ -8,6 +8,7 @@ import WorkoutMode from '@/views/WorkoutMode.vue'
 import AccountSettings from '@/views/AccountSettings.vue'
 import BodyParameters from '@/views/BodyParameters.vue'
 import Program from '@/views/Program.vue'
+import Exercises from '@/views/Exercises.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,6 +73,14 @@ const router = createRouter({
       path: '/program',
       name: 'program',
       component: Program,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/exercises',
+      name: 'exercises',
+      component: Exercises,
       meta: {
         auth: true
       }

@@ -41,8 +41,8 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
 
         <div class="header__user">
           <nav class="header__nav">
-            <RouterLink to="/">
-              Blog
+            <RouterLink to="/exercises">
+              Exercises
             </RouterLink>
           </nav>
           <Avatar

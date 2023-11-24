@@ -66,7 +66,7 @@ const getProgramId = (program) => emits('getProgramId', program)
             {{ program.level }}
           </div>
           <div class="programs-list__item-repeats">
-            <Icon width="15px" icon-name="arrows-repeat"/>
+            <Icon width="15px" icon-name="arrows-rotate"/>
             <span>{{ program.perWeek }}</span> per/week
           </div>
         </div>

@@ -7,6 +7,7 @@
   --main-bg: #fff;
   --header-bg: #fff;
   --block-bg: rgba(244,247,248,1);
+  --form-bg: rgba(244,247,248,1);
 
   --btn-color: #fff;
   --btn-color-transparent: rgb(var(--accent-color));
@@ -18,6 +19,7 @@
   color-scheme: dark;
   --main-bg: rgb(37 37 46);
   --text-color: 224 224 224;
+  --form-bg: rgb(65 65 76);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -135,7 +137,6 @@ body {
 
 .main__layout-left {
   max-width: 100%;
-  overflow: hidden;
   position: relative;
 }
 

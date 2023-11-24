@@ -57,8 +57,8 @@
 	transform: rotate(-135deg);
 	transition: all .25s ease;
 	z-index: 10;
-	border-left: 1px solid black;
-	border-top: 1px solid black;
+	border-left: 1px solid rgb(var(--text-color));
+	border-top: 1px solid rgb(var(--text-color));
 }
 
 .exercises-wr {

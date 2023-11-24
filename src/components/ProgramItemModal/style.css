@@ -9,6 +9,16 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
+
+	& svg {
+		animation: arrow-rotate 2s infinite;
+	}
+}
+
+@keyframes arrow-rotate {
+	to {
+		transform: rotate(1turn);
+	}
 }
 
 .program-item__duration-value {

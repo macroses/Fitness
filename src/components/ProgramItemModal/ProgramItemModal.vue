@@ -23,7 +23,7 @@ const toggleExpander = () => isExpanderActive.value = !isExpanderActive.value
   <div class="program-item">
     <div class="program-item__top">
       <div class="program-item__duration">
-        <Icon icon-name="arrows-repeat" width="16px" />
+        <Icon icon-name="arrows-rotate" width="16px" />
         <div class="program-item__duration-value">
           <span>{{ program.perWeek }}</span> per week
         </div>
