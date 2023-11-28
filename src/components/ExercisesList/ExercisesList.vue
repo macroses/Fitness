@@ -76,6 +76,7 @@ const getActiveTab = id => activeTabId.value = id
       :tabs="tabs"
       @activeTab="getActiveTab"
     />
+    <Button size="small" @click="$emit('openCreateModal')">Create exercise</Button>
     <Transition
       mode="out-in"
     >
