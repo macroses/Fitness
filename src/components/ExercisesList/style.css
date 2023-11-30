@@ -189,3 +189,13 @@
 		opacity: 0.7;
 	}
 }
+
+.exercises-list {
+	position: relative;
+}
+
+.create-exercise-btn {
+	position: absolute;
+	right: 0;
+	top: 49px;
+}

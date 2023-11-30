@@ -78,7 +78,13 @@ const getActiveTab = id => activeTabId.value = id
       :tabs="tabs"
       @activeTab="getActiveTab"
     />
-    <Button size="small" @click="isCreateExerciseVisible = true">Create exercise</Button>
+    <Button
+      size="small"
+      @click="isCreateExerciseVisible = true"
+      class="create-exercise-btn"
+    >
+      Create exercise
+    </Button>
     <CreateExercise
       v-if="isCreateExerciseVisible"
       @close="isCreateExerciseVisible = false"

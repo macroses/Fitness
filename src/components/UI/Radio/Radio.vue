@@ -1,6 +1,6 @@
 <script setup>
 import { uid } from 'uid'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const props = defineProps({
   value: {
@@ -15,21 +15,32 @@ const props = defineProps({
     type: String,
     required: true
   },
-  checked: {
+  defaultChecked: {
     type: Boolean,
     default: false
   }
 })
 
-const checkFromProps = ref(props.checked)
+const defaultChecked = ref(props.defaultChecked)
 
 const uniqueId = uid(10)
 const isChecked = computed(() => {
-  checkFromProps.value = false
-  return props.value === props.modelValue
+  if (defaultChecked.value) {
+    return true
+  }
+
+  if (props.value === props.modelValue) {
+    return true
+  }
 })
 
 defineEmits(['update:modelValue'])
+
+watch(() => props.modelValue, () => {
+  if (isChecked.value) {
+    defaultChecked.value = false
+  }
+})
 </script>
 
 <template>
@@ -41,12 +52,12 @@ defineEmits(['update:modelValue'])
           type="radio"
           :id="uniqueId"
           :value="value"
-          @input="$emit('update:modelValue', $event.target.value)"
-          :checked="checkFromProps || isChecked"
+          @change="$emit('update:modelValue', $event.target.value)"
+          :checked="defaultChecked || isChecked"
         >
         <span
           class="radio-effect"
-          :class="{ active: isChecked || checkFromProps }"
+          :class="{ active: defaultChecked || isChecked }"
         />
       </div>
 

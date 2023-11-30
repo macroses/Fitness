@@ -1,16 +1,16 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 import { uid } from 'uid'
 
 const newExercise = reactive({
   id: uid(10),
   name: '',
   muscles: [],
-  type: null,
+  type: 'Compound',
   main_muscle: null,
   equipment: [],
   load_type: null,
-  level: null,
+  level: 'Beginner',
   description: '',
   force_type: null
 })
@@ -45,6 +45,10 @@ const exerciseLevelData = [
   { id: 1, value: "Intermediate" },
   { id: 2, value: "Professional" }
 ]
+
+watch(newExercise, (val) => {
+  console.log(val)
+})
 </script>
 
 <template>
@@ -71,7 +75,7 @@ const exerciseLevelData = [
               label="Compound"
               name="loadType"
               value="Compound"
-              checked
+              default-checked
             />
             <Radio
               v-model="newExercise.type"
@@ -108,6 +112,7 @@ const exerciseLevelData = [
               :label="item.value"
               name="exerciseLevel"
               :value="item.value"
+              :default-checked="item.id === 0"
             />
           </GroupInputs>
         </div>
