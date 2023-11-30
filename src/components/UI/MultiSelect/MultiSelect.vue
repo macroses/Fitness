@@ -1,47 +1,106 @@
 <script setup>
-// это компонент мультиселекта. Допиши его так, чтобы он принимал массив объектов вида:
-// { id: 0, value: "Biceps" },
-// { id: 1, value: "Triceps" },
-// и т.д.
-// При клике на элемент списка он должен добавляться в список выбранных элементов.
-// При клике на выбранный элемент он должен удаляться из списка выбранных элементов.
+import { reactive, ref, watch } from 'vue'
 
-import { ref } from 'vue'
-
-defineProps({
+const props = defineProps({
   multiselectList: {
     type: Array,
     default: () => [],
     required: true
+  },
+  label: {
+    type: String,
+    default: ''
+  },
+  isSingleSelect: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
-const selectedItems = ref([])
-const pushItem = item => selectedItems.value.push(item)
+const emit = defineEmits(['getSelectedItems'])
+const isDropdownVisible = ref(false)
+
+const state = reactive({
+  selectedItems: [],
+  matchedItems: props.multiselectList
+})
+
+const selectItem = (item) => {
+  isDropdownVisible.value = false
+
+  if (!state.selectedItems.includes(item)) {
+    if (props.isSingleSelect) {
+      state.selectedItems = [item]
+      emit('getSelectedItems', state.selectedItems)
+
+      return
+    }
+
+    state.selectedItems.push(item)
+    state.matchedItems = state.matchedItems.filter(matchedItem => matchedItem !== item)
+    emit('getSelectedItems', state.selectedItems)
+  }
+}
+
+const removeItem = (item) => {
+  state.selectedItems = state.selectedItems.filter(selectedItem => selectedItem !== item)
+  state.matchedItems.unshift(item)
+}
+
+watch(() => props.disabled, () => {
+  state.selectedItems = []
+  isDropdownVisible.value = false
+})
 </script>
 
 <template>
-  <div class="multiselect">
-    <div class="multiselect__value">
-      <span
-        v-for="item in selectedItems"
-        :key="item.id"
+  <div
+    :class="{ 'multiselect--disabled': disabled }"
+    class="multiselect"
+  >
+    <div
+      class="multiselect__value"
+      @click="isDropdownVisible = !isDropdownVisible"
+    >
+      <div
+        v-if="!state.selectedItems.length"
+        class="multiselect__placeholder"
+      >
+        {{ label }}
+        <Icon
+          icon-name="angle-down"
+          width="13px"
+        />
+      </div>
+      <div
         class="multiselect__item"
+        v-for="item in state.selectedItems"
+        :key="item"
       >
         {{ item.value }}
-      </span>
+        <Icon
+          icon-name="xmark"
+          width="13px"
+          @click="removeItem(item)"
+        />
+      </div>
     </div>
-    <div class="multiselect__parent">
-      <ul class="multiselect__list">
-        <li
-          v-for="item in multiselectList"
-          :key="item.id"
-          class="multiselect__item"
-          @click="pushItem(item)"
-        >
-          {{ item.value }}
-        </li>
-      </ul>
+    <div
+      v-if="isDropdownVisible"
+      class="multiselect__dropdown"
+    >
+      <div
+        class="multiselect__dropdown-item"
+        v-for="item in state.matchedItems"
+        :key="item.id"
+        @click.stop="selectItem(item)"
+      >
+        {{ item }}
+      </div>
     </div>
   </div>
 </template>

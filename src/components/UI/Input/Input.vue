@@ -41,7 +41,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['focus', 'blur', 'update:modelValue'])
+const emit = defineEmits(['focus', 'blur', 'update:modelValue', 'clear'])
 
 const inp = ref(null)
 

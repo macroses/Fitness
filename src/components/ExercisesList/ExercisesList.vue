@@ -6,6 +6,7 @@ import Exercises from '@/components/ExercisesList/Exercises/Exercises.vue'
 import MuscleItemHeader from '@/components/ExercisesList/MuscleItemHeader/MuscleItemHeader.vue'
 import { updateProfile } from '@/composables/profile'
 import { useEventsStore } from '@/stores/userEvents'
+import CreateExercise from '@/components/CreateExercise/CreateExercise.vue'
 
 const exercisesStore = exerciseStore()
 const userEvents = useEventsStore()
@@ -16,6 +17,7 @@ const muscles = ref(null)
 const isFavoriteLoading = ref(false)
 const activeTabId = ref(0)
 let scrollTimeout = null
+const isCreateExerciseVisible = ref(false)
 
 const uniqueMainMuscles = computed(() => {
   const mainMuscles = new Set(sessionExercises.value.map(exercise => exercise.main_muscle))
@@ -76,10 +78,12 @@ const getActiveTab = id => activeTabId.value = id
       :tabs="tabs"
       @activeTab="getActiveTab"
     />
-    <Button size="small" @click="$emit('openCreateModal')">Create exercise</Button>
-    <Transition
-      mode="out-in"
-    >
+    <Button size="small" @click="isCreateExerciseVisible = true">Create exercise</Button>
+    <CreateExercise
+      v-if="isCreateExerciseVisible"
+      @close="isCreateExerciseVisible = false"
+    />
+    <Transition mode="out-in">
       <keep-alive>
         <ul
           v-if="activeTabId === 0"
