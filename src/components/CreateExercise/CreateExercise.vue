@@ -1,6 +1,11 @@
 <script setup>
 import { reactive, watch } from 'vue'
 import { uid } from 'uid'
+import {
+  musclesGroups,
+  exerciseLevelData,
+  forceType
+} from "@/components/CreateExercise/constants/constants.js";
 
 const newExercise = reactive({
   id: uid(10),
@@ -8,29 +13,12 @@ const newExercise = reactive({
   muscles: [],
   type: 'Compound',
   main_muscle: null,
-  equipment: [],
+  equip: '',
   load_type: null,
   level: 'Beginner',
   description: '',
   force_type: null
 })
-
-const musclesGroups = [
-  { id: 0, value: "Biceps" },
-  { id: 1, value: "Triceps" },
-  { id: 2, value: "Forearms" },
-  { id: 3, value: "Shoulders" },
-  { id: 4, value: "Chest" },
-  { id: 5, value: "Back" },
-  { id: 6, value: "Abs" },
-  { id: 7, value: "Quads" },
-  { id: 8, value: "Hamstrings" },
-  { id: 9, value: "Calves" },
-  { id: 10, value: "Glutes" },
-  { id: 11, value: "Cardio" },
-  { id: 12, value: "Full body" },
-  { id: 13, value: "Other" }
-]
 
 const addMainMuscleGroup = async muscle => {
   newExercise.main_muscle = muscle[0].value
@@ -39,12 +27,6 @@ const addMainMuscleGroup = async muscle => {
 const addHelpersMuscleGroup = async muscle => {
   newExercise.muscles = muscle
 }
-
-const exerciseLevelData = [
-  { id: 0, value: "Beginner" },
-  { id: 1, value: "Intermediate" },
-  { id: 2, value: "Professional" }
-]
 
 watch(newExercise, (val) => {
   console.log(val)
@@ -111,6 +93,43 @@ watch(newExercise, (val) => {
               v-model="newExercise.level"
               :label="item.value"
               name="exerciseLevel"
+              :value="item.value"
+              :default-checked="item.id === 0"
+            />
+          </GroupInputs>
+        </div>
+        <div class="creating-modal__item">
+          <h3 class="creating-modal__item-title">Equipment</h3>
+          <Input
+            v-model="newExercise.equip"
+            label-placeholder="like barbell, dumbbell, etc."
+            label-fade
+            @clear="newExercise.equip = ''"
+          />
+        </div>
+        <div class="creating-modal__item">
+          <h3 class="creating-modal__item-title">Force type</h3>
+          <GroupInputs>
+            <Radio
+              v-for="item in forceType"
+              :key="item.id"
+              v-model="newExercise.force_type"
+              :label="item.value"
+              name="forceType"
+              :value="item.value"
+              :default-checked="item.id === 0"
+            />
+          </GroupInputs>
+        </div>
+        <div class="creating-modal__item">
+          <h3 class="creating-modal__item-title">Short description</h3>
+          <GroupInputs>
+            <Radio
+              v-for="item in forceType"
+              :key="item.id"
+              v-model="newExercise.force_type"
+              :label="item.value"
+              name="forceType"
               :value="item.value"
               :default-checked="item.id === 0"
             />
