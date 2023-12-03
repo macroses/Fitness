@@ -115,7 +115,7 @@ onBeforeRouteLeave(() => {
         >
           <div class="main__layout-right">
             <div class="exercises-list__wr">
-              <ExercisesList/>
+              <ExercisesList />
             </div>
           </div>
         </Transition>

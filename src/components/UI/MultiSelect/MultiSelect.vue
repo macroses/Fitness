@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref, watch } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
   multiselectList: {
@@ -23,6 +24,7 @@ const props = defineProps({
 
 const emit = defineEmits(['getSelectedItems'])
 const isDropdownVisible = ref(false)
+const multiselectDropdown = ref(null)
 
 const state = reactive({
   selectedItems: [],
@@ -55,6 +57,8 @@ watch(() => props.disabled, () => {
   state.selectedItems = []
   isDropdownVisible.value = false
 })
+
+onClickOutside(multiselectDropdown, () => isDropdownVisible.value = false)
 </script>
 
 <template>
@@ -89,19 +93,20 @@ watch(() => props.disabled, () => {
         />
       </div>
     </div>
-    <div
+    <ul
+      ref="multiselectDropdown"
       v-if="isDropdownVisible"
       class="multiselect__dropdown"
     >
-      <div
+      <li
         class="multiselect__dropdown-item"
         v-for="item in state.matchedItems"
         :key="item.id"
         @click.stop="selectItem(item)"
       >
-        {{ item }}
-      </div>
-    </div>
+        {{ item.value }}
+      </li>
+    </ul>
   </div>
 </template>
 

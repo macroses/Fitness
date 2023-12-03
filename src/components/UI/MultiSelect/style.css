@@ -1,5 +1,6 @@
 .multiselect {
 	cursor: pointer;
+	position: relative;
 
 	&.multiselect--disabled {
 		cursor: crosshair;
@@ -52,10 +53,27 @@
 }
 
 .multiselect__dropdown {
-	/*position: absolute;*/
-	/*top: 100%;*/
-	/*left: 0;*/
-	/*z-index: 2;*/
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 11;
+	max-height: 200px;
+	width: 100%;
+	overflow: auto;
+	background-color: var(--main-bg);
+	border: 1px solid rgb(var(--accent-color) / 10%);
+	border-top: 0;
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+}
+
+.multiselect__dropdown-item {
+	padding: 4px 4px;
+	font-size: 12px;
+
+	&:hover {
+		background-color: rgb(var(--accent-color) / 10%);
+	}
 }
 
 .multiselect__placeholder {

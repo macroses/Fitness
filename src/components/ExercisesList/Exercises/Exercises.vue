@@ -10,10 +10,19 @@ const props = defineProps({
   favorites: {
     type: Array,
     default: () => []
+  },
+  isCustomExercises: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['showChosenExercises', 'getFavoriteId'])
+const emit = defineEmits([
+  'showChosenExercises',
+  'getFavoriteId',
+  'deleteExercise'
+])
+
 const workoutsStore = workoutStore()
 
 const showExercise = exercise => emit('showChosenExercises', exercise)
@@ -21,6 +30,8 @@ const showExercise = exercise => emit('showChosenExercises', exercise)
 const toggleToFavoriteExercise = async id => emit('getFavoriteId', id)
 
 const isFavorite = id => props.favorites.includes(id)
+
+const deleteExercise = id => emit('deleteExercise', id)
 </script>
 
 <template>
@@ -41,10 +52,22 @@ const isFavorite = id => props.favorites.includes(id)
         <button
           type="button"
           class="favorite-icon"
+          v-if="!isCustomExercises"
           @click.stop="toggleToFavoriteExercise(exercise.id)"
         >
           <Icon
             :icon-name="isFavorite(exercise.id) ? 'star-fill' : 'star'"
+            width="15px"
+          />
+        </button>
+        <button
+          type="button"
+          class="favorite-icon"
+          v-else
+          @click.stop="deleteExercise(exercise.id)"
+        >
+          <Icon
+            icon-name="trash"
             width="15px"
           />
         </button>

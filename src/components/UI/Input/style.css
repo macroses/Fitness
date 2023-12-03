@@ -46,7 +46,6 @@
 
 .input-component:focus {
 	padding-left: 15px;
-	outline: none;
 }
 
 .input-component:focus ~ .input-label {
