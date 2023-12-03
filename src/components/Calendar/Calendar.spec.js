@@ -1,21 +1,62 @@
-import { shallowMount } from '@vue/test-utils'
-import Calendar from '@/components/Calendar/Calendar.vue'
-import { useEventsStore } from '@/stores/userEvents.js'
+import { ref } from 'vue'
+import { beforeEach, describe, it } from 'vitest'
 
-const store = useEventsStore()
-store.isCopyMode = false
+describe('Calendar.vue', () => {
+  let wrapper
+  let mockEvent
 
-describe('Calendar', () => {
-  it('correctly renders calendar controls', () => {
-    const wrapper = shallowMount(Calendar)
-    expect(wrapper.find("[data-test='controls']"))
+  beforeEach(() => {
+    mockEvent = {
+      touches: [{ clientX: 100 }],
+      changedTouches: [{ clientX: 200 }]
+    }
+    ref.mockImplementation((initValue) => {
+      return {
+        value: initValue
+      }
+    })
+    wrapper = factory({ events: [{ date: new Date(), color: 'red' }] })
   })
 
-  it('emits date when a cell is clicked', async () => {
-    const wrapper = shallowMount(Calendar)
-    await wrapper.vm.$nextTick()
-    const cell = wrapper.find('.calendar__cell')
-    cell.trigger('click')
-    expect(wrapper.emitted('getDate')).toBeTruthy()
+  it('goes to next month', () => {
+    wrapper.vm.goToNextMonth()
+    expect(wrapper.vm.currentDate.value).toBeCalledWith(1, 'month')
+    expect(wrapper.vm.transitionName.value).toBe('slideMonthRight')
+  })
+
+  it('goes to current month', () => {
+    wrapper.vm.goToCurrentMonth()
+    expect(wrapper.vm.currentDate.value).toBe(wrapper.vm.today.value)
+    expect(wrapper.vm.transitionName.value).toBe('slideMonth')
+  })
+
+  it('checks if date has marker', () => {
+    const result = wrapper.vm.isMarker(new Date())
+    expect(result).toBe(true)
+  })
+
+  it('gets cell color', () => {
+    const color = wrapper.vm.getCellColor(new Date())
+    expect(color).toBe('red')
+  })
+
+  it('handles touch start', () => {
+    wrapper.vm.handleTouchStart(mockEvent)
+    expect(wrapper.vm.touchStartX.value).toBe(100)
+  })
+
+  it('handles touch end and goes to previous month', () => {
+    wrapper.vm.handleTouchEnd(mockEvent)
+    expect(wrapper.vm.touchEndX.value).toBe(200)
+    expect(wrapper.vm.goToPreviousMonth).toBeCalled()
+    expect(wrapper.vm.transitionName.value).toBe('slideMonthRight')
+  })
+
+  it('handles touch end and goes to next month', () => {
+    mockEvent.changedTouches[0].clientX = 50
+    wrapper.vm.handleTouchEnd(mockEvent)
+    expect(wrapper.vm.touchEndX.value).toBe(50)
+    expect(wrapper.vm.goToNextMonth).toBeCalled()
+    expect(wrapper.vm.transitionName.value).toBe('slideMonth')
   })
 })

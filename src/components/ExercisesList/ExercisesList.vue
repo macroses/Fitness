@@ -1,14 +1,17 @@
 <script setup>
-import { computed, readonly, ref } from 'vue'
+import { computed, onMounted, readonly, ref } from 'vue'
 import { exerciseStore } from '@/stores/exercise'
 import SearchExercises from '@/components/SearchExercises/SearchExercises.vue'
 import Exercises from '@/components/ExercisesList/Exercises/Exercises.vue'
 import MuscleItemHeader from '@/components/ExercisesList/MuscleItemHeader/MuscleItemHeader.vue'
 import { updateProfile } from '@/composables/profile'
 import { useEventsStore } from '@/stores/userEvents'
+import CreateExercise from '@/components/CreateExercise/CreateExercise.vue'
+import { userExercisesStore } from '@/stores/userExercises.js'
 
 const exercisesStore = exerciseStore()
 const userEvents = useEventsStore()
+const userExercises = userExercisesStore()
 
 const activeMuscle = ref(null)
 const sessionExercises = ref(JSON.parse(localStorage.getItem('exercisesCache')))
@@ -16,6 +19,8 @@ const muscles = ref(null)
 const isFavoriteLoading = ref(false)
 const activeTabId = ref(0)
 let scrollTimeout = null
+const isCreateExerciseVisible = ref(false)
+const isUserExerciseLoading = ref(false)
 
 const uniqueMainMuscles = computed(() => {
   const mainMuscles = new Set(sessionExercises.value.map(exercise => exercise.main_muscle))
@@ -63,10 +68,23 @@ const getFavoriteId = async id => {
 const tabs = readonly([
   { id: 0, tabTitle: 'All', icon: 'lottie/folder.json', size: 18 },
   { id: 1, tabTitle: 'Favorites', icon: 'lottie/star.json', size: 18 },
-  { id: 2, tabTitle: 'Recent', icon: 'lottie/clock.json', size: 18 }
+  { id: 2, tabTitle: 'Recent', icon: 'lottie/clock.json', size: 18 },
+  { id: 3, tabTitle: 'Custom', icon: 'lottie/edit.json', size: 18 }
 ])
 
 const getActiveTab = id => activeTabId.value = id
+
+const deleteExerciseHandler = async id => {
+  console.log(id)
+  await userExercises.deleteExerciseFromBase(id, isUserExerciseLoading)
+  // await userExercises.fetchExercises()
+}
+
+onMounted(async () => {
+  await userExercises.fetchExercises()
+
+  console.log(userExercises.exercises)
+})
 </script>
 
 <template>
@@ -76,9 +94,7 @@ const getActiveTab = id => activeTabId.value = id
       :tabs="tabs"
       @activeTab="getActiveTab"
     />
-    <Transition
-      mode="out-in"
-    >
+    <Transition mode="out-in">
       <keep-alive>
         <ul
           v-if="activeTabId === 0"
@@ -124,6 +140,28 @@ const getActiveTab = id => activeTabId.value = id
             >
             <p>Add a few exercises to favorites</p>
           </div>
+        </div>
+        <div v-else-if="activeTabId === 3">
+          <Button
+            size="small"
+            @click="isCreateExerciseVisible = true"
+            class="create-exercise-btn"
+          >
+            Create exercise
+          </Button>
+          <CreateExercise
+            v-if="isCreateExerciseVisible"
+            @close="isCreateExerciseVisible = false"
+          />
+
+          <Exercises
+            v-if="userExercises.exercises.length"
+            :exercises="userExercises.exercises"
+            class="active"
+            isCustomExercises
+            @deleteExercise="deleteExerciseHandler"
+            @showChosenExercises="showExercise"
+          />
         </div>
       </keep-alive>
     </Transition>
