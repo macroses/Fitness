@@ -69,8 +69,8 @@ body {
 }
 
 .main__layout {
-  display: grid;
-  grid-auto-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
   padding-top: 16px;
   gap: 24px;
   position: relative;
@@ -93,8 +93,6 @@ body {
 
     @media (max-width: 475px) {
       gap: 8px;
-
-
     }
   }
 }
@@ -116,9 +114,9 @@ body {
     padding: 0 32px;
   }
 
-  .main__layout.workout-mode {
-    grid-template-columns: 1fr 1fr;
-  }
+  /*.main__layout.workout-mode {*/
+  /*  grid-template-columns: 1fr 1fr;*/
+  /*}*/
 
   .main__layout.workout-mode .calendar {
     max-width: 100%;
@@ -133,10 +131,27 @@ body {
   .calendar {
     margin-top: 50px;
   }
+
+  .main__layout-right {
+    flex: 1;
+  }
+
+  .main__layout-left {
+    flex: 1;
+  }
+
+  .main__layout {
+    flex-wrap: nowrap;
+  }
+}
+
+.main__layout-right {
+  max-width: 100%;
+  width: 100%;
 }
 
 .main__layout-left {
-  max-width: 100%;
+  width: 100%;
   position: relative;
 }
 

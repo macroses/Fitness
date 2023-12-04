@@ -5,6 +5,12 @@
 
 .tabs {
 	display: flex;
+	max-width: 100%;
+	overflow-x: auto;
+
+	&::-webkit-scrollbar {
+		height: 0;
+	}
 }
 
 .tabs__item {
