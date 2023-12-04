@@ -75,15 +75,11 @@ const tabs = readonly([
 const getActiveTab = id => activeTabId.value = id
 
 const deleteExerciseHandler = async id => {
-  console.log(id)
   await userExercises.deleteExerciseFromBase(id, isUserExerciseLoading)
-  // await userExercises.fetchExercises()
 }
 
 onMounted(async () => {
   await userExercises.fetchExercises()
-
-  console.log(userExercises.exercises)
 })
 </script>
 
