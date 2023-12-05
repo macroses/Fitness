@@ -63,11 +63,11 @@ const inpFocus = () => {
         :type="type"
         :inputmode="mode"
         :id="uniqueId"
-        autocomplete="off"
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
         @focus="inpFocus"
         @blur="$emit('blur')"
+        autocomplete="new-password"
       >
       <label
         v-if="labelPlaceholder"
