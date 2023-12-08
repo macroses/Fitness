@@ -73,6 +73,7 @@ body.blured::after {
 		padding-top: 0;
 		padding-inline: 0;
 		width: 220px;
+		padding-right: 8px;
 	}
 }
 

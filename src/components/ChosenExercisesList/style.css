@@ -199,12 +199,14 @@
 .chosen-exercises__empty {
 	text-align: center;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	padding-top: 12px;
 
 	& span {
 		margin-top: 5px;
+		font-size: 12px;
 		opacity: 0.8;
 		color: rgb(var(--accent-color));
 	}

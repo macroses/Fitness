@@ -5,6 +5,8 @@ import { toast } from 'vue3-toastify'
 import { supabase } from '@/lib/supabaseClient'
 import Button from '@/components/UI/Button/Button.vue'
 import Input from '@/components/UI/Input/Input.vue'
+import { useVuelidate } from '@vuelidate/core'
+import { minLength, required } from '@vuelidate/validators'
 
 const router = useRouter()
 const formState = reactive({
@@ -13,10 +15,17 @@ const formState = reactive({
   confirmPassword: null
 })
 
+const rules = reactive({
+  password: { required, minLength: minLength(6) }
+})
+
+const v$ = ref(useVuelidate(rules, formState))
+
 const loading = ref(false)
 
 const register = async () => {
-  if (formState.password === formState.confirmPassword) {
+  v$.value.password.$touch()
+  if (!v$.value.password.$error && formState.password === formState.confirmPassword) {
     try {
       loading.value = true
       const { error } = await supabase.auth.signUp({
@@ -33,7 +42,7 @@ const register = async () => {
 
     return
   }
-  toast.error('Password do not match', { position: toast.POSITION.TOP_CENTER })
+  toast.error('Password do not match or is less than 6 characters', { position: toast.POSITION.TOP_CENTER })
 }
 
 async function signInWithGitHub() {
