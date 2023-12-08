@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { uid } from 'uid'
 import { exerciseLevelData, forceType, musclesGroups } from '@/components/CreateExercise/constants/constants.js'
 import { toast } from 'vue3-toastify'
@@ -22,20 +22,23 @@ const newExercise = reactive({
 
 const isLoading = ref(false)
 
-const addMainMuscleGroup = async muscle => newExercise.main_muscle = muscle[0].value
+const addMainMuscleGroup = muscle => newExercise.main_muscle = muscle[0].value
 
-const addHelpersMuscleGroup = async muscle => newExercise.muscles = muscle.map(item => item.value)
+const addHelpersMuscleGroup = muscle => newExercise.muscles = muscle.map(item => item.value)
+
+const isCreateAvailable = computed(() => newExercise.name && newExercise.main_muscle)
 
 const sendNewExercise = () => {
-  if (newExercise.name && newExercise.main_muscle) {
-    userExercises.pushExerciseToBase(isLoading, newExercise)
-    toast.success('Exercise created')
+  if (!isCreateAvailable.value) {
+    toast.error('Please, fill all required fields')
 
     return
   }
 
-  toast.error('Please, fill all required fields')
+  userExercises.pushExerciseToBase(isLoading, newExercise)
+  toast.success('Exercise created')
 }
+
 </script>
 
 <template>
@@ -43,7 +46,6 @@ const sendNewExercise = () => {
     width="600px"
     @close="$emit('close')"
     @confirm="sendNewExercise"
-    confirm-label="Create"
   >
     <template #modal-header>
       Create exercise
@@ -81,6 +83,7 @@ const sendNewExercise = () => {
               label="Main muscle"
               :multiselectList="musclesGroups"
               is-single-select
+              @remove-selected-item="newExercise.main_muscle = ''"
               @get-selected-items="addMainMuscleGroup"
             />
             <MultiSelect
@@ -137,6 +140,22 @@ const sendNewExercise = () => {
           />
         </div>
       </div>
+    </template>
+    <template #modal-footer>
+      <Button
+        type="button"
+        @click="$emit('close')"
+        bordered
+      >
+        Cancel
+      </Button>
+      <Button
+        type="button"
+        @click="sendNewExercise"
+        :disabled="!isCreateAvailable"
+      >
+        Create
+      </Button>
     </template>
   </Modal>
 </template>

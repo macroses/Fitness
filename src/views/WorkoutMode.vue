@@ -102,6 +102,7 @@ onBeforeRouteLeave(() => {
               <Button
                 full
                 @click="workoutToBase"
+                :disabled="!workoutsStore.exercisesParamsCollection.length"
               >
                 {{ workoutsStore.isWorkoutEdit ? 'Update workout' : 'Save workout' }}
               </Button>

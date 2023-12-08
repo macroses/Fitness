@@ -182,11 +182,11 @@ watch(() => store.isSuperset, () => activeExerciseId.value = null)
       <img
         src="/Folder.svg"
         alt="add exercises"
-        width="100"
-        height="150"
+        width="80"
+        height="100"
       >
     </div>
-    <span>Add exercises</span>
+    <span>To save the workout, add at least one exercise</span>
   </div>
 </template>
 

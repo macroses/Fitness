@@ -22,7 +22,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['getSelectedItems'])
+const emit = defineEmits(['getSelectedItems', 'removeSelectedItem'])
 const isDropdownVisible = ref(false)
 const multiselectDropdown = ref(null)
 
@@ -49,6 +49,13 @@ const selectItem = (item) => {
 }
 
 const removeItem = (item) => {
+  if (props.isSingleSelect) {
+    state.selectedItems = state.selectedItems.filter(selectedItem => selectedItem !== item)
+    emit('removeSelectedItem', item)
+
+    return
+  }
+
   state.selectedItems = state.selectedItems.filter(selectedItem => selectedItem !== item)
   state.matchedItems.unshift(item)
 }
