@@ -1,0 +1,13 @@
+.custom-program {
+	display: flex;
+	gap: 12px;
+	width: 100%;
+}
+
+.custom-program__params {
+	flex: 1;
+}
+
+.custom-program__details {
+	flex: 2;
+}

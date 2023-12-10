@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import { uid } from 'uid'
-import { exerciseLevelData, forceType, musclesGroups } from '@/components/CreateExercise/constants/constants.js'
+import { exerciseLevelData, forceType, musclesGroups } from '@/constants/MUSCLES.js'
 import { toast } from 'vue3-toastify'
 import { userExercisesStore } from '@/stores/userExercises.js'
 
