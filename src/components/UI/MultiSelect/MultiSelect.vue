@@ -76,6 +76,7 @@ onClickOutside(multiselectDropdown, () => isDropdownVisible.value = false)
     <div
       class="multiselect__value"
       @click="isDropdownVisible = !isDropdownVisible"
+      :class="{ active: isDropdownVisible }"
     >
       <div
         v-if="!state.selectedItems.length"
@@ -100,20 +101,24 @@ onClickOutside(multiselectDropdown, () => isDropdownVisible.value = false)
         />
       </div>
     </div>
-    <ul
+    <div
       ref="multiselectDropdown"
-      v-if="isDropdownVisible"
-      class="multiselect__dropdown"
+      class="multiselect__list"
+      :class="{ active: isDropdownVisible }"
     >
-      <li
-        class="multiselect__dropdown-item"
-        v-for="item in state.matchedItems"
-        :key="item.id"
-        @click.stop="selectItem(item)"
+      <ul
+        class="multiselect__dropdown"
       >
-        {{ item.value }}
-      </li>
-    </ul>
+        <li
+          class="multiselect__dropdown-item"
+          v-for="item in state.matchedItems"
+          :key="item.id"
+          @click.self="selectItem(item)"
+        >
+          {{ item.value }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
