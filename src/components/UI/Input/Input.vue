@@ -38,10 +38,6 @@ const props = defineProps({
   },
   modelValue: {
     type: [String, Number]
-  },
-  pattern: {
-    type: String,
-    default: ''
   }
 })
 
@@ -70,7 +66,6 @@ const inpFocus = () => {
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
         @focus="inpFocus"
-        :pattern="pattern"
         @blur="$emit('blur')"
         autocomplete="new-password"
       >

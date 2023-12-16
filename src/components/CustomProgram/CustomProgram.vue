@@ -53,7 +53,7 @@ const maskDate = (event) => {
           Program duration
         </div>
         <div class="calendar-period">
-          <Input type="date" pattern="\d{1}-\d{1}-\d{1}"/>
+          <Input type="date"/>
           <Input type="date" />
         </div>
       </div>

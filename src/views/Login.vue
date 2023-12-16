@@ -49,8 +49,8 @@ const isButtonDisabled = computed(() => Boolean(formState.errorMessage))
     </h1>
     <Input
       v-model="formState.email"
-      value=""
       label-placeholder="Email"
+      type="email"
     />
     <Input
       type="password"

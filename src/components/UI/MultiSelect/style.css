@@ -88,7 +88,7 @@
 }
 
 .multiselect__dropdown-item {
-	padding: 4px 4px;
+	padding: 8px;
 	font-size: 12px;
 
 	&:hover {
