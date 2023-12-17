@@ -17,6 +17,10 @@ defineProps({
   withoutFooter: {
     type: Boolean,
     default: false
+  },
+  isConfirmActive: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -89,6 +93,7 @@ const confirm = () => {
             <slot name="modal-footer" />
             <Button
               v-if="confirmLabel"
+              :disabled="!isConfirmActive"
               @click="confirm"
             >
               {{ confirmLabel }}

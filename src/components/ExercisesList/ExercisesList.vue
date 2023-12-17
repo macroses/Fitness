@@ -19,7 +19,6 @@ const muscles = ref(null)
 const isFavoriteLoading = ref(false)
 const activeTabId = ref(0)
 let scrollTimeout = null
-const isCreateExerciseVisible = ref(false)
 const isUserExerciseLoading = ref(false)
 
 const uniqueMainMuscles = computed(() => {
@@ -138,17 +137,7 @@ onMounted(async () => {
           </div>
         </div>
         <div v-else-if="activeTabId === 3">
-          <Button
-            size="small"
-            @click="isCreateExerciseVisible = true"
-            class="create-exercise-btn"
-          >
-            Create exercise
-          </Button>
-          <CreateExercise
-            v-if="isCreateExerciseVisible"
-            @close="isCreateExerciseVisible = false"
-          />
+          <CreateExercise />
 
           <Exercises
             v-if="userExercises.exercises.length"

@@ -5,7 +5,9 @@ import { exerciseLevelData, forceType, musclesGroups } from '@/constants/MUSCLES
 import { toast } from 'vue3-toastify'
 import { userExercisesStore } from '@/stores/userExercises.js'
 
+
 const userExercises = userExercisesStore()
+const isCreateExerciseVisible = ref(false)
 
 const newExercise = reactive({
   id: uid(10),
@@ -26,7 +28,9 @@ const addMainMuscleGroup = muscle => newExercise.main_muscle = muscle[0].value
 
 const addHelpersMuscleGroup = muscle => newExercise.muscles = muscle.map(item => item.value)
 
-const isCreateAvailable = computed(() => newExercise.name && newExercise.main_muscle)
+const isCreateAvailable = computed(() => {
+  return newExercise.name.length > 0 && newExercise.main_muscle !== null
+})
 
 const sendNewExercise = () => {
   if (!isCreateAvailable.value) {
@@ -38,14 +42,23 @@ const sendNewExercise = () => {
   userExercises.pushExerciseToBase(isLoading, newExercise)
   toast.success('Exercise created')
 }
-
 </script>
 
 <template>
+  <Button
+    size="small"
+    @click="isCreateExerciseVisible = true"
+    class="create-exercise-btn"
+  >
+    Create exercise
+  </Button>
   <Modal
+    v-if="isCreateExerciseVisible"
     width="600px"
-    @close="$emit('close')"
+    @close="isCreateExerciseVisible = false"
     @confirm="sendNewExercise"
+    confirm-label="Create"
+    :is-confirm-active="isCreateAvailable"
   >
     <template #modal-header>
       Create exercise
@@ -59,7 +72,7 @@ const sendNewExercise = () => {
           @clear="newExercise.name = ''"
         />
         <div class="creating-modal__item">
-          <h3 class="creating-modal__item-title">Exercise type</h3>
+          <h3 class="creating-modal__item-title">Exercise type {{ isCreateAvailable }}</h3>
           <GroupInputs>
             <Radio
               v-model="newExercise.type"
@@ -83,7 +96,7 @@ const sendNewExercise = () => {
               label="Main muscle"
               :multiselectList="musclesGroups"
               is-single-select
-              @remove-selected-item="newExercise.main_muscle = ''"
+              @remove-selected-item="newExercise.main_muscle = null"
               @get-selected-items="addMainMuscleGroup"
             />
             <MultiSelect
@@ -140,22 +153,6 @@ const sendNewExercise = () => {
           />
         </div>
       </div>
-    </template>
-    <template #modal-footer>
-      <Button
-        type="button"
-        @click="$emit('close')"
-        bordered
-      >
-        Cancel
-      </Button>
-      <Button
-        type="button"
-        @click="sendNewExercise"
-        :disabled="!isCreateAvailable"
-      >
-        Create
-      </Button>
     </template>
   </Modal>
 </template>

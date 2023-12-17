@@ -18,6 +18,7 @@ const handleSignOut = async () => {
   isDropdownVisible.value = false
   userEvents.events = []
   localStorage.removeItem('workouts')
+  localStorage.removeItem('bodyParams')
   router.push('/login')
 }
 const redirectToPage = page => {
