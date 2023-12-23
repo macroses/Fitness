@@ -1,10 +1,9 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { uid } from 'uid'
 import { exerciseLevelData, forceType, musclesGroups } from '@/constants/MUSCLES.js'
 import { toast } from 'vue3-toastify'
 import { userExercisesStore } from '@/stores/userExercises.js'
-
 
 const userExercises = userExercisesStore()
 const isCreateExerciseVisible = ref(false)
@@ -12,9 +11,9 @@ const isCreateExerciseVisible = ref(false)
 const newExercise = reactive({
   id: uid(10),
   name: '',
-  muscles: [],
+  helpers: [],
   type: 'Compound',
-  main_muscle: null,
+  main_muscle: [],
   equip: '',
   load_type: 'strength',
   level: 'Beginner',
@@ -23,25 +22,62 @@ const newExercise = reactive({
 })
 
 const isLoading = ref(false)
+const musclesGroupsList = ref(JSON.parse(JSON.stringify(musclesGroups)))
+const helpersGroupsList = ref(JSON.parse(JSON.stringify(musclesGroups)))
 
-const addMainMuscleGroup = muscle => newExercise.main_muscle = muscle[0].value
+const addMainMuscleGroup = muscle => {
+  musclesGroupsList.value.forEach(item => item.selected = false)
 
-const addHelpersMuscleGroup = muscle => newExercise.muscles = muscle.map(item => item.value)
+  newExercise.main_muscle = []
+  newExercise.main_muscle.push(muscle)
+  muscle.selected = true
+}
+
+const addHelpersMuscleGroup = muscle => {
+  muscle.selected = true
+  newExercise.helpers.push(muscle)
+}
+
+const removeHelpersMuscleGroup = muscle => {
+  muscle.selected = false
+  newExercise.helpers = newExercise.helpers.filter(item => item.id !== muscle.id)
+}
 
 const isCreateAvailable = computed(() => {
-  return newExercise.name.length > 0 && newExercise.main_muscle !== null
+  return newExercise.name.length > 0 && newExercise.main_muscle.length > 0
 })
 
 const sendNewExercise = () => {
-  if (!isCreateAvailable.value) {
-    toast.error('Please, fill all required fields')
-
-    return
-  }
-
   userExercises.pushExerciseToBase(isLoading, newExercise)
+  resetNewExercise()
   toast.success('Exercise created')
 }
+
+const resetNewExercise = () => {
+  newExercise.name = ''
+  newExercise.helpers = []
+  newExercise.type = 'Compound'
+  newExercise.main_muscle = []
+  newExercise.equip = ''
+  newExercise.load_type = 'strength'
+  newExercise.level = 'Beginner'
+  newExercise.description = ''
+  newExercise.force_type = null
+
+  musclesGroupsList.value = JSON.parse(JSON.stringify(musclesGroups))
+  helpersGroupsList.value = JSON.parse(JSON.stringify(musclesGroups))
+}
+
+watch(() => newExercise.type, val => {
+  if (val === 'Isolation') {
+    helpersGroupsList.value.forEach(item => item.selected = false)
+    newExercise.helpers = []
+  }
+})
+
+watch(() => isCreateExerciseVisible.value, val => {
+  if (!val) resetNewExercise()
+})
 </script>
 
 <template>
@@ -94,16 +130,19 @@ const sendNewExercise = () => {
           <div class="creating-modal__muscles">
             <MultiSelect
               label="Main muscle"
-              :multiselectList="musclesGroups"
+              :multiselect-list="musclesGroupsList"
+              :chosen-items="newExercise.main_muscle"
               is-single-select
-              @remove-selected-item="newExercise.main_muscle = null"
-              @get-selected-items="addMainMuscleGroup"
+              @remove-items="newExercise.main_muscle = []"
+              @get-items="addMainMuscleGroup"
             />
             <MultiSelect
               :disabled="newExercise.type === 'Isolation'"
               label="Helper muscles"
-              :multiselectList="musclesGroups"
-              @get-selected-items="addHelpersMuscleGroup"
+              :multiselectList="helpersGroupsList"
+              @remove-items="removeHelpersMuscleGroup"
+              @get-items="addHelpersMuscleGroup"
+              :chosen-items="newExercise.helpers"
             />
           </div>
         </div>

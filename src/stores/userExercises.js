@@ -26,7 +26,20 @@ export const userExercisesStore = defineStore('userExercises', () => {
   }
 
   const pushExerciseToBase = async (isLoading, exercise) => {
-    exercises.value.push(exercise)
+    const newExerciseData = {
+      id: exercise.id,
+      name: exercise.name,
+      helpers: exercise.helpers.map(item => item.value),
+      main_muscle: exercise.main_muscle.reduce((_, item) => item.value, ''),
+      type: exercise.type,
+      equip: exercise.equip,
+      load_type: exercise.load_type,
+      level: exercise.level,
+      description: exercise.description,
+      force_type: exercise.force_type
+    }
+
+    exercises.value.push(newExerciseData)
 
     await updateProfile(
       null,
