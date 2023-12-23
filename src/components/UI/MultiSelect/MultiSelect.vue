@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, watch } from 'vue'
+import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
@@ -19,51 +19,31 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  chosenItems: {
+    type: Array,
+    default: () => []
   }
 })
 
-const emit = defineEmits(['getSelectedItems', 'removeSelectedItem'])
+const emit = defineEmits([
+  'remove-items',
+  'get-items'
+])
+
 const isDropdownVisible = ref(false)
 const multiselectDropdown = ref(null)
 
-const state = reactive({
-  selectedItems: [],
-  matchedItems: props.multiselectList
-})
-
-const selectItem = (item) => {
-  isDropdownVisible.value = false
-
-  if (!state.selectedItems.includes(item)) {
-    if (props.isSingleSelect) {
-      state.selectedItems = [item]
-      emit('getSelectedItems', state.selectedItems)
-
-      return
-    }
-
-    state.selectedItems.push(item)
-    state.matchedItems = state.matchedItems.filter(matchedItem => matchedItem !== item)
-    emit('getSelectedItems', state.selectedItems)
-  }
-}
-
-const removeItem = (item) => {
+const getItems = item => {
   if (props.isSingleSelect) {
-    state.selectedItems = state.selectedItems.filter(selectedItem => selectedItem !== item)
-    emit('removeSelectedItem', item)
+    emit('get-items', item)
+    isDropdownVisible.value = false
 
     return
   }
 
-  state.selectedItems = state.selectedItems.filter(selectedItem => selectedItem !== item)
-  state.matchedItems.unshift(item)
+  emit('get-items', item)
 }
-
-watch(() => props.disabled, () => {
-  state.selectedItems = []
-  isDropdownVisible.value = false
-})
 
 onClickOutside(multiselectDropdown, () => isDropdownVisible.value = false)
 </script>
@@ -79,7 +59,7 @@ onClickOutside(multiselectDropdown, () => isDropdownVisible.value = false)
       :class="{ active: isDropdownVisible }"
     >
       <div
-        v-if="!state.selectedItems.length"
+        v-if="!chosenItems.length"
         class="multiselect__placeholder"
       >
         {{ label }}
@@ -89,15 +69,17 @@ onClickOutside(multiselectDropdown, () => isDropdownVisible.value = false)
         />
       </div>
       <div
+        v-else
         class="multiselect__item"
-        v-for="item in state.selectedItems"
+        v-for="item in chosenItems"
         :key="item"
       >
         {{ item.value }}
         <Icon
+          v-if="!isSingleSelect"
           icon-name="xmark"
           width="13px"
-          @click="removeItem(item)"
+          @click="$emit('remove-items', item)"
         />
       </div>
     </div>
@@ -106,16 +88,20 @@ onClickOutside(multiselectDropdown, () => isDropdownVisible.value = false)
       class="multiselect__list"
       :class="{ active: isDropdownVisible }"
     >
-      <ul
-        class="multiselect__dropdown"
-      >
+      <ul class="multiselect__dropdown">
         <li
           class="multiselect__dropdown-item"
-          v-for="item in state.matchedItems"
+          v-for="item in multiselectList"
           :key="item.id"
-          @click.self="selectItem(item)"
+          :class="{ selected: item.selected }"
+          @click.self="getItems(item)"
         >
           {{ item.value }}
+          <Icon
+            v-if="item.selected"
+            icon-name="check"
+            width="15px"
+          />
         </li>
       </ul>
     </div>

@@ -8,6 +8,7 @@
 .creating-modal__muscles {
 	display: flex;
 	gap: 12px;
+	align-items: flex-start;
 
 	& .multiselect {
 		flex: 1;
