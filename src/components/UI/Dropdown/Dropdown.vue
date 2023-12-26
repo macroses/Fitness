@@ -5,6 +5,14 @@ import { onClickOutside } from '@vueuse/core'
 const props = defineProps({
   dropdownList: {
     type: Array
+  },
+  small: {
+    type: Boolean,
+    default: false
+  },
+  width: {
+    type: Number,
+    default: 200
   }
 })
 
@@ -25,7 +33,12 @@ onClickOutside(dropdownParent, () => isDropdownOpened.value = false)
 </script>
 
 <template>
-  <div ref="dropdownParent" class="dropdown">
+  <div
+    ref="dropdownParent"
+    class="dropdown"
+    :style="{ width: `${width}px` }"
+    :class="{ small: small }"
+  >
     <p
       class="dropdown__value"
       @click="toggleDropdown"

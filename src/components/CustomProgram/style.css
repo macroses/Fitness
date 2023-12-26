@@ -1,36 +1,7 @@
 .custom-program {
+
+}
+
+.custom-program__row {
 	display: flex;
-	gap: 12px;
-}
-
-.custom-program__form {
-	flex: 1;
-}
-
-.custom-program__details {
-	flex: 2;
-}
-
-.custom-program__form {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-}
-
-.custom-program__item-title {
-	font-size: 13px;
-	font-weight: 500;
-	margin-bottom: 4px;
-	display: flex;
-	align-items: center;
-	gap: 8px;
-
-	svg {
-		color: rgb(var(--accent-color) / 70%);
-	}
-}
-
-.calendar-period {
-	display: flex;
-	gap: 8px;
 }
