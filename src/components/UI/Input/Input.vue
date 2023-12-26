@@ -13,6 +13,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  small: {
+    type: Boolean,
+    default: false
+  },
   disabled: {
     type: Boolean,
     default: false
@@ -60,6 +64,7 @@ const inpFocus = () => {
       <input
         ref="inp"
         class="input-component"
+        :class="{ small: small }"
         :type="type"
         :inputmode="mode"
         :id="uniqueId"

@@ -1,6 +1,5 @@
 .dropdown {
 	position: relative;
-	width: 200px;
 
 	&:has(.active) {
 		box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
@@ -22,6 +21,23 @@
 	&:has(.active) .dropdown__list {
 		border-color: rgb(var(--accent-color) / 30%);
 		opacity: 1;
+	}
+}
+
+.dropdown.small {
+	& .dropdown__value {
+		height: 28px;
+		font-size: 12px;
+		border-radius: 6px;
+	}
+
+	& .dropdown__list {
+		font-size: 12px;
+	}
+
+	&:has(.active) .dropdown__value {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 }
 
