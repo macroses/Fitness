@@ -37,6 +37,12 @@ const login = async () => {
 }
 
 const isButtonDisabled = computed(() => Boolean(formState.errorMessage))
+
+async function signInWithGitHub() {
+  await supabase.auth.signInWithOAuth({
+    provider: 'github'
+  })
+}
 </script>
 
 <template>
@@ -57,6 +63,16 @@ const isButtonDisabled = computed(() => Boolean(formState.errorMessage))
       v-model="formState.password"
       label-placeholder="Password"
     />
+
+    <div class="social-auth">
+      <Button
+        type="button"
+        @click="signInWithGitHub"
+        transparent
+      >
+        <Icon icon-name="github" width="28px"/>
+      </Button>
+    </div>
 
     <div class="form__submit">
       <Button

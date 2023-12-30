@@ -42,6 +42,10 @@ const props = defineProps({
   },
   modelValue: {
     type: [String, Number]
+  },
+  noClear: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -85,7 +89,7 @@ const inpFocus = () => {
         }"
       >{{ labelPlaceholder }}</label>
       <button
-        v-if="modelValue"
+        v-if="modelValue && !noClear"
         class="input-clear"
         @click="$emit('clear'); inp.focus()"
         type="button"
