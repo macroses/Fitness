@@ -22,17 +22,23 @@ const createTableRows = () => {
   })
 }
 
-export const microcycles = ref([createTableRows()])
+export const dayInMicrocycle = ref([createTableRows()])
+export const microcycle = ref([])
 
-export const addMicrocycle = () => {
-  if (microcycles.value.length >= 10) return
-  microcycles.value.push(createTableRows())
+export const addRow = () => {
+  if (dayInMicrocycle.value.length >= 10) return
+  dayInMicrocycle.value.push(createTableRows())
 }
 
 export const removeRow = (id) => {
-  microcycles.value = microcycles.value.filter((microcycle) => microcycle.id !== id)
+  dayInMicrocycle.value = dayInMicrocycle.value.filter((microcycle) => microcycle.id !== id)
 }
 
 export const clearAll = () => {
-  microcycles.value = [createTableRows()]
+  dayInMicrocycle.value = [createTableRows()]
+}
+
+export const createNewDay = () => {
+  microcycle.value.push(dayInMicrocycle.value)
+  dayInMicrocycle.value = [createTableRows()]
 }

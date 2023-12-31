@@ -1,7 +1,12 @@
 <script setup>
 import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
-import { addMicrocycle, clearAll, microcycles, removeRow } from '@/components/CustomProgram/composable'
+import { addRow, clearAll, createNewDay, dayInMicrocycle, removeRow } from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
+import { watch } from 'vue'
+
+watch(dayInMicrocycle, (newValue) => {
+  console.log(newValue)
+})
 </script>
 
 <template>
@@ -23,8 +28,12 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
           Clear
         </Button>
       </div>
-      <Button @click="addMicrocycle">Add more</Button>
-      <div class="custom-program__table-wrap">
+      <Button @click="addRow">Add more</Button>
+      <div
+        v-for="(day, dayIndex) in dayInMicrocycle"
+        :key="dayIndex"
+        class="custom-program__table-wrap"
+      >
         <table class="custom-program__table">
           <thead class="custom-program__table-head">
           <tr>
@@ -46,8 +55,8 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
           </thead>
           <TransitionGroup tag="tbody" name="fade" class="tbody-container">
             <tr
-              v-for="(microcycle, index) in microcycles"
-              :key="microcycle.id"
+              v-for="(row, index) in dayInMicrocycle"
+              :key="row.id"
               class="custom-program__body-row"
             >
               <td class="custom-program__cell">
@@ -55,12 +64,12 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
                   :dropdown-list="LOAD"
                   :width="60"
                   small
-                  @active-value="microcycle.load = $event"
+                  @active-value="row.load = $event"
                 />
               </td>
               <td class="custom-program__cell">
                 <Input
-                  v-model="microcycle.exercise"
+                  v-model="row.exercise"
                   small
                   no-clear
                 />
@@ -70,13 +79,13 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
                   :dropdown-list="MULTIPLIER"
                   :width="50"
                   small
-                  @active-value="microcycle.multiplier = $event"
+                  @active-value="row.multiplier = $event"
                 />
               </td>
               <td class="custom-program__cell">
                 <Input
                   type="number"
-                  v-model.number="microcycle.weight"
+                  v-model.number="row.weight"
                   small
                   no-clear
                   @keydown="useOnlyNumbers($event)"
@@ -85,7 +94,7 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
               <td class="custom-program__cell">
                 <Input
                   type="number"
-                  v-model.number="microcycle.reps"
+                  v-model.number="row.reps"
                   small
                   no-clear
                   @keydown="useOnlyNumbers($event)"
@@ -94,7 +103,7 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
               <td class="custom-program__cell">
                 <Input
                   type="number"
-                  v-model.number="microcycle.sets"
+                  v-model.number="row.sets"
                   small
                   no-clear
                   @keydown="useOnlyNumbers($event)"
@@ -103,7 +112,7 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
               <td class="custom-program__cell">
                 <Input
                   type="number"
-                  v-model.number="microcycle.percentOfPM"
+                  v-model.number="row.percentOfPM"
                   small
                   no-clear
                   @keydown="useOnlyNumbers($event)"
@@ -112,7 +121,7 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
               <td class="custom-program__cell">
                 <Input
                   type="number"
-                  v-model.number="microcycle.time"
+                  v-model.number="row.time"
                   small
                   style="width: 70px"
                   no-clear
@@ -123,13 +132,13 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
                 class="custom-program__cell"
                 style="width: 100px"
               >
-                {{  microcycle.tonnage() }}
+                {{  row.tonnage() }}
               </td>
               <td
                 class="custom-program__cell"
                 style="width: 100px"
               >
-                {{  microcycle.totalReps() }}
+                {{  row.totalReps() }}
               </td>
               <td
                 class="custom-program__cell"
@@ -137,7 +146,7 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
               >
                 <Button
                   v-if="index !== 0"
-                  @click="removeRow(microcycle.id)"
+                  @click="removeRow(row.id)"
                   transparent
                   size="small"
                 >
@@ -151,8 +160,7 @@ import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
           </TransitionGroup>
         </table>
       </div>
-
-
+      <Button @click="createNewDay">Create new day</Button>
     </div>
   </section>
 </template>
