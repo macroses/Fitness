@@ -4,3 +4,10 @@ export const useOnlyNumbers = event => {
     event.preventDefault()
   }
 }
+
+export const preventNonNumericPaste = event => {
+  const paste = (event.clipboardData || window.clipboardData).getData('text');
+  if (!paste.match(/^[0-9]*$/)) {
+    event.preventDefault();
+  }
+}

@@ -29,11 +29,20 @@
 	-webkit-appearance: none;
 
 	&.small {
-		padding: 0 4px 0 4px;
+		padding: 1px 4px;
+		height: 28px;
 		border-radius: 6px;
+		border: 1px solid transparent;
+		font-size: 12px;
 
 		&:focus {
-			padding-left: 0;
+			padding-left: 4px;
+			outline: 1px solid rgb(var(--accent-color) / 50%);
+		}
+
+		& + .input-clear {
+			width: 24px;
+			height: 24px;
 		}
 	}
 }

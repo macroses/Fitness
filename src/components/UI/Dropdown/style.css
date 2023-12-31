@@ -33,11 +33,16 @@
 
 	& .dropdown__list {
 		font-size: 12px;
+		text-align: left;
 	}
 
 	&:has(.active) .dropdown__value {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
+	}
+
+	svg {
+		width: 10px;
 	}
 }
 
