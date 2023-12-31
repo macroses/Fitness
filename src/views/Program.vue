@@ -28,10 +28,10 @@ const closeModal = () => activeProgram.value = null
       @activeTab="getActiveTab"
     />
     <ProgramsList
-      v-if="activeTabId === 0"
+      v-if="activeTabId === 1"
       @get-program-id="getProgramId"
     />
-    <CustomProgram  v-if="activeTabId === 1"/>
+    <CustomProgram v-if="activeTabId === 0"/>
     <Modal
       v-if="activeProgram"
       width="700px"
@@ -43,9 +43,6 @@ const closeModal = () => activeProgram.value = null
       </template>
       <template #modal-body>
         <ProgramItemModal :program="activeProgram"/>
-      </template>
-      <template #modal-footer>
-
       </template>
     </Modal>
   </div>
