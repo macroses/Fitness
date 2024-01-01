@@ -1,11 +1,22 @@
 <script setup>
 import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
-import { addRow, clearAll, createNewDay, dayInMicrocycle, removeRow } from '@/components/CustomProgram/composable'
+import {
+  addRow,
+  clearAll,
+  createNewDayOfMicrocycle,
+  dayInMicrocycle,
+  microcycle,
+  removeRow
+} from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'
 
 watch(dayInMicrocycle, (newValue) => {
   console.log(newValue)
+})
+
+onMounted(() => {
+  addRow()
 })
 </script>
 
@@ -28,12 +39,13 @@ watch(dayInMicrocycle, (newValue) => {
           Clear
         </Button>
       </div>
-      <Button @click="addRow">Add more</Button>
+
       <div
-        v-for="(day, dayIndex) in dayInMicrocycle"
+        v-for="(day, dayIndex) in microcycle"
         :key="dayIndex"
         class="custom-program__table-wrap"
       >
+        <Button @click="addRow">Add more</Button>
         <table class="custom-program__table">
           <thead class="custom-program__table-head">
           <tr>
@@ -160,7 +172,11 @@ watch(dayInMicrocycle, (newValue) => {
           </TransitionGroup>
         </table>
       </div>
-      <Button @click="createNewDay">Create new day</Button>
+
+      <Button @click="createNewDayOfMicrocycle">
+        Create a new day microcycle
+      </Button>
+
     </div>
   </section>
 </template>
