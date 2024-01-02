@@ -1,23 +1,27 @@
 <script setup>
+import { nextTick, ref } from 'vue'
 import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
-import {
-  addRow,
-  clearAll,
-  createNewDayOfMicrocycle,
-  dayInMicrocycle,
-  microcycle,
-  removeRow
-} from '@/components/CustomProgram/composable'
+import { addRow, addTable, removeRow, tables } from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
-import { onMounted, watch } from 'vue'
 
-watch(dayInMicrocycle, (newValue) => {
-  console.log(newValue)
-})
+const editingCellIndex = ref(null)
 
-onMounted(() => {
-  addRow()
-})
+const startEditing = (event, row, columnIndex) => {
+  row.editing = true
+  editingCellIndex.value = columnIndex
+
+  nextTick(() => {
+    const inputElement = event.currentTarget.querySelector(`td:nth-child(${columnIndex + 1}) input`)
+    if (inputElement) {
+      inputElement.focus()
+    }
+  })
+}
+
+const stopEditing = (row) => {
+  row.editing = false
+  editingCellIndex.value = null
+}
 </script>
 
 <template>
@@ -34,40 +38,39 @@ onMounted(() => {
         <Button
           bordered
           size="small"
-          @click="clearAll"
         >
           Clear
         </Button>
       </div>
 
       <div
-        v-for="(day, dayIndex) in microcycle"
-        :key="dayIndex"
+        v-for="(table, tableIndex) in tables"
+        :key="table.id"
         class="custom-program__table-wrap"
       >
-        <Button @click="addRow">Add more</Button>
+        <Button @click="addRow(tableIndex)">Add more</Button>
         <table class="custom-program__table">
           <thead class="custom-program__table-head">
-          <tr>
-            <th class="custom-program__head">Load</th>
-            <th class="custom-program__head">Exercise</th>
-            <th class="custom-program__head">Multi</th>
-            <th class="custom-program__head">Weight</th>
-            <th class="custom-program__head">Reps</th>
-            <th class="custom-program__head">Sets</th>
-            <th class="custom-program__head">% of PM</th>
-            <th class="custom-program__head">Time, m</th>
-            <th class="custom-program__head">Tonnage, kg</th>
-            <th class="custom-program__head">Total reps</th>
-            <th
-              class="custom-program__head"
-              style="width: 41px"
-            ></th>
-          </tr>
+            <tr>
+              <th class="custom-program__head">Load</th>
+              <th class="custom-program__head">Exercise</th>
+              <th class="custom-program__head">Multi</th>
+              <th class="custom-program__head">Weight</th>
+              <th class="custom-program__head">Reps</th>
+              <th class="custom-program__head">Sets</th>
+              <th class="custom-program__head">% of PM</th>
+              <th class="custom-program__head">Time, m</th>
+              <th class="custom-program__head">Tonnage, kg</th>
+              <th class="custom-program__head">Total reps</th>
+              <th
+                class="custom-program__head"
+                style="width: 41px"
+              ></th>
+            </tr>
           </thead>
-          <TransitionGroup tag="tbody" name="fade" class="tbody-container">
+          <tbody>
             <tr
-              v-for="(row, index) in dayInMicrocycle"
+              v-for="(row, rowIndex) in table.rows"
               :key="row.id"
               class="custom-program__body-row"
             >
@@ -79,11 +82,20 @@ onMounted(() => {
                   @active-value="row.load = $event"
                 />
               </td>
-              <td class="custom-program__cell">
+              <td
+                class="custom-program__cell"
+                @click="startEditing($event, row, 1)"
+              >
+                <span v-if="!row.editing || editingCellIndex !== 1">
+                  {{ row.exercise }}
+                </span>
                 <Input
+                  v-else
                   v-model="row.exercise"
                   small
                   no-clear
+                  @keydown.enter="stopEditing(row)"
+                  @blur="stopEditing(row)"
                 />
               </td>
               <td class="custom-program__cell">
@@ -94,50 +106,95 @@ onMounted(() => {
                   @active-value="row.multiplier = $event"
                 />
               </td>
-              <td class="custom-program__cell">
+              <td
+                class="custom-program__cell"
+                @click="startEditing($event, row, 3)"
+              >
+                <span v-if="!row.editing || editingCellIndex !== 3">
+                  {{ row.weight }}
+                </span>
                 <Input
+                  v-else
                   type="number"
                   v-model.number="row.weight"
                   small
                   no-clear
                   @keydown="useOnlyNumbers($event)"
+                  @keydown.enter="stopEditing(row)"
+                  @blur="stopEditing(row)"
                 />
               </td>
-              <td class="custom-program__cell">
+              <td
+                class="custom-program__cell"
+                @click="startEditing($event, row, 4)"
+              >
+                <span v-if="!row.editing || editingCellIndex !== 4">
+                  {{ row.reps }}
+                </span>
                 <Input
+                  v-else
                   type="number"
                   v-model.number="row.reps"
                   small
                   no-clear
                   @keydown="useOnlyNumbers($event)"
+                  @keydown.enter="stopEditing(row)"
+                  @blur="stopEditing(row)"
                 />
               </td>
-              <td class="custom-program__cell">
+              <td
+                class="custom-program__cell"
+                @click="startEditing($event, row, 5)"
+              >
+                <span v-if="!row.editing || editingCellIndex !== 5">
+                  {{ row.reps }}
+                </span>
                 <Input
+                  v-else
                   type="number"
                   v-model.number="row.sets"
                   small
                   no-clear
                   @keydown="useOnlyNumbers($event)"
+                  @keydown.enter="stopEditing(row)"
+                  @blur="stopEditing(row)"
                 />
               </td>
-              <td class="custom-program__cell">
+              <td
+                class="custom-program__cell"
+                @click="startEditing($event, row, 6)"
+              >
+                <span v-if="!row.editing || editingCellIndex !== 6">
+                  {{ row.percentOfPM }}
+                </span>
                 <Input
+                  v-else
                   type="number"
                   v-model.number="row.percentOfPM"
                   small
                   no-clear
                   @keydown="useOnlyNumbers($event)"
+                  @keydown.enter="stopEditing(row)"
+                  @blur="stopEditing(row)"
                 />
               </td>
-              <td class="custom-program__cell">
+              <td
+                class="custom-program__cell"
+                @click="startEditing($event, row, 7)"
+              >
+                <span v-if="!row.editing || editingCellIndex !== 7">
+                  {{ row.time }}
+                </span>
                 <Input
+                  v-else
                   type="number"
                   v-model.number="row.time"
                   small
                   style="width: 70px"
                   no-clear
                   @keydown="useOnlyNumbers($event)"
+                  @keydown.enter="stopEditing(row)"
+                  @blur="stopEditing(row)"
                 />
               </td>
               <td
@@ -157,8 +214,8 @@ onMounted(() => {
                 style="width: 30px"
               >
                 <Button
-                  v-if="index !== 0"
-                  @click="removeRow(row.id)"
+                  v-if="rowIndex !== 0"
+                  @click="removeRow(tableIndex, rowIndex)"
                   transparent
                   size="small"
                 >
@@ -169,11 +226,11 @@ onMounted(() => {
                 </Button>
               </td>
             </tr>
-          </TransitionGroup>
+          </tbody>
         </table>
       </div>
 
-      <Button @click="createNewDayOfMicrocycle">
+      <Button @click="addTable">
         Create a new day microcycle
       </Button>
 

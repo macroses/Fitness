@@ -13,6 +13,9 @@ const createTableRows = () => {
     sets: 1,
     percentOfPM: 0,
     tonnage: function() {
+      if (this.multiplier.value === 'x2') {
+        return this.weight * this.reps * this.sets * 2 || 0
+      }
       return this.weight * this.reps * this.sets || 0
     },
     totalReps: function() {
@@ -22,32 +25,30 @@ const createTableRows = () => {
   })
 }
 
-const dayInMicrocycle = ref([])
-const microcycle = ref([])
+const tables = ref([
+  {
+    id: uid(10),
+    rows: [createTableRows()]
+  }
+]);
 
-const addRow = () => {
-  if (dayInMicrocycle.value.length >= 10) return
-  dayInMicrocycle.value.push(createTableRows())
+const addRow = tableIndex => tables.value[tableIndex].rows.push(createTableRows())
+
+const removeRow = (tableId, rowId) => {
+  tables.value[tableId].rows.splice(rowId, 1)
 }
 
-const removeRow = (id) => {
-  dayInMicrocycle.value = dayInMicrocycle.value.filter((microcycle) => microcycle.id !== id)
-}
+const addTable = () => tables.value.push({
+  id: uid(10),
+  rows: [createTableRows()]
+})
 
-const clearAll = () => {
-  dayInMicrocycle.value = [createTableRows()]
-}
-
-const createNewDayOfMicrocycle = () => {
-  microcycle.value.push(dayInMicrocycle.value)
-  dayInMicrocycle.value = [createTableRows()]
-}
+const removeTable = tableId => tables.value.splice(tableId, 1)
 
 export {
-  dayInMicrocycle,
-  microcycle,
+  tables,
   addRow,
   removeRow,
-  clearAll,
-  createNewDayOfMicrocycle
+  addTable,
+  removeTable
 }
