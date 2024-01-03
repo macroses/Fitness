@@ -16,6 +16,7 @@ const createTableRows = () => {
       if (this.multiplier.value === 'x2') {
         return this.weight * this.reps * this.sets * 2 || 0
       }
+
       return this.weight * this.reps * this.sets || 0
     },
     totalReps: function() {
@@ -32,7 +33,11 @@ const tables = ref([
   }
 ]);
 
-const addRow = tableIndex => tables.value[tableIndex].rows.push(createTableRows())
+const addRow = tableIndex => {
+  if (tables.value[tableIndex].rows.length >= 10) return
+
+  tables.value[tableIndex].rows.push(createTableRows())
+}
 
 const removeRow = (tableId, rowId) => {
   tables.value[tableId].rows.splice(rowId, 1)

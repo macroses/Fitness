@@ -48,7 +48,12 @@ const stopEditing = (row) => {
         :key="table.id"
         class="custom-program__table-wrap"
       >
-        <Button @click="addRow(tableIndex)">Add more</Button>
+        <Button
+          @click="addRow(tableIndex)"
+          :disabled="table.rows.length >= 10"
+        >
+          Add more
+        </Button>
         <table class="custom-program__table">
           <thead class="custom-program__table-head">
             <tr>
@@ -68,13 +73,16 @@ const stopEditing = (row) => {
               ></th>
             </tr>
           </thead>
-          <tbody>
+          <TransitionGroup tag="tbody" name="fade" appear>
             <tr
               v-for="(row, rowIndex) in table.rows"
               :key="row.id"
               class="custom-program__body-row"
             >
-              <td class="custom-program__cell">
+              <td
+                class="custom-program__cell"
+                tabindex="1"
+              >
                 <Dropdown
                   :dropdown-list="LOAD"
                   :width="60"
@@ -83,6 +91,7 @@ const stopEditing = (row) => {
                 />
               </td>
               <td
+                tabindex="1"
                 class="custom-program__cell"
                 @click="startEditing($event, row, 1)"
               >
@@ -147,7 +156,7 @@ const stopEditing = (row) => {
                 @click="startEditing($event, row, 5)"
               >
                 <span v-if="!row.editing || editingCellIndex !== 5">
-                  {{ row.reps }}
+                  {{ row.sets }}
                 </span>
                 <Input
                   v-else
@@ -226,7 +235,7 @@ const stopEditing = (row) => {
                 </Button>
               </td>
             </tr>
-          </tbody>
+          </TransitionGroup>
         </table>
       </div>
 
