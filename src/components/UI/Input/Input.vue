@@ -40,9 +40,6 @@ const props = defineProps({
   value: {
     type: [String, Number]
   },
-  modelValue: {
-    type: [String, Number]
-  },
   noClear: {
     type: Boolean,
     default: false
@@ -57,6 +54,11 @@ const inpFocus = () => {
   inp.value.select()
   emit('focus')
 }
+
+const modelValue = defineModel({
+  type: [String, Number, null],
+  required: true,
+})
 </script>
 
 <template>
@@ -72,8 +74,7 @@ const inpFocus = () => {
         :type="type"
         :inputmode="mode"
         :id="uniqueId"
-        @input="$emit('update:modelValue', $event.target.value)"
-        :value="modelValue"
+        v-model="modelValue"
         @focus="inpFocus"
         @blur="$emit('blur')"
         autocomplete="new-password"
