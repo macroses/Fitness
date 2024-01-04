@@ -1,6 +1,10 @@
 import { reactive, ref } from 'vue'
 import { uid } from 'uid'
+import { gsap } from 'gsap'
 import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants/index.js'
+import { CSSPlugin } from 'gsap/CSSPlugin'
+
+gsap.registerPlugin(CSSPlugin)
 
 const createTableRows = () => {
   return reactive({
@@ -33,20 +37,23 @@ const tables = ref([
   }
 ]);
 
-const addRow = tableIndex => {
+const addRow = (tableIndex, ref) => {
   if (tables.value[tableIndex].rows.length >= 10) return
 
-  tables.value[tableIndex].rows.push(createTableRows())
+  const newRow = createTableRows()
+  tables.value[tableIndex].rows.push(newRow)
 }
 
 const removeRow = (tableId, rowId) => {
   tables.value[tableId].rows.splice(rowId, 1)
 }
 
-const addTable = () => tables.value.push({
-  id: uid(10),
-  rows: [createTableRows()]
-})
+const addTable = () => {
+  tables.value.push({
+    id: uid(10),
+    rows: [createTableRows()]
+  })
+}
 
 const removeTable = tableId => tables.value.splice(tableId, 1)
 

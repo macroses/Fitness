@@ -1,8 +1,14 @@
+.custom-program__table-wrap {
+	padding: 8px;
+	border-radius: 12px;
+	border: 1px solid rgb(var(--accent-color) / 0.1);
+	margin-bottom: 12px;
+}
+
 .custom-program__table {
 	border-collapse: collapse;
 	border-top-left-radius: 12px;
 	border-top-right-radius: 12px;
-	border: 1px solid rgb(var(--accent-color) / 0.3);
 }
 
 .custom-program__row {
@@ -103,6 +109,13 @@
 .custom-program__cell-value {
 	width: 100%;
 	height: 28px;
+}
+
+.custom-program__table-footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8px;
 }
 
 .fade-move,

@@ -4,6 +4,21 @@ import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
 import { addRow, addTable, removeRow, tables } from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 
+const headers = [
+  { value: 'Load' },
+  { value: 'Exercise' },
+  { value: 'Multi' },
+  { value: 'Weight' },
+  { value: 'Reps' },
+  { value: 'Sets' },
+  { value: '% of PM' },
+  { value: 'Time, m' },
+  { value: 'Tonnage, kg' },
+  { value: 'Total reps' },
+  { value: '', width: '40px'}
+]
+
+const tableRow = ref(null)
 const editingCellIndex = ref(null)
 
 const startEditing = (event, row, columnIndex) => {
@@ -21,6 +36,10 @@ const startEditing = (event, row, columnIndex) => {
 const stopEditing = (row) => {
   row.editing = false
   editingCellIndex.value = null
+}
+
+const removeDayTable = (tableId) => {
+  tables.value = tables.value.filter(table => table.id !== tableId)
 }
 </script>
 
@@ -48,35 +67,24 @@ const stopEditing = (row) => {
         :key="table.id"
         class="custom-program__table-wrap"
       >
-        <Button
-          @click="addRow(tableIndex)"
-          :disabled="table.rows.length >= 10"
-        >
-          Add more
-        </Button>
         <table class="custom-program__table">
           <thead class="custom-program__table-head">
             <tr>
-              <th class="custom-program__head">Load</th>
-              <th class="custom-program__head">Exercise</th>
-              <th class="custom-program__head">Multi</th>
-              <th class="custom-program__head">Weight</th>
-              <th class="custom-program__head">Reps</th>
-              <th class="custom-program__head">Sets</th>
-              <th class="custom-program__head">% of PM</th>
-              <th class="custom-program__head">Time, m</th>
-              <th class="custom-program__head">Tonnage, kg</th>
-              <th class="custom-program__head">Total reps</th>
               <th
+                v-for="(header, headerIndex) in headers"
+                :key="headerIndex"
                 class="custom-program__head"
-                style="width: 41px"
-              ></th>
+                :style="{ width: header?.width }"
+              >
+                {{ header.value }}
+              </th>
             </tr>
           </thead>
-          <TransitionGroup tag="tbody" name="fade" appear>
+          <tbody>
             <tr
               v-for="(row, rowIndex) in table.rows"
               :key="row.id"
+              ref="tableRow"
               class="custom-program__body-row"
             >
               <td
@@ -235,8 +243,24 @@ const stopEditing = (row) => {
                 </Button>
               </td>
             </tr>
-          </TransitionGroup>
+          </tbody>
         </table>
+        <div class="custom-program__table-footer">
+          <Button
+            @click="addRow(tableIndex, tableRow)"
+            :disabled="table.rows.length >= 10"
+            size="small"
+          >
+            Add exercise
+          </Button>
+          <Button
+            bordered
+            @click="removeDayTable(table.id)"
+            size="small"
+          >
+            Delete day
+          </Button>
+        </div>
       </div>
 
       <Button @click="addTable">
