@@ -174,7 +174,7 @@ onClickOutside(aside, () => {
           @submit.prevent="submitBodyParams"
         >
           <Input
-            v-model.number="inputValue"
+            :model-value="inputValue"
             mode="decimal"
             :label-placeholder="paramsStore.activeParam.unit"
             @clear="inputValue = null"

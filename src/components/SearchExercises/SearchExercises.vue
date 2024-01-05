@@ -41,8 +41,6 @@ const showExercise = exercise => {
   exercisesStore.exercise = exercise
   search.value = null
 }
-
-// onClickOutside(resultList, () => isSearchInFocus.value = false)
 </script>
 
 <template>
