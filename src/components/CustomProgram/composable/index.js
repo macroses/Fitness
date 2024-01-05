@@ -30,37 +30,48 @@ const createTableRows = () => {
   })
 }
 
+
 const tables = ref([
   {
     id: uid(10),
     rows: [createTableRows()]
   }
-]);
+])
 
-const addRow = (tableIndex, ref) => {
-  if (tables.value[tableIndex].rows.length >= 10) return
+const addRow = (tableIndex) => {
+  if (tables.value[tableIndex].rows.length >= 5) return
 
-  const newRow = createTableRows()
-  tables.value[tableIndex].rows.push(newRow)
+  tables.value[tableIndex].rows.push(createTableRows())
 }
 
 const removeRow = (tableId, rowId) => {
+  if (tables.value[tableId].rows.length <= 2) {
+    removeDayTable(tableId)
+
+    return
+  }
+
   tables.value[tableId].rows.splice(rowId, 1)
 }
 
 const addTable = () => {
+  if (tables.value.length >= 7) return
+
   tables.value.push({
     id: uid(10),
     rows: [createTableRows()]
   })
 }
 
-const removeTable = tableId => tables.value.splice(tableId, 1)
+const removeDayTable = (tableId) => {
+  tables.value = tables.value.filter(table => table.id !== tableId)
+}
+
 
 export {
   tables,
   addRow,
   removeRow,
   addTable,
-  removeTable
+  removeDayTable
 }

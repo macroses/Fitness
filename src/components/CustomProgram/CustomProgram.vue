@@ -1,8 +1,9 @@
 <script setup>
 import { nextTick, ref } from 'vue'
 import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
-import { addRow, addTable, removeRow, tables } from '@/components/CustomProgram/composable'
+import { addRow, addTable, removeDayTable, removeRow, tables } from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
+import { gsap } from 'gsap'
 
 const headers = [
   { value: 'Load' },
@@ -26,7 +27,7 @@ const startEditing = (event, row, columnIndex) => {
   editingCellIndex.value = columnIndex
 
   nextTick(() => {
-    const inputElement = event.currentTarget.querySelector(`td:nth-child(${columnIndex + 1}) input`)
+    const inputElement = event.currentTarget.querySelector(`div:nth-child(${columnIndex + 1}) input`)
     if (inputElement) {
       inputElement.focus()
     }
@@ -38,8 +39,27 @@ const stopEditing = (row) => {
   editingCellIndex.value = null
 }
 
-const removeDayTable = (tableId) => {
-  tables.value = tables.value.filter(table => table.id !== tableId)
+const onBeforeEnter = (el) => {
+  el.style.opacity = 0
+  el.style.height = 0
+}
+
+const onEnter = (el, done) => {
+  gsap.to(el, {
+    duration: 0.2,
+    opacity: 1,
+    height: 'auto',
+    onComplete: done
+  })
+}
+
+const onLeave = (el, done) => {
+  gsap.to(el, {
+    duration: 0.2,
+    opacity: 0,
+    height: 0,
+    onComplete: done
+  })
 }
 </script>
 
@@ -54,12 +74,21 @@ const removeDayTable = (tableId) => {
             width="20px"
           />
         </h1>
-        <Button
-          bordered
-          size="small"
-        >
-          Clear
-        </Button>
+        <div class="custom-program__micro-funcs">
+          <Button
+            size="small"
+            @click="addTable"
+            :disabled="tables.length >= 7"
+          >
+            Add new day of microcycle
+          </Button>
+          <Button
+            bordered
+            size="small"
+          >
+            Clear
+          </Button>
+        </div>
       </div>
 
       <div
@@ -67,27 +96,32 @@ const removeDayTable = (tableId) => {
         :key="table.id"
         class="custom-program__table-wrap"
       >
-        <table class="custom-program__table">
-          <thead class="custom-program__table-head">
-            <tr>
-              <th
-                v-for="(header, headerIndex) in headers"
-                :key="headerIndex"
-                class="custom-program__head"
-                :style="{ width: header?.width }"
-              >
-                {{ header.value }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
+        <div class="custom-program__table">
+          <div class="custom-program__table-head">
+            <div
+              v-for="(header, headerIndex) in headers"
+              :key="headerIndex"
+              class="custom-program__head"
+              :style="{ width: header?.width }"
+            >
+              {{ header.value }}
+            </div>
+          </div>
+          <TransitionGroup
+            tag="div"
+            :css="false"
+            @before-enter="onBeforeEnter"
+            @enter="onEnter"
+            @leave="onLeave"
+            class="custom-program__table-body"
+          >
+            <div
               v-for="(row, rowIndex) in table.rows"
               :key="row.id"
-              ref="tableRow"
+              :ref="`tableRow_${tableIndex}_${rowIndex}`"
               class="custom-program__body-row"
             >
-              <td
+              <div
                 class="custom-program__cell"
                 tabindex="1"
               >
@@ -97,15 +131,18 @@ const removeDayTable = (tableId) => {
                   small
                   @active-value="row.load = $event"
                 />
-              </td>
-              <td
+              </div>
+              <div
                 tabindex="1"
                 class="custom-program__cell"
                 @click="startEditing($event, row, 1)"
               >
-                <span v-if="!row.editing || editingCellIndex !== 1">
+                <div
+                  v-if="!row.editing || editingCellIndex !== 1"
+                  class="custom-program__cell-value"
+                >
                   {{ row.exercise }}
-                </span>
+                </div>
                 <Input
                   v-else
                   v-model="row.exercise"
@@ -114,22 +151,25 @@ const removeDayTable = (tableId) => {
                   @keydown.enter="stopEditing(row)"
                   @blur="stopEditing(row)"
                 />
-              </td>
-              <td class="custom-program__cell">
+              </div>
+              <div class="custom-program__cell">
                 <Dropdown
                   :dropdown-list="MULTIPLIER"
                   :width="50"
                   small
                   @active-value="row.multiplier = $event"
                 />
-              </td>
-              <td
+              </div>
+              <div
                 class="custom-program__cell"
                 @click="startEditing($event, row, 3)"
               >
-                <span v-if="!row.editing || editingCellIndex !== 3">
+                <div
+                  class="custom-program__cell-value"
+                  v-if="!row.editing || editingCellIndex !== 3"
+                >
                   {{ row.weight }}
-                </span>
+                </div>
                 <Input
                   v-else
                   type="number"
@@ -140,14 +180,17 @@ const removeDayTable = (tableId) => {
                   @keydown.enter="stopEditing(row)"
                   @blur="stopEditing(row)"
                 />
-              </td>
-              <td
+              </div>
+              <div
                 class="custom-program__cell"
                 @click="startEditing($event, row, 4)"
               >
-                <span v-if="!row.editing || editingCellIndex !== 4">
+                <div
+                  class="custom-program__cell-value"
+                  v-if="!row.editing || editingCellIndex !== 4"
+                >
                   {{ row.reps }}
-                </span>
+                </div>
                 <Input
                   v-else
                   type="number"
@@ -158,14 +201,17 @@ const removeDayTable = (tableId) => {
                   @keydown.enter="stopEditing(row)"
                   @blur="stopEditing(row)"
                 />
-              </td>
-              <td
+              </div>
+              <div
                 class="custom-program__cell"
                 @click="startEditing($event, row, 5)"
               >
-                <span v-if="!row.editing || editingCellIndex !== 5">
+                <div
+                  v-if="!row.editing || editingCellIndex !== 5"
+                  class="custom-program__cell-value"
+                >
                   {{ row.sets }}
-                </span>
+                </div>
                 <Input
                   v-else
                   type="number"
@@ -176,14 +222,17 @@ const removeDayTable = (tableId) => {
                   @keydown.enter="stopEditing(row)"
                   @blur="stopEditing(row)"
                 />
-              </td>
-              <td
+              </div>
+              <div
                 class="custom-program__cell"
                 @click="startEditing($event, row, 6)"
               >
-                <span v-if="!row.editing || editingCellIndex !== 6">
+                <div
+                  v-if="!row.editing || editingCellIndex !== 6"
+                  class="custom-program__cell-value"
+                >
                   {{ row.percentOfPM }}
-                </span>
+                </div>
                 <Input
                   v-else
                   type="number"
@@ -194,44 +243,45 @@ const removeDayTable = (tableId) => {
                   @keydown.enter="stopEditing(row)"
                   @blur="stopEditing(row)"
                 />
-              </td>
-              <td
+              </div>
+              <div
                 class="custom-program__cell"
                 @click="startEditing($event, row, 7)"
               >
-                <span v-if="!row.editing || editingCellIndex !== 7">
+                <div
+                  v-if="!row.editing || editingCellIndex !== 7"
+                  class="custom-program__cell-value"
+                >
                   {{ row.time }}
-                </span>
+                </div>
                 <Input
                   v-else
                   type="number"
                   v-model.number="row.time"
                   small
-                  style="width: 70px"
                   no-clear
                   @keydown="useOnlyNumbers($event)"
                   @keydown.enter="stopEditing(row)"
                   @blur="stopEditing(row)"
                 />
-              </td>
-              <td
+              </div>
+              <div
                 class="custom-program__cell"
                 style="width: 100px"
               >
                 {{  row.tonnage() }}
-              </td>
-              <td
+              </div>
+              <div
                 class="custom-program__cell"
                 style="width: 100px"
               >
                 {{  row.totalReps() }}
-              </td>
-              <td
+              </div>
+              <div
                 class="custom-program__cell"
                 style="width: 30px"
               >
                 <Button
-                  v-if="rowIndex !== 0"
                   @click="removeRow(tableIndex, rowIndex)"
                   transparent
                   size="small"
@@ -241,14 +291,14 @@ const removeDayTable = (tableId) => {
                     width="13px"
                   />
                 </Button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </TransitionGroup>
+        </div>
         <div class="custom-program__table-footer">
           <Button
             @click="addRow(tableIndex, tableRow)"
-            :disabled="table.rows.length >= 10"
+            :disabled="table.rows.length >= 5"
             size="small"
           >
             Add exercise
@@ -262,11 +312,6 @@ const removeDayTable = (tableId) => {
           </Button>
         </div>
       </div>
-
-      <Button @click="addTable">
-        Create a new day microcycle
-      </Button>
-
     </div>
   </section>
 </template>
