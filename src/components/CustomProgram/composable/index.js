@@ -1,10 +1,18 @@
 import { reactive, ref } from 'vue'
 import { uid } from 'uid'
-import { gsap } from 'gsap'
 import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants/index.js'
-import { CSSPlugin } from 'gsap/CSSPlugin'
 
-gsap.registerPlugin(CSSPlugin)
+const DAYS = [
+  { id: 1, value: 'Monday' },
+  { id: 2, value: 'Tuesday' },
+  { id: 3, value: 'Wednesday' },
+  { id: 4, value: 'Thursday' },
+  { id: 5, value: 'Friday' },
+  { id: 6, value: 'Saturday' },
+  { id: 0, value: 'Sunday' }
+]
+
+const availableDays = reactive([...DAYS]);
 
 const createTableRows = () => {
   return reactive({
@@ -34,6 +42,7 @@ const createTableRows = () => {
 const tables = ref([
   {
     id: uid(10),
+    day: DAYS[0].id,
     rows: [createTableRows()]
   }
 ])
@@ -59,7 +68,8 @@ const addTable = () => {
 
   tables.value.push({
     id: uid(10),
-    rows: [createTableRows()]
+    rows: [createTableRows()],
+    day: 0
   })
 }
 

@@ -13,6 +13,10 @@ const props = defineProps({
   width: {
     type: Number,
     default: 200
+  },
+  isTop: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -48,7 +52,10 @@ onClickOutside(dropdownParent, () => isDropdownOpened.value = false)
     </p>
     <div
       class="dropdown__parent"
-      :class="{ active: isDropdownOpened }"
+      :class="{
+        active: isDropdownOpened,
+        'dropdown__parent-top': isTop
+      }"
     >
       <ul class="dropdown__list">
         <li

@@ -1,24 +1,12 @@
 <script setup>
-import { nextTick, ref } from 'vue'
-import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
+import { nextTick, onMounted, ref } from 'vue'
+import { DAYS, HEADERS, LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
 import { addRow, addTable, removeDayTable, removeRow, tables } from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 import { gsap } from 'gsap'
+import CustomProgramDescription from '@/components/CustomProgram/CustomProgramDescription/CustomProgramDescription.vue'
 
-const headers = [
-  { value: 'Load' },
-  { value: 'Exercise' },
-  { value: 'Multi' },
-  { value: 'Weight' },
-  { value: 'Reps' },
-  { value: 'Sets' },
-  { value: '% of PM' },
-  { value: 'Time, m' },
-  { value: 'Tonnage, kg' },
-  { value: 'Total reps' },
-  { value: '', width: '40px'}
-]
-
+const isDescriptionVisible = ref(true)
 const tableRow = ref(null)
 const editingCellIndex = ref(null)
 
@@ -61,33 +49,73 @@ const onLeave = (el, done) => {
     onComplete: done
   })
 }
+
+const hideProgramDescription = () => {
+  localStorage.setItem('program-description', false)
+  isDescriptionVisible.value = false
+}
+
+const showProgramDescription = () => {
+  localStorage.setItem('program-description', true)
+  isDescriptionVisible.value = true
+}
+
+const updateDay = (tableIndex, selectedDay) => {
+  tables.value[tableIndex].day = selectedDay.id;
+}
+
+onMounted(() => {
+  const descriptionValue = localStorage.getItem('program-description');
+  isDescriptionVisible.value = descriptionValue !== 'false';
+
+  if (!descriptionValue) {
+    localStorage.setItem('program-description', true);
+  }
+})
 </script>
 
 <template>
   <section class="custom-program">
-    <div class="custom-program__micro">
+    <CustomProgramDescription
+      v-if="isDescriptionVisible"
+      @create="hideProgramDescription"
+    />
+    <div
+      v-else
+      class="custom-program__micro"
+    >
+      {{ tables}}
       <div class="custom-program__micro-top">
         <h1 class="custom-program__micro-header">
           Creating a microcycle
-          <Icon
-            icon-name="circle-question"
-            width="20px"
-          />
+          <Button
+            transparent
+            size="small"
+            @click="showProgramDescription"
+          >
+            <Icon
+              icon-name="circle-question"
+              width="20px"
+            />
+          </Button>
         </h1>
         <div class="custom-program__micro-funcs">
-          <Button
-            size="small"
-            @click="addTable"
-            :disabled="tables.length >= 7"
-          >
-            Add new day of microcycle
-          </Button>
-          <Button
-            bordered
-            size="small"
-          >
-            Clear
-          </Button>
+
+          <div class="group">
+            <Button
+              size="small"
+              @click="addTable"
+              :disabled="tables.length >= 7"
+            >
+              Add new day of microcycle
+            </Button>
+            <Button
+              bordered
+              size="small"
+            >
+              Clear
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -99,7 +127,7 @@ const onLeave = (el, done) => {
         <div class="custom-program__table">
           <div class="custom-program__table-head">
             <div
-              v-for="(header, headerIndex) in headers"
+              v-for="(header, headerIndex) in HEADERS"
               :key="headerIndex"
               class="custom-program__head"
               :style="{ width: header?.width }"
@@ -296,20 +324,29 @@ const onLeave = (el, done) => {
           </TransitionGroup>
         </div>
         <div class="custom-program__table-footer">
-          <Button
-            @click="addRow(tableIndex, tableRow)"
-            :disabled="table.rows.length >= 5"
-            size="small"
-          >
-            Add exercise
-          </Button>
-          <Button
-            bordered
-            @click="removeDayTable(table.id)"
-            size="small"
-          >
-            Delete day
-          </Button>
+          <Dropdown
+            :dropdown-list="DAYS"
+            :width="120"
+            small
+            isTop
+            @activeValue="updateDay(tableIndex, $event)"
+          />
+          <div class="group">
+            <Button
+              @click="addRow(tableIndex, tableRow)"
+              :disabled="table.rows.length >= 5"
+              size="small"
+            >
+              Add exercise
+            </Button>
+            <Button
+              bordered
+              @click="removeDayTable(table.id)"
+              size="small"
+            >
+              Delete day
+            </Button>
+          </div>
         </div>
       </div>
     </div>
