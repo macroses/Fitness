@@ -17,6 +17,10 @@ const props = defineProps({
   isTop: {
     type: Boolean,
     default: false
+  },
+  defaultValue: {
+    type: String,
+    default: ''
   }
 })
 
@@ -47,7 +51,7 @@ onClickOutside(dropdownParent, () => isDropdownOpened.value = false)
       class="dropdown__value"
       @click="toggleDropdown"
     >
-      {{ activeItem.value }}
+      {{ activeItem.value || defaultValue }}
       <Icon icon-name="angle-down" width="14px" />
     </p>
     <div
