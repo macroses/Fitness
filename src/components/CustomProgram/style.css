@@ -106,6 +106,17 @@
 	gap: 8px;
 }
 
+.custom-program__choose-day {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	& span {
+		font-size: 12px;
+		font-weight: 500;
+	}
+}
+
 .fade-move,
 .fade-enter-active,
 .fade-leave-active {

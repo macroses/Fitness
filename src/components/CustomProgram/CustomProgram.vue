@@ -1,7 +1,15 @@
 <script setup>
 import { nextTick, onMounted, ref } from 'vue'
-import { DAYS, HEADERS, LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
-import { addRow, addTable, removeDayTable, removeRow, tables } from '@/components/CustomProgram/composable'
+import { HEADERS, LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
+import {
+  addRow,
+  addTable,
+  chosenDays,
+  removeDayTable,
+  removeRow,
+  tables,
+  unusedDays
+} from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 import { gsap } from 'gsap'
 import CustomProgramDescription from '@/components/CustomProgram/CustomProgramDescription/CustomProgramDescription.vue'
@@ -84,7 +92,6 @@ onMounted(() => {
       v-else
       class="custom-program__micro"
     >
-      {{ tables}}
       <div class="custom-program__micro-top">
         <h1 class="custom-program__micro-header">
           Creating a microcycle
@@ -324,13 +331,17 @@ onMounted(() => {
           </TransitionGroup>
         </div>
         <div class="custom-program__table-footer">
-          <Dropdown
-            :dropdown-list="DAYS"
-            :width="120"
-            small
-            isTop
-            @activeValue="updateDay(tableIndex, $event)"
-          />
+          <div class="custom-program__choose-day">
+            <Dropdown
+              :dropdown-list="unusedDays"
+              :width="120"
+              small
+              isTop
+              default-value="Choose day"
+              @activeValue="updateDay(tableIndex, $event)"
+            />
+            <span>Chosen day: {{ chosenDays[tableIndex] }}</span>
+          </div>
           <div class="group">
             <Button
               @click="addRow(tableIndex, tableRow)"
