@@ -104,7 +104,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateIsMobile))
                 icon-name="weight-hanging"
                 width="15px"
               />
-            {{ (exercise.setTonnage) / 1000 }} T
+              {{ exercise.setTonnage / 1000 }} T
             </div>
           </div>
           <div class="read-event__table-parent">
@@ -112,19 +112,23 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateIsMobile))
               v-if="!exercise.sets"
               class="read-event__table-empty"
             >
-              <Icon width="13px" icon-name="triangle-exclamation" />
+              <Icon
+                width="13px"
+                icon-name="triangle-exclamation"
+              />
               No data
             </div>
-            <table v-else class="read-event__table">
+            <table
+              v-else
+              class="read-event__table"
+            >
               <thead>
                 <tr>
                   <th>Effort</th>
                   <th>Weight</th>
                   <th>Repeats</th>
                   <th>
-                    <div class="read-event__rm">
-                      1 RM
-                    </div>
+                    <div class="read-event__rm">1 RM</div>
                   </th>
                 </tr>
               </thead>
@@ -138,7 +142,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateIsMobile))
                     <div
                       :style="{
                         background: EFFORTS[set.effort].color,
-                        color: set.effort === 4 && '#fff',
+                        color: set.effort === 4 && '#fff'
                       }"
                       class="read-event__effort"
                     >

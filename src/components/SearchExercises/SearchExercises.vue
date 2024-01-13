@@ -19,7 +19,9 @@ const debouncedSearch = useDebounceFn(() => {
   }
 
   const query = search.value.toLowerCase()
-  searchResults.value = sessionExercises.value.filter(exercise => exercise.name.toLowerCase().includes(query))
+  searchResults.value = sessionExercises.value.filter(exercise =>
+    exercise.name.toLowerCase().includes(query)
+  )
 }, 100)
 
 const highlightText = text => {
@@ -74,7 +76,7 @@ const showExercise = exercise => {
           alt=""
           width="50"
           height="50"
-        >
+        />
         <span>No results</span>
       </li>
     </ul>

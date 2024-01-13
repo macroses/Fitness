@@ -7,7 +7,7 @@ const emits = defineEmits(['getProgramId'])
 const programsList = ref(null)
 const activeProgramId = ref(null)
 
-const toggleProgramList = (id) => {
+const toggleProgramList = id => {
   if (activeProgramId.value === id) {
     activeProgramId.value = null
     return
@@ -16,12 +16,12 @@ const toggleProgramList = (id) => {
   activeProgramId.value = id
 }
 
-const getProgramId = (program) => emits('getProgramId', program)
+const getProgramId = program => emits('getProgramId', program)
 </script>
 
 <template>
   <section
-    v-for="(category) in programs"
+    v-for="category in programs"
     :key="category.id"
     class="programs"
   >
@@ -33,8 +33,11 @@ const getProgramId = (program) => emits('getProgramId', program)
         :class="{ active: activeProgramId === category.id }"
         @click="toggleProgramList(category.id)"
       >
-        {{ activeProgramId === category.id ? "Hide" : "Show all" }}
-        <Icon width="15px" icon-name="angle-down"/>
+        {{ activeProgramId === category.id ? 'Hide' : 'Show all' }}
+        <Icon
+          width="15px"
+          icon-name="angle-down"
+        />
       </Button>
     </div>
 
@@ -58,15 +61,23 @@ const getProgramId = (program) => emits('getProgramId', program)
           <div
             class="programs-list__item-lvl"
             :class="[
-              {'programs-list__item-lvl-beginner': program.level === 'beginner'},
-              {'programs-list__item-lvl-intermediate': program.level === 'intermediate'},
-              {'programs-list__item-lvl-pro': program.level === 'pro'},
+              {
+                'programs-list__item-lvl-beginner': program.level === 'beginner'
+              },
+              {
+                'programs-list__item-lvl-intermediate':
+                  program.level === 'intermediate'
+              },
+              { 'programs-list__item-lvl-pro': program.level === 'pro' }
             ]"
           >
             {{ program.level }}
           </div>
           <div class="programs-list__item-repeats">
-            <Icon width="15px" icon-name="arrows-rotate"/>
+            <Icon
+              width="15px"
+              icon-name="arrows-rotate"
+            />
             <span>{{ program.perWeek }}</span> per/week
           </div>
         </div>

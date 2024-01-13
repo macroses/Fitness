@@ -13,23 +13,31 @@ const sessionExercises = ref(JSON.parse(localStorage.getItem('exercisesCache')))
 const isExpanderActive = ref(false)
 
 const filteredExercises = computed(() => {
-  return sessionExercises.value.filter(exercise => props.program.exercises.includes(exercise.id))
+  return sessionExercises.value.filter(exercise =>
+    props.program.exercises.includes(exercise.id)
+  )
 })
 
-const toggleExpander = () => isExpanderActive.value = !isExpanderActive.value
+const toggleExpander = () => (isExpanderActive.value = !isExpanderActive.value)
 </script>
 
 <template>
   <div class="program-item">
     <div class="program-item__top">
       <div class="program-item__duration">
-        <Icon icon-name="arrows-rotate" width="16px" />
+        <Icon
+          icon-name="arrows-rotate"
+          width="16px"
+        />
         <div class="program-item__duration-value">
           <span>{{ program.perWeek }}</span> per week
         </div>
       </div>
       <div class="program-item__goal">
-        <Icon icon-name="bullseye-arrow" width="16px"/>
+        <Icon
+          icon-name="bullseye-arrow"
+          width="16px"
+        />
         {{ program.goals }}
       </div>
     </div>
@@ -57,7 +65,7 @@ const toggleExpander = () => isExpanderActive.value = !isExpanderActive.value
       />
     </div>
 
-<!--    <BodySvg />-->
+    <!--    <BodySvg />-->
   </div>
 </template>
 

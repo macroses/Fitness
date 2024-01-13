@@ -6,8 +6,8 @@
 
   --main-bg: #fff;
   --header-bg: #fff;
-  --block-bg: rgba(244,247,248,1);
-  --form-bg: rgba(244,247,248,1);
+  --block-bg: rgba(244, 247, 248, 1);
+  --form-bg: rgba(244, 247, 248, 1);
 
   --btn-color: #fff;
   --btn-color-transparent: rgb(var(--accent-color));
@@ -49,7 +49,9 @@ html {
 
 body {
   min-height: 100vh;
-  transition: color 0.5s, background-color 0.5s;
+  transition:
+    color 0.5s,
+    background-color 0.5s;
   line-height: 1.6;
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
@@ -81,7 +83,6 @@ body {
   gap: 12px;
   align-items: center;
   justify-content: center;
-
 
   &.home {
     max-width: 500px;

@@ -37,7 +37,7 @@ const tabStyle = computed(() => {
   return ''
 })
 
-onMounted( async () => {
+onMounted(async () => {
   setTimeout(() => lottieAnimation.value[activeTab.value].play(), 100)
 })
 </script>
@@ -54,7 +54,11 @@ onMounted( async () => {
         @click="changeActiveTab(index)"
       >
         <Vue3Lottie
-          :ref="(el) => { lottieAnimation[index] = el }"
+          :ref="
+            el => {
+              lottieAnimation[index] = el
+            }
+          "
           :animation-link="tab.icon"
           :height="tab.size"
           :width="tab.size"

@@ -25,10 +25,12 @@ const getDate = date => {
   dateStore.date = date
 }
 
-const filteredEvents = computed(() => userEvents.events.filter(event => {
-  const eventDate = event.date.format('YYYY-MM-DD')
-  return eventDate === dateStore.date.format('YYYY-MM-DD')
-}))
+const filteredEvents = computed(() =>
+  userEvents.events.filter(event => {
+    const eventDate = event.date.format('YYYY-MM-DD')
+    return eventDate === dateStore.date.format('YYYY-MM-DD')
+  })
+)
 
 const toWorkoutMode = () => {
   workoutsStore.workoutId = workoutId.value
@@ -37,11 +39,7 @@ const toWorkoutMode = () => {
 }
 
 const deleteHandler = workoutId => {
-  userEvents.deleteEventHandler(
-    'workouts',
-    'workoutId',
-    workoutId
-  )
+  userEvents.deleteEventHandler('workouts', 'workoutId', workoutId)
 }
 </script>
 

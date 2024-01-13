@@ -22,38 +22,50 @@ let scrollTimeout = null
 const isUserExerciseLoading = ref(false)
 
 const uniqueMainMuscles = computed(() => {
-  const mainMuscles = new Set(sessionExercises.value.map(exercise => exercise.main_muscle))
+  const mainMuscles = new Set(
+    sessionExercises.value.map(exercise => exercise.main_muscle)
+  )
   return Array.from(mainMuscles)
 })
 
-const filteredExercisesByMuscle = computed(() => uniqueMainMuscles.value.map(muscle => ({
-  muscle,
-  exercises: sessionExercises.value.filter(exercise => exercise.main_muscle === muscle)
-})))
+const filteredExercisesByMuscle = computed(() =>
+  uniqueMainMuscles.value.map(muscle => ({
+    muscle,
+    exercises: sessionExercises.value.filter(
+      exercise => exercise.main_muscle === muscle
+    )
+  }))
+)
 
-const filteredExercisesByFavorite = computed(() => sessionExercises.value.filter(exercise => userEvents.favoritesFromBase.includes(exercise.id)))
+const filteredExercisesByFavorite = computed(() =>
+  sessionExercises.value.filter(exercise =>
+    userEvents.favoritesFromBase.includes(exercise.id)
+  )
+)
 
 const selectMuscle = async index => {
   activeMuscle.value = activeMuscle.value === index ? null : index
 
   if (activeMuscle.value !== null) {
     if (scrollTimeout) {
-      clearTimeout(scrollTimeout);
+      clearTimeout(scrollTimeout)
     }
 
     scrollTimeout = setTimeout(() => {
-      const targetElement = muscles.value.children[index];
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      scrollTimeout = null;
+      const targetElement = muscles.value.children[index]
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      scrollTimeout = null
     }, 250)
   }
 }
 
-const showExercise = exercise => exercisesStore.exercise = exercise
+const showExercise = exercise => (exercisesStore.exercise = exercise)
 
 const getFavoriteId = async id => {
   userEvents.favoritesFromBase.includes(id)
-    ? userEvents.favoritesFromBase = userEvents.favoritesFromBase.filter(favoriteId => favoriteId !== id)
+    ? (userEvents.favoritesFromBase = userEvents.favoritesFromBase.filter(
+        favoriteId => favoriteId !== id
+      ))
     : userEvents.favoritesFromBase.push(id)
 
   await updateProfile(
@@ -71,7 +83,7 @@ const tabs = readonly([
   { id: 3, tabTitle: 'Custom', icon: 'lottie/edit.json', size: 18 }
 ])
 
-const getActiveTab = id => activeTabId.value = id
+const getActiveTab = id => (activeTabId.value = id)
 
 const deleteExerciseHandler = async id => {
   await userExercises.deleteExerciseFromBase(id, isUserExerciseLoading)
@@ -132,7 +144,7 @@ onMounted(async () => {
               alt="empty favorites"
               width="170"
               height="93"
-            >
+            />
             <p>Add a few exercises to favorites</p>
           </div>
         </div>

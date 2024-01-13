@@ -90,7 +90,13 @@ const deleteEvent = async (tableName, nameOfId, id, loading) => {
   }
 }
 
-const updateEvent = async (tableName, nameOfId, eventId, updatedObject, loading) => {
+const updateEvent = async (
+  tableName,
+  nameOfId,
+  eventId,
+  updatedObject,
+  loading
+) => {
   const {
     data: { session }
   } = await supabase.auth.getSession()

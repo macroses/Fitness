@@ -56,13 +56,18 @@ onMounted(() => {
     x="0px"
     y="0px"
     viewBox="0 0 3000 3000"
-    style="enable-background:new 0 0 3000 3000;"
+    style="enable-background: new 0 0 3000 3000"
     xml:space="preserve"
   >
     <path
       id="path14144"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M990.2,1221.3c0.1,1.9,0,3.8,0,5.8c0.4,0.1,0.8,0.1,1.1,0.2
 	c-2.3,11.9-4.4,23.9-7.2,35.6c-0.7,3.1-3.5,6-6,8.2c-10,8.5-20.2,16.7-30.5,24.8c-12,9.4-20.4,8.7-30.7-2.8
 	c-7.9-8.9-15-18.3-19.4-29.5c-6.1-15.5-5.1-30.7,1.6-45.5c6.1-13.4,15.7-24.2,27.6-32.7c9.9-7,20.7-12.7,31.1-18.9
@@ -71,7 +76,12 @@ onMounted(() => {
     <path
       id="path14142"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M1003.8,1413.4c-0.8,18.1,2.6,35.7,6.4,53.2c3,13.7,6.5,35.4,10,50.1
 	c-10.5-5.2-20.8-15.8-26.2-24.9c-7.6-12.8-14.4-33.7-17.4-48.2c-8.5-33.3-9.9-64.8-10.1-97.9c0.7-15.9,2.7-25,9.2-36.6
 	c1.4-2.4,8.1-11.6,10.3-14.8c1.1,2.4,3,10.7,3.3,12.1C998.2,1341.5,1005.4,1376.9,1003.8,1413.4z"
@@ -79,7 +89,12 @@ onMounted(() => {
     <path
       id="path14134"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M1049,2627.3c3.9,7.3,6.9,14.4,6.3,22.7c-1,13,3,24.1,10.5,35
 	c22.4,32.4,43.2,65.9,59.9,101.7c5.5,11.8,12.3,23.1,18.3,34.7c2.6,5,6.2,10.1-0.1,16.1c-10.5-16.1-20.8-31.9-37.7-42.6
 	c0.7,1.8,1.1,3.8,2.1,5.3c7.7,11.4,15.8,22.5,23.3,34c2,3.1,3.8,7,3.8,10.5c0,2.3-3.4,4.6-5.3,7c-1.7-1.6-4-2.9-5-4.8
@@ -103,7 +118,12 @@ onMounted(() => {
     <path
       id="path14084"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M563.2,1188.3c4.7-8.3,9.5-16.5,14.7-25.5
 	c24.7,12.3,48.3,24.5,62.5,48.5c12.4,21,13,42.4-0.6,63.3c-4.5,6.9-9.6,13.5-14.8,20c-7,8.7-14,10.4-23.5,4.5
 	c-9.2-5.7-17.2-13.3-26.3-19.1c-13.7-8.6-18.4-21.1-21-36.4C550.7,1223.8,553.5,1205.7,563.2,1188.3L563.2,1188.3z"
@@ -111,7 +131,12 @@ onMounted(() => {
     <path
       id="path14066"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M419.7,1489.7c6,9.3,8.2,20.2,9.5,31c3.1,27.4,3.7,54.9,0.2,82.4c-0.4,3.1-1.6,6-2.3,8.6
 	c-6.1,2.2-9.4-0.9-12.4-4.4c-6.4-7.6-9.7-16.4-11.1-26.1c-1.1-7.6-2.3-15.2-3.8-22.7c-0.7-3.4-1.7-6.9-3.3-10
 	c-5.6-10.8-15-12.1-21.7-2.1c-6.5,9.8-11.2,20.8-16.1,31.5c-2.7,5.8-4.1,12.1-6.4,18.1c-3,7.9-3.4,16-3,24.5
@@ -124,14 +149,24 @@ onMounted(() => {
     <path
       id="path14064"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M357.3,1640.3c1.7,2.5,3,4.4,4.2,6.4c6.9,11.8,13.9,23.6,20.7,35.4c3.3,5.8,5.8,11.9,2.5,20.2
 	c-3.3-5.1-6-9.2-8.5-13.5c-5-8.5-9.7-17.2-14.7-25.7C357.5,1656.3,355,1649.3,357.3,1640.3z"
     />
     <path
       id="path14062"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M372.3,1737.7c-2.7-4.6-5.3-7.3-6-10.4c-4.2-18.3-8-36.7-11.8-55c-0.1-0.6,0.2-1.2,0.7-3
 	c7.4,12.7,14.9,24.4,21.2,36.8C381.5,1716,377.6,1725.8,372.3,1737.7z"
     />
@@ -139,7 +174,12 @@ onMounted(() => {
       id="none_14_"
       inkscape:label="head"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M672.1,338.9c-2.9,4.4-5.8,4.8-9.3,0.9c-3.2-3.5-5.9-7.6-8.4-11.7
 	c-3.4-5.4-5.9-11.4-9.6-16.6c-12-16.8-9-34.5-4-52.4c1.7-6.2,4.9-7.2,9.8-2.9c4.9,4.3,9,9.5,15.2,16c0-6.9,0.1-11.5,0-16.2
 	c-0.8-26-0.3-51.9,6.1-77.2c5.1-20.6,12.9-39.8,32.2-51.5c13-7.8,27.2-12.7,41.9-16.3c33.8-8.1,64.6,0.2,93.8,17
@@ -152,7 +192,12 @@ onMounted(() => {
     <path
       id="none_6_"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M493.4,2626.8c4.4-8.1,7.2-17,10.8-25.5c2.2-5.3,3.9-10.9,6.9-15.6
 	c8.3-13.1,14.5-27,18.6-41.9c5.9-21.2,8.4-42.8,8.5-64.5c0.6-80.4,0.5-160.8,0.6-241.2c0-15.6,0-31.1,0-48.3
 	c4.2,6.5,7.5,11.6,10.8,16.6c0.6-0.4,1.2-0.8,1.9-1.2c-2.9-6-6.1-11.8-8.6-17.9c-8.8-20.9-17.7-41.8-25.9-63
@@ -176,7 +221,12 @@ onMounted(() => {
     <path
       id="none_7_"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M365.9,834.3c3-10,6.6-19.8,10.1-30c8.5,6.8,10.1,7.5,6.7,15.6c-13.3,31.7-19.3,57.6-21.2,95.2
 	c-1.6,32.1,1.5,63.9,8.3,95.3c4.9,22.7,14.7,55.7,23.1,77.7c-0.3,0.2-4.7-9.6-5-9.4c-8.5-16.1-19.4-32-27.5-48.2
 	c-9-18-13.4-37.3-12.2-57.5c1.1-17.5,2.6-35,3.8-52.6C353.8,891.1,357.5,862.3,365.9,834.3L365.9,834.3z"
@@ -184,42 +234,42 @@ onMounted(() => {
     <path
       id="path14867"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1806.8,1754.5c8.5-9,10.6-17,5.8-22.4c-5.8-6.7-12.4-12.7-18.6-19c-0.7,0.4-1.3,0.8-2,1.2
 	C1796.8,1727.3,1801.6,1740.3,1806.8,1754.5z"
     />
     <path
       id="path14865"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2665.2,1713.7c-5.3,4.4-12.4,9.9-18.8,16.1c-7.4,7.2-6,16.6,3.8,23.8
 	C2655.7,1739.2,2661,1725,2665.2,1713.7L2665.2,1713.7z"
     />
     <path
       id="path14861"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2051.6,2654.9c6.5-9.6,8.8-18.2,6-28.8c-4.4-16.7-6.9-33.8-6.5-51.2c0.2-8.5,0-16.9,0-25.4
 	C2044.2,2584.4,2044.1,2619.1,2051.6,2654.9L2051.6,2654.9z"
     />
     <path
       id="path14859"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1833.9,1726.2c-19.6-17.9-39.5-34.5-54.2-57.4c-0.4,12.4,2,19.4,8.7,26.4
 	c5.5,5.8,11.1,11.5,16.7,17.1c7.8,7.9,15.7,15.7,24.2,24.2C1831.1,1732.7,1832.3,1729.9,1833.9,1726.2L1833.9,1726.2z"
     />
     <path
       id="path14857"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2677.6,1668.4c-13.9,23.1-35.2,39.2-54.5,57.6c1.4,3.5,2.7,6.6,4.5,11
 	c14.1-14.5,27-28.1,40.3-41.4C2675.5,1688,2677.3,1678.6,2677.6,1668.4z"
     />
     <path
       id="path14851"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1857.2,1063.5c-3.2,2.8-13.1-2.7-13.4-1.4c-1.8,7.4-0.6,30.2-1.3,37.8
 	c-1.3,13.5,1.1,26.8,4.4,39.8c3.6,14.2,9.2,27.5,17.7,40.6c6-11.2,14.6-27.2,20.5-38.2c-13.7-21-24.8-39.7-27.5-69.2L1857.2,1063.5z
 	"
@@ -227,21 +277,21 @@ onMounted(() => {
     <path
       id="path14841"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1922,1025.4c-15.3,23.9-37.9,35.9-64.8,38.1c-0.2,27.4,10.8,58.3,27.9,78.6
 	c8.5-11.4,16.5-21.8,24-32.5c3.3-4.7,6.2-9.8,8.3-15c7.8-19.1,4.6-39,4.6-59.2V1025.4z"
     />
     <path
       id="path14839"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1770.6,1132c16.2-17.2,33.8-35.3,45.7-54c3.9-6.1,7.2-15.8,10.4-22.4
 	c2.3-4.7,6.4-11.1,4.6-15.8c-5.6-15-11.7-30.1-17.1-45.2c-0.7-1.9-5.5-16.7-6.4-19C1779.7,1010.6,1766,1077.9,1770.6,1132z"
     />
     <path
       id="path14819"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1960.6,2625.3c0.4,0.2,4.8-6.5,5.2-6.3c5.9-10.9,15.7-24.9,21.7-35.7
 	c6.2-11.4,5.9-23.6,4.2-36.3c-4.1-30.1-8.1-60.2-12.6-90.3c-4.5-29.7-10.9-59.3-15.2-89c-3.8-26.9-6.2-53.9-8.8-80.9
 	c-2.6-27.1-5.9-54.2-3-81.4c0.4-3.5-4.8-7-4.7-10.6c0-0.3,6.4-10.5,5.9-10.9c-8.9,26.9-19.4,64.4-20.2,92.3
@@ -250,7 +300,7 @@ onMounted(() => {
     <path
       id="path14805"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2051.5,2159.4c1.8-2,2.4-2.4,2.6-3c9.8-23,20.9-45.3,35.1-65.9c2.3-3.4,7.9-6.3,6.4-9.8
 	c-7.4-17.3-15.1-34.6-22-52.2c-13-28.2-29.4-74.1-27.6-107.8c-0.8,1.4-3.4,8.1-3.7,9c-11,31.7-28.2,74-41.9,104.7
 	c-2.7,6.7,4.7,11.3,8.8,16.5c21.6,27.3,37.7,61.4,39.9,89.2C2050.1,2145.9,2050.6,2151.9,2051.5,2159.4L2051.5,2159.4z"
@@ -258,7 +308,7 @@ onMounted(() => {
     <path
       id="path14781"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1951.3,1877.6c0.4,0,1.7,5.1,2.1,5.1c0.5-2.2,4.2-22.3,4.5-24.5c4-26.9,3.6-53.8,8-80.7
 	c5-38.1,18.5-76.5,31.4-115c8.5-27.8,20.5-51.3,26.5-80c4.1-19.6,12.5-41.3,19-60.3c5.5-16.1,9.1-32.7,10.4-49.6
 	c5.1-30.5-14.1-58-21.7-78.4c-6.8,5.4-23.7,17.6-29.2,22.5c-9.5,8.4-7.5,20-9.9,33.4c-5.5,29.8-13.1,59.3-20.5,88.8
@@ -267,7 +317,7 @@ onMounted(() => {
     <path
       id="path14779"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1846.1,1547.5c9.3,9.2,10.6,19.7,11.9,30.3c1.7,13.4,3.5,26.9,13.7,37c2.2,2.2,5.9,4.2,8.9,4
 	c1.6-0.1,3.9-4.7,4.3-7.5c1.3-9.8,2.8-19.7,2.8-29.6c0-16.6-0.5-33.3-1.9-49.9c-1.4-16.1-5.2-31.9-16.1-44.5
 	c-13.1-15.1-20.7-32.8-26.2-51.8c-8.2-28.7-11.3-85.4-13.1-115.2c-5.8,16.9-16.3,56-18.8,73.8c-1.7,12.3-3.6,17.7-6,29.9
@@ -282,7 +332,7 @@ onMounted(() => {
     <path
       id="path14741"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M1935.2,2671.1c-16.8,11.8-32.9,22.8-48.6,34.3c-8.2,6-15.6,13.3-23.8,19.4
 	c-5.2,3.9-11.3,6.6-18.3,10.6c0.8-3.7,1.2-5.4,1.6-7.4c-1.1,0-2.1-0.2-2.9,0c-5.9,2.1-6.7,7-6.9,12.4c-0.2,6.7,4.6,9.4,9.5,10.3
 	c6.2,1.1,7.7,4.1,7.9,9.7c0.3,8.4,4.7,14.6,12.4,17.9c11.8,5,23.5,10.1,35.6,14.2c15.8,5.4,31.6,10.4,45.2,20.6
@@ -298,7 +348,7 @@ onMounted(() => {
     <path
       id="path14729"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2136,328.3c2.6,21.2-4.4,42.5,9,61.1c2.8-9.6,5.3-18.6,7.9-27.5c0.9,0.2,1.9,0.5,2.8,0.7
 	c-3.8,19.1-7.5,38.3-11.3,57.4c0.6,0.3,1.1,0.6,1.7,0.9c2.4-2.8,5.2-5.4,7.1-8.5c6.4-10.3,12.8-20.7,18.6-31.4
 	c8.1-14.9,15.2-30.3,23.4-45.1c3.4-6.2,8.7-11.4,16.9-10.5c8,0.8,11.1,7,13.1,13.6c1.1,3.6,1.9,7.5,1.9,11.3c0.2,28.5,0.4,57,0,85.5
@@ -317,27 +367,27 @@ onMounted(() => {
     <path
       id="path14841_1_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2533.1,1035.5c0,20.2-3.2,40.1,4.6,59.2c2.1,5.2,5,10.3,8.3,15c7.5,10.7,15.5,21.1,24,32.5
 	c17.1-20.3,28.1-51.2,27.9-78.6c-26.9-2.2-49.5-14.2-64.8-38.1V1035.5z"
     />
     <path
       id="path14839_1_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2647.3,975.7c-0.9,2.3-5.7,17.1-6.4,19c-5.4,15.1-11.5,30.2-17.1,45.2
 	c-1.8,4.7,2.3,11.1,4.6,15.8c3.2,6.6,6.5,16.3,10.4,22.4c11.9,18.7,29.5,36.8,45.7,54C2689.1,1078,2675.4,1010.7,2647.3,975.7z"
     />
     <path
       id="path14851_1_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2597.6,1072.9c-2.7,29.5-13.8,48.1-27.5,69.2c5.9,11,14.5,27,20.5,38.2
 	c8.5-13.1,14.1-26.4,17.7-40.6c3.3-13,5.7-26.3,4.4-39.8c-0.7-7.6,0.5-30.4-1.3-37.8c-0.3-1.3-10.2,4.2-13.4,1.4L2597.6,1072.9z"
     />
     <path
       class="MidBack st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2395.5,1253.7c0.1-0.3,0.2-0.5,0.3-0.8c-1.6-0.9-3.2-1.8-4.9-2.6c-13.8-6.7-28-12.7-41.4-20.2
 	c-7.6-4.3-14.3-6.4-23.3-4.7c-17.2,3.3-27.5-2.5-34.8-18.4c-3.8-8.4-6.8-17.3-9.3-26.2c-5.2-18.5-10.1-37.1-14.9-55.6
 	c-10.2-39.7-19.3-79.6-22.1-120.7c-0.3-4.8-1.6-9.1-6-12.4c-2.5-1.9-4.4-5.7-5-9c-1.2-6.2-1.6-12.7-1.6-19c0-16.9,0.7-33.8,0.7-50.8
@@ -353,14 +403,14 @@ onMounted(() => {
       <path
         id="path14823"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2078,762.6c-31.1-11-71.3-33.4-93.7-58c-4.6,8.5-11.3,16.5-20.1,24c3,15,13.1,39.8,16,57.6
 		c1.9,11.6,9.2,18.1,18.8,22.2c12.6,5.3,26,6.2,39.5,5c4.7-0.4,14.2-0.4,16.4-5.1c6.6-13.1,11.5-23.1,19.1-37.7L2078,762.6z"
       />
       <path
         id="path14799"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1985.1,703.9c20,25.6,54.8,43.6,84.1,55c1.9,0.7,9.6,4,10.7,2.6c3.9-5.4,11.4-14.9,13.2-21.1
 		c5.9-19.6,9.2-39.4,13.7-59.4c2.3-10.5,4.6-30,3.2-40.3c0.2-12.5-10.7-21.4-22.1-26.9c-8.6-4.2-18.3-0.8-27.5,3.2
 		c-21.1,9.1-51.2,19.7-67.9,35.4c-3.4,3.2,0.6,9.8,0.8,14.1c-1.4,13.1-1.8,14.4-5.2,28.4L1985.1,703.9z"
@@ -368,7 +418,7 @@ onMounted(() => {
       <path
         id="path14731"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1982.3,794.6c3.7,17.7,9.2,46.6,12.2,62.6c9.5,50,25.1,97.9,47.2,143.6
 		c18.1,37.5,36.7,74.7,54.7,112.2c12.6,26.3,24.5,52.8,29.3,82c1,6.2,1.6,14.4,4.9,19.7c5.1,8.3,13.3,15.1,20.1,8.2
 		c4.6-4.6,10.6-6.4,13.1-12.3c3.7-8.8,7.8-20,10.6-29.2c16.3-54,31.7-120.9,37.4-177.2c0.9-8.5,13.9-21-4-23.9
@@ -378,7 +428,7 @@ onMounted(() => {
       <path
         id="path14799_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2467.9,694.2c-3.4-14-3.8-15.3-5.2-28.4c0.2-4.3,4.2-10.9,0.8-14.1
 		c-16.7-15.7-46.8-26.3-67.9-35.4c-9.2-4-18.9-7.4-27.5-3.2c-11.4,5.5-22.3,14.4-22.1,26.9c-1.4,10.3,0.9,29.8,3.2,40.3
 		c4.5,20,7.8,39.8,13.7,59.4c1.8,6.2,9.3,15.7,13.2,21.1c1.1,1.4,8.8-1.9,10.7-2.6c29.3-11.4,64.1-29.4,84.1-55L2467.9,694.2z"
@@ -386,7 +436,7 @@ onMounted(() => {
       <path
         id="path14823_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2381.3,770.6c7.6,14.6,12.5,24.6,19.1,37.7c2.2,4.7,11.7,4.7,16.4,5.1
 		c13.5,1.2,26.9,0.3,39.5-5c9.6-4.1,16.9-10.6,18.8-22.2c2.9-17.8,13-42.6,16-57.6c-8.8-7.5-15.5-15.5-20.1-24
 		c-22.4,24.6-62.6,47-93.7,58L2381.3,770.6z"
@@ -394,7 +444,7 @@ onMounted(() => {
       <path
         id="path14731_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2466.5,802.7c-18.6,11.3-31.2,10.3-50.1,9.1c-16.4-2-32.8-3.6-50.1-6.1
 		c-0.3,0.4-4.6-2.5-5-1.1c-6.9,28-27.8,58.9-43.1,80.3c-21.7,30.4-41.1,67.6-69.2,94.5c-17.9,2.9-4.9,15.4-4,23.9
 		c5.7,56.3,21.1,123.2,37.4,177.2c2.8,9.2,6.9,20.4,10.6,29.2c2.5,5.9,8.5,7.7,13.1,12.3c6.8,6.9,15,0.1,20.1-8.2
@@ -404,14 +454,14 @@ onMounted(() => {
       <path
         id="path14855_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2361.1,804c10.1,4.4,28.3,5.6,41.5,7.6c-8.7-19.3-25.8-49.7-37.6-66.4
 		C2363.3,760.8,2368.8,786.3,2361.1,804z"
       />
       <path
         id="path14855"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2091.1,745.2c-11.8,16.7-28.9,47.1-37.6,66.4c13.2-2,31.4-3.2,41.5-7.6
 		C2087.3,786.3,2092.8,760.8,2091.1,745.2z"
       />
@@ -420,7 +470,12 @@ onMounted(() => {
       <path
         id="neck_1_"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M751.7,578.9c0,6.4-0.3,12.8-0.8,19.2c-0.4,5.1-1.2,10.2-2,16.8c-2.1-4.3-4-7.4-5.3-10.8
 		c-4-10.1-8-20.3-12.1-30.4c-1.9,3.3-5.2,6.7-10,8.9c-7.4,2.9-14.9,6.3-22.6,7.4c-18.8,2.6-37.5,0.9-57-5.2
 		c-1.5,0.2-16.5-4.4-17.9-4.9c-8.7-3-17.3-6.2-26.1-10.2c17-5.5,30.4-15.4,39.8-30c6.9-10.7,12.8-22.1,19.1-33.2
@@ -431,7 +486,12 @@ onMounted(() => {
       <path
         id="neck"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M791.4,579.3c0,6.4,0.3,12.8,0.8,19.2c0.4,5.1,1.2,10.2,2,16.8c2.1-4.3,4-7.4,5.3-10.8
 		c4-10.1,8-20.3,12.1-30.4c1.9,3.3,5.2,6.7,10,8.9c7.4,2.9,14.9,6.3,22.6,7.4c18.8,2.6,37.5,0.9,57-5.2c1.5,0.2,16.5-4.4,17.9-4.9
 		c8.7-3,17.3-6.2,26.1-10.2c-17-5.5-30.4-15.4-39.8-30c-6.9-10.7-12.8-22.1-19.1-33.2c-5.8-10.3-11.3-20.8-17.4-30.9
@@ -444,7 +504,12 @@ onMounted(() => {
         id="path14154"
         inkscape:label="chest-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M982.5,820.5c-9.5,8.4-20.2,15.7-31.3,21.9
 		c-18.7,10.4-39.2,10.8-59.8,7.6c-23-3.6-44.4-11.3-64.2-24c-19.5-12.5-31.4-30.2-35.9-52.2c-4.4-21.2-7.2-42.8-9.9-64.4
 		c-1.6-13.3-1.8-26.8-2.4-40.2c-1-20.1,10.3-33.8,24.7-45.3c15.9-12.7,34.7-17.1,57.3-16.9c19.4,0.6,40.6,5.7,61.3,12.2
@@ -454,7 +519,12 @@ onMounted(() => {
         id="path14044"
         inkscape:label="chest-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M610.3,849.3c-20.1-4.4-36.3-15.7-51-29.3
 		c-23.7-22-41.8-48.3-58.7-75.6c-2.8-4.6-2.5-9.2-1.4-13.9c5.1-21.2,15.1-39.6,29.9-56c29.9-33,68.3-49.4,110.2-60.2
 		c15.5-4,31.2-6.9,44.6-7.3c30.3,0.1,52.8,10.7,70.4,32.2c8.3,10.1,11,22.2,10.2,34.2c-2.3,34.4-4.7,68.9-13.3,102.5
@@ -465,7 +535,7 @@ onMounted(() => {
       <path
         id="path14833"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1843.8,1062.1c10.3,2.8,29,0.9,33-7.7c2.7-5.8,4.2-9.6,7-15.4c17.1-35.2,29.2-76.6,40.3-114
 		c2.1-6.9,2.3-13.5,2.7-20.8c0.1-2.3-2.2-10.1-4.2-11.3c-1.3-0.8-12.1-1.5-13.7,0c-6.5,2.1-14.9,15.5-17.8,20.7
 		c-8.7,16-15.6,29.7-22.7,46.5c-13.3,32-19.5,60.6-24.5,95.3L1843.8,1062.1z"
@@ -473,7 +543,7 @@ onMounted(() => {
       <path
         id="path14755"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1874.8,1055.8c23.9-3.4,49.2-29.7,53.5-51.8c4.5-23.3,13-45.3,24.8-66.2
 		c12.1-21.4,21.9-44.1,32.2-66.5c1.8-4,10-9.4,9.2-13.8c-5.2-27.7-11-55.2-16.6-82.8c-2.6-13.1-9.3-35.3-14.8-48.3
 		c-1.7,0-8.7,4.7-9.5,5c-38,15.5-78.4,27.8-106.2,57.7c-6.4,6-13.9,11.7-17.2,19.5c-9.3,21.8-9.4,49-12.7,72.6
@@ -485,7 +555,7 @@ onMounted(() => {
       <path
         id="path14755_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2580.6,1058.9c-6.4-14.7-13.7-29-19-43.7c-10.7-29.8-20.6-59.9-30.3-90.1
 		c-2.1-6.6-2.8-13.9-2.7-20.8c0.2-9.7,6.6-14,15.7-10.8c6.2,2.2,11.7,5.6,15.8,11.6c14.4,21.5,23.4,45.5,32.3,69.5
 		c9,24.3,15.2,49.5,18.1,75.4c0.3,2.9,1.1,5.7,2.1,10.6c3.2-4.4,6.3-7.2,7.6-10.7c8-20.9,15.3-42.1,23.5-62.9
@@ -497,7 +567,7 @@ onMounted(() => {
       <path
         id="path14833_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2612.4,1055.7c-5-34.7-11.2-63.3-24.5-95.3c-7.1-16.8-14-30.5-22.7-46.5
 		c-2.9-5.2-11.3-18.7-17.8-20.7c-1.6-1.5-12.4-0.8-13.7,0c-2,1.2-4.3,9-4.2,11.3c0.4,7.3,0.6,13.9,2.7,20.8
 		c11.1,37.4,23.2,78.8,40.3,114c2.8,5.8,4.3,9.6,7,15.4c4,8.6,22.7,10.5,33,7.7L2612.4,1055.7z"
@@ -506,21 +576,36 @@ onMounted(() => {
     <g class="Abdominals">
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M729.8,831.7c-0.6,0.2-1.2,0.4-1.8,0.6c-16.2,6.8-32.6,13.1-48.5,20.6c-18.3,8.6-29.4,23.2-32.1,43.6
 		c-0.7,5.4-0.7,10.8-0.9,16.3c-0.2,0-0.4,0-0.6,0.1c0.6,6.6,0.7,13.4,2.1,19.9c2.8,12.6,10.4,16.7,22,11.4
 		c18.9-8.6,37.5-17.8,56-27.1c24.1-12.2,35.1-33.3,36.1-59.1C762.8,839.4,755.2,823.9,729.8,831.7z"
       />
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M893.8,902.3c-0.6-24.4-13.2-40.8-34.9-50.6c-14.3-6.4-28.7-12.6-43.2-18.4c-4.7-1.9-9.8-3-14.8-3.7
 		c-9.2-1.3-15.7,2.3-18.9,11.1c-1.9,5.3-2.5,11.1-3.6,16.7c1.4,28,14.3,48.4,38.9,61c17.3,8.9,35,17.3,52.7,25.3
 		c13,5.9,22.2,0.5,23.5-13.8C894.4,920.8,894.1,911.5,893.8,902.3z"
       />
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M765.8,1176.7c-0.3-5.4-0.6-10.8-0.8-16.3c-1-23.2-17.2-36-40-32.4c-20.5,3.2-38,12.9-54.3,25.1
 		c-11,8.3-17.9,19.1-18.2,33.1c-0.2,9.5-0.4,19.2,1.2,28.5c2.9,16.7,7.1,33.1,10.7,49.7c5.9,26.6,12.6,52.9,25.4,77.2
 		c10.5,19.9,26.9,33.1,47.8,40.7c17.3,6.3,21.2,3.5,21.7-14.8c0.6-24.3,0.8-48.6,1.5-72.9c1.1-39.3,2.4-78.6,3.6-117.9l0,0
@@ -528,7 +613,12 @@ onMounted(() => {
       />
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M874.9,1157.5c-11.7-11.4-25.6-19.3-40.8-24.6c-8-2.8-16.7-5-25.1-5.3c-17.7-0.7-28.2,8.3-31.9,25.6
 		c-1,4.7-1.7,9.5-1.5,14.3c1,22.7,2.7,45.4,3.4,68.1c1.1,32,1.7,64,2.5,96c-0.1,0-0.2,0-0.3,0c0,11.2-0.1,22.4,0.1,33.6
 		c0.1,4.1,0.4,8.4,1.5,12.3c2.1,7.5,5.3,9.3,12.9,7.2c22.8-6.3,41.4-18.7,53.1-39.7c5.6-10,10.5-20.6,14-31.5
@@ -536,7 +626,12 @@ onMounted(() => {
       />
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M874.6,1059.4c-4.2-4.1-9-7.7-14.8-12.7c4.9,1.5,8.1,2.6,11.5,3.5c12.4,3.6,20.7-0.5,22.5-13.3
 		c1.6-11.9,2.5-24.5,0.3-36.1c-8-43.4-38.7-65.4-78-77.1c-21.7-6.4-31.6,2.7-32.9,25.5c-0.7,12.4-1,25-3,37.2
 		c-3.2,19.4,6.8,35.1,25.4,38.4c10.1,1.8,19.8,6.6,30.2,10.3c-11.1-0.9-21.2-2.4-31.2-2.2c-12.3,0.2-20,7.3-23.3,19.2
@@ -545,7 +640,12 @@ onMounted(() => {
       />
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M760.8,1058.1c-2.6-18.6-13-26.5-32-25.4c-7.9,0.4-15.7,2.2-23.5,3.3l0,0c-0.1-0.3-0.2-0.6-0.3-0.9
 		c11.1-3.7,22-7.8,33.3-11c11.1-3.1,19.1-9.2,21.7-20.7c1.2-5.2,1-10.8,0.7-16.2c-0.9-14-2.3-28-3.5-42.1
 		c-1.5-18.2-12.3-26.1-30.2-22.2c-14,3-26.3,9.8-38.4,17.2c-24.8,15.2-39.3,37.5-43,66.1c-1.3,10.3-0.2,21.1,1.5,31.4
@@ -558,14 +658,24 @@ onMounted(() => {
       <path
         id="path14152"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1002.1,850.3c-2,15.8-8.2,33.6-10.3,50c-2.2-11.8-4.7-23-7.7-33.8
 		c-2.1-12.7-7.9-18.5-11.9-29.9c9.7-8.8,25.5-22.5,35.4-31.4C1005.9,819.1,1004.1,834.7,1002.1,850.3L1002.1,850.3z"
       />
       <path
         id="path14150"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M981.9,899.4c-10.9,7.3-28.2,12.5-41.9,14.8
 		c7.8-11.4,16.3-20.7,23.2-31.5c4.2-6.6,14.6-7.6,22.3-5.6c0.7,2.5,1.7,5.5,2.3,8.5C989,891.5,987.3,895.8,981.9,899.4L981.9,899.4z
 		"
@@ -573,14 +683,24 @@ onMounted(() => {
       <path
         id="path14148"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M949.4,953.8c0.3-2.7,3.4-7.1,4-9.5c1.5-6.8,7.5-13.5,8.8-20.4
 		c1-5.1,1.3-14.4,6.2-16.6c5.7-2.6,15.9-10.2,21.4-13.5c4.4,26-7.9,51.3-33.4,58L949.4,953.8z"
       />
       <path
         id="path14146"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M952.3,994.6c0.7-12,0.2-27.3,0.9-39.3c9.1-1.3,27.3-17,30-23.3
 		C977.4,949.4,961.6,981,952.3,994.6z"
       />
@@ -588,7 +708,12 @@ onMounted(() => {
         id="path14120"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M921.8,861.2c18.2-2.2,36.6-13.3,49.4-23.6
 		c6.8,9,13.9,28.5,14.3,38.3C965.8,876.5,941.3,869.9,921.8,861.2z"
       />
@@ -596,7 +721,12 @@ onMounted(() => {
         id="path14118"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M928,922.5c-5.2,4-9.7,8.8-15.2,13.8
 		c-19.3-32.3-0.8-53.8,18.8-65.4c2.4-1.4,6.1-1.5,9-1c7.8,1.5,15.5,3.6,24,5.6c-0.7,2.1-1.1,4.2-2.2,6
 		C953,896.8,942.5,911.3,928,922.5L928,922.5z"
@@ -605,7 +735,12 @@ onMounted(() => {
         id="path14116"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M915.3,1001.8c-1.1-2.1-3-4.1-3.3-6.3c-1.5-11.7-3.1-23.3-3.8-35
 		c-0.4-6.6-4.7-15.4,0.7-19.8c2.7-2.2,6.1-6.8,8.6-9.2c13.1-13,27.1-19,47.3-22.8C958.1,944.5,931.2,993.2,915.3,1001.8
 		L915.3,1001.8z"
@@ -614,7 +749,12 @@ onMounted(() => {
         id="path14114"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M918.3,1001.4c10.5-10.4,16.8-18.6,23.5-31.8
 		c1.5-3,5.6-10.7,7.4-13.6c0.8,0.2-0.4-1.5,0.4-1.3c0.2,1.8,3.7,10.6,3.6,12.4c-0.6,18.9-0.5,37.6-7.2,55.5
 		c-4.7,12.3-12.8,22.1-22.7,30.4c-1.7,1.4-5.4,2.9-6.7,2c-2.3-1.6-4.7-4.7-4.8-7.3c-0.3-6.7,0.5-13.4,0.9-20.1
@@ -624,7 +764,12 @@ onMounted(() => {
         id="path14112"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M940.3,1083c-4.5,7.7-9.9,14.8-15.2,22.1c-1.7,2.2-4,4.3-6.4,5.6
 		c-6,3.2-12.9-0.2-12.3-6.7c1.2-12.3,3.7-24.5,6-36.7c0.3-1.7,0.6-9.7,2.4-10.4c17.5-6.8,19.8-15.1,29.8-31.1c2-4.7,3.2-9.7,5-14.5
 		c0.9-2.5,2.4-10.8,4.1-14.1C956.1,1027,954.6,1058.9,940.3,1083L940.3,1083z"
@@ -633,7 +778,12 @@ onMounted(() => {
         id="path14110"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M960,1114.2c2.3,8.9-1.3,15.7-6.6,22c-7.9,9.3-15.8,18.5-26.3,25
 		c-2.4,1.5-4.9,3.2-7.6,4c-6.8,2.2-10.8-0.2-11-7.4c-0.4-11.1-1.1-34.3-1.1-46.3c12.4-2,13.3-0.5,19.3-9
 		c12.9-13.5,19.2-30.8,25.1-48.6c0,15.3,8,34.5,8,49.8C959.8,1107.2,959.2,1110.9,960,1114.2L960,1114.2z"
@@ -641,7 +791,12 @@ onMounted(() => {
       <path
         id="path14152_1_"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M536.3,847.3c-2-15.6-3.8-31.2-5.5-45.1
 		c9.9,8.9,25.7,22.6,35.4,31.4c-4,11.4-9.8,17.2-11.9,29.9c-3,10.8-5.5,22-7.7,33.8C544.5,880.9,538.3,863.1,536.3,847.3
 		L536.3,847.3z"
@@ -649,14 +804,24 @@ onMounted(() => {
       <path
         id="path14148_1_"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M582,948.8c-25.5-6.7-37.8-32-33.4-58
 		c5.5,3.3,15.7,10.9,21.4,13.5c4.9,2.2,5.2,11.5,6.2,16.6c1.3,6.9,7.3,13.6,8.8,20.4c0.6,2.4,3.7,6.8,4,9.5L582,948.8z"
       />
       <path
         id="path14146_1_"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M555.2,929c2.7,6.3,20.8,21.9,30,23.3c0.7,12,0.2,27.3,0.9,39.3
 		C576.8,978,561,946.4,555.2,929z"
       />
@@ -664,7 +829,12 @@ onMounted(() => {
         id="path14120_1_"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M552.9,872.9c0.4-9.8,7.5-29.3,14.3-38.3
 		c12.8,10.3,31.2,21.4,49.4,23.6C597.1,866.9,572.6,873.5,552.9,872.9z"
       />
@@ -672,7 +842,12 @@ onMounted(() => {
         id="path14118_1_"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M610.4,919.5c-14.5-11.2-25-25.7-34.4-41
 		c-1.1-1.8-1.5-3.9-2.2-6c8.5-2,16.2-4.1,24-5.6c2.9-0.5,6.6-0.4,9,1c19.6,11.6,38.1,33.1,18.8,65.4
 		C620.1,928.3,615.6,923.5,610.4,919.5L610.4,919.5z"
@@ -681,7 +856,12 @@ onMounted(() => {
         id="path14116_1_"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M623.1,998.8c-15.9-8.6-42.8-57.3-49.5-93.1
 		c20.2,3.8,34.2,9.8,47.3,22.8c2.5,2.4,5.9,7,8.6,9.2c5.4,4.4,1.1,13.2,0.7,19.8c-0.7,11.7-2.3,23.3-3.8,35
 		C626.1,994.7,624.2,996.7,623.1,998.8L623.1,998.8z"
@@ -690,7 +870,12 @@ onMounted(() => {
         id="path14114_1_"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M621.1,998.4c4.8,4.8,4.2,13.6,3.7,20.5
 		c-0.1,1.9,0.8,3.8,0.9,5.7c0.4,6.7,1.2,13.4,0.9,20.1c-0.1,2.6-2.5,5.7-4.8,7.3c-1.3,0.9-5-0.6-6.7-2c-9.9-8.3-18-18.1-22.7-30.4
 		c-6.7-17.9-6.6-36.6-7.2-55.5c-0.1-1.8,3.4-10.6,3.6-12.4c0.8-0.2-0.4,1.5,0.4,1.3c1.8,2.9,5.9,10.6,7.4,13.6
@@ -700,7 +885,12 @@ onMounted(() => {
         id="path14112_1_"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M598.1,1080c-14.3-24.1-15.8-56-13.4-85.8
 		c1.7,3.3,3.2,11.6,4.1,14.1c1.8,4.8,3,9.8,5,14.5c10,16,12.3,24.3,29.8,31.1c1.8,0.7,2.1,8.7,2.4,10.4c2.3,12.2,4.8,24.4,6,36.7
 		c0.6,6.5-6.3,9.9-12.3,6.7c-2.4-1.3-4.7-3.4-6.4-5.6C608,1094.8,602.6,1087.7,598.1,1080L598.1,1080z"
@@ -709,7 +899,12 @@ onMounted(() => {
         id="path14110_1_"
         inkscape:label="bench-rear"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M578.4,1111.2c0.8-3.3,0.2-7,0.2-10.5c0-15.3,8-34.5,8-49.8
 		c5.9,17.8,12.2,35.1,25.1,48.6c6,8.5,6.9,7,19.3,9c0,12-0.7,35.2-1.1,46.3c-0.2,7.2-4.2,9.6-11,7.4c-2.7-0.8-5.2-2.5-7.6-4
 		c-10.5-6.5-18.4-15.7-26.3-25C579.7,1126.9,576.1,1120.1,578.4,1111.2L578.4,1111.2z"
@@ -718,7 +913,12 @@ onMounted(() => {
     <g class="Quadriceps">
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1049.3,1649.5c-2.5-19.3-12.1-38.4-15.2-57.7c-0.4,0.2,0.1,0.4-0.3,0.6c0,1.6,0,3.2,0,4.8l0,0
 		c0.2,5.2,0.2,10.4,0.1,15.5c-0.1-13.1-0.6-26.3-2-39.3c-1.8-16.2-4.7-32.2-7.6-48.2l0,0c-0.6-3.4-2.9-7.6-5.6-9.3
 		c-21.1-13.3-32.4-33.2-38.3-56.6c-3.5-13.6-6.3-27.4-8.7-41.3c-2.8-16.4-5.7-32.8-6.7-49.3c-1.9,15.5-6.7,35.6-8.5,49.8
@@ -732,7 +932,12 @@ onMounted(() => {
       />
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M488.1,1760.3c0.9,26.2,1.6,52.5,3.8,78.6c3.8,45.2,8.8,90.3,13.3,135.5c1,9.8,3.2,11.8,13.1,9.8
 		c16.3-3.3,27.3-14,34.1-28.5c10.2-21.9,18.9-44.9,16.7-69.2c0-0.5-0.1-1-0.2-1.5c0.3,2.1,0.7,4.2,1.1,6.4c1.1,6,4.8,7.7,10.5,5.9
 		c3.8-1.2,4.3-3.9,4.8-7.3c1.8-11.3,2.9-23,6.4-33.9c1.2-3.8,2.5-7.6,3.7-11.4c-1.3,4.5-2.6,9-3.7,13.6c-7.4,30.8-3.7,61.6,5.2,92.8
@@ -750,7 +955,12 @@ onMounted(() => {
         id="path14016"
         inkscape:label="shoulder-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M446,575.6c7.4,9.2,16,13.8,26.6,13.6
 		c12.4-0.1,24.9-0.3,37.2-1.6c10.3-1.1,20.4-0.5,30.3,2.3c11.9,3.4,18.2,13.4,16.8,25.5c-2,17.7-5,35-17.1,47.2
 		c-19.3,19.5-33.8,38.5-39.9,65.7c-1.2,4.9-4.1,11.8-6.6,16.2c-18.3,32.9-48.9,55.9-83.8,70.9c-14.9,6.4-25.5,1.7-30.6-13.8
@@ -761,7 +971,12 @@ onMounted(() => {
         id="shoulder"
         inkscape:label="shoulder-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1097,576.1c11.3,6.3,22.1,11.9,32.5,18.1
 		c7.9,4.8,13.1,12.1,16.4,20.7c13.2,34.1,22.1,69.4,28.5,105.3c3.7,21,0.6,41.4-4.6,61.6c-1.7,6.8-3.4,13.7-5.7,20.3
 		c-5.1,15.5-15.7,20.2-30.6,13.8c-34.9-15-65.5-38-83.8-70.9c-2.5-4.4-5.4-11.3-6.6-16.2c-6.1-27.2-20.6-46.2-39.9-65.7
@@ -771,7 +986,7 @@ onMounted(() => {
       <path
         id="path14769"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1834.2,800.8c1,0.3,1.9,0.5,2.9,0.8c3.2-3,6.5-5.8,9.6-8.9c16.1-16.5,34.3-29.6,55.9-37.9
 		c14.3-5.5,28.9-10.5,42.8-16.8c8.9-4,18.1-8.7,25.2-15.3c23.8-22.2,29-65.3,11.6-94c-14.3-23.6-35.8-38.6-61.3-48.4
 		c-10.1-3.9-19.7-4.7-29,2c-2.6,1.8-5.8,2.8-8.6,4.2c-14.9,7.3-25.8,17.8-31.5,34.2c-10,28.4-18.3,57.3-23.7,86.8
@@ -780,7 +995,7 @@ onMounted(() => {
       <path
         id="path14769_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2621.8,801.2c3.5-17.5,8.6-34.8,9.9-52.4c1.1-13.5-1.3-27.5-3.8-40.9
 		c-5.4-29.5-13.7-58.4-23.7-86.8c-5.7-16.4-16.6-26.9-31.5-34.2c-2.8-1.4-6-2.4-8.6-4.2c-9.3-6.7-18.9-5.9-29-2
 		c-25.5,9.8-47,24.8-61.3,48.4c-17.4,28.7-12.2,71.8,11.6,94c7.1,6.6,16.3,11.3,25.2,15.3c13.9,6.3,28.5,11.3,42.8,16.8
@@ -791,7 +1006,7 @@ onMounted(() => {
       <path
         id="glutes_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2223.4,1483.3c-1.7-17.5,3-33.7,0.9-49.9c-2.5-26.8-14.4-53.6-26.5-76.2
 		c-9.1-12.9-20.5-20.5-36.6-21.1c-15.2-0.6-32,2.1-45.3,8.7c-17.5,8.6-34.8,19.6-52.1,28.7c-5.9,3.1-17.9,8.5-22.9,12.9
 		c-9.7,8.4-6.6,18.2,0.2,30.6c8.8,16.3,12.9,34.3,12.1,52.8c-0.8,17.9-4.3,35.5-10.3,52.6c-5.2,14.8-10.1,29.7-14.8,44.6
@@ -801,7 +1016,7 @@ onMounted(() => {
       <path
         id="glutes"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2233.2,1482.7c1.6,14.5,2.9,30.2,5.3,45.6c3.3,21.6,16.8,36.3,35.4,46.2
 		c12.1,6.5,24.8,12,37.7,16.6c30.5,10.8,61.2,20.8,91.9,30.9c4.2,1.4,8.7,2.4,13.1,2.6c11.6,0.7,17.9-5.1,18.6-16.8
 		c0.9-14.2-2.4-27.9-6.7-41.4c-4.7-14.9-9.6-29.8-14.8-44.6c-6-17.1-9.5-34.7-10.3-52.6c-0.8-18.5,3.3-36.5,12.1-52.8
@@ -813,7 +1028,7 @@ onMounted(() => {
       <path
         id="path14757"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2111.6,2133.7c9.4-14.8,18.9-27.7,22.1-43c3.1-14.9,11.6-32.5,11.6-50.4
 		c-0.1-27.2-2.5-54.4-4.9-81.4c-2.9-32.5-5.7-65-5.4-97.7c-0.1-26.2,5.3-49.8,11.6-73.6c2.1-6.6,3.2-13,2.4-19.8
 		c-1.9-15.5-4-31.1-4.8-46.7c-2-39.2,0.6-77,12-114.9c-1-6.1,6.3-21.5,9-22.5c-18.9,7.4-60.5,21.4-78.5,28.3
@@ -823,7 +1038,7 @@ onMounted(() => {
       <path
         id="path14749"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1969.8,2101.8c0.5,0.1,1,0.2,1.5,0.3c0.9-2.3,1.7-4.6,2.7-6.9c17-39.7,34.6-79.1,50.9-119.1
 		c22.8-56.2,38.9-114.4,47.6-174.5c4.5-31,8.1-62.1,12-93.2c3-24.2,4.3-48.4,3.2-72.8c-0.2-5.6-0.5-18.1-1.3-23.9
 		c-12.2,3.7-24.1,8.3-35.1,11.2c-14.3,5-31.7,4.2-32.2-21.7c-16.1,46.2-39.1,108.1-48.6,150.8c-7.3,40.9-9.2,82-15.2,123.2
@@ -833,7 +1048,7 @@ onMounted(() => {
       <path
         id="path14749_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2486.9,2101.5c0-4.8,0.8-9.7,0-14.2c-4.3-20.1-1.3-40,1.2-60c3.1-25,6-50.1,9-75.2
 		c1.7-14.9,4-29.8,4.8-44.8c0.6-10.7,1.1-21.7-0.5-32.4c-6-41.2-7.9-82.3-15.2-123.2c-9.5-42.7-32.5-104.6-48.6-150.8
 		c-0.5,25.9-17.9,26.7-32.2,21.7c-11-2.9-22.9-7.5-35.1-11.2c-0.8,5.8-1.1,18.3-1.3,23.9c-1.1,24.4,0.2,48.6,3.2,72.8
@@ -843,7 +1058,7 @@ onMounted(() => {
       <path
         id="path14757_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2345.3,2133.4c1.8-6.2,3.4-10.3,4.4-14.6c6.1-27.3,17.3-52.8,28.2-78.4
 		c6.2-14.7,12.2-29.6,17.7-44.6c12.6-34.6,20.4-66.6,8.2-102.6c-14.2-41.8-19.6-89.8-25-133.6c-3.8-31.1-7.9-58.8-10-90
 		c-1.1-16.8,1-39.6,1.4-57.9c-18-6.9-59.6-20.9-78.5-28.3c2.7,1,10,16.4,9,22.5c11.4,37.9,14,75.7,12,114.9
@@ -854,7 +1069,12 @@ onMounted(() => {
     <g class="Abductors">
       <path
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M761.4,1556c-1.4-9.2-0.9-9.3-9.3-11.8c-11.4-3.4-20.8-9.5-28.6-18.4c-9.9-11.3-15.9-24.7-21.9-38.1
 		c-5-11.1-10.1-22.1-15.7-32.9c-11.5-22.2-23.2-44.2-34.9-66.3c-11-20.9-22-41.9-33.1-62.8c-3.8-7.2-9.1-12.9-16.1-17.3
 		s-13.4-9.9-19.9-15c-6.3-4.9-12.5-9.9-19.9-15.9c-2.3,7.8-6.7,13.6-1.8,19.8c13.8,17.2,17.7,37.2,17.5,58.5c0,0.2,0,0.5,0,0.7
@@ -871,7 +1091,7 @@ onMounted(() => {
       <path
         id="path14829"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2139.5,2072.9c6.4-14.1,15.8-30.8,17.5-46.5c4.1-37.8,7.8-75.7,11.4-113.5
 		c0.5-5.3,0.4-11-0.7-16.2c-6.9-34.4-11.1-83.7-18.4-119.1c-1.2,3.4-5.4,20.9-6,23.6c-5.1,20.6-7.8,41.5-8.3,62.6
 		c-0.9,42.6,5.3,84.8,8.2,127.3c0.5,26.6,6.6,53.1-3.7,79.8V2072.9z"
@@ -879,7 +1099,7 @@ onMounted(() => {
       <path
         id="path14795"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2214.3,1544.9c-2.1,2.3-6.2,9.4-7.1,10.6c-12.3,12.3-18.9,17.5-34.4,25.1
 		c-14.9,5.5-16.5,19.7-19.2,33.5c-0.3,1.6-0.9,3.1-1.3,4.6c-10.4,44.2-11.4,89-5.4,133.6c5.7,42.4,10.3,84.4,17.6,126.6
 		c0.7-0.1,5.4,25.9,6.1,25.8c1.2-10.4,2.2-46.8,3.6-57.2c4.2-30.4,7.3-61,13.1-91.1c8.4-43,18.9-85.5,28.4-128.3
@@ -888,7 +1108,7 @@ onMounted(() => {
       <path
         id="path14795_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2240.3,1550.9c-4.8,27.2-4.1,52.2,1.6,77.2c9.5,42.8,20,85.3,28.4,128.3
 		c5.8,30.1,8.9,60.7,13.1,91.1c1.4,10.4,2.4,46.8,3.6,57.2c0.7,0.1,5.4-25.9,6.1-25.8c7.3-42.2,11.9-84.2,17.6-126.6
 		c6-44.6,5-89.4-5.4-133.6c-0.4-1.5-1-3-1.3-4.6c-2.7-13.8-4.3-28-19.2-33.5c-15.5-7.6-22.1-12.8-34.4-25.1c-0.9-1.2-5-8.3-7.1-10.6
@@ -897,7 +1117,7 @@ onMounted(() => {
       <path
         id="path14829_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2318,2070.9c-10.3-26.7-4.2-53.2-3.7-79.8c2.9-42.5,9.1-84.7,8.2-127.3
 		c-0.5-21.1-3.2-42-8.3-62.6c-0.6-2.7-4.8-20.2-6-23.6c-7.3,35.4-11.5,84.7-18.4,119.1c-1.1,5.2-1.2,10.9-0.7,16.2
 		c3.6,37.8,7.3,75.7,11.4,113.5c1.7,15.7,11.1,32.4,17.5,46.5V2070.9z"
@@ -908,7 +1128,12 @@ onMounted(() => {
         id="calve_7_"
         inkscape:label="calves-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1045.1,2154.9c9.7,27.5,19.5,55.1,22.7,84.1
 		c1.7,15.5,1.7,31.4,0.3,46.9c-2.7,28.6-6.9,57.1-10.8,85.6c-4,29.5-8.7,58.8-12.6,88.3c-3.2,24.7-6,49.5-8.6,74.3
 		c-1.4,14-7.8,29.1-8.8,44.5c-12.2-20.9-18.5-43.4-21.4-66.2c-4.2-33.2-2-66.5-2.1-99.8c-0.1-66.6-0.2-133.2-0.5-199.9
@@ -919,7 +1144,12 @@ onMounted(() => {
         id="calve_6_"
         inkscape:label="calves-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M938.3,2496.7c-0.7-3.6-3.2-11.4-0.4-14.6
 		c20.2-23.2,31.7-60.6,38.2-96.3c-0.8,37.7,2.9,118.4,1.5,156c-0.6,15.6-4.2,31-11.6,45.1c-1,1.9-11.3,17.6-13.4,20.6
 		C952.1,2573.6,944.6,2528.2,938.3,2496.7L938.3,2496.7z"
@@ -928,7 +1158,12 @@ onMounted(() => {
         id="calve_5_"
         inkscape:label="calves-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M921.3,2423c21.9-11.9,45.6-36.3,52-63.6
 		c4,32.5-10.1,101.2-37.7,124.1c-4.5-18.1-8.8-35.4-13.3-53.5L921.3,2423z"
       />
@@ -936,7 +1171,12 @@ onMounted(() => {
         id="calve_4_"
         inkscape:label="calves-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M917.7,2414.2c-9.8-22.3-20.1-44.3-29.3-66.8
 		c-7.6-18.6-14.8-37.5-20.6-56.7s-4.6-39.4-3.3-59.2c1.1-16.3,3.2-32.5,5.4-48.6c2.2-15.8,15.2-32.4,17.8-48
 		c17.3,22.1,37.4,44.3,53.6,66c19.5,29.5,28,62.7,29.2,99.8c0.5,13.7,2.7,27.4,4,41.1c2.7,29.5-27,68.9-53.5,81
@@ -946,7 +1186,12 @@ onMounted(() => {
         id="calve_3_"
         inkscape:label="calves-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M499.2,2469.1c-5.3-38.6-10.9-77.2-16.1-115.8
 		c-3.3-24.7-6.6-49.4-9-74.2c-2-20.5-0.2-40.8,4.5-61c6.7-28.7,16.5-56.5,27.1-83.9c0.9-2.3,8-12.5,9.4-15.8
 		c4.1,9.2,8.8,25.4,12.4,33.5c0.9,2,1.4,4.3,2.7,6.1c10.2,14.6,9.9,30.9,9.2,48.3c-1,25.9-0.4,51.9-0.5,77.8
@@ -957,7 +1202,12 @@ onMounted(() => {
         id="calve_2_"
         inkscape:label="calves-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M604.1,2495.7c-6.3,31.5-13.8,76.9-14.3,110.8
 		c-2.1-3-12.4-18.7-13.4-20.6c-7.4-14.1-11-29.5-11.6-45.1c-1.4-37.6,2.3-118.3,1.5-156c6.5,35.7,18,73.1,38.2,96.3
 		C607.3,2484.3,604.8,2492.1,604.1,2495.7L604.1,2495.7z"
@@ -966,7 +1216,12 @@ onMounted(() => {
         id="calve_1_"
         inkscape:label="calves-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M620.1,2429c-4.5,18.1-8.8,35.4-13.3,53.5
 		c-27.6-22.9-41.7-91.6-37.7-124.1c6.4,27.3,30.1,51.7,52,63.6L620.1,2429z"
       />
@@ -974,7 +1229,12 @@ onMounted(() => {
         id="calve"
         inkscape:label="calves-left"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M624.7,2413.2c-1.2,2.8-2.2,5.7-3.3,8.6
 		c-26.5-12.1-56.2-51.5-53.5-81c1.3-13.7,3.5-27.4,4-41.1c1.2-37.1,9.7-70.3,29.2-99.8c16.2-21.7,36.3-43.9,53.6-66
 		c2.6,15.6,15.6,32.2,17.8,48c2.2,16.1,4.3,32.3,5.4,48.6c1.3,19.8,2.5,40-3.3,59.2s-13,38.1-20.6,56.7
@@ -983,7 +1243,7 @@ onMounted(() => {
       <path
         id="calve_11_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1999.8,2040c-1.5,3-7.6,14.2-8.4,16.3c-20.2,37.7-26.2,72.3-33.2,105.2
 		c-1.1,3-1.9,6.1-2.3,9.3c-4.6,29.9-5,60-3.1,90c1.9,30.3,5.8,60.4,9.2,90.6c1.2,11.1,2.8,22.3,5.6,33.1
 		c4.7,18.1,22.5,27.3,39.8,20.9c8.8-3.2,13.5-8.3,13.3-18.5c-0.6-33.6,5.4-67.1,8.4-100.7c-0.1-34.2,4.6-68,14.3-100.6
@@ -992,7 +1252,7 @@ onMounted(() => {
       <path
         id="calve_10_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2095.8,2082c-2.6,3.2-12,16.7-13.2,18.4c-15.5,24-26.6,49.7-36.3,76.6
 		c-16.9,47.2-17.4,96.2-18.9,145.9c-1.1,32.9-1.1,65.9-1.4,98.9c0,3,0.8,6.5,2.4,9c6.6,10.4,16.3,14.8,28.6,13.6
 		c11.3-1.1,18.9-6.9,23-17.5c3.1-8.1,6.2-16.1,9.5-24.1c13.8-34.4,30-67.8,40.4-103.6c5.4-18.5,4.3-36.6-1.5-55.6
@@ -1001,7 +1261,7 @@ onMounted(() => {
       <path
         id="calve_9_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2447.2,2049.9c-27.1,37.3-43.2,70.3-39,115.7c0,5,4,13.8,5.4,18.6
 		c9.7,32.6,14.4,66.4,14.3,100.6c3,33.6,9,67.1,8.4,100.7c-0.2,10.2,4.5,15.3,13.3,18.5c17.3,6.4,35.1-2.8,39.8-20.9
 		c2.8-10.8,4.4-22,5.6-33.1c3.4-30.2,7.3-60.3,9.2-90.6c1.9-30,1.5-60.1-3.1-90c-0.4-3.2-1.2-6.3-2.3-9.3
@@ -1010,7 +1270,7 @@ onMounted(() => {
       <path
         id="calve_8_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2356.2,2092.6c-2.4,8.2-3,16-5.8,21.4c-6,18.3-15.8,44-14.9,64.5c1,22.1-0.5,42.6-6.9,63.7
 		c-5.8,19-6.9,37.1-1.5,55.6c10.4,35.8,26.6,69.2,40.4,103.6c3.3,8,6.4,16,9.5,24.1c4.1,10.6,11.7,16.4,23,17.5
 		c12.3,1.2,22-3.2,28.6-13.6c1.6-2.5,2.4-6,2.4-9c-0.3-33-0.3-66-1.4-98.9c-1.5-49.7-2-98.7-18.9-145.9
@@ -1021,7 +1281,12 @@ onMounted(() => {
       <path
         id="traps_3_"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M683.9,462.4c-7.6,7.7-8.7,10.6-13.1,17.1c-3.1,4.5-4.9,7.9-7.3,12.3
 		c-5.3,9.8-7.6,13.6-13.2,24.6c-6.4,12.5-10.5,21.5-12.2,23.9c-7.8,11.1-15.8,19.5-26.3,23.9c-6.5,2.8-11.8,4.2-14,4.4
 		c-8.8,0.8-16.6-1.7-19.3-2.3c-12.4-2.7-40.1-8-77.1-15.2c20.4-20.5,42.5-34.3,66.1-46c63.4-31.5,91.2-45.5,85-42.3
@@ -1030,7 +1295,7 @@ onMounted(() => {
       <path
         id="traps_2_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1940.9,554.4c6.2,4.1,13.4,8.5,18.1,11c14.8,7.9,34.2,10.5,50.5,10.8
 		c37,0.7,73.3-3.5,108.8-13.6c10.4-3,20.6-8.1,30.2-12.9c20.9-10.4,43-31.3,56.7-49.6c15.2-20.3,21.1-46.2,21.9-71
 		c0.9-25.6,0.5-51.2,0.6-76.8c0-2.9-3.9-16.9-4.6-19.6c-2-8.3-17.3-8.5-23.7-3c-4.9,4.2-11,17.9-14.1,23.7
@@ -1040,7 +1305,7 @@ onMounted(() => {
       <path
         id="traps_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2510.2,552.3c-11.6-10.7-22-20.1-33.7-27.9c-23.8-15.9-50.1-27-75.8-39.2
 		c-15.3-7.3-30.5-14.8-45.9-21.8c-30.8-14-42.5-36.7-60.3-66.4c-7.7-13.9-15.1-28.7-22.7-42.7c-3.1-5.8-9.2-19.5-14.1-23.7
 		c-6.4-5.5-21.7-5.3-23.7,3c-0.7,2.7-4.6,16.7-4.6,19.6c0.1,25.6-0.3,51.2,0.6,76.8c0.8,24.8,6.7,50.7,21.9,71
@@ -1050,7 +1315,12 @@ onMounted(() => {
       <path
         id="traps"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M858.6,463.4c7.6,7.7,8.7,10.6,13.1,17.1c3.1,4.5,4.9,7.9,7.3,12.3c5.3,9.8,7.6,13.6,13.2,24.6
 		c6.4,12.5,10.5,21.5,12.2,23.9c7.8,11.1,15.8,19.5,26.3,23.9c6.5,2.8,11.8,4.2,14,4.4c8.8,0.8,16.6-1.7,19.3-2.3
 		c12.4-2.7,40.1-8,77.1-15.2c-20.4-20.5-42.5-34.3-66.1-46c-63.4-31.5-91.2-45.5-85-42.3c-4.6-2.3-8.9-5-13.3-7.7
@@ -1059,7 +1329,7 @@ onMounted(() => {
       <path
         id="path14737_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2470.1,575.3c-14.7,0.2-28.8,1.3-42.8,0.6c-35.5-2-70.9-5.3-104.3-18.9
 		c-1.5-0.6-3.2-1-4.4-1.9c-10.6-7.8-23.3-9.5-33.1-2.3c-30,22-49.4,55.5-55.8,91.7c-3.1,21.5-0.1,45-1.8,66
 		c4.4,51.4,5.2,102.9,4.3,154.5c-0.6,34.6,0.1,70.2,0.3,104.8c0,1.2-0.1,10.5,0.1,11.8c0.9,5.9,7.9,1.1,13.5-0.9
@@ -1070,7 +1340,7 @@ onMounted(() => {
       <path
         id="path14737"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1985.8,575.5c-0.3,9.2,2.3,15.8,9.2,19.5c5.6,3,11.6,5.9,17.7,7c11.3,2.1,22.9,2.6,34.2,4.2
 		c12.6,1.8,25.4,3.2,37.8,6.2c13.8,3.4,23.2,12.5,25.6,26.9c1.2,7.1,1.6,14.8,0.3,21.8c-4.6,23.9-10.2,47.5-15.3,71.3
 		c-5.2,24.3-7,48.7-0.4,73.2c5.1,19.1,14.5,36.4,25.2,52.6c23.4,35.5,47.9,70.4,72.1,105.4c4.4,6.4,10.1,14.6,17.6,17.3
@@ -1084,7 +1354,12 @@ onMounted(() => {
         id="path14074"
         inkscape:label="biceps-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M495.1,932.8c-1.8,5.5-4.3,10.7-6.3,16
 		c-3.7,9.9-7.9,19.6-10.9,29.7c-12.1,41-31.7,77.4-64.4,105.9c-3.4,2.9-6.6,6.1-9.9,9.1c-0.2,0.2-4.6,5.2-6.2,5.7
 		c-3.6-10.3-10.8-25.5-13.7-36.1c-7-25.2-15.4-50.7-18.3-76.8c-2.9-25.8-6.5-51.5-4-77.5c0.6-27.7,10.4-65.3,22.8-91
@@ -1095,7 +1370,12 @@ onMounted(() => {
         id="biceps"
         inkscape:label="biceps-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1045.8,932.6c-9.5-28.9-16.5-58.5-20.9-88.6
 		c-2.8-19.8-4.4-40-6-60c-0.3-3.8,0.9-8.4,3-11.6c7.4-11.2,15.5-21.8,23.6-33c8.6,11.6,15.9,23.4,25,33.6
 		c18.6,20.9,41.6,35.7,68.1,45c5.6,1.9,15.8-6.1,18.1-0.4c12.4,25.7,22.2,63.3,22.8,91c2.5,26-1.1,51.7-4,77.5
@@ -1108,7 +1388,12 @@ onMounted(() => {
         id="path14068"
         inkscape:label="brachialis-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M408.3,1314.9c-4.9,18.4-15.4,40.3-21.3,59.7
 		c-1.8-9.2-3-21-4.5-29c-6.6-34.4-14.2-67.2-28.2-99.3c-9.9-22.9-20.1-45.7-28.6-69.1c-8.2-22.8-14.5-46.4-12.9-71.3
 		c0.5-7.7,0.4-15.4,0-23c-1.2-24,5.3-46.2,15.6-67.5c4.6-9.7,13.8-20.9,19.6-30.2c3.6,35.7,21.6,59.1,39.6,88.4
@@ -1117,7 +1402,7 @@ onMounted(() => {
       <path
         id="path14811"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1832.8,1040.5c-6.3,17.8-20.3,43.4-31.8,56c-7.8,8.5-15.9,16.6-23.9,24.9
 		c-6.6,6.7-11.7,14.3-15,23.2c-5.8,15.7-9.1,32-9.8,48.7c-0.4,8,0.2,16-0.3,24c-0.5,7.4,1.1,14.7,1.6,22c1.2,20.4,4.1,40.7,6.6,63.2
 		c4.5-34.5,11.7-66,25.4-95.5c9.8-21.2,20.5-42,30.4-63.1c10.3-22.1,19-44.8,24.3-68.6c0.5-2.3,4.5-14.2,3.5-16.2
@@ -1126,7 +1411,7 @@ onMounted(() => {
       <path
         id="path14811_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2618.1,1050.1c-3.9,5.7-4.2,4.4-6.8,9c-1,2,3,13.9,3.5,16.2c5.3,23.8,14,46.5,24.3,68.6
 		c9.9,21.1,20.6,41.9,30.4,63.1c13.7,29.5,20.9,61,25.4,95.5c2.5-22.5,5.4-42.8,6.6-63.2c0.5-7.3,2.1-14.6,1.6-22
 		c-0.5-8,0.1-16-0.3-24c-0.7-16.7-4-33-9.8-48.7c-3.3-8.9-8.4-16.5-15-23.2c-8-8.3-16.1-16.4-23.9-24.9
@@ -1136,7 +1421,12 @@ onMounted(() => {
         id="brachialis"
         inkscape:label="brachialis-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1132.6,1314.7c-6.8-26-12-52.3-14.4-79.2
 		c-2.9-32.2-6.5-63.8,4.1-94.7c7.2-21.2,19-47.8,31-67.4c18-29.3,36-52.7,39.6-88.4c5.8,9.3,15,20.5,19.6,30.2
 		c10.3,21.3,16.8,43.5,15.6,67.5c-0.4,7.6-0.5,15.3,0,23c1.6,24.9-4.7,48.5-12.9,71.3c-8.5,23.4-18.7,46.2-28.6,69.1
@@ -1148,7 +1438,12 @@ onMounted(() => {
         id="path14070"
         inkscape:label="forearm-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M447.4,1212c-7.8,22.6-23.8,51.4-31.9,75.3
 		c1.7-22.2,8-49,9.2-69.7c1.2-22.5,2-44.8-3.9-66.5c-1.6-5.8-4.4-14-0.4-17.8c7.5-7.3,21.6-19.7,30.7-28.4c1.4,4.4,1.3,16.2,1.7,19
 		C456.5,1153.5,457.3,1183,447.4,1212L447.4,1212z"
@@ -1157,7 +1452,12 @@ onMounted(() => {
         id="path14060"
         inkscape:label="forearm-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M297,1232c-1.7-26.1-1.7-51.7,4.6-77.1c1.4-5.5,8.7-30.4,11-38
 		c0,18.9,6.6,48.5,11.4,61.3c9,24.3,19.9,47.4,30.3,71.1c19.4,44.2,26.8,91,32.6,138.9c1.8,14.9,2.1,29.9,1.5,45.5
 		c-3.9-4.9-8.1-9.5-11.7-14.6c-21.1-29.4-41.1-59.5-55.3-93C308.5,1296,299.2,1265.1,297,1232L297,1232z"
@@ -1165,14 +1465,14 @@ onMounted(() => {
       <path
         id="path14803"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1907.7,1112c-0.9,0-1.7,2.9-2.6,2.9c-67.3,86.1-86.4,196.9-65.3,304.1
 		c1-21.7,9.6-48.9,17-69.4c13.2-36.7,26.4-73.5,40.1-110.1c11.3-30.1,16.9-61,14-93.2C1910.2,1138.9,1908.8,1119.5,1907.7,1112z"
       />
       <path
         id="path14791"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M1843,1068.5c-6,33.8-39.5,109-57.4,141.5c-4.5,9.8-3.8,22.9-4.5,33.3
 		c-2.8,40.8-4.6,81.7-5.7,122.6c-0.6,21.7,1.1,43.5,2,65.2c0.2,4.1,1,8.3,2.4,12.2c2.8,7.5,9,8.7,15.1,3.7c7.7-6.3,8.5-15.2,10.4-24
 		c4.4-20.9,8.8-41.9,14-62.6c4.1-16.1,11-31.4,12.1-48.2c0.3-5.4,0.6-10.9,1.4-16.2c4.7-34.7,12.4-68.6,26.1-100.9
@@ -1181,7 +1481,7 @@ onMounted(() => {
       <path
         id="path14791_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2612.9,1115.2c-0.6,5.1-1.3,10.5-1.8,13.8c-3.2,18.8-8.7,32.1-18.7,48.3
 		c-3,4.9,1.5,12.7,3.7,17.9c13.7,32.3,21.4,66.2,26.1,100.9c0.8,5.3,1.1,10.8,1.4,16.2c1.1,16.8,8,32.1,12.1,48.2
 		c5.2,20.7,9.6,41.7,14,62.6c1.9,8.8,2.7,17.7,10.4,24c6.1,5,12.3,3.8,15.1-3.7c1.4-3.9,2.2-8.1,2.4-12.2c0.9-21.7,2.6-43.5,2-65.2
@@ -1190,7 +1490,7 @@ onMounted(() => {
       <path
         id="path14803_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2543.6,1144.3c-2.9,32.2,2.7,63.1,14,93.2c13.7,36.6,26.9,73.4,40.1,110.1
 		c7.4,20.5,16,47.7,17,69.4c21.1-107.1,1.9-218-65.3-304.1c-0.9,0-1.7-2.9-2.6-2.9C2545.7,1117.5,2544.3,1136.9,2543.6,1144.3z"
       />
@@ -1198,7 +1498,12 @@ onMounted(() => {
         id="forearm_1_"
         inkscape:label="forearm-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1093.5,1211.8c-9.9-29-9.1-58.5-5.4-88.1
 		c0.4-2.8,0.3-14.6,1.7-19c9.1,8.7,23.2,21.1,30.7,28.4c4,3.8,1.2,12-0.4,17.8c-5.9,21.7-5.1,44-3.9,66.5
 		c1.2,20.7,7.5,47.5,9.2,69.7C1117.4,1263.2,1101.3,1234.4,1093.5,1211.8L1093.5,1211.8z"
@@ -1207,7 +1512,12 @@ onMounted(() => {
         id="forearm"
         inkscape:label="forearm-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1243.9,1231.8c-2.2,33.1-11.5,64-24.4,94.1
 		c-14.2,33.5-34.2,63.6-55.3,93c-3.6,5.1-7.8,9.7-11.7,14.6c-0.6-15.6-0.3-30.6,1.5-45.5c5.8-47.9,13.2-94.7,32.6-138.9
 		c10.4-23.7,21.3-46.8,30.3-71.1c4.8-12.8,11.4-42.4,11.4-61.3c2.3,7.6,9.6,32.5,11,38C1245.6,1180.1,1245.6,1205.7,1243.9,1231.8
@@ -1217,7 +1527,12 @@ onMounted(() => {
         id="forearm_2_"
         inkscape:label="biceps-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M1074.5,1051c-0.4-7.4,5.9-18.8,6-26.2
 		c19.1,29.4,36.4,49.5,62.8,74c-5.6,11.5-14.7,26.8-19.6,36.8c-8.5-7.7-16.6-15.8-25.5-22.9c-11-8.7-18.4-19.8-21.2-33.2
 		C1075,1070.2,1075,1060.5,1074.5,1051L1074.5,1051z"
@@ -1226,7 +1541,12 @@ onMounted(() => {
         id="path14072"
         inkscape:label="biceps-right"
         class="st0"
-        style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+        style="
+          fill: none;
+          stroke: lightgray;
+          stroke-width: 7;
+          stroke-miterlimit: 10;
+        "
         d="M466.4,1051.2c-0.5,9.5-0.5,19.2-2.5,28.5
 		c-2.8,13.4-10.2,24.5-21.2,33.2c-8.9,7.1-17,15.2-25.5,22.9c-4.9-10-14-25.3-19.6-36.8c26.4-24.5,43.7-44.6,62.8-74
 		C460.5,1032.4,466.8,1043.8,466.4,1051.2L466.4,1051.2z"
@@ -1236,21 +1556,21 @@ onMounted(() => {
       <path
         id="path14825"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2039.2,1142.4c-24.9,36-39.1,86.2-20.6,127.7c13.8-7.6,27.3-9.4,41.1-16.6
 		c13.1-6.8,26.5-12.7,39.7-19.2c7.2-9.1,37.3-13.6,38.3-9.2C2081.8,1202.6,2051.8,1171.1,2039.2,1142.4z"
       />
       <path
         id="path14825_2_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2318.8,1224.7c1-4.4,31.1,0.1,38.3,9.2c13.2,6.5,26.6,12.4,39.7,19.2
 		c13.8,7.2,27.3,9,41.1,16.6c18.5-41.5,4.3-91.7-20.6-127.7C2404.6,1170.7,2374.7,1202.2,2318.8,1224.7z"
       />
       <path
         id="path14815"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2135.6,1223.6c-5-5.9-10.4-25.8-10.6-33.2c-7.3-33-18.6-56.3-33.4-86.6
 		c-11.6-23.6-21.8-46.8-33.7-70.2c-2.6-5-13.9-27.1-17.2-34.1c-0.2,3.5-0.3,21.8-0.3,23c0,38.1,0.4,76.3-0.1,114.4
 		c0.5,11.5,5.7,20.8,16.5,33c10.8,9.5,19.8,18.9,30.9,28c10.6,5.2,21.3,12.3,34.9,19.7L2135.6,1223.6z"
@@ -1258,7 +1578,7 @@ onMounted(() => {
       <path
         id="path14787"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2195.9,1351.9c-1.4-3.1-10.8-16.6-11.7-17.7c-10.3-13.5-20.4-27.1-31-40.3
 		c-8.4-10.4-24-29.9-36.1-36.5c-12-6.6-25.5-10-39.6-8.3c-17.8,4.4-37.2,12.2-57.3,20c-4.8,3-5,19.2-6.3,24.8
 		c-2.8,11.5-6.1,22.9-8.6,34.4c-6.2,28.5-10.7,57.2-9.3,86.6c0.1,2.4,0.6,4.7,0.9,7.3c10.1-8.1,19.6-15.6,29-23.2
@@ -1268,13 +1588,13 @@ onMounted(() => {
       <path
         id="path14825_1_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2137.7,1223.1c-56.5-23.2-86.6-52.6-98.5-80.7c-24.9,36-39.1,86.2-20.6,127.7"
       />
       <path
         id="path14815_2_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2332.8,1220.2c13.6-7.4,24.3-14.5,34.9-19.7c11.1-9.1,20.1-18.5,30.9-28
 		c10.8-12.2,16-21.5,16.5-33c-0.5-38.1-0.1-76.3-0.1-114.4c0-1.2-0.1-19.5-0.3-23c-3.3,7-14.6,29.1-17.2,34.1
 		c-11.9,23.4-22.1,46.6-33.7,70.2c-14.8,30.3-26.1,53.6-33.4,86.6c-0.2,7.4-5.6,27.3-10.6,33.2L2332.8,1220.2z"
@@ -1282,7 +1602,7 @@ onMounted(() => {
       <path
         id="none_12_"
         class="st1"
-        style="fill:none;stroke:lightgray;stroke-width:7"
+        style="fill: none; stroke: lightgray; stroke-width: 7"
         d="M2278,1339.3c5.8-1.3,9.9-2.4,14-3.2c19.2-3.1,36.9,2.3,53.7,10.6c15.8,7.9,30.9,16.9,46.4,25.2
 		c6.7,3.6,13.7,7.8,20.6,11.2c5.5,4,6.8,5.6,12.7,10.5c0.5,1.1,4.6,4,5.6,4.8c9.4,7.6,18.9,15.1,29,23.2c0.3-2.6,0.8-4.9,0.9-7.3
 		c1.4-29.4-3.1-58.1-9.3-86.6c-2.5-11.5-5.8-22.9-8.6-34.4c-1.3-5.6-1.5-21.8-6.3-24.8c-20.1-7.8-39.5-15.6-57.3-20
@@ -1293,7 +1613,12 @@ onMounted(() => {
     <path
       id="none_4_"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M554.5,1305.2c0.3-1.4,2.2-9.7,3.3-12.1c2.2,3.2,9,12.4,10.3,14.8
 	c6.5,11.6,8.5,20.7,9.2,36.6c-0.2,33.1-1.6,64.5-10.1,97.9c-3,14.5-9.8,35.4-17.4,48.2c-5.4,9.1-15.7,19.7-26.2,24.9
 	c3.5-14.7,7-36.3,10-50.1c3.8-17.5,7.1-35.1,6.4-53.2C538.4,1375.7,545.6,1340.3,554.5,1305.2z"
@@ -1301,7 +1626,7 @@ onMounted(() => {
     <path
       id="none_5_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2521.8,2669.7c-4.6,9.2-8.2,16.6-12,23.6c-0.5-0.2-1-0.3-1.5-0.4c0-1.5-0.2-3.1,0.1-4.6
 	c1.4-6.2,2.6-12.5,4.6-18.6c4.4-13.4-0.4-24.5-8.1-34.9c-5.5-7.4-11.8-14.4-16.8-22.1c-6.8-10.3-12.6-21.3-18.9-32
 	c-2.3,50.6-0.6,101,13.5,150.5c-0.7,0.1-1.3,0.3-2,0.4c-1-1.9-2-3.6-2.8-5.5c-8.4-21-12.6-43-13.5-65.5c-1.1-23.9-2.4-48-1.6-71.9
@@ -1316,14 +1641,19 @@ onMounted(() => {
     <path
       id="none_1_"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M1178.4,1655.9c-5,8.5-9.7,17.2-14.7,25.7c-2.5,4.3-5.2,8.4-8.5,13.5c-3.3-8.3-0.8-14.4,2.5-20.2
 	c6.8-11.8,13.8-23.6,20.7-35.4c1.2-2,2.5-3.9,4.2-6.4C1184.9,1642.1,1182.4,1649.1,1178.4,1655.9z"
     />
     <path
       id="none_9_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2496.4,2613.9c-1.8-10.3-4.7-20.5-5.3-30.9c-0.9-17.5-1-35.1-0.2-52.6
 	c2.2-45.5,13.3-89.7,20.9-134.5c6.8-40.1,13.3-80.2,12.1-121.1c-0.8-27.9-11.3-65.4-20.2-92.3c-0.5,0.4,5.9,10.6,5.9,10.9
 	c0.1,3.6-5.1,7.1-4.7,10.6c2.9,27.2-0.4,54.3-3,81.4c-2.6,27-5,54-8.8,80.9c-4.3,29.7-10.7,59.3-15.2,89
@@ -1333,14 +1663,14 @@ onMounted(() => {
     <path
       id="none_10_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2405.4,2653.5c7.5-35.8,7.4-70.5,0.5-105.4c0,8.5-0.2,16.9,0,25.4c0.4,17.4-2.1,34.5-6.5,51.2
 	C2396.6,2635.3,2398.9,2643.9,2405.4,2653.5L2405.4,2653.5z"
     />
     <path
       id="none_13_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2609,1547.7c-5.2-5.1-9.7-9.6-15.7-15c3.5,1.2,5.5,1.6,7.3,2.5c19.5,10.2,31.4,26.7,38.2,47.2
 	c3.2,9.7,6.6,19.4,9.3,29.2c0.9,3.4,0.7,7.5,0,11.1c-1.8,10.1-3.8,20.1-6.3,30c-1,3.8-3,7.6-5.5,10.7c-5.8,7.2-12.4,13.8-18.2,21
 	c-7.4,9.1-7.3,20.3,0.1,31.8c2.2-1.5,4.9-2.5,6.8-4.4c11.9-12.1,24.5-23.7,35.1-36.8c7.3-9.1,13.1-19.9,17.2-30.8
@@ -1354,7 +1684,7 @@ onMounted(() => {
     <path
       id="none_11_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2506.3,1865.2c1.9-34.5,4.3-69,5.5-103.5c2.5-75.4-8.8-149.2-27.1-222.2
 	c-7.4-29.5-15-59-20.5-88.8c-2.4-13.4-0.4-25-9.9-33.4c-5.5-4.9-22.4-17.1-29.2-22.5c-7.6,20.4-26.8,47.9-21.7,78.4
 	c1.3,16.9,4.9,33.5,10.4,49.6c6.5,19,14.9,40.7,19,60.3c6,28.7,18,52.2,26.5,80c12.9,38.5,26.4,76.9,31.4,115
@@ -1363,7 +1693,7 @@ onMounted(() => {
     <path
       id="none_8_"
       class="st1"
-      style="fill:none;stroke:lightgray;stroke-width:7"
+      style="fill: none; stroke: lightgray; stroke-width: 7"
       d="M2405.5,2158c0.9-7.5,1.4-13.5,2.4-19.3c2.2-27.8,18.3-61.9,39.9-89.2c4.1-5.2,11.5-9.8,8.8-16.5
 	c-13.7-30.7-30.9-73-41.9-104.7c-0.3-0.9-2.9-7.6-3.7-9c1.8,33.7-14.6,79.6-27.6,107.8c-6.9,17.6-14.6,34.9-22,52.2
 	c-1.5,3.5,4.1,6.4,6.4,9.8c14.2,20.6,25.3,42.9,35.1,65.9C2403.1,2155.6,2403.7,2156,2405.5,2158L2405.5,2158z"
@@ -1371,7 +1701,12 @@ onMounted(() => {
     <path
       id="none_3_"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M1121.2,1489.5c8.8-13.7,9.6-27.5,19.6-40.2c26.6-34.9,54.8-70.1,73.4-110.2
 	c5-10.9,17.8-47.1,23-58.9c0,2.9-1.8,30-2,32.1c-3.4,28.7-5.7,57.3-5.5,86.2c0.2,25.9,0.9,51.9,0.1,77.8c-1.2,38.7-3.5,77.3-5.6,116
 	c-1,19.2-2.5,38.3-4.3,57.4c-0.9,9.5-2.2,19.1-4.8,28.3c-3.4,12.3-8.1,24.3-12.5,36.3c-3.9,10.7-8,21.4-12.4,33
@@ -1384,14 +1719,24 @@ onMounted(() => {
     <path
       id="none_2_"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M1163.5,1698.9c6.3-12.4,13.8-24.1,21.2-36.8c0.5,1.8,0.8,2.4,0.7,3c-3.8,18.3-7.6,36.7-11.8,55
 	c-0.7,3.1-3.3,5.8-6,10.4C1162.3,1718.6,1158.4,1708.8,1163.5,1698.9z"
     />
     <path
       id="none"
       class="st0"
-      style="fill:none;stroke:lightgray;stroke-width:7;stroke-miterlimit:10;"
+      style="
+        fill: none;
+        stroke: lightgray;
+        stroke-width: 7;
+        stroke-miterlimit: 10;
+      "
       d="M1175,834.1c8.4,28,12.1,56.8,13.9,86.1c1.2,17.6,2.7,35.1,3.8,52.6c1.2,20.2-3.2,39.5-12.2,57.5
 	c-8.1,16.2-19,32.1-27.5,48.2c-0.3-0.2-4.7,9.6-5,9.4c8.4-22,18.2-55,23.1-77.7c6.8-31.4,9.9-63.2,8.3-95.3
 	c-1.9-37.6-7.9-63.5-21.2-95.2c-3.4-8.1-1.8-8.8,6.7-15.6C1168.4,814.3,1172,824.1,1175,834.1L1175,834.1z"
@@ -1407,7 +1752,7 @@ svg {
 }
 
 .active * {
-  fill: rgb(255, 102, 102)!important;
+  fill: rgb(255, 102, 102) !important;
   position: relative;
   overflow: hidden;
 }
@@ -1420,6 +1765,6 @@ svg {
 }
 
 .secondary-active * {
-  fill: #ffe55b!important;
+  fill: #ffe55b !important;
 }
 </style>

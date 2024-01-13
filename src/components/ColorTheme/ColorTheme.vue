@@ -1,7 +1,7 @@
 <script setup>
 import { toggleColorTheme } from '@/composables/toggleColor'
 
-const { userTheme, toggleTheme } = toggleColorTheme();
+const { userTheme, toggleTheme } = toggleColorTheme()
 </script>
 
 <template>

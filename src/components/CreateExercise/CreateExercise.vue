@@ -1,7 +1,11 @@
 <script setup>
 import { computed, reactive, ref, watch } from 'vue'
 import { uid } from 'uid'
-import { exerciseLevelData, forceType, musclesGroups } from '@/constants/MUSCLES.js'
+import {
+  exerciseLevelData,
+  forceType,
+  musclesGroups
+} from '@/constants/MUSCLES.js'
 import { toast } from 'vue3-toastify'
 import { userExercisesStore } from '@/stores/userExercises.js'
 
@@ -26,7 +30,7 @@ const musclesGroupsList = ref(JSON.parse(JSON.stringify(musclesGroups)))
 const helpersGroupsList = ref(JSON.parse(JSON.stringify(musclesGroups)))
 
 const addMainMuscleGroup = muscle => {
-  musclesGroupsList.value.forEach(item => item.selected = false)
+  musclesGroupsList.value.forEach(item => (item.selected = false))
 
   newExercise.main_muscle = []
   newExercise.main_muscle.push(muscle)
@@ -40,7 +44,9 @@ const addHelpersMuscleGroup = muscle => {
 
 const removeHelpersMuscleGroup = muscle => {
   muscle.selected = false
-  newExercise.helpers = newExercise.helpers.filter(item => item.id !== muscle.id)
+  newExercise.helpers = newExercise.helpers.filter(
+    item => item.id !== muscle.id
+  )
 }
 
 const isCreateAvailable = computed(() => {
@@ -68,16 +74,22 @@ const resetNewExercise = () => {
   helpersGroupsList.value = JSON.parse(JSON.stringify(musclesGroups))
 }
 
-watch(() => newExercise.type, val => {
-  if (val === 'Isolation') {
-    helpersGroupsList.value.forEach(item => item.selected = false)
-    newExercise.helpers = []
+watch(
+  () => newExercise.type,
+  val => {
+    if (val === 'Isolation') {
+      helpersGroupsList.value.forEach(item => (item.selected = false))
+      newExercise.helpers = []
+    }
   }
-})
+)
 
-watch(() => isCreateExerciseVisible.value, val => {
-  if (!val) resetNewExercise()
-})
+watch(
+  () => isCreateExerciseVisible.value,
+  val => {
+    if (!val) resetNewExercise()
+  }
+)
 </script>
 
 <template>
@@ -96,11 +108,9 @@ watch(() => isCreateExerciseVisible.value, val => {
     confirm-label="Create"
     :is-confirm-active="isCreateAvailable"
   >
-    <template #modal-header>
-      Create exercise
-    </template>
+    <template #modal-header> Create exercise </template>
     <template #modal-body>
-      <Loading v-if="isLoading"/>
+      <Loading v-if="isLoading" />
       <div class="creating-modal__wr">
         <Input
           v-model="newExercise.name"
@@ -108,7 +118,9 @@ watch(() => isCreateExerciseVisible.value, val => {
           @clear="newExercise.name = ''"
         />
         <div class="creating-modal__item">
-          <h3 class="creating-modal__item-title">Exercise type {{ isCreateAvailable }}</h3>
+          <h3 class="creating-modal__item-title">
+            Exercise type {{ isCreateAvailable }}
+          </h3>
           <GroupInputs>
             <Radio
               v-model="newExercise.type"
@@ -126,7 +138,9 @@ watch(() => isCreateExerciseVisible.value, val => {
           </GroupInputs>
         </div>
         <div class="creating-modal__item">
-          <h3 class="creating-modal__item-title">Main muscle group and helpers</h3>
+          <h3 class="creating-modal__item-title">
+            Main muscle group and helpers
+          </h3>
           <div class="creating-modal__muscles">
             <MultiSelect
               label="Main muscle"

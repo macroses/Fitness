@@ -23,19 +23,21 @@ const startEditing = (event, row, columnIndex) => {
   editingCellIndex.value = columnIndex
 
   nextTick(() => {
-    const inputElement = event.currentTarget.querySelector(`div:nth-child(${columnIndex + 1}) input`)
+    const inputElement = event.currentTarget.querySelector(
+      `div:nth-child(${columnIndex + 1}) input`
+    )
     if (inputElement) {
       inputElement.focus()
     }
   })
 }
 
-const stopEditing = (row) => {
+const stopEditing = row => {
   row.editing = false
   editingCellIndex.value = null
 }
 
-const onBeforeEnter = (el) => {
+const onBeforeEnter = el => {
   el.style.opacity = 0
   el.style.height = 0
 }
@@ -69,15 +71,15 @@ const showProgramDescription = () => {
 }
 
 const updateDay = (tableIndex, selectedDay) => {
-  tables.value[tableIndex].day = selectedDay.id;
+  tables.value[tableIndex].day = selectedDay.id
 }
 
 onMounted(() => {
-  const descriptionValue = localStorage.getItem('program-description');
-  isDescriptionVisible.value = descriptionValue !== 'false';
+  const descriptionValue = localStorage.getItem('program-description')
+  isDescriptionVisible.value = descriptionValue !== 'false'
 
   if (!descriptionValue) {
-    localStorage.setItem('program-description', true);
+    localStorage.setItem('program-description', true)
   }
 })
 </script>
@@ -107,7 +109,6 @@ onMounted(() => {
           </Button>
         </h1>
         <div class="custom-program__micro-funcs">
-
           <div class="group">
             <Button
               size="small"
@@ -304,13 +305,13 @@ onMounted(() => {
                 class="custom-program__cell"
                 style="width: 100px"
               >
-                {{  row.tonnage() }}
+                {{ row.tonnage() }}
               </div>
               <div
                 class="custom-program__cell"
                 style="width: 100px"
               >
-                {{  row.totalReps() }}
+                {{ row.totalReps() }}
               </div>
               <div
                 class="custom-program__cell"

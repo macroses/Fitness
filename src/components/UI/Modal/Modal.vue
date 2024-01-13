@@ -29,14 +29,21 @@ const modalContent = ref(null)
 
 gsap.registerPlugin(CSSPlugin)
 
-const unmountTimer = () => setTimeout(() => {
-  close()
-}, 500)
+const unmountTimer = () =>
+  setTimeout(() => {
+    close()
+  }, 500)
 
 onMounted(() => {
   const t1 = gsap.timeline()
   t1.from(modalLayer.value, { autoAlpha: 0, duration: 0.25 })
-  t1.from(modalContent.value, { autoAlpha: 0, scale: 0.8, y: '-100', duration: 0.25, ease: 'power2' })
+  t1.from(modalContent.value, {
+    autoAlpha: 0,
+    scale: 0.8,
+    y: '-100',
+    duration: 0.25,
+    ease: 'power2'
+  })
   t1.play()
 
   document.body.style.overflow = 'hidden'
@@ -44,7 +51,12 @@ onMounted(() => {
 
 const animateBeforeClose = () => {
   const t2 = gsap.timeline()
-  t2.to(modalContent.value, { autoAlpha: 0, y: '+100', duration: 0.5, ease: 'power2' })
+  t2.to(modalContent.value, {
+    autoAlpha: 0,
+    y: '+100',
+    duration: 0.5,
+    ease: 'power2'
+  })
   t2.to(modalLayer.value, { autoAlpha: 0, duration: 0.5 }, 0)
   t2.play()
 

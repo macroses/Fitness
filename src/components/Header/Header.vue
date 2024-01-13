@@ -42,9 +42,7 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
 
         <div class="header__user">
           <nav class="header__nav">
-            <RouterLink to="/exercises">
-              Exercises
-            </RouterLink>
+            <RouterLink to="/exercises"> Exercises </RouterLink>
           </nav>
           <Avatar
             v-if="session"

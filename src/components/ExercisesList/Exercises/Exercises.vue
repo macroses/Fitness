@@ -1,5 +1,4 @@
 <script setup>
-
 import { workoutStore } from '@/stores/workout.js'
 
 const props = defineProps({
@@ -47,8 +46,12 @@ const deleteExercise = id => emit('deleteExercise', id)
         <button
           type="button"
           class="exercises__item-add"
-          @click.stop="workoutsStore.addExerciseToWorkout(exercise.id, exercise.name)"
-        >+</button>
+          @click.stop="
+            workoutsStore.addExerciseToWorkout(exercise.id, exercise.name)
+          "
+        >
+          +
+        </button>
         <button
           type="button"
           class="favorite-icon"

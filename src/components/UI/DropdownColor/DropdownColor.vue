@@ -39,9 +39,7 @@ onClickOutside(container, () => (isDropDownActive.value = false))
     class="dropdown-color__container"
     @click="isDropDownActive = true"
   >
-    <div class="title">
-      Label
-    </div>
+    <div class="title">Label</div>
     <div
       class="dropdown-color__result"
       :style="{ backgroundColor: 'rgb(' + defaultColor + ')' }"

@@ -10,7 +10,7 @@ describe('Calendar.vue', () => {
       touches: [{ clientX: 100 }],
       changedTouches: [{ clientX: 200 }]
     }
-    ref.mockImplementation((initValue) => {
+    ref.mockImplementation(initValue => {
       return {
         value: initValue
       }

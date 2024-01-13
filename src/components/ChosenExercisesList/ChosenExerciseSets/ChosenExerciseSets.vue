@@ -6,7 +6,8 @@ import { useEventsStore } from '@/stores/userEvents'
 const store = workoutStore()
 const eventsStore = useEventsStore()
 
-const getEffortColor = effort => EFFORTS.filter(el => el.id === effort).map(item => item.color)
+const getEffortColor = effort =>
+  EFFORTS.filter(el => el.id === effort).map(item => item.color)
 
 const deleteSetHandler = setId => store.deleteSet(setId)
 
@@ -42,7 +43,9 @@ const isPositive = num => ({
               :style="[
                 getEffortColor(result.effort).length
                   ? `background: ${getEffortColor(result.effort)}`
-                  : `background: ${getEffortColor(result.prevEffort)}; opacity: 0.5`,
+                  : `background: ${getEffortColor(
+                      result.prevEffort
+                    )}; opacity: 0.5`
               ]"
             />
             <td
@@ -50,7 +53,7 @@ const isPositive = num => ({
               :style="{
                 background: getEffortColor(result.prevEffort),
                 opacity: 0.5,
-                borderLeft: '1px solid rgb(var(--text-color) / 0.2)',
+                borderLeft: '1px solid rgb(var(--text-color) / 0.2)'
               }"
             />
 
@@ -59,11 +62,14 @@ const isPositive = num => ({
               <span
                 v-if="!result.weight"
                 class="prev-result"
-              >{{ result.prevWeight }}</span>
+                >{{ result.prevWeight }}</span
+              >
               <span
                 v-if="result.prevWeight && result.weight"
                 class="prev-result__grow"
-                :style="{ color: isPositive(result.weight - result.prevWeight).color }"
+                :style="{
+                  color: isPositive(result.weight - result.prevWeight).color
+                }"
               >
                 <span
                   v-if="result.weight - result.prevWeight !== 0"
@@ -80,11 +86,14 @@ const isPositive = num => ({
               <span
                 v-if="!result.repeats"
                 class="prev-result"
-              >{{ result.prevRepeats }}</span>
+                >{{ result.prevRepeats }}</span
+              >
               <span
                 v-if="result.prevRepeats && result.repeats"
                 class="prev-result__grow"
-                :style="{ color: isPositive(result.repeats - result.prevRepeats).color }"
+                :style="{
+                  color: isPositive(result.repeats - result.prevRepeats).color
+                }"
               >
                 <span
                   v-if="result.repeats - result.prevRepeats !== 0"

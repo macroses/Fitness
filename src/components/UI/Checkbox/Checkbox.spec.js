@@ -24,11 +24,11 @@ describe('test checkbox', () => {
       }
     })
 
-    const checkbox = wrapper.find('.checkbox-component');
-    await checkbox.setChecked(true);
+    const checkbox = wrapper.find('.checkbox-component')
+    await checkbox.setChecked(true)
 
-    expect(wrapper.emitted()['update:modelValue']).toBeTruthy();
-    expect(wrapper.emitted()['update:modelValue'][0]).toEqual([true]);
+    expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
+    expect(wrapper.emitted()['update:modelValue'][0]).toEqual([true])
   })
 
   test('render is checked if modelValue is true', () => {

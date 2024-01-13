@@ -71,7 +71,11 @@ onBeforeRouteLeave(() => {
               >
                 <Icon
                   width="20px"
-                  :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"
+                  :icon-name="
+                    isCalendarVisible
+                      ? 'calendar-arrow-up'
+                      : 'calendar-arrow-down'
+                  "
                 />
               </Button>
             </div>
@@ -80,7 +84,8 @@ onBeforeRouteLeave(() => {
               <WorkoutDescription />
               <div class="user-workout__funcs">
                 <div class="total-tonnage">
-                  Total tonnage:&nbsp; <b>{{ workoutsStore.tonnage / 1000 }} T</b>
+                  Total tonnage:&nbsp;
+                  <b>{{ workoutsStore.tonnage / 1000 }} T</b>
                 </div>
                 <Checkbox
                   v-if="workoutsStore.filteredCacheExercises.length > 1"
@@ -104,7 +109,11 @@ onBeforeRouteLeave(() => {
                 @click="workoutToBase"
                 :disabled="!workoutsStore.exercisesParamsCollection.length"
               >
-                {{ workoutsStore.isWorkoutEdit ? 'Update workout' : 'Save workout' }}
+                {{
+                  workoutsStore.isWorkoutEdit
+                    ? 'Update workout'
+                    : 'Save workout'
+                }}
               </Button>
             </div>
           </div>
@@ -135,7 +144,7 @@ onBeforeRouteLeave(() => {
 }
 .slideFromRight-enter-active,
 .slideFromRight-leave-active {
-  transition: all 0.3s ease
+  transition: all 0.3s ease;
 }
 
 .slideFromLeft-enter-from,
@@ -145,6 +154,6 @@ onBeforeRouteLeave(() => {
 }
 .slideFromLeft-enter-active,
 .slideFromLeft-leave-active {
-  transition: all 0.3s ease
+  transition: all 0.3s ease;
 }
 </style>

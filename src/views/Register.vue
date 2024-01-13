@@ -25,7 +25,10 @@ const loading = ref(false)
 
 const register = async () => {
   v$.value.password.$touch()
-  if (!v$.value.password.$error && formState.password === formState.confirmPassword) {
+  if (
+    !v$.value.password.$error &&
+    formState.password === formState.confirmPassword
+  ) {
     try {
       loading.value = true
       const { error } = await supabase.auth.signUp({
@@ -42,7 +45,9 @@ const register = async () => {
 
     return
   }
-  toast.error('Password do not match or is less than 6 characters', { position: toast.POSITION.TOP_CENTER })
+  toast.error('Password do not match or is less than 6 characters', {
+    position: toast.POSITION.TOP_CENTER
+  })
 }
 
 async function signInWithGitHub() {
@@ -57,9 +62,7 @@ async function signInWithGitHub() {
     class="form__auth"
     @submit.prevent="register"
   >
-    <h1 class="form__header">
-      Register
-    </h1>
+    <h1 class="form__header">Register</h1>
     <Input
       v-model="formState.email"
       label-placeholder="Email"
@@ -82,7 +85,10 @@ async function signInWithGitHub() {
         @click="signInWithGitHub"
         transparent
       >
-        <Icon icon-name="github" width="28px"/>
+        <Icon
+          icon-name="github"
+          width="28px"
+        />
       </Button>
     </div>
 

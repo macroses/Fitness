@@ -25,9 +25,9 @@ const paramsLocalStorage = ref(JSON.parse(localStorage.getItem('bodyParams')))
 const isAsideVisible = ref(false)
 const aside = ref(null)
 
-const blankCanvas = document.createElement('canvas');
+const blankCanvas = document.createElement('canvas')
 blankCanvas.classList.add('pseudo')
-blankCanvas.style.opacity = '0';
+blankCanvas.style.opacity = '0'
 
 const setActiveField = id => {
   paramsStore.activeBodyField = id
@@ -41,7 +41,11 @@ const submitBodyParams = async () => {
     return
   }
 
-  await paramsStore.pushBodyParamsToBase(inputValue, paramsStore.activeParam, isLoading)
+  await paramsStore.pushBodyParamsToBase(
+    inputValue,
+    paramsStore.activeParam,
+    isLoading
+  )
   inputValue.value = null
 
   toast.success('Saved', { position: toast.POSITION.TOP_RIGHT })
@@ -50,13 +54,12 @@ const submitBodyParams = async () => {
 const getDate = date => {
   dateStore.date = date
   isCalendarVisible.value = false
-  toast.info(
-    `Selected date is ${dayjs(date).format('DD.MM.YYYY')}`,
-    { position: toast.POSITION.TOP_RIGHT }
-  )
+  toast.info(`Selected date is ${dayjs(date).format('DD.MM.YYYY')}`, {
+    position: toast.POSITION.TOP_RIGHT
+  })
 }
 
-const getFilter = filterId => filterType.value = filterId
+const getFilter = filterId => (filterType.value = filterId)
 
 onMounted(async () => await paramsStore.fetchEventHandler())
 
@@ -67,13 +70,13 @@ const handleDragEnd = () => {
 
 const dragOptions = {
   animation: 200,
-  group: "description",
+  group: 'description',
   disabled: false,
-  ghostClass: "ghost"
+  ghostClass: 'ghost'
 }
 
 const handleDragStart = event => {
-  event.dataTransfer.setDragImage(blankCanvas, 0, 0);
+  event.dataTransfer.setDragImage(blankCanvas, 0, 0)
   document.body.appendChild(blankCanvas)
 }
 
@@ -156,14 +159,21 @@ onClickOutside(aside, () => {
             >
               <Icon
                 width="20px"
-                :icon-name="isCalendarVisible ? 'calendar-arrow-up' : 'calendar-arrow-down'"
+                :icon-name="
+                  isCalendarVisible
+                    ? 'calendar-arrow-up'
+                    : 'calendar-arrow-down'
+                "
               />
             </Button>
           </div>
         </div>
         <div class="body-params__top">
           <Button @click="toggleAside">
-            <Icon icon-name="bars" width="15px"/>
+            <Icon
+              icon-name="bars"
+              width="15px"
+            />
           </Button>
           <h1 class="body-params__header">
             {{ paramsStore.activeParam.label }}
@@ -185,7 +195,8 @@ onClickOutside(aside, () => {
 
         <div
           v-if="paramsStore.filteredParamsByProp.length"
-          class="body-params__content-wrap">
+          class="body-params__content-wrap"
+        >
           <div class="button-group body-params__content-group">
             <ButtonGroup
               :buttons="FILTER_LIST"
@@ -195,10 +206,16 @@ onClickOutside(aside, () => {
           <div class="body-params__last-data">
             <div class="body-params__last-content">
               {{ paramsStore.calculateTableCellContent[0].content }}
-              <span class="body-params__last-unit">{{ paramsStore.activeParam.unit }}</span>
+              <span class="body-params__last-unit">{{
+                paramsStore.activeParam.unit
+              }}</span>
             </div>
             <div class="body-params__last-date">
-              {{ dayjs(paramsStore.calculateTableCellContent[0].date).format('dddd DD.MM.YYYY') }}
+              {{
+                dayjs(paramsStore.calculateTableCellContent[0].date).format(
+                  'dddd DD.MM.YYYY'
+                )
+              }}
             </div>
           </div>
           <div class="body-params__data">
@@ -206,11 +223,12 @@ onClickOutside(aside, () => {
               <ParamsTable />
             </div>
           </div>
-          <BodyParamsChart
-            :filter="filterType"
-          />
+          <BodyParamsChart :filter="filterType" />
         </div>
-        <div v-else class="body-params__empty">
+        <div
+          v-else
+          class="body-params__empty"
+        >
           <Vue3Lottie
             animation-link="lottie/box.json"
             :height="300"

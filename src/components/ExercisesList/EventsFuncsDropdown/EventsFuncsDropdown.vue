@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
   <div
@@ -13,9 +11,7 @@
       class="user-dropdown"
       style="width: 100px"
     >
-      <li class="user-dropdown__item">
-        Edit
-      </li>
+      <li class="user-dropdown__item">Edit</li>
       <li
         class="user-dropdown__item"
         @click="deleteEvent(event.workoutId)"

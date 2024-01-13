@@ -9,8 +9,8 @@ const supersetExercises = ref([])
 
 const toggleParameters = id => {
   activeExerciseId.value === id
-    ? activeExerciseId.value = null
-    : activeExerciseId.value = id
+    ? (activeExerciseId.value = null)
+    : (activeExerciseId.value = id)
 
   store.effort = 0
   store.weight = null
@@ -27,7 +27,10 @@ const handleMerge = () => store.mergeToSuperset(supersetExercises)
 
 const handleSplit = supersetId => store.splitToExercises(supersetId)
 
-watch(() => store.isSuperset, () => activeExerciseId.value = null)
+watch(
+  () => store.isSuperset,
+  () => (activeExerciseId.value = null)
+)
 </script>
 
 <template>
@@ -63,7 +66,7 @@ watch(() => store.isSuperset, () => activeExerciseId.value = null)
             class="chosen-exercises__item-top"
             :class="{
               active: activeExerciseId === element.id,
-              superset: store.isSuperset,
+              superset: store.isSuperset
             }"
           >
             <div
@@ -123,7 +126,7 @@ watch(() => store.isSuperset, () => activeExerciseId.value = null)
             class="chosen-exercises__item-top"
             :class="{
               active: activeExerciseId === element.id,
-              superset: store.isSuperset,
+              superset: store.isSuperset
             }"
           >
             <Checkbox
@@ -184,7 +187,7 @@ watch(() => store.isSuperset, () => activeExerciseId.value = null)
         alt="add exercises"
         width="80"
         height="100"
-      >
+      />
     </div>
     <span>To save the workout, add at least one exercise</span>
   </div>

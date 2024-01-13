@@ -25,16 +25,20 @@ const addExerciseToWorkout = (exerciseId, exerciseName) => {
 }
 
 const handleTouchMove = event => {
-  const swipeDistance = event.touches[0].clientX - touchStartX.value;
+  const swipeDistance = event.touches[0].clientX - touchStartX.value
 
   if (swipeDistance < 0) {
-    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' });
+    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' })
   } else {
-    gsap.to(asideExercise.value, { x: swipeDistance, duration: 0.1, ease: 'none' });
+    gsap.to(asideExercise.value, {
+      x: swipeDistance,
+      duration: 0.1,
+      ease: 'none'
+    })
   }
 }
 
-const handleTouchStart = event => touchStartX.value = event.touches[0].clientX
+const handleTouchStart = event => (touchStartX.value = event.touches[0].clientX)
 
 const handleTouchEnd = event => {
   touchEndX.value = event.changedTouches[0].clientX
@@ -43,21 +47,31 @@ const handleTouchEnd = event => {
   if (swipeDistance >= 100) {
     closeAside()
   } else {
-    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' });
+    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' })
   }
 }
 
 const closeAside = () => {
-  const t1 = gsap.timeline();
-  t1.to(asideExercise.value, { autoAlpha: 0, x: '+350', duration: 0.25, ease: 'sine' });
-  t1.to(asideLayout.value, { autoAlpha: 0, duration: 0.25 });
-  t1.call(() => (store.exercise = null));
+  const t1 = gsap.timeline()
+  t1.to(asideExercise.value, {
+    autoAlpha: 0,
+    x: '+350',
+    duration: 0.25,
+    ease: 'sine'
+  })
+  t1.to(asideLayout.value, { autoAlpha: 0, duration: 0.25 })
+  t1.call(() => (store.exercise = null))
 }
 
 onMounted(() => {
   const t1 = gsap.timeline()
   t1.from(asideLayout.value, { autoAlpha: 0, duration: 0.25 })
-  t1.from(asideExercise.value, { autoAlpha: 0, x: '+100', duration: 0.25, ease: 'sine' })
+  t1.from(asideExercise.value, {
+    autoAlpha: 0,
+    x: '+100',
+    duration: 0.25,
+    ease: 'sine'
+  })
   t1.play()
 })
 
@@ -91,33 +105,29 @@ onClickOutside(asideExercise, () => closeAside())
       </Button>
       <div class="aside__content">
         <div class="exercise-description">
-          <div class="title">
-            Name
-          </div>
+          <div class="title">Name</div>
           <div class="value">
             {{ store.exercise.name }}
           </div>
         </div>
         <div class="exercise-description">
-          <div class="title">
-            Muscle targeted
-          </div>
+          <div class="title">Muscle targeted</div>
           <div class="value">
             {{ store.exercise.main_muscle }}
           </div>
         </div>
         <div class="exercise-description">
-          <div class="title">
-            Other muscles
-          </div>
+          <div class="title">Other muscles</div>
           <div class="value">
-            {{ store.exercise.helpers ? store.exercise.helpers.join(', ') : 'Not set' }}
+            {{
+              store.exercise.helpers
+                ? store.exercise.helpers.join(', ')
+                : 'Not set'
+            }}
           </div>
         </div>
         <div class="exercise-description">
-          <div class="title">
-            The muscles involved
-          </div>
+          <div class="title">The muscles involved</div>
           <div class="body-svg">
             <BodySvg
               :body-part="store.exercise?.main_muscle"
@@ -126,41 +136,31 @@ onClickOutside(asideExercise, () => closeAside())
           </div>
         </div>
         <div class="exercise-description">
-          <div class="title">
-            Mechanic type
-          </div>
+          <div class="title">Mechanic type</div>
           <div class="value">
             {{ store.exercise.type }}
           </div>
         </div>
         <div class="exercise-description">
-          <div class="title">
-            Type
-          </div>
+          <div class="title">Type</div>
           <div class="value">
             {{ store.exercise.load }}
           </div>
         </div>
         <div class="exercise-description">
-          <div class="title">
-            Equipment
-          </div>
+          <div class="title">Equipment</div>
           <div class="value">
             {{ store.exercise.equip }}
           </div>
         </div>
         <div class="exercise-description">
-          <div class="title">
-            Force
-          </div>
+          <div class="title">Force</div>
           <div class="value">
             {{ store.exercise.force }}
           </div>
         </div>
         <div class="exercise-description">
-          <div class="title">
-            Level of proficiency
-          </div>
+          <div class="title">Level of proficiency</div>
           <div class="value">
             {{ store.exercise.level }}
           </div>
