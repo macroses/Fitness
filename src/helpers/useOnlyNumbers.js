@@ -6,8 +6,8 @@ export const useOnlyNumbers = event => {
 }
 
 export const preventNonNumericPaste = event => {
-  const paste = (event.clipboardData || window.clipboardData).getData('text');
+  const paste = (event.clipboardData || window.clipboardData).getData('text')
   if (!paste.match(/^[0-9]*$/)) {
-    event.preventDefault();
+    event.preventDefault()
   }
 }

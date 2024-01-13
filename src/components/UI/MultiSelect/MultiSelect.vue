@@ -26,10 +26,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits([
-  'remove-items',
-  'get-items'
-])
+const emit = defineEmits(['remove-items', 'get-items'])
 
 const isDropdownVisible = ref(false)
 const multiselectDropdown = ref(null)
@@ -45,7 +42,7 @@ const getItems = item => {
   emit('get-items', item)
 }
 
-onClickOutside(multiselectDropdown, () => isDropdownVisible.value = false)
+onClickOutside(multiselectDropdown, () => (isDropdownVisible.value = false))
 </script>
 
 <template>

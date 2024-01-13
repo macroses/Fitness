@@ -29,7 +29,7 @@ const emit = defineEmits(['activeValue'])
 const dropdownParent = ref(null)
 const isDropdownOpened = ref(false)
 const activeItem = ref(props.dropdownList[0])
-const toggleDropdown = () => isDropdownOpened.value = !isDropdownOpened.value
+const toggleDropdown = () => (isDropdownOpened.value = !isDropdownOpened.value)
 
 const activeValue = item => {
   activeItem.value = item
@@ -37,7 +37,7 @@ const activeValue = item => {
   emit('activeValue', item)
 }
 
-onClickOutside(dropdownParent, () => isDropdownOpened.value = false)
+onClickOutside(dropdownParent, () => (isDropdownOpened.value = false))
 </script>
 
 <template>
@@ -52,7 +52,10 @@ onClickOutside(dropdownParent, () => isDropdownOpened.value = false)
       @click="toggleDropdown"
     >
       {{ activeItem.value || defaultValue }}
-      <Icon icon-name="angle-down" width="14px" />
+      <Icon
+        icon-name="angle-down"
+        width="14px"
+      />
     </p>
     <div
       class="dropdown__parent"

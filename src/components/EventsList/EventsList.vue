@@ -31,9 +31,10 @@ const deleteEvent = eventId => emit('deleteEvent', eventId)
 const activeIndex = ref(null)
 const dropdownList = ref(null)
 
-const toggleMenu = index => activeIndex.value = (activeIndex.value === index) ? null : index
+const toggleMenu = index =>
+  (activeIndex.value = activeIndex.value === index ? null : index)
 
-onClickOutside(dropdownList, () => activeIndex.value = null)
+onClickOutside(dropdownList, () => (activeIndex.value = null))
 
 const editEvent = event => {
   workoutsStore.editUsersEvent(event)
@@ -45,7 +46,8 @@ const openRescheduleModule = event => {
   isRescheduleModal.value = true
 }
 
-const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isFutureEventsMove)
+const rescheduleEventHandler = () =>
+  userEvents.rescheduleEvent(chosenEvent, isFutureEventsMove)
 
 const copyEventHandler = event => {
   userEvents.isCopyMode = true
@@ -61,6 +63,11 @@ const closeReadModal = () => {
   isReadModal.value = false
   readableEvent.value = null
   workoutsStore.openedExerciseId = null
+}
+
+const rescheduleModalClose = () => {
+  isRescheduleModal.value = false
+  isFutureEventsMove.value = false
 }
 </script>
 
@@ -138,19 +145,15 @@ const closeReadModal = () => {
     <Modal
       v-if="isRescheduleModal"
       width="400px"
-      @close="
-        isRescheduleModal = false;
-        isFutureEventsMove = false
-      "
+      @close="rescheduleModalClose"
       @confirm="rescheduleEventHandler"
       confirm-label="Reschedule"
     >
-      <template #modal-header>
-        Reschedule event
-      </template>
+      <template #modal-header> Reschedule event </template>
       <template #modal-body>
         <Alert sm>
-          To move this event in the calendar for how many days. Positive value - forward, negative - backward. (from -30 to +30 days)
+          To move this event in the calendar for how many days. Positive value -
+          forward, negative - backward. (from -30 to +30 days)
         </Alert>
         <form class="reschedule-form">
           <Input v-model.number="dateStore.rescheduleCounter" />

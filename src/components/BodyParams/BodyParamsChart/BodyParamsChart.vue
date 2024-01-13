@@ -1,12 +1,27 @@
 <script setup>
-import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js'
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Tooltip
+} from 'chart.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
 import { computed, ref, watch } from 'vue'
 import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
 
-ChartJS.register(Legend, LineElement, CategoryScale, LinearScale, PointElement, Tooltip)
+ChartJS.register(
+  Legend,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Tooltip
+)
 
 const props = defineProps({
   filter: {
@@ -34,7 +49,9 @@ const fillDateCollection = computed(() => {
 
 const filteredData = computed(() => {
   return paramsStore.filteredParamsByProp?.filter(el => {
-    return dayjs(el.date).isAfter(currentDate.subtract(daysCounterByFilter.value, 'days'))
+    return dayjs(el.date).isAfter(
+      currentDate.subtract(daysCounterByFilter.value, 'days')
+    )
   })
 })
 
@@ -48,32 +65,40 @@ const chartData = computed(() => {
 
   return {
     labels: fillDateCollection.value,
-    datasets: [{
-      borderColor: '#1a5cff',
-      backgroundColor: '#fff',
-      data: aggregatedData,
-      tension: 0.4
-    }]
+    datasets: [
+      {
+        borderColor: '#1a5cff',
+        backgroundColor: '#fff',
+        data: aggregatedData,
+        tension: 0.4
+      }
+    ]
   }
 })
 
-watch(() => props.filter, (val) => {
-  const values = [
-    { days: 30, points: 30 },
-    { days: 90, points: 10 },
-    { days: 180, points: 10 },
-    { days: 365, points: 5 }
-  ]
+watch(
+  () => props.filter,
+  val => {
+    const values = [
+      { days: 30, points: 30 },
+      { days: 90, points: 10 },
+      { days: 180, points: 10 },
+      { days: 365, points: 5 }
+    ]
 
-  daysCounterByFilter.value = values[val].days;
-  numPoints.value = values[val].points;
-})
+    daysCounterByFilter.value = values[val].days
+    numPoints.value = values[val].points
+  }
+)
 </script>
 
 <template>
   <div class="body-params__container">
     <div class="body-params__chart">
-      <Loading large v-if="!paramsStore.filteredParamsByProp"/>
+      <Loading
+        large
+        v-if="!paramsStore.filteredParamsByProp"
+      />
       <Line
         v-if="paramsStore.filteredParamsByProp?.length"
         :data="chartData"

@@ -7,7 +7,7 @@ import ProgramItemModal from '@/components/ProgramItemModal/ProgramItemModal.vue
 const activeTabId = ref(0)
 const activeProgram = ref(null)
 
-const getActiveTab = id => activeTabId.value = id
+const getActiveTab = id => (activeTabId.value = id)
 
 const tabs = readonly([
   { id: 0, tabTitle: 'All programs', icon: 'lottie/folder.json', size: 18 },
@@ -18,7 +18,7 @@ const getProgramId = program => {
   activeProgram.value = program
 }
 
-const closeModal = () => activeProgram.value = null
+const closeModal = () => (activeProgram.value = null)
 </script>
 
 <template>
@@ -31,7 +31,7 @@ const closeModal = () => activeProgram.value = null
       v-if="activeTabId === 1"
       @get-program-id="getProgramId"
     />
-    <CustomProgram v-if="activeTabId === 0"/>
+    <CustomProgram v-if="activeTabId === 0" />
     <Modal
       v-if="activeProgram"
       width="700px"
@@ -42,7 +42,7 @@ const closeModal = () => activeProgram.value = null
         {{ activeProgram.title }}
       </template>
       <template #modal-body>
-        <ProgramItemModal :program="activeProgram"/>
+        <ProgramItemModal :program="activeProgram" />
       </template>
     </Modal>
   </div>

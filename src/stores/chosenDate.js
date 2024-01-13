@@ -7,7 +7,9 @@ export const chosenDateStore = defineStore('chosenDate', () => {
   const copyDate = ref(null)
   const rescheduleCounter = ref(0)
 
-  const rescheduledEventDate = computed(() => date.value.add(rescheduleCounter.value, 'day'))
+  const rescheduledEventDate = computed(() =>
+    date.value.add(rescheduleCounter.value, 'day')
+  )
 
   watch(rescheduleCounter, val => {
     if (val > 30) rescheduleCounter.value = 30

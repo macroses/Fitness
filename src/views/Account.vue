@@ -9,7 +9,8 @@ import UserForm from '@/components/Account/UserForm.vue'
       <div class="account__layout">
         <div class="account__layout-item">
           <Alert>
-            Please provide additional information about yourself. This is necessary for compiling
+            Please provide additional information about yourself. This is
+            necessary for compiling
             <b>statistics</b> and creating <b>training programs</b>.
           </Alert>
           <UserForm />

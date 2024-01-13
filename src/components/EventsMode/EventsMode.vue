@@ -7,12 +7,12 @@ const dateStore = chosenDateStore()
 
 <template>
   <div class="group home">
+    <Button @click="$emit('workoutMode')"> Workout </Button>
     <Button
-      @click="$emit('workoutMode')"
+      is-link
+      path="/program"
+      >Program</Button
     >
-      Workout
-    </Button>
-    <Button is-link path="/program">Program</Button>
     <Button
       is-link
       :disabled="dateStore.date > dayjs()"

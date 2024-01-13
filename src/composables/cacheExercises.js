@@ -6,12 +6,7 @@ const cacheExercises = async cacheKey => {
 
   !cachedData
     ? await getAndCacheCollection()
-    : tableSubscriber(
-      '*',
-      'public',
-      'exercises',
-      'exercisesCache'
-    )
+    : tableSubscriber('*', 'public', 'exercises', 'exercisesCache')
 
   async function getAndCacheCollection() {
     const data = await getCollection('exercises', '*')

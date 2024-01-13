@@ -8,7 +8,7 @@ test('render alert sm', () => {
       sm: true
     },
     slots: {
-      'alert-header': '<span>Test Alert Header</span>',
+      'alert-header': '<span>Test Alert Header</span>'
     }
   })
 

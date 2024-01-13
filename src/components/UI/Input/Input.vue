@@ -55,9 +55,14 @@ const inpFocus = () => {
   emit('focus')
 }
 
+const clear = () => {
+  inp.value.focus()
+  emit('clear')
+}
+
 const modelValue = defineModel({
   type: [String, Number, null],
-  required: true,
+  required: true
 })
 </script>
 
@@ -78,7 +83,7 @@ const modelValue = defineModel({
         @focus="inpFocus"
         @blur="$emit('blur')"
         autocomplete="new-password"
-      >
+      />
       <label
         v-if="labelPlaceholder"
         :for="uniqueId"
@@ -86,13 +91,14 @@ const modelValue = defineModel({
         :class="{
           'input-label--hidden': modelValue && !labelFade,
           'input-label--fade': labelFade,
-          'input-has-value': labelFade && modelValue,
+          'input-has-value': labelFade && modelValue
         }"
-      >{{ labelPlaceholder }}</label>
+        >{{ labelPlaceholder }}</label
+      >
       <button
         v-if="modelValue && !noClear"
         class="input-clear"
-        @click="$emit('clear'); inp.focus()"
+        @click="clear"
         type="button"
       >
         <Icon

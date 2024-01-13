@@ -1,7 +1,13 @@
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { uid } from 'uid'
-import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } from '@/composables/workouts'
+import {
+  deleteEvent,
+  getWorkouts,
+  pushEvent,
+  updateEvent,
+  updateSeveralRows
+} from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { userIdFromStorage } from '@/composables/userIdFromStorage'
@@ -39,7 +45,8 @@ export const useEventsStore = defineStore('userEvents', () => {
     let workoutObject = {}
 
     if (copyObject.value) {
-      const { title, color, exercisesParamsCollection, tonnage } = copyObject.value
+      const { title, color, exercisesParamsCollection, tonnage } =
+        copyObject.value
 
       workoutObject = {
         workoutId: uid(50),
@@ -50,11 +57,7 @@ export const useEventsStore = defineStore('userEvents', () => {
         tonnage
       }
 
-      await pushEvent(
-        'workouts',
-        workoutObject,
-        eventsLoading
-      )
+      await pushEvent('workouts', workoutObject, eventsLoading)
 
       console.log('pushed')
 
@@ -74,11 +77,7 @@ export const useEventsStore = defineStore('userEvents', () => {
       tonnage: workoutData.tonnage
     }
 
-    await pushEvent(
-      'workouts',
-      workoutObject,
-      eventsLoading
-    )
+    await pushEvent('workouts', workoutObject, eventsLoading)
 
     events.value.push(workoutObject)
   }
@@ -100,7 +99,9 @@ export const useEventsStore = defineStore('userEvents', () => {
       eventsLoading
     )
 
-    const index = events.value.findIndex(event => event.workoutId === workoutData.workoutId)
+    const index = events.value.findIndex(
+      event => event.workoutId === workoutData.workoutId
+    )
 
     if (index !== -1) {
       events.value.splice(index, 1, workoutObject)
@@ -112,16 +113,26 @@ export const useEventsStore = defineStore('userEvents', () => {
   }
 
   const getExerciseSets = () => {
-    const exerciseParams = workoutData.exercisesParamsCollection.find(item => item.exerciseId === workoutData.openedExerciseId)
-    return exerciseParams ? (exerciseParams.sets ? exerciseParams.sets : []) : []
+    const exerciseParams = workoutData.exercisesParamsCollection.find(
+      item => item.exerciseId === workoutData.openedExerciseId
+    )
+    return exerciseParams
+      ? exerciseParams.sets
+        ? exerciseParams.sets
+        : []
+      : []
   }
 
   const previousResults = computed(() => {
-    const userWorkouts = events.value.filter(workout => workout.date < dateStore.date)
+    const userWorkouts = events.value.filter(
+      workout => workout.date < dateStore.date
+    )
 
     const previousSets = []
     for (const workout of userWorkouts.reverse()) {
-      const exerciseParams = workout.exercisesParamsCollection.find(item => item.exerciseId === workoutData.openedExerciseId)
+      const exerciseParams = workout.exercisesParamsCollection.find(
+        item => item.exerciseId === workoutData.openedExerciseId
+      )
 
       if (exerciseParams && exerciseParams.sets?.length > 0) {
         previousSets.push(...exerciseParams.sets)
@@ -151,17 +162,15 @@ export const useEventsStore = defineStore('userEvents', () => {
     })
 
     combined.push(
-      ...previous
-        .slice(exerciseSets.length)
-        .map(prevSet => ({
-          setId: null,
-          weight: null,
-          repeats: null,
-          effort: null,
-          prevWeight: prevSet.weight,
-          prevRepeats: prevSet.repeats,
-          prevEffort: prevSet.effort
-        }))
+      ...previous.slice(exerciseSets.length).map(prevSet => ({
+        setId: null,
+        weight: null,
+        repeats: null,
+        effort: null,
+        prevWeight: prevSet.weight,
+        prevRepeats: prevSet.repeats,
+        prevEffort: prevSet.effort
+      }))
     )
 
     return combined
@@ -169,7 +178,9 @@ export const useEventsStore = defineStore('userEvents', () => {
 
   const rescheduleEvent = async (chosenEvent, isFutureEventsMove) => {
     if (isFutureEventsMove.value) {
-      const eventsToUpdate = events.value.filter(event => event.date >= dateStore.date)
+      const eventsToUpdate = events.value.filter(
+        event => event.date >= dateStore.date
+      )
 
       eventsToUpdate.forEach(event => {
         event.date = event.date.add(dateStore.rescheduleCounter, 'day')
@@ -185,23 +196,29 @@ export const useEventsStore = defineStore('userEvents', () => {
     workoutData.$reset()
   }
 
-  watch(() => dateStore.copyDate, async val => {
-    if (val) {
-      // if copyDate and copyObject is defined and filled
-      await pushEventHandler()
-      copyObject.value = null
-      isCopyMode.value = false
-      dateStore.copyDate = null
+  watch(
+    () => dateStore.copyDate,
+    async val => {
+      if (val) {
+        // if copyDate and copyObject is defined and filled
+        await pushEventHandler()
+        copyObject.value = null
+        isCopyMode.value = false
+        dateStore.copyDate = null
+      }
     }
-  })
+  )
 
-  watch(() => isCopyMode.value, async val => {
-    if (!val) {
-      copyObject.value = null
-      isCopyMode.value = false
-      dateStore.copyDate = null
+  watch(
+    () => isCopyMode.value,
+    async val => {
+      if (!val) {
+        copyObject.value = null
+        isCopyMode.value = false
+        dateStore.copyDate = null
+      }
     }
-  })
+  )
 
   return {
     events,
@@ -216,6 +233,6 @@ export const useEventsStore = defineStore('userEvents', () => {
     previousResults,
     combinedResults,
     updateAllEvents,
-    rescheduleEvent,
+    rescheduleEvent
   }
 })

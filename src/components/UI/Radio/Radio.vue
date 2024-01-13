@@ -36,11 +36,14 @@ const isChecked = computed(() => {
 
 defineEmits(['update:modelValue'])
 
-watch(() => props.modelValue, () => {
-  if (isChecked.value) {
-    defaultChecked.value = false
+watch(
+  () => props.modelValue,
+  () => {
+    if (isChecked.value) {
+      defaultChecked.value = false
+    }
   }
-})
+)
 </script>
 
 <template>
@@ -54,7 +57,7 @@ watch(() => props.modelValue, () => {
           :value="value"
           @change="$emit('update:modelValue', $event.target.value)"
           :checked="defaultChecked || isChecked"
-        >
+        />
         <span
           class="radio-effect"
           :class="{ active: defaultChecked || isChecked }"
@@ -64,7 +67,8 @@ watch(() => props.modelValue, () => {
       <label
         :for="uniqueId"
         class="radio-label"
-      >{{ label }}</label>
+        >{{ label }}</label
+      >
     </div>
   </div>
 </template>

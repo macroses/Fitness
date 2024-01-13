@@ -40,7 +40,7 @@ const model = computed({
           :id="uniqueId"
           v-model="model"
           :checked="modelValue"
-        >
+        />
         <div
           class="checkbox-effect"
           :class="{ active: modelValue }"
@@ -56,7 +56,8 @@ const model = computed({
         v-if="label"
         :for="uniqueId"
         class="checkbox-label"
-      >{{ label }}</label>
+        >{{ label }}</label
+      >
     </div>
   </div>
 </template>

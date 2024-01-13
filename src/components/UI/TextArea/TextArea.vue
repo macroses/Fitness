@@ -15,7 +15,7 @@ const props = defineProps({
   labelFade: {
     type: Boolean,
     default: false
-  },
+  }
 })
 </script>
 

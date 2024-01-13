@@ -12,16 +12,16 @@ export const bodyParamsOptions = {
         beginAtZero: true
       },
       border: {
-        dash: [5, 5],
+        dash: [5, 5]
       }
     },
     y: {
       grid: {
-        color: 'rgba(0,0,0, 0.05)',
+        color: 'rgba(0,0,0, 0.05)'
       },
       ticks: {
         stepSize: 10,
-        beginAtZero: true,
+        beginAtZero: true
       },
       border: {
         dash: [5, 5]

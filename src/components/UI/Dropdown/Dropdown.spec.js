@@ -7,7 +7,7 @@ describe('Dropdown', () => {
     const dropdownList = [
       { id: 1, value: 'dropdown item 1' },
       { id: 2, value: 'dropdown item 2' },
-      { id: 3, value: 'dropdown item 3' },
+      { id: 3, value: 'dropdown item 3' }
     ]
 
     const wrapper = mount(Dropdown, {
@@ -23,7 +23,7 @@ describe('Dropdown', () => {
     const dropdownList = [
       { id: 1, value: 'dropdown item 1' },
       { id: 2, value: 'dropdown item 2' },
-      { id: 3, value: 'dropdown item 3' },
+      { id: 3, value: 'dropdown item 3' }
     ]
 
     const wrapper = mount(Dropdown, {
@@ -42,12 +42,12 @@ describe('Dropdown', () => {
     const dropdownList = [
       { id: 1, value: 'Item 1' },
       { id: 2, value: 'Item 2' },
-      { id: 3, value: 'Item 3' },
-    ];
+      { id: 3, value: 'Item 3' }
+    ]
 
     const wrapper = mount(Dropdown, {
       props: {
-        dropdownList: dropdownList,
+        dropdownList: dropdownList
       }
     })
 

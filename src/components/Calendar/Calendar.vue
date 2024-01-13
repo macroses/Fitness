@@ -55,10 +55,13 @@ const goToCurrentMonth = () => {
   updateCalendar(currentDate, today, calendarCells)
 }
 
-const isMarker = date => props.events.some(event => event.date.isSame(date, 'day'))
+const isMarker = date =>
+  props.events.some(event => event.date.isSame(date, 'day'))
 
 const getCellColor = date => {
-  const matchingEvent = props.events.find(event => event.date.isSame(date, 'day'))
+  const matchingEvent = props.events.find(event =>
+    event.date.isSame(date, 'day')
+  )
   return matchingEvent ? matchingEvent.color : ''
 }
 
@@ -88,11 +91,15 @@ onMounted(() => {
   updateCalendar(currentDate, today, calendarCells)
 })
 
-watch(props.events, val => {
-  if (val) {
-    updateCalendar(currentDate, today, calendarCells)
-  }
-}, { immediate: true })
+watch(
+  props.events,
+  val => {
+    if (val) {
+      updateCalendar(currentDate, today, calendarCells)
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -169,11 +176,13 @@ watch(props.events, val => {
               'calendar__cell--current-day': cell.isCurrentDay,
               active: dayjs(cell.date).isSame(dateStore.date, 'day'),
               disabled: isAfterDaysOff && dayjs(cell.date).isAfter(today, 'day')
-            },
+            }
           ]"
           @click="handleClickCell(cell.date)"
         >
-          <span class="calendar__cell-text">{{ dayjs(cell.date).format('D') }}</span>
+          <span class="calendar__cell-text">{{
+            dayjs(cell.date).format('D')
+          }}</span>
           <div
             v-if="isMarker(cell.date)"
             :style="{ backgroundColor: `rgb(${getCellColor(cell.date)})` }"

@@ -50,9 +50,7 @@ async function signInWithGitHub() {
     class="form__auth"
     @submit.prevent="login"
   >
-    <h1 class="form__header">
-      Login
-    </h1>
+    <h1 class="form__header">Login</h1>
     <Input
       v-model="formState.email"
       label-placeholder="Email"
@@ -70,7 +68,10 @@ async function signInWithGitHub() {
         @click="signInWithGitHub"
         transparent
       >
-        <Icon icon-name="github" width="28px"/>
+        <Icon
+          icon-name="github"
+          width="28px"
+        />
       </Button>
     </div>
 

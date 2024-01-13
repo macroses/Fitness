@@ -14,7 +14,7 @@ describe('Modal', () => {
       slots: {
         'modal-header': `<div>Header content</div>`,
         'modal-body': `<div>Body content</div>`,
-        'modal-footer': `<div>Footer content</div>`,
+        'modal-footer': `<div>Footer content</div>`
       }
     })
 

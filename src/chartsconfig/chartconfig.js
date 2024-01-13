@@ -29,7 +29,20 @@ export const chartData = (propData, isMobile) => {
     datasets: [
       {
         data: percentageData.value,
-        backgroundColor: ['#99ffcc', '#ff99cc', '#ffff9b', '#ffccff', '#ccffcc', '#cc99ff', '#ccff99', '#ccccff', '#ffcc99', '#ccffff', '#ffcccc', '#99ccff']
+        backgroundColor: [
+          '#99ffcc',
+          '#ff99cc',
+          '#ffff9b',
+          '#ffccff',
+          '#ccffcc',
+          '#cc99ff',
+          '#ccff99',
+          '#ccccff',
+          '#ffcc99',
+          '#ccffff',
+          '#ffcccc',
+          '#99ccff'
+        ]
       }
     ]
   }

@@ -23,7 +23,7 @@ defineProps({
       v-model="selectValue"
       :placeholder="label"
       class="select-input"
-    >
+    />
     <ul class="options">
       <li
         v-for="option in options"

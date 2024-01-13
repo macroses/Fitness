@@ -1,5 +1,5 @@
 export const BODY_PARAMS = [
-  { id: 0, label: 'Weight', unit: 'kg'},
+  { id: 0, label: 'Weight', unit: 'kg' },
   { id: 1, label: 'Height', unit: 'cm' },
   { id: 2, label: 'Fat Percent', unit: '%' }, // процент жира
   { id: 3, label: 'Chest', unit: 'cm' },
