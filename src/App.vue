@@ -1,12 +1,14 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useEventsStore } from '@/stores/userEvents'
+import toggleColorTheme from '@/composables/useColorTheme'
 import { cacheExercises } from '@/composables/cacheExercises'
 import { tableSubscriber } from '@/composables/tableSubscriber'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { toast } from 'vue3-toastify'
 
 const userEvents = useEventsStore()
+toggleColorTheme()
 const isOnline = ref(navigator.onLine)
 
 onMounted(async () => {

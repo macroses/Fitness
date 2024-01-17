@@ -110,4 +110,4 @@ const modelValue = defineModel({
   </div>
 </template>
 
-<style src="./style.css"></style>
+<style src="./style.css" />

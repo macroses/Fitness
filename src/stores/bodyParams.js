@@ -93,10 +93,11 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
       if (startIndex < endIndex) {
         const intervalData = data.slice(startIndex, endIndex)
         const average =
-          intervalData.reduce((sum, item) => sum + item.y, 0) /
+          intervalData.reduce((sum, item) => sum + Number(item.y), 0) /
           intervalData.length
+
         aggregatedData.push({
-          x: intervalData[Math.floor(intervalData.length / 2)].x, // серединная дата интервала
+          x: intervalData[Math.floor(intervalData.length / 2)].x,
           y: average
         })
       }

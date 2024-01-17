@@ -7,24 +7,48 @@
   --main-bg: #fff;
   --header-bg: #fff;
   --block-bg: rgba(244, 247, 248, 1);
+  --content-bg: #fff;
+  --cobtent-inner-bg: #fff;
   --form-bg: rgba(244, 247, 248, 1);
 
   --btn-color: #fff;
   --btn-color-transparent: rgb(var(--accent-color));
 
+  --loader-bg: rgb(255 255 255 / 0.7);
+
   --base-transition: 0.25s ease;
+
+  --content-border-color: 255 255 255;
+
+  --dropdown-bg: #fff;
+  --modal-bg: #fff;
+  --even-row-bg: rgba(249, 252, 253, 1);
 }
 
 :root.dark-theme {
   color-scheme: dark;
-  --main-bg: rgb(37 37 46);
+  --content-bg: #0d1116;
+  --content-inner-bg: #161b22;
+  --main-bg: #02040a;
   --text-color: 224 224 224;
-  --form-bg: rgb(65 65 76);
+  --form-bg: #0d1116;
+  --loader-bg: rgb(2 4 10 / 0.7);
+  --dropdown-bg: #161b22;
+  --modal-bg: #0d1116;
+  --even-row-bg: #1f252d;
 }
 
 @media (prefers-color-scheme: dark) {
   :root.prefer {
-    --main-bg: rgb(37 37 46);
+    --content-bg: #0d1116;
+    --content-inner-bg: #161b22;
+    --main-bg: #02040a;
+    --text-color: 224 224 224;
+    --form-bg: #0d1116;
+    --loader-bg: rgb(2 4 10 / 0.7);
+    --dropdown-bg: #161b22;
+    --modal-bg: #0d1116;
+    --even-row-bg: #1f252d;
   }
 }
 
@@ -50,8 +74,8 @@ html {
 body {
   min-height: 100vh;
   transition:
-    color 0.5s,
-    background-color 0.5s;
+    color 0.25s,
+    background-color 0.25s;
   line-height: 1.6;
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
@@ -86,7 +110,7 @@ body {
 
   &.home {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 16px auto 0;
 
     & .button {
       flex: 1;
@@ -116,7 +140,10 @@ body {
   }
 
   /*.main__layout.workout-mode {*/
-  /*  grid-template-columns: 1fr 1fr;*/
+  /*  & .main__layout-left {*/
+  /*    padding: 8px;*/
+  /*    border: 1px solid rgb(var(--content-border-color) / 0.1);*/
+  /*  }*/
   /*}*/
 
   .main__layout.workout-mode .calendar {
@@ -154,6 +181,15 @@ body {
 .main__layout-left {
   width: 100%;
   position: relative;
+}
+
+.main__layout-container {
+  max-width: 524px;
+  padding: 16px;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: var(--content-bg);
+  border: 1px solid rgb(var(--accent-color) / 0.1);
 }
 
 ::-webkit-scrollbar {

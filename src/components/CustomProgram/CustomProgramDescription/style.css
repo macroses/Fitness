@@ -17,6 +17,7 @@
   overflow: auto;
   scroll-snap-type: x mandatory;
   scroll-timeline: --gallery__scrollcontainer inline;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
     display: none;

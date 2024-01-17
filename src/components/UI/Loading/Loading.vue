@@ -35,7 +35,7 @@ defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--loader-bg);
   border-radius: inherit;
   z-index: 10000;
 }
