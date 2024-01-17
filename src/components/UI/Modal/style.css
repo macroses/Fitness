@@ -22,7 +22,7 @@
 }
 
 .modal__content {
-  background-color: var(--modal-bg);
+  background-color: var(--dropdown-bg);
   min-width: 320px;
   width: 100%;
   border-radius: 20px;

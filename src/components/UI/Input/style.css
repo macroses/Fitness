@@ -5,9 +5,9 @@
   position: relative;
 }
 
-.input-parent:has(.input-label--fade) {
-  overflow: hidden;
-}
+/*.input-parent:has(.input-label--fade) {*/
+/*  overflow: hidden;*/
+/*}*/
 
 .input-content {
   display: flex;
@@ -18,8 +18,9 @@
 }
 
 .input-component {
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   background: var(--form-bg);
+  box-shadow: var(--form-box-shadow);
   color: rgb(var(--text-color));
   border-radius: inherit;
   transition: all 0.25s ease;
@@ -37,7 +38,7 @@
 
     &:focus {
       padding-left: 4px;
-      outline: 1px solid rgb(var(--accent-color) / 50%);
+      outline: 1px solid rgb(var(--accent-color) / 0.1);
     }
 
     & + .input-clear {
@@ -105,18 +106,18 @@
   background: transparent;
   display: flex;
   align-items: center;
-  height: 38px;
-  width: 38px;
+  height: 36px;
+  width: 36px;
   justify-content: center;
   position: absolute;
   top: 2px;
-  right: 3px;
+  right: 2px;
   border: 0;
   cursor: pointer;
-  border-radius: 9px;
+  border-radius: 12px;
   transition: all var(--base-transition);
 }
 
 .input-clear:hover {
-  background-color: rgba(249, 252, 253, 1);
+  background-color: var(--table-dark-bg);
 }

@@ -52,69 +52,71 @@ onBeforeRouteLeave(() => {
           appear
         >
           <div class="main__layout-left">
-            <div
-              class="calendar-wr"
-              :class="{ hidden: !isCalendarVisible }"
-            >
-              <Calendar @get-date="getDate" />
+            <div class="exercises-list__wr">
               <div
-                v-if="!isCalendarVisible"
-                class="calendar-chosen-date"
+                class="calendar-wr"
+                :class="{ hidden: !isCalendarVisible }"
               >
-                {{ dateStore.date.format('DD MMMM YYYY') }}
-                <span>{{ dateStore.date.format('dddd') }}</span>
-              </div>
-              <Button
-                class="hide-calendar__button"
-                :class="{ active: isCalendarVisible }"
-                @click="isCalendarVisible = !isCalendarVisible"
-              >
-                <Icon
-                  width="20px"
-                  :icon-name="
-                    isCalendarVisible
-                      ? 'calendar-arrow-up'
-                      : 'calendar-arrow-down'
-                  "
-                />
-              </Button>
-            </div>
-
-            <div class="user-workout">
-              <WorkoutDescription />
-              <div class="user-workout__funcs">
-                <div class="total-tonnage">
-                  Total tonnage:&nbsp;
-                  <b>{{ workoutsStore.tonnage / 1000 }} T</b>
+                <Calendar @get-date="getDate" />
+                <div
+                  v-if="!isCalendarVisible"
+                  class="calendar-chosen-date"
+                >
+                  {{ dateStore.date.format('DD MMMM YYYY') }}
+                  <span>{{ dateStore.date.format('dddd') }}</span>
                 </div>
-                <Checkbox
-                  v-if="workoutsStore.filteredCacheExercises.length > 1"
-                  v-model="workoutsStore.isSuperset"
-                  label="Supersets"
-                />
+                <Button
+                  class="hide-calendar__button"
+                  :class="{ active: isCalendarVisible }"
+                  @click="isCalendarVisible = !isCalendarVisible"
+                >
+                  <Icon
+                    width="20px"
+                    :icon-name="
+                      isCalendarVisible
+                        ? 'calendar-arrow-up'
+                        : 'calendar-arrow-down'
+                    "
+                  />
+                </Button>
               </div>
-              <ChosenExercisesList />
-            </div>
 
-            <div class="group">
-              <Button
-                bordered
-                full
-                @click="router.push('/')"
-              >
-                Back
-              </Button>
-              <Button
-                full
-                @click="workoutToBase"
-                :disabled="!workoutsStore.exercisesParamsCollection.length"
-              >
-                {{
-                  workoutsStore.isWorkoutEdit
-                    ? 'Update workout'
-                    : 'Save workout'
-                }}
-              </Button>
+              <div class="user-workout">
+                <WorkoutDescription />
+                <div class="user-workout__funcs">
+                  <div class="total-tonnage">
+                    Total tonnage:&nbsp;
+                    <b>{{ workoutsStore.tonnage / 1000 }} T</b>
+                  </div>
+                  <Checkbox
+                    v-if="workoutsStore.filteredCacheExercises.length > 1"
+                    v-model="workoutsStore.isSuperset"
+                    label="Supersets"
+                  />
+                </div>
+                <ChosenExercisesList />
+              </div>
+
+              <div class="group">
+                <Button
+                  bordered
+                  full
+                  @click="router.push('/')"
+                >
+                  Back
+                </Button>
+                <Button
+                  full
+                  @click="workoutToBase"
+                  :disabled="!workoutsStore.exercisesParamsCollection.length"
+                >
+                  {{
+                    workoutsStore.isWorkoutEdit
+                      ? 'Update workout'
+                      : 'Save workout'
+                  }}
+                </Button>
+              </div>
             </div>
           </div>
         </Transition>

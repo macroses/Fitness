@@ -6,7 +6,7 @@ table {
 }
 
 thead {
-  background-color: rgba(244, 247, 248, 1);
+  background-color: var(--table-dark-bg);
   font-size: 12px;
 }
 
@@ -17,7 +17,7 @@ tbody td {
 }
 
 tbody tr:nth-child(even) {
-  background-color: rgba(249, 252, 253, 1);
+  background-color: var(--table-dark-bg);
 }
 
 .table-parent {

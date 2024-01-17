@@ -156,7 +156,10 @@ const rescheduleModalClose = () => {
           forward, negative - backward. (from -30 to +30 days)
         </Alert>
         <form class="reschedule-form">
-          <Input v-model.number="dateStore.rescheduleCounter" />
+          <Input
+            v-model.number="dateStore.rescheduleCounter"
+            @clear="dateStore.rescheduleCounter = 0"
+          />
         </form>
       </template>
       <template #modal-footer>

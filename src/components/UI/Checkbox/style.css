@@ -21,7 +21,7 @@
 }
 
 .checkbox-content:hover .checkbox-effect:not(.active) {
-  background-color: rgba(230, 233, 234, 1);
+  background-color: var(--form-bg);
 }
 
 .checkbox {

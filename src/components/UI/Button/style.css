@@ -182,10 +182,12 @@
 
 .hide-calendar__button {
   position: absolute;
-  right: 0;
-  top: 5px;
+  right: 12px;
+  top: 8px;
 
   &:hover {
     box-shadow: none;
   }
+
+
 }
