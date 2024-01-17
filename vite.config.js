@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import Components from 'unplugin-vue-components/vite'
 import postcssNesting from 'postcss-nesting'
+import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
   define: {
@@ -14,7 +15,33 @@ export default defineConfig({
   plugins: [
     vue(),
     Components(),
-    VueDevTools()
+    VueDevTools(),
+    VitePWA({
+      manifest: {
+        icons: [
+          {
+            src: '/icons/512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          }
+        ]
+      },
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith('/rest/v1'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'api-cache',
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          }
+        ]
+      }
+    })
   ],
   resolve: {
     alias: {
@@ -23,9 +50,7 @@ export default defineConfig({
   },
   css: {
     postcss: {
-      plugins: [
-        postcssNesting
-      ]
+      plugins: [postcssNesting]
     }
   },
   build: {
@@ -33,7 +58,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          bodyParams: ['./src/views/BodyParameters.vue'],
+          bodyParams: ['./src/views/BodyParameters.vue']
         }
       }
     }
