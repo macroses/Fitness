@@ -24,13 +24,15 @@
 .calendar {
   position: relative;
   overflow-x: hidden;
-  padding: 0 1px 12px;
-  max-width: 500px;
   margin: 0 auto;
-  border-radius: 20px;
+  padding: 1px;
 
-  .workout-mode & {
+  &.workout-mode & {
     margin-top: 0;
+  }
+
+  &.copyMode {
+    margin-bottom: 16px;
   }
 }
 
@@ -122,8 +124,8 @@
 .slideMonth-enter-active,
 .slideMonth-leave-active {
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .slideMonth-enter-from {
@@ -140,8 +142,8 @@
 .slideMonthRight-enter-active,
 .slideMonthRight-leave-active {
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .slideMonthRight-enter-from {
@@ -158,7 +160,7 @@
 .calendar-chosen-date {
   font-weight: 500;
   position: absolute;
-  left: 0;
+  left: 8px;
   top: 10px;
 
   & span {

@@ -52,16 +52,19 @@ const deleteHandler = workoutId => {
       />
       <div class="main__layout">
         <div class="main__layout-left">
-          <Calendar
-            @get-date="getDate"
-            :events="userEvents.events"
-          />
-          <EventsMode
-            v-if="!userEvents.isCopyMode"
-            @workoutMode="toWorkoutMode"
-          />
+          <div class="main__layout-container">
+            <Calendar
+              @get-date="getDate"
+              :events="userEvents.events"
+            />
+            <EventsMode
+              v-if="!userEvents.isCopyMode"
+              @workoutMode="toWorkoutMode"
+            />
+          </div>
+
           <div
-            v-else
+            v-if="userEvents.isCopyMode"
             class="group"
           >
             <Button @click="userEvents.isCopyMode = false">
