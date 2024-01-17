@@ -71,7 +71,7 @@
   }
 
   &.disabled {
-    background-color: var(--block-bg);
+    background-color: var(--table-dark-bg);
     pointer-events: none;
     color: rgb(var(--text-color) / 20%);
   }
@@ -160,7 +160,7 @@
 .calendar-chosen-date {
   font-weight: 500;
   position: absolute;
-  left: 8px;
+  left: 12px;
   top: 10px;
 
   & span {

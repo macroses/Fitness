@@ -8,6 +8,7 @@
   margin-top: 24px;
   gap: 16px;
   grid-template-columns: 1fr;
+  background-color: var(--content-bg);
 
   @media (min-width: 1024px) {
     border: 1px solid rgba(var(--accent-color) / 10%);
@@ -53,7 +54,7 @@ body.blured::after {
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: #fff;
+  background-color: transparent;
   width: 270px;
   z-index: 5;
   padding-top: 20px;
@@ -161,7 +162,7 @@ body.blured::after {
 
   & th {
     font-weight: bold;
-    background-color: #e9eeff;
+    background-color: var(--table-dark-bg);
   }
 
   & td {
@@ -176,7 +177,7 @@ body.blured::after {
   }
 
   & tbody tr:nth-child(even) {
-    background-color: var(--block-bg);
+    background-color: var(--table-dark-bg);
   }
 
   & thead {
@@ -219,6 +220,15 @@ body.blured::after {
       display: none;
     }
   }
+
+  & .calendar-chosen-date {
+    left: 0;
+  }
+
+  & .hide-calendar__button {
+    right: 0;
+    top: 4px;
+  }
 }
 
 .body-params__table-value {
@@ -232,7 +242,7 @@ body.blured::after {
 }
 
 .body-params__last-data {
-  background-color: var(--block-bg);
+  background-color: var(--content-inner-bg);
   padding: 6px 8px;
   border-radius: 12px;
   border: 1px solid rgb(var(--accent-color) / 20%);

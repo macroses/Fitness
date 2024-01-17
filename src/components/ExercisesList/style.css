@@ -26,7 +26,7 @@
 
 .muscles__item.active {
   & .muscles__item-header {
-    background: rgba(244, 247, 248, 1);
+    background: var(--table-dark-bg);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
   }
@@ -128,7 +128,7 @@
 @media (hover: hover) and (pointer: fine) {
   .exercises__item:hover {
     transform: translateY(-3px);
-    background: rgba(244, 247, 248, 1);
+    background: var(--table-dark-bg);
   }
 
   .favorite-icon:hover svg {
@@ -196,8 +196,9 @@
   position: relative;
 }
 
-.create-exercise-btn {
-  /*position: absolute;*/
-  /*right: 0;*/
-  /*top: 49px;*/
+.exercises-list__wr {
+  border: 1px solid rgb(var(--content-border-color) / 0.1);
+  background-color: var(--content-bg);
+  padding: 12px;
+  border-radius: 16px;
 }

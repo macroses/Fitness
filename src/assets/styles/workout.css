@@ -31,9 +31,6 @@
 }
 
 .user-workout {
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid rgb(var(--accent-color) / 0.1);
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
@@ -49,7 +46,7 @@
 
 .total-tonnage {
   font-size: 12px;
-  background-color: rgba(244, 247, 248, 1);
+  background-color: var(--table-dark-bg);
   padding: 0 12px;
   display: flex;
   align-items: center;
