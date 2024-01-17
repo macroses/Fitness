@@ -105,7 +105,7 @@ body {
 .main__layout {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 16px;
+  padding-top: 8px;
   gap: 16px;
   position: relative;
 }
@@ -145,6 +145,10 @@ body {
 @media (min-width: 768px) {
   .container {
     padding: 0 32px;
+  }
+
+  .main__layout {
+    padding-top: 16px;
   }
 
   .main__layout.workout-mode .calendar {
