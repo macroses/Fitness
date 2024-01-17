@@ -39,9 +39,6 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
         >
           Plinx
         </RouterLink>
-
-        <ColorTheme />
-
         <div class="header__user">
           <nav class="header__nav">
             <RouterLink to="/exercises"> Exercises </RouterLink>
