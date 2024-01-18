@@ -28,6 +28,7 @@ export default defineConfig({
         ]
       },
       workbox: {
+        globPatterns: ['**/*.{js,css,html,png,svg}'],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith('/rest/v1'),
@@ -36,6 +37,16 @@ export default defineConfig({
               cacheName: 'api-cache',
               cacheableResponse: {
                 statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: ({ url }) => url.pathname.endsWith('/light.svg'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'light-svg-cache',
+              cacheableResponse: {
+                statuses: [0, 300]
               }
             }
           }
@@ -58,7 +69,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          bodyParams: ['./src/views/BodyParameters.vue']
+          bodyParams: ['./src/views/BodyParameters.vue'],
+          workoutMode: ['./src/views/WorkoutMode.vue']
         }
       }
     }
