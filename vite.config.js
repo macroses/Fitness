@@ -65,12 +65,13 @@ export default defineConfig({
     }
   },
   build: {
-    chunkSizeWarningLimit: 300,
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
         manualChunks: {
           bodyParams: ['./src/views/BodyParameters.vue'],
-          workoutMode: ['./src/views/WorkoutMode.vue']
+          workoutMode: ['./src/views/WorkoutMode.vue'],
+          program: ['./src/views/Program.vue']
         }
       }
     }
