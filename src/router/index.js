@@ -6,7 +6,6 @@ import { supabase } from '@/lib/supabaseClient'
 import Account from '@/views/Account.vue'
 import WorkoutMode from '@/views/WorkoutMode.vue'
 import AccountSettings from '@/views/AccountSettings.vue'
-import BodyParameters from '@/views/BodyParameters.vue'
 import Program from '@/views/Program.vue'
 import Exercises from '@/views/Exercises.vue'
 
@@ -64,7 +63,7 @@ const router = createRouter({
     {
       path: '/body-parameters',
       name: 'bodyParameters',
-      component: BodyParameters,
+      component: import('@/views/BodyParameters.vue'),
       meta: {
         auth: true
       }
