@@ -26,32 +26,32 @@ export default defineConfig({
             purpose: 'any maskable'
           }
         ]
-      },
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,png,svg}'],
-        runtimeCaching: [
-          {
-            urlPattern: ({ url }) => url.pathname.startsWith('/rest/v1'),
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'api-cache',
-              cacheableResponse: {
-                statuses: [0, 200]
-              }
-            }
-          },
-          {
-            urlPattern: ({ url }) => url.pathname.endsWith('/light.svg'),
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'light-svg-cache',
-              cacheableResponse: {
-                statuses: [0, 300]
-              }
-            }
-          }
-        ]
       }
+      // workbox: {
+      //   globPatterns: ['**/*.{js,css,html,png,svg}'],
+      //   runtimeCaching: [
+      //     {
+      //       urlPattern: ({ url }) => url.pathname.startsWith('/rest/v1'),
+      //       handler: 'networkFirst',
+      //       options: {
+      //         cacheName: 'api-cache',
+      //         cacheableResponse: {
+      //           statuses: [0, 200]
+      //         }
+      //       }
+      //     },
+      //     {
+      //       urlPattern: ({ url }) => url.pathname.endsWith('/light.svg'),
+      //       handler: 'networkFirst',
+      //       options: {
+      //         cacheName: 'light-svg-cache',
+      //         cacheableResponse: {
+      //           statuses: [0, 300]
+      //         }
+      //       }
+      //     }
+      //   ]
+      // }
     })
   ],
   resolve: {
