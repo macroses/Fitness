@@ -1,4 +1,4 @@
-import { computed, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { uid } from 'uid'
 import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants/index.js'
 
@@ -74,33 +74,4 @@ const removeDayTable = tableId => {
   tables.value = tables.value.filter(table => table.id !== tableId)
 }
 
-const usedDays = computed(() => {
-  return tables.value.map(table =>
-    availableDays.find(day => day.id === table.day)
-  )
-})
-
-const unusedDays = computed(() => {
-  const usedDayIds = usedDays.value.map(day => day.id)
-  const daysToExclude = tables.value.length === 0 ? [availableDays[0].id] : []
-  return availableDays.filter(
-    day => !usedDayIds.includes(day.id) && !daysToExclude.includes(day.id)
-  )
-})
-
-const chosenDays = computed(() => {
-  return tables.value.map(table => {
-    const selectedDay = availableDays.find(day => day.id === table.day)
-    return selectedDay ? selectedDay.value : ''
-  })
-})
-
-export {
-  tables,
-  addRow,
-  removeRow,
-  addTable,
-  removeDayTable,
-  unusedDays,
-  chosenDays
-}
+export { tables, addRow, removeRow, addTable, removeDayTable }

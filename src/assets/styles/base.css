@@ -80,7 +80,7 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   transition:
     color 0.25s,
     background-color 0.25s;

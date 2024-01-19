@@ -1,14 +1,12 @@
 <script setup>
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { HEADERS, LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
 import {
   addRow,
   addTable,
-  chosenDays,
   removeDayTable,
   removeRow,
-  tables,
-  unusedDays
+  tables
 } from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 import { gsap } from 'gsap'
@@ -70,16 +68,18 @@ const showProgramDescription = () => {
   isDescriptionVisible.value = true
 }
 
-const updateDay = (tableIndex, selectedDay) => {
-  tables.value[tableIndex].day = selectedDay.id
-}
-
 onMounted(() => {
   const descriptionValue = localStorage.getItem('program-description')
   isDescriptionVisible.value = descriptionValue !== 'false'
 
   if (!descriptionValue) {
     localStorage.setItem('program-description', true)
+  }
+})
+
+watch(tables, val => {
+  if (val) {
+    console.log(tables.value)
   }
 })
 </script>
@@ -332,17 +332,6 @@ onMounted(() => {
           </TransitionGroup>
         </div>
         <div class="custom-program__table-footer">
-          <div class="custom-program__choose-day">
-            <Dropdown
-              :dropdown-list="unusedDays"
-              :width="120"
-              small
-              isTop
-              default-value="Choose day"
-              @activeValue="updateDay(tableIndex, $event)"
-            />
-            <span>Chosen day: {{ chosenDays[tableIndex] }}</span>
-          </div>
           <div class="group">
             <Button
               @click="addRow(tableIndex, tableRow)"
