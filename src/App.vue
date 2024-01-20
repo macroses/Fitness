@@ -6,6 +6,7 @@ import { cacheExercises } from '@/composables/cacheExercises'
 import { tableSubscriber } from '@/composables/tableSubscriber'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { toast } from 'vue3-toastify'
+import Cookies from 'js-cookie'
 
 const userEvents = useEventsStore()
 toggleColorTheme()
@@ -19,6 +20,11 @@ onMounted(async () => {
 
   if (!localStorage.getItem('bodyParams')) {
     localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
+  }
+
+  const savedColor = Cookies.get('palette-color')
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor)
   }
 })
 

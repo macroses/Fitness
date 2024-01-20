@@ -13,6 +13,11 @@
   &:nth-child(even) {
     background-color: var(--table-dark-bg);
   }
+
+  &:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
 }
 
 .events__button {
