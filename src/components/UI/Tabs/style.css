@@ -1,8 +1,3 @@
-.tabs-parent {
-  position: relative;
-  margin-bottom: 16px;
-}
-
 .tabs {
   display: flex;
   max-width: 100%;

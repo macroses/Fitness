@@ -1,5 +1,5 @@
 <script setup>
-import { nextTick, onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { HEADERS, LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
 import {
   addRow,
@@ -19,7 +19,10 @@ const editingCellIndex = ref(null)
 const startEditing = (event, row, columnIndex) => {
   row.editing = true
   editingCellIndex.value = columnIndex
+  focusInput(event, columnIndex)
+}
 
+const focusInput = (event, columnIndex) => {
   nextTick(() => {
     const inputElement = event.currentTarget.querySelector(
       `div:nth-child(${columnIndex + 1}) input`
@@ -74,12 +77,6 @@ onMounted(() => {
 
   if (!descriptionValue) {
     localStorage.setItem('program-description', true)
-  }
-})
-
-watch(tables, val => {
-  if (val) {
-    console.log(tables.value)
   }
 })
 </script>

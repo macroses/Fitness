@@ -54,16 +54,6 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           >
             <ul class="user-dropdown">
               <li
-                @click="redirectToPage('/account')"
-                class="user-dropdown__item"
-              >
-                <Icon
-                  icon-name="person"
-                  width="20px"
-                />
-                Account
-              </li>
-              <li
                 @click="redirectToPage('/settings')"
                 class="user-dropdown__item"
               >

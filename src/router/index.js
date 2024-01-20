@@ -3,7 +3,6 @@ import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import { supabase } from '@/lib/supabaseClient'
-import Account from '@/views/Account.vue'
 import BodyParameters from '@/views/BodyParameters.vue'
 import WorkoutMode from '@/views/WorkoutMode.vue'
 import AccountSettings from '@/views/AccountSettings.vue'
@@ -35,14 +34,6 @@ const router = createRouter({
       component: Register,
       meta: {
         auth: false
-      }
-    },
-    {
-      path: '/account',
-      name: 'Account',
-      component: Account,
-      meta: {
-        auth: true
       }
     },
     {

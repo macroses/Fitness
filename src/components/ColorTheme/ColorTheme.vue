@@ -6,35 +6,28 @@ const { userTheme, toggleTheme } = toggleColorTheme()
 
 <template>
   <div class="switcher-box">
-    <div
-      class="light"
-      :class="{ active: userTheme === 'light-theme' }"
-      @click.stop="toggleTheme('light-theme')"
-    >
-      light
-      <!--      <Icon-->
-      <!--        width="17px"-->
-      <!--        icon-name="sun-bright"/>-->
-    </div>
-    <div
-      class="dark"
-      @click.stop="toggleTheme('dark-theme')"
-      :class="{ active: userTheme === 'dark-theme' }"
-    >
-      dark
-      <!--      <Icon-->
-      <!--        width="17px"-->
-      <!--        icon-name="moon"/>-->
-    </div>
-    <div
-      class="dark"
-      @click.stop="toggleTheme('prefer')"
-      :class="{ active: userTheme === 'prefer' }"
-    >
-      prefer
-      <!--      <Icon-->
-      <!--        width="17px"-->
-      <!--        icon-name="gear"/>-->
-    </div>
+    <GroupInputs>
+      <Radio
+        v-model="userTheme"
+        label="Light"
+        name="theme"
+        value="light-theme"
+        @click="toggleTheme('light-theme')"
+      />
+      <Radio
+        v-model="userTheme"
+        label="Dark"
+        name="theme"
+        value="dark-theme"
+        @click="toggleTheme('dark-theme')"
+      />
+      <Radio
+        v-model="userTheme"
+        label="System"
+        name="theme"
+        value="prefer"
+        @click="toggleTheme('prefer')"
+      />
+    </GroupInputs>
   </div>
 </template>

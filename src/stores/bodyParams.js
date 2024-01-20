@@ -5,6 +5,8 @@ import dayjs from 'dayjs'
 import { uid } from 'uid'
 import { chosenDateStore } from '@/stores/chosenDate.js'
 
+const BODY_PARAMS = 'body_params'
+
 export const bodyParamsStore = defineStore('bodyParams', () => {
   const dateStore = chosenDateStore()
 
@@ -15,7 +17,21 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
   const eventsLoading = ref(false)
 
   const fetchEventHandler = async () => {
-    await getProfileColumn(bodyParams, eventsLoading, 'body_params')
+    await getProfileColumn(bodyParams, eventsLoading, BODY_PARAMS)
+  }
+
+  const addParam = (params, activeParam, inputValue) => {
+    const existingParam = params.find(
+      param => param.label === activeParam.label
+    )
+    if (existingParam) {
+      existingParam.value = inputValue.value
+    } else {
+      params.push({
+        label: activeParam.label,
+        value: inputValue.value
+      })
+    }
   }
 
   const pushBodyParamsToBase = async (inputValue, activeParam, isLoading) => {
@@ -24,40 +40,22 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
     )
 
     if (existingData) {
-      // Дата уже существует в массиве
-      const hasExistingParam = existingData.params.some(
-        param => param.label === activeParam.label
-      )
-
-      if (hasExistingParam) {
-        // Параметр с таким label уже существует, обновим его значение
-        existingData.params.find(
-          param => param.label === activeParam.label
-        ).value = inputValue.value
-      } else {
-        // Параметр с таким label не существует, добавим новый объект параметра
-        existingData.params.push({
-          label: activeParam.label,
-          value: inputValue.value
-        })
-      }
+      addParam(existingData.params, activeParam, inputValue)
     } else {
-      // Дата не существует в массиве, добавим новый объект данных
       const collectedData = {
         id: uid(15),
         date: dateStore.date,
-        params: [
-          {
-            label: activeParam.label,
-            value: inputValue.value
-          }
-        ]
+        params: []
       }
-
+      addParam(collectedData.params, activeParam, inputValue)
       bodyParams.value.push(collectedData)
     }
 
-    await updateProfile(null, isLoading, 'body_params', bodyParams.value)
+    try {
+      await updateProfile(null, isLoading, BODY_PARAMS, bodyParams.value)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const activeParam = computed(() => {

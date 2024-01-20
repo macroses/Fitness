@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps({
   tabs: {
@@ -11,7 +11,6 @@ const emit = defineEmits(['activeTab'])
 
 const activeTab = ref(0)
 const tabRect = ref(null)
-const tabsLine = ref(null)
 const lottieAnimation = ref([])
 
 const changeActiveTab = index => {
@@ -24,18 +23,6 @@ const changeActiveTab = index => {
 
   lottieAnimation.value[activeTab.value].play()
 }
-
-const tabStyle = computed(() => {
-  if (tabRect.value && activeTab.value !== null) {
-    const activeTabRect = tabRect.value[activeTab.value].getBoundingClientRect()
-    const parentRect = tabsLine.value.parentNode.getBoundingClientRect()
-    const width = `${activeTabRect.width}px`
-    const left = `${activeTabRect.left - parentRect.left}px`
-    return `width: ${width}; left: ${left};`
-  }
-
-  return ''
-})
 
 onMounted(async () => {
   setTimeout(() => lottieAnimation.value[activeTab.value].play(), 100)
@@ -68,11 +55,6 @@ onMounted(async () => {
         {{ tab.tabTitle }}
       </li>
     </ul>
-    <div
-      ref="tabsLine"
-      class="tabs-line"
-      :style="tabStyle"
-    />
   </div>
 </template>
 

@@ -60,12 +60,13 @@ body.blured::after {
   padding-top: 20px;
   padding-inline: 12px;
   translate: -100%;
-  transition: translate 0.25s ease;
+  transition: translate 0.25s ease, background-color 0.25s ease;
   border-right: 1px solid rgb(var(--accent-color) / 10%);
 
   &.active {
     translate: 0;
     overflow: auto;
+    background-color: var(--dropdown-bg);
   }
 
   @media (min-width: 1024px) {

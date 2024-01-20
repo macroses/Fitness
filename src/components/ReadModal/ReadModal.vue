@@ -142,7 +142,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateIsMobile))
                     <div
                       :style="{
                         background: EFFORTS[set.effort].color,
-                        color: set.effort === 4 && '#fff'
+                        color: set.effort === 4 ? '#fff' : '#000'
                       }"
                       class="read-event__effort"
                     >
