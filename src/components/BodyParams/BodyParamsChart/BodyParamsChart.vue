@@ -10,7 +10,7 @@ import {
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
 import { bodyParamsStore } from '@/stores/bodyParams.js'
 
@@ -30,6 +30,7 @@ const props = defineProps({
   }
 })
 
+const accentColor = ref('')
 const paramsStore = bodyParamsStore()
 const currentDate = dayjs()
 const daysCounterByFilter = ref(30)
@@ -67,7 +68,7 @@ const chartData = computed(() => {
     labels: fillDateCollection.value,
     datasets: [
       {
-        borderColor: '#1a5cff',
+        borderColor: `rgb(${accentColor.value})` || '#1a5cff',
         backgroundColor: '#fff',
         data: aggregatedData,
         tension: 0.4
@@ -90,11 +91,18 @@ watch(
     numPoints.value = values[val].points
   }
 )
+
+onMounted(() => {
+  accentColor.value = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue('--accent-color')
+})
 </script>
 
 <template>
   <div class="body-params__container">
     <div class="body-params__chart">
+      accentColor: {{ accentColor }}
       <Loading
         large
         v-if="!paramsStore.filteredParamsByProp"
