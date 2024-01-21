@@ -1,0 +1,17 @@
+.settings__content-result-label {
+	&:not(:last-child) {
+		margin-bottom: 8px;
+	}
+
+	& span {
+		font-weight: 500;
+		color: rgb(var(--accent-color))
+	}
+}
+
+.settings__content-result {
+	margin-top: 16px;
+	padding: 16px;
+	border-radius: 12px;
+	background-color: var(--table-dark-bg);
+}
