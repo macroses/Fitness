@@ -4,12 +4,12 @@ import Icon from '@/components/UI/Icon/Icon.vue'
 
 <template>
   <div class="avatar-content">
-    <div class="avatar">
+    <button class="avatar">
       <Icon
         icon-name="user-alien"
         width="15px"
       />
-    </div>
+    </button>
   </div>
 </template>
 

@@ -166,7 +166,7 @@ watch(
         @touchstart.passive="handleTouchStart"
         @touchend.passive="handleTouchEnd"
       >
-        <div
+        <button
           v-for="cell in calendarCells"
           :key="cell.date"
           :class="[
@@ -178,6 +178,7 @@ watch(
               disabled: isAfterDaysOff && dayjs(cell.date).isAfter(today, 'day')
             }
           ]"
+          tabindex="0"
           @click="handleClickCell(cell.date)"
         >
           <span class="calendar__cell-text">{{
@@ -188,7 +189,7 @@ watch(
             :style="{ backgroundColor: `rgb(${getCellColor(cell.date)})` }"
             class="markerDate"
           />
-        </div>
+        </button>
       </div>
     </Transition>
   </div>
