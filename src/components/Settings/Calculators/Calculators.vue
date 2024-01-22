@@ -35,12 +35,6 @@ import Accordion from '@/components/UI/Accordion/Accordion.vue'
               @keydown="useOnlyNumbers($event)"
             />
           </GroupInputs>
-
-          <!--          {{ oneRepMaxBrzycki.toFixed(0) }}-->
-          <!--          {{ oneRepMaxEpley.toFixed(0) }}-->
-          <!--          {{ oneRepMaxLander.toFixed(0) }}-->
-          <!--          {{ averageOneRepMax.toFixed(0) }}-->
-
           <div class="settings__content-result">
             <p class="settings__content-result-label">
               Brzycki formula: <span>{{ oneRepMaxBrzycki.toFixed(0) }}kg</span>
@@ -58,8 +52,27 @@ import Accordion from '@/components/UI/Accordion/Accordion.vue'
         </template>
       </Accordion>
       <Accordion>
-        <template #accordion-header> Weight for N reps Calculation </template>
-        <template #accordion-body> lololo </template>
+        <template #accordion-header>
+          Fat percentage in a body calculation
+        </template>
+        <template #accordion-body>
+          <GroupInputs>
+            <Input
+              type="number"
+              v-model="fatPercentAge"
+              @clear="fatPercentAge = 20"
+              label-placeholder="Age, years"
+              @keydown="useOnlyNumbers($event)"
+            />
+            <Input
+              type="number"
+              v-model="fatPercentBellArea"
+              @clear="fatPercentBellArea = 20"
+              label-placeholder="Repeats"
+              @keydown="useOnlyNumbers($event)"
+            />
+          </GroupInputs>
+        </template>
       </Accordion>
     </div>
   </div>

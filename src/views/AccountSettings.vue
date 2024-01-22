@@ -1,5 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import AccountSettings from '@/components/Settings/AccountSettings/AccountSettings.vue'
+import Palette from '@/components/Settings/Palette/Palette.vue'
+import Calculators from '@/components/Settings/Calculators/Calculators.vue'
 
 const activeTab = ref(0)
 const transitionName = ref('')
@@ -14,6 +17,23 @@ const changeTab = id => {
   transitionName.value = activeTab.value < id ? 'slideDown' : 'slideUp'
   activeTab.value = id
 }
+
+const tabContent = computed(() => {
+  switch (activeTab.value) {
+    case 0:
+      return AccountSettings
+    case 1:
+      return Palette
+    case 2:
+      return Calculators
+  }
+})
+
+// const deleteUserAccount = async () => {
+//   const { data, error } = await supabase.auth.admin.deleteUser(
+//     '715ed5db-f090-4b8c-a067-640ecee36aa0'
+//   )
+// }
 </script>
 
 <template>
@@ -37,15 +57,7 @@ const changeTab = id => {
           :name="transitionName"
           appear
         >
-          <div
-            v-if="activeTab === 0"
-            class="settings__content-item"
-          >
-            <h2 class="settings__content-header">Delete account</h2>
-            <Button>Delete</Button>
-          </div>
-          <Palette v-else-if="activeTab === 1" />
-          <Calculators v-else-if="activeTab === 2" />
+          <component :is="tabContent" />
         </Transition>
       </div>
     </div>

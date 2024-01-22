@@ -1,5 +1,5 @@
 <script setup>
-import { readonly, ref } from 'vue'
+import { computed, readonly, ref } from 'vue'
 import ProgramsList from '@/components/ProgramsList/ProgramsList.vue'
 import CustomProgram from '@/components/CustomProgram/CustomProgram.vue'
 import ProgramItemModal from '@/components/ProgramItemModal/ProgramItemModal.vue'
@@ -19,6 +19,21 @@ const getProgramId = program => {
 }
 
 const closeModal = () => (activeProgram.value = null)
+
+const activeTab = computed(() => {
+  switch (activeTabId.value) {
+    case 0:
+      return {
+        component: CustomProgram,
+        emits: {}
+      }
+    case 1:
+      return {
+        component: ProgramsList,
+        emits: { 'get-program-id': getProgramId }
+      }
+  }
+})
 </script>
 
 <template>
@@ -27,11 +42,10 @@ const closeModal = () => (activeProgram.value = null)
       :tabs="tabs"
       @activeTab="getActiveTab"
     />
-    <ProgramsList
-      v-if="activeTabId === 1"
-      @get-program-id="getProgramId"
+    <component
+      :is="activeTab.component"
+      @get-program-id="activeTab.emits['get-program-id']"
     />
-    <CustomProgram v-if="activeTabId === 0" />
     <Modal
       v-if="activeProgram"
       width="700px"

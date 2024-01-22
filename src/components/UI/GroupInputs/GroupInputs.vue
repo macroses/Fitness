@@ -1,14 +1,16 @@
 <script setup></script>
 
 <template>
-  <div class="group-inputs">
+  <fieldset class="group-inputs">
     <slot />
-  </div>
+  </fieldset>
 </template>
 
 <style>
 .group-inputs {
   display: flex;
   gap: 12px;
+  padding: 0;
+  border: 0;
 }
 </style>
