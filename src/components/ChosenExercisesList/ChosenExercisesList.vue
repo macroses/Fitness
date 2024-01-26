@@ -154,6 +154,7 @@ watch(
               >
                 {{ (store.getSetTonnage(element.id) / 1000).toFixed(2) }} T
               </div>
+
               <button
                 v-if="!store.isSuperset"
                 @click="store.deleteExercise(element.id)"

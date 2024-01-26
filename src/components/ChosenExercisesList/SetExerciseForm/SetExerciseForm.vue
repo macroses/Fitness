@@ -2,6 +2,7 @@
 import { watch } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
 import { workoutStore } from '@/stores/workout'
+import { useEventsStore } from '@/stores/userEvents'
 import { EFFORTS } from '@/constants/EFFORTS'
 import ChosenExerciseSets from '@/components/ChosenExercisesList/ChosenExerciseSets/ChosenExerciseSets.vue'
 
@@ -13,6 +14,7 @@ defineProps({
 })
 
 const store = workoutStore()
+const eventsStore = useEventsStore()
 
 const addEffortType = effortId => (store.effort = effortId)
 
@@ -77,6 +79,30 @@ watch(
         </div>
       </div>
       <ChosenExerciseSets :exercise-id="exerciseId" />
+      <div class="chosen-exercises__total-repeats">
+        <div class="chosen-exercises__total-current">
+          Total repeats:
+          <span
+            :class="{
+              'total-repeats--higher':
+                store.getSetRepeats(exerciseId) >
+                eventsStore.getTotalPreviousRepeats,
+              'total-repeats--lower':
+                store.getSetRepeats(exerciseId) <
+                eventsStore.getTotalPreviousRepeats,
+              'total-repeats--equal':
+                store.getSetRepeats(exerciseId) ===
+                eventsStore.getTotalPreviousRepeats
+            }"
+          >
+            {{ store.getSetRepeats(exerciseId) }}
+          </span>
+        </div>
+        <div class="chosen-exercises__total-previous">
+          Total previous:
+          <span>{{ eventsStore.getTotalPreviousRepeats }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>

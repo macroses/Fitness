@@ -59,8 +59,6 @@ export const useEventsStore = defineStore('userEvents', () => {
 
       await pushEvent('workouts', workoutObject, eventsLoading)
 
-      console.log('pushed')
-
       events.value.push(workoutObject)
 
       return
@@ -141,6 +139,20 @@ export const useEventsStore = defineStore('userEvents', () => {
     }
 
     return previousSets
+  })
+
+  const getTotalPreviousRepeats = computed(() => {
+    const previousSets = previousResults.value.slice()
+    if (previousSets.length === 0) {
+      return 0
+    }
+
+    const totalRepeats = previousSets.reduce(
+      (total, set) => total + set.repeats,
+      0
+    )
+
+    return totalRepeats
   })
 
   const combinedResults = computed(() => {
@@ -231,6 +243,7 @@ export const useEventsStore = defineStore('userEvents', () => {
     pushEventHandler,
     updateEventHandler,
     previousResults,
+    getTotalPreviousRepeats,
     combinedResults,
     updateAllEvents,
     rescheduleEvent
