@@ -105,8 +105,9 @@ const isPositive = num => ({
               </span>
             </td>
 
-            <td v-if="result.setId !== null">
+            <td>
               <button
+                v-if="result.setId !== null"
                 class="chosen-exercises__delete"
                 @click="deleteSetHandler(result.setId)"
               >
