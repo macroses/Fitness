@@ -94,6 +94,15 @@ export const workoutStore = defineStore({
       )
       return exercise.setTonnage ? exercise.setTonnage : 0
     },
+    getSetRepeats(id) {
+      const exercise = this.exercisesParamsCollection.find(
+        item => item.exerciseId === id
+      )
+
+      return exercise.sets
+        ? exercise.sets.reduce((acc, curSet) => acc + curSet.repeats, 0)
+        : 0
+    },
     updateTonnage() {
       const sumTonnage = this.exercisesParamsCollection.reduce(
         (acc, exerciseParams) => acc + (exerciseParams.setTonnage || 0),

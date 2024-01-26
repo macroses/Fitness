@@ -197,8 +197,11 @@
 }
 
 .exercises-list__wr {
-  border: 1px solid rgb(var(--content-border-color) / 0.1);
   background-color: var(--content-bg);
   padding: 12px;
   border-radius: 16px;
+
+  @media (width < 768px) {
+    padding: 8px;
+  }
 }
