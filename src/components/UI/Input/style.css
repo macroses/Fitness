@@ -119,6 +119,7 @@
   align-items: center;
   height: 36px;
   min-width: 36px;
+  color: var(--text-color);
   justify-content: center;
   position: absolute;
   top: 2px;

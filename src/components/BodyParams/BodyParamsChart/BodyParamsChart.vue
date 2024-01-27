@@ -102,7 +102,6 @@ onMounted(() => {
 <template>
   <div class="body-params__container">
     <div class="body-params__chart">
-      accentColor: {{ accentColor }}
       <Loading
         large
         v-if="!paramsStore.filteredParamsByProp"
