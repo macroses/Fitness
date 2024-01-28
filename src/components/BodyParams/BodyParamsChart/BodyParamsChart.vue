@@ -1,13 +1,5 @@
 <script setup>
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Tooltip
-} from 'chart.js'
+import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
 import { computed, onMounted, ref, watch } from 'vue'
@@ -102,7 +94,6 @@ onMounted(() => {
 <template>
   <div class="body-params__container">
     <div class="body-params__chart">
-      accentColor: {{ accentColor }}
       <Loading
         large
         v-if="!paramsStore.filteredParamsByProp"

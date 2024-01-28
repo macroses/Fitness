@@ -146,17 +146,19 @@
 
 .chosen-exercises__item-header {
   font-size: 13px;
-  padding: 8px 12px;
+  padding: 8px 0 8px 12px;
   cursor: pointer;
   border-radius: 12px;
   transition:
     background var(--base-transition),
     border var(--base-transition);
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 140px;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid transparent;
-  flex-grow: 1;
+  width: 100%;
 
   &.active {
     background: rgba(244, 247, 248, 1);
@@ -184,11 +186,12 @@
 
 .chosen-exercises__item-name {
   padding-left: 24px;
-  max-width: 75%;
+  /*max-width: 75%;*/
+  overflow: hidden;
 
-  @media (max-width: 500px) {
-    max-width: 200px;
-  }
+  /*@media (max-width: 500px) {*/
+  /*  max-width: 200px;*/
+  /*}*/
 }
 
 .chosen-exercises__item-value {
@@ -215,11 +218,26 @@
   }
 }
 
+.chosen-exercises__item-funcs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.chosen-exercises__item-chart {
+  display: flex;
+  align-items: center;
+}
+
+.chosen-exercises__item-chart-btn {
+  height: 24px;
+}
+
 .chosen-exercises__item-tonnage {
-  margin-left: auto;
-  transform: translateX(-35px);
   color: rgb(var(--text-color));
   opacity: 0.5;
+  white-space: nowrap;
 }
 
 .chosen-exercises__img-wr {
@@ -238,9 +256,6 @@
   height: 100%;
   background-color: transparent;
   border-radius: 12px;
-  position: absolute;
-  top: 0;
-  right: 5px;
   border: 0;
   cursor: pointer;
   opacity: 0.5;

@@ -87,7 +87,6 @@
   background: transparent;
   color: rgb(var(--accent-color));
   overflow: hidden;
-  height: 40px;
   box-shadow: none;
 
   &::before {

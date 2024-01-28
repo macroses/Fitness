@@ -1,0 +1,75 @@
+<script setup>
+import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js'
+import { Line } from 'vue-chartjs'
+import dayjs from 'dayjs'
+import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
+import { computed } from 'vue'
+import { useEventsStore } from '@/stores/userEvents.js'
+
+ChartJS.register(
+  Legend,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Tooltip
+)
+
+const props = defineProps({
+  exerciseId: {
+    type: [Number, String],
+    default: 0
+  }
+})
+
+const eventStore = useEventsStore()
+eventStore.exerciseId = props.exerciseId
+
+const chartData = computed(() => {
+  return {
+    labels: eventStore.exerciseHistory.map(el =>
+      dayjs(el.date).format('DD.MM')
+    ),
+    datasets: [
+      {
+        borderColor: '#1a5cff',
+        backgroundColor: '#fff',
+        data: eventStore.exerciseHistory.map(el => el.weight / 1000),
+        tension: 0.4,
+        yAxisID: 'y',
+      },
+      {
+        borderColor: 'red',
+        backgroundColor: '#fff',
+        data: eventStore.exerciseHistory.map(el => el.repeats),
+        tension: 0.4,
+        yAxisID: 'y1',
+      }
+    ]
+  }
+})
+</script>
+
+<template>
+  <div
+    class="exercise-chart"
+    @click.stop
+  >
+    <button
+      class="exercise-chart__close"
+      @click="$emit('close')"
+    >
+      <Icon
+        icon-name="xmark"
+        width="14px"
+      />
+    </button>
+
+    <Line
+      :data="chartData"
+      :options="bodyParamsOptions"
+    />
+  </div>
+</template>
+
+<style scoped src="./style.css" />
