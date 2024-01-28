@@ -26,6 +26,9 @@ export const bodyParamsOptions = {
       border: {
         dash: [5, 5]
       }
+    },
+    y1: {
+      position: 'right'
     }
   },
   elements: {

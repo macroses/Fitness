@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { workoutStore } from '@/stores/workout'
 import Icon from '@/components/UI/Icon/Icon.vue'
+import ChosenExerciseFuncs from '@/components/ChosenExercisesList/ChosenExerciseFuncs/ChosenExerciseFuncs.vue'
 
 const store = workoutStore()
 const activeExerciseId = ref(null)
@@ -139,32 +140,7 @@ watch(
               :class="{ disabledExercise: store.isSuperset }"
               @click="toggleParameters(element.id)"
             >
-              <div
-                class="collapse__icon"
-                v-if="!store.isSuperset"
-              />
-              <div class="chosen-exercises__item-name">
-                <div class="chosen-exercises__item-value">
-                  {{ element.name }}
-                </div>
-              </div>
-              <div
-                v-if="!store.isSuperset"
-                class="chosen-exercises__item-tonnage"
-              >
-                {{ (store.getSetTonnage(element.id) / 1000).toFixed(2) }} T
-              </div>
-
-              <button
-                v-if="!store.isSuperset"
-                @click="store.deleteExercise(element.id)"
-                class="chosen-exercises__delete"
-              >
-                <Icon
-                  icon-name="xmark"
-                  width="14px"
-                />
-              </button>
+              <ChosenExerciseFuncs :element="element" />
             </div>
           </div>
           <TransitionSlideY>
