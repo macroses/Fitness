@@ -126,12 +126,13 @@ body {
 
     @media (max-width: 475px) {
       gap: 8px;
+      padding-inline: 8px;
     }
   }
 }
 
 .group.efforts {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   display: grid;
   grid-template-columns: 1fr min-content;
   gap: 0;
@@ -191,6 +192,11 @@ body {
   border-radius: 12px;
   background-color: var(--content-bg);
   border: 1px solid rgb(var(--accent-color) / 0.1);
+
+  @media (width < 768px) {
+    padding: 0 0 8px;
+    border: 0;
+  }
 }
 
 ::-webkit-scrollbar {

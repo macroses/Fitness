@@ -108,15 +108,17 @@
     opacity: 0;
   }
 
-  &:hover {
-    box-shadow: none;
-    transform: none;
-  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      box-shadow: none;
+      transform: none;
+    }
 
-  &:hover::before {
-    opacity: 1;
-    transform: scale(1);
-    background-color: rgb(var(--accent-color) / 0.2);
+    &:hover::before {
+      opacity: 1;
+      transform: scale(1);
+      background-color: rgb(var(--accent-color) / 0.2);
+    }
   }
 
   &.active {
