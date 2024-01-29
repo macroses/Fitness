@@ -55,7 +55,12 @@ const chartData = computed(() => {
     class="exercise-chart"
     @click.stop
   >
-    <h3 class="exercise-chart__header">Last 6 results</h3>
+    <h3
+      v-if="eventStore.exerciseHistory.length > 3"
+      class="exercise-chart__header"
+    >
+      Last 6 results
+    </h3>
     <button
       class="exercise-chart__close"
       @click="$emit('close')"
@@ -67,9 +72,13 @@ const chartData = computed(() => {
     </button>
 
     <Line
+      v-if="eventStore.exerciseHistory.length > 3"
       :data="chartData"
       :options="bodyParamsOptions"
     />
+    <p v-else class="exercise-chart__no-data">
+      Not enough data to show chart
+    </p>
   </div>
 </template>
 

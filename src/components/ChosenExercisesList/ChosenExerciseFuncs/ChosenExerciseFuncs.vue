@@ -88,7 +88,6 @@ onClickOutside(chart, () => {
           width="20px"
         />
       </Button>
-
       <Transition
         :css="false"
         @before-enter="onBeforeEnter"
