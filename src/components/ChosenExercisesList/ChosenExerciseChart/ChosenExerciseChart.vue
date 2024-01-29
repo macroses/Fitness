@@ -26,22 +26,22 @@ const eventStore = useEventsStore()
 eventStore.exerciseId = props.exerciseId
 
 const chartData = computed(() => {
+  const lastSixExerciseHistory = eventStore.exerciseHistory.slice(-6)
+
   return {
-    labels: eventStore.exerciseHistory.map(el =>
-      dayjs(el.date).format('DD.MM')
-    ),
+    labels: lastSixExerciseHistory.map(el => dayjs(el.date).format('DD.MM')),
     datasets: [
       {
         borderColor: '#1a5cff',
         backgroundColor: '#fff',
-        data: eventStore.exerciseHistory.map(el => el.weight / 1000),
+        data: lastSixExerciseHistory.map(el => el.weight / 1000),
         tension: 0.4,
         yAxisID: 'y',
       },
       {
         borderColor: 'red',
         backgroundColor: '#fff',
-        data: eventStore.exerciseHistory.map(el => el.repeats),
+        data: lastSixExerciseHistory.map(el => el.repeats),
         tension: 0.4,
         yAxisID: 'y1',
       }
@@ -55,6 +55,7 @@ const chartData = computed(() => {
     class="exercise-chart"
     @click.stop
   >
+    <h3 class="exercise-chart__header">Last 6 results</h3>
     <button
       class="exercise-chart__close"
       @click="$emit('close')"

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Icon from '@/components/UI/Icon/Icon.vue'
 import { workoutStore } from '@/stores/workout'
+import { useEventsStore } from '@/stores/userEvents.js'
 import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import { onClickOutside } from '@vueuse/core'
@@ -17,6 +18,7 @@ defineProps({
 })
 
 const store = workoutStore()
+const eventStore = useEventsStore()
 const isExerciseChartVisible = ref(false)
 const chart = ref(null)
 
