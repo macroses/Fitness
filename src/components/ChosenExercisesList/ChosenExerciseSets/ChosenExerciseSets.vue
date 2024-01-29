@@ -30,7 +30,7 @@ const isPositive = num => ({
             <td />
             <td>Weight</td>
             <td>Repeats</td>
-            <td />
+            <td style="width: 36px"/>
           </tr>
         </thead>
         <tbody>
@@ -107,7 +107,7 @@ const isPositive = num => ({
 
             <td>
               <button
-                v-if="result.setId !== null"
+                v-if="result.setId ?? null"
                 class="chosen-exercises__delete"
                 @click="deleteSetHandler(result.setId)"
               >
