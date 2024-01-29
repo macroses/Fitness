@@ -405,6 +405,7 @@
   background: rgb(250, 93, 131);
   flex-grow: 1;
   border-radius: 2px;
+  opacity: 0.5;
 }
 
 .chosen-exercises__total-progress-bar {
