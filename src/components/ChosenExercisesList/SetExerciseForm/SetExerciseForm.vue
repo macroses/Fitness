@@ -1,12 +1,12 @@
 <script setup>
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
 import { workoutStore } from '@/stores/workout'
 import { useEventsStore } from '@/stores/userEvents'
 import { EFFORTS } from '@/constants/EFFORTS'
 import ChosenExerciseSets from '@/components/ChosenExercisesList/ChosenExerciseSets/ChosenExerciseSets.vue'
 
-defineProps({
+const props = defineProps({
   exerciseId: {
     type: Number,
     required: true
@@ -19,6 +19,12 @@ const eventsStore = useEventsStore()
 const addEffortType = effortId => (store.effort = effortId)
 
 const addSetHandler = exerciseId => store.addSet(exerciseId)
+
+const progressPercentage = computed(() => {
+  const total = eventsStore.getTotalPreviousRepeats;
+  const current = store.getSetRepeats(props.exerciseId)
+  return (current / total) * 100
+})
 
 watch(
   () => store.repeats,
@@ -97,6 +103,12 @@ watch(
           >
             {{ store.getSetRepeats(exerciseId) }}
           </span>
+        </div>
+        <div class="chosen-exercises__total-progress">
+          <div
+            class="chosen-exercises__total-progress-bar"
+            :style="{ width: `${progressPercentage}%` }"
+          />
         </div>
         <div class="chosen-exercises__total-previous">
           Total previous:

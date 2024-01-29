@@ -274,7 +274,7 @@
   grid-template-rows: 0fr;
   border: 1px solid rgb(var(--accent-color) / 0.6);
   border-top: 0;
-  transition: all 0.5s ease;
+  /*transition: all 0.5s ease;*/
   padding: 0 12px;
   border-bottom-left-radius: 9px;
   border-bottom-right-radius: 9px;
@@ -371,6 +371,8 @@
 .chosen-exercises__total-repeats {
   font-size: 12px;
   display: flex;
+  align-items: center;
+  gap: 12px;
   justify-content: space-between;
   padding: 4px 8px;
   background-color: var(--table-dark-bg);
@@ -396,4 +398,17 @@
 
 .total-repeats--equal {
   color: var(--text-color);
+}
+
+.chosen-exercises__total-progress {
+  height: 4px;
+  background: rgb(250, 93, 131);
+  flex-grow: 1;
+  border-radius: 2px;
+}
+
+.chosen-exercises__total-progress-bar {
+  height: 100%;
+  border-radius: 2px;
+  background-color: #00c700;
 }

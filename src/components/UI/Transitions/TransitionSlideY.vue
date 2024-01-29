@@ -1,25 +1,35 @@
 <script setup>
 import { gsap } from 'gsap'
 
-const enter = el => {
+const onBeforeEnter = el => {
+  el.style.gridTemplateRows = '0'
+}
+
+const onEnter = (el, done) => {
   gsap.to(el, {
-    duration: 0,
-    gridTemplateRows: '1fr'
+    duration: 0.3,
+    gridTemplateRows: '1fr',
+    onComplete: done
   })
 }
 
-const leave = el => {
+const onLeave = (el, done) => {
   gsap.to(el, {
-    duration: 0,
-    gridTemplateRows: '0fr'
+    duration: 0.3,
+    gridTemplateRows: '0fr',
+    alpha: 0,
+    onComplete: done
   })
 }
+
 </script>
 
 <template>
   <Transition
-    @enter="enter"
-    @leave="leave"
+    :css="false"
+    @before-enter="onBeforeEnter"
+    @enter="onEnter"
+    @leave="onLeave"
   >
     <slot />
   </Transition>
