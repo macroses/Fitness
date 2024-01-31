@@ -3,10 +3,6 @@ import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import { supabase } from '@/lib/supabaseClient'
-import BodyParameters from '@/views/BodyParameters.vue'
-import WorkoutMode from '@/views/WorkoutMode.vue'
-import AccountSettings from '@/views/AccountSettings.vue'
-import Program from '@/views/Program.vue'
 import Exercises from '@/views/Exercises.vue'
 
 const router = createRouter({
@@ -39,7 +35,7 @@ const router = createRouter({
     {
       path: '/workout/',
       name: 'workoutmode',
-      component: WorkoutMode,
+      component: () => import('@/views/WorkoutMode.vue'),
       meta: {
         auth: true
       }
@@ -47,7 +43,7 @@ const router = createRouter({
     {
       path: '/settings',
       name: 'settings',
-      component: AccountSettings,
+      component: () => import('@/views/AccountSettings.vue'),
       meta: {
         auth: true
       }
@@ -55,7 +51,7 @@ const router = createRouter({
     {
       path: '/body-parameters',
       name: 'bodyParameters',
-      component: BodyParameters,
+      component: () => import('@/views/BodyParameters.vue'),
       meta: {
         auth: true
       }
@@ -63,7 +59,7 @@ const router = createRouter({
     {
       path: '/program',
       name: 'program',
-      component: Program,
+      component: () => import('@/views/Program.vue'),
       meta: {
         auth: true
       }

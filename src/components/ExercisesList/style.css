@@ -1,7 +1,3 @@
-.muscles {
-  margin-top: 16px;
-}
-
 .muscles__item-header {
   height: 42px;
   display: flex;
@@ -204,6 +200,6 @@
   border-radius: 16px;
 
   @media (width < 768px) {
-    padding: 0;
+    padding: 8px;
   }
 }

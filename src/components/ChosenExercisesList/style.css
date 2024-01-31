@@ -369,15 +369,17 @@
 }
 
 .chosen-exercises__total-repeats {
+  position: relative;
   font-size: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
   justify-content: space-between;
   padding: 4px 8px;
-  background-color: var(--table-dark-bg);
+  /*background-color: var(--table-dark-bg);*/
   border-radius: 6px;
   margin-bottom: 8px;
+  z-index: 1;
 
   & span {
     font-weight: 600;
@@ -401,15 +403,10 @@
 }
 
 .chosen-exercises__total-progress {
-  height: 4px;
-  background: rgb(250, 93, 131);
+  position: absolute;
+  inset: 0;
   flex-grow: 1;
-  border-radius: 2px;
-  opacity: 0.5;
-}
-
-.chosen-exercises__total-progress-bar {
-  height: 100%;
-  border-radius: 2px;
-  background-color: #00c700;
+  border-radius: 6px;
+  z-index: -1;
+  opacity: 0.8;
 }

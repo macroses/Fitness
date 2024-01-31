@@ -21,6 +21,10 @@ const addEffortType = effortId => (store.effort = effortId)
 const addSetHandler = exerciseId => store.addSet(exerciseId)
 
 const progressPercentage = computed(() => {
+  if (store.getSetRepeats(props.exerciseId) === 0) {
+    return -100
+  }
+
   const total = eventsStore.getTotalPreviousRepeats;
   const current = store.getSetRepeats(props.exerciseId)
   return (current / total) * 100
@@ -88,32 +92,18 @@ watch(
       <div class="chosen-exercises__total-repeats">
         <div class="chosen-exercises__total-current">
           Total repeats:
-          <span
-            :class="{
-              'total-repeats--higher':
-                store.getSetRepeats(exerciseId) >
-                eventsStore.getTotalPreviousRepeats,
-              'total-repeats--lower':
-                store.getSetRepeats(exerciseId) <
-                eventsStore.getTotalPreviousRepeats,
-              'total-repeats--equal':
-                store.getSetRepeats(exerciseId) ===
-                eventsStore.getTotalPreviousRepeats
-            }"
-          >
+          <span>
             {{ store.getSetRepeats(exerciseId) }}
           </span>
-        </div>
-        <div class="chosen-exercises__total-progress">
-          <div
-            class="chosen-exercises__total-progress-bar"
-            :style="{ width: `${progressPercentage}%` }"
-          />
         </div>
         <div class="chosen-exercises__total-previous">
           Total previous:
           <span>{{ eventsStore.getTotalPreviousRepeats }}</span>
         </div>
+        <div
+          class="chosen-exercises__total-progress"
+          :style="{background: `linear-gradient(to right, rgba(51, 176, 29, 0.59) ${progressPercentage}%, rgba(254, 64, 1, 0.91) 100%)`}"
+        />
       </div>
     </div>
   </div>

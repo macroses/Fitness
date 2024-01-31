@@ -20,6 +20,7 @@
   height: 100%;
   overflow: hidden;
   background-color: var(--content-bg);
+  color: var(--accent-color);
   border: 1px solid rgb(var(--content-border-color) / 0.1);
   display: flex;
   align-items: center;
@@ -27,6 +28,10 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .avatar:hover {
+    cursor: pointer;
+  }
+  
   .avatar-content:hover svg {
     scale: 1.2;
     transition: all var(--base-transition);

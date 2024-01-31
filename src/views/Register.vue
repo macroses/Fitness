@@ -75,7 +75,7 @@ async function signInWithGitHub() {
     <Input
       type="password"
       v-model="formState.confirmPassword"
-      label-placeholder="Password"
+      label-placeholder="Confirm password"
       width="350px"
     />
 

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const props = defineProps({
   buttons: {
@@ -12,18 +12,18 @@ const activeButton = ref(0)
 
 const shadowBtn = ref(null)
 const buttonItem = ref(null)
+const tabStyle = ref(null)
 
 const activateButton = index => (activeButton.value = index)
 
-const tabStyle = computed(() => {
-  if (buttonItem.value) {
-    const activeButtonRect =
-      buttonItem.value[activeButton.value].getBoundingClientRect()
+watchEffect(() => {
+  if (buttonItem.value && shadowBtn.value) {
+    const activeButtonRect = buttonItem.value[activeButton.value].getBoundingClientRect()
     const parentRect = shadowBtn.value.parentNode.getBoundingClientRect()
     const width = `${activeButtonRect.width - 4}px`
     const left = `${activeButtonRect.left - parentRect.left + 1}px`
 
-    return `width: ${width}; left: ${left};`
+    tabStyle.value = `width: ${width}; left: ${left};`
   }
 })
 </script>
@@ -36,7 +36,7 @@ const tabStyle = computed(() => {
       :key="item.id"
       class="button-group__item"
       :class="{ active: item.id === activeButton }"
-      @click="$emit('getButton', item.id), activateButton(index)"
+      @click="$emit('getButton', item.id); activateButton(index)"
     >
       {{ item.value }}
     </button>

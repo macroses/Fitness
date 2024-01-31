@@ -16,7 +16,6 @@ export const bodyParamsOptions = {
       }
     },
     y: {
-      position: 'right',
       grid: {
         color: 'rgba(0,0,0, 0.05)'
       },
@@ -27,6 +26,9 @@ export const bodyParamsOptions = {
       border: {
         dash: [5, 5]
       }
+    },
+    y1: {
+      position: 'right'
     }
   },
   elements: {

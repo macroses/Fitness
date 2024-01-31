@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 import BodyParamsChart from '@/components/BodyParams/BodyParamsChart/BodyParamsChart.vue'
 import { chosenDateStore } from '../stores/chosenDate.js'
 import { FILTER_LIST } from '@/constants/FILTER_LIST.js'
@@ -38,6 +37,12 @@ const setActiveField = id => {
 const submitBodyParams = async () => {
   if (!inputValue.value) {
     toast.error('Field is empty', { position: toast.POSITION.TOP_RIGHT })
+    return
+  }
+
+  if ( typeof inputValue.value !== 'number' ) {
+    inputValue.value = null
+    toast.error('Field must be a number', { position: toast.POSITION.TOP_RIGHT })
     return
   }
 
@@ -184,11 +189,11 @@ onClickOutside(aside, () => {
           @submit.prevent="submitBodyParams"
         >
           <Input
-            v-model="inputValue"
+            v-model.number.trim="inputValue"
             mode="decimal"
+            type="number"
             :label-placeholder="paramsStore.activeParam.unit"
             @clear="inputValue = null"
-            @keydown="useOnlyNumbers($event)"
           />
           <Button>Submit</Button>
         </form>

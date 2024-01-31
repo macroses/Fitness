@@ -6,11 +6,12 @@ import Calculators from '@/components/Settings/Calculators/Calculators.vue'
 
 const activeTab = ref(0)
 const transitionName = ref('')
+const isSidebarOpen = ref(false)
 
 const tabs = [
-  { id: 0, value: 'Account' },
-  { id: 1, value: 'UI' },
-  { id: 2, value: 'Calculators' }
+  { id: 0, value: 'Account', icon: 'user-alien' },
+  { id: 1, value: 'UI', icon: 'palette' },
+  { id: 2, value: 'Calculators', icon: 'calculator'}
 ]
 
 const changeTab = id => {
@@ -28,34 +29,46 @@ const tabContent = computed(() => {
       return Calculators
   }
 })
-
-// const deleteUserAccount = async () => {
-//   const { data, error } = await supabase.auth.admin.deleteUser(
-//     '715ed5db-f090-4b8c-a067-640ecee36aa0'
-//   )
-// }
 </script>
 
 <template>
   <div class="container">
     <div class="settings">
-      <div class="settings__aside">
-        <ul class="settings__aside-list">
-          <li
-            v-for="tab in tabs"
-            :key="tab.id"
-            class="settings__aside-item"
+      <ul
+        class="settings__aside-list"
+        :class="{ active: isSidebarOpen }"
+      >
+        <li
+          v-for="(tab, index) in tabs"
+          :key="tab.id"
+          class="settings__aside-item"
+          :class="{ active: activeTab === index }"
+        >
+          <button
+            class="settings__aside-btn"
             @click="changeTab(tab.id)"
           >
+            <Icon
+              :icon-name="tab.icon"
+              width="18px"
+            />
             {{ tab.value }}
-          </li>
-        </ul>
-      </div>
+          </button>
+        </li>
+      </ul>
       <div class="settings__content">
+        <Button
+          transparent
+          @click="isSidebarOpen = true"
+        >
+          <Icon
+            icon-name="gear"
+            width="18px"
+          />
+        </Button>
         <Transition
           mode="out-in"
           :name="transitionName"
-          appear
         >
           <component :is="tabContent" />
         </Transition>
@@ -63,53 +76,3 @@ const tabContent = computed(() => {
     </div>
   </div>
 </template>
-
-<style>
-.settings {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  border-radius: 16px;
-  margin-top: 16px;
-}
-
-.settings__content-header {
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.settings__content-subject {
-  margin-bottom: 24px;
-}
-
-.slideUp-enter-active,
-.slideUp-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.slideUp-enter-from {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.slideUp-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
-  overflow: hidden;
-}
-
-.slideDown-enter-active,
-.slideDown-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.slideDown-enter-from {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-
-.slideDown-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-  overflow: hidden;
-}
-</style>
