@@ -103,6 +103,12 @@
   svg {
     color: rgb(var(--accent-color));
   }
+
+  &.selected {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .multiselect__placeholder {
