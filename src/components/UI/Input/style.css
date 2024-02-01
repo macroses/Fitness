@@ -1,0 +1,135 @@
+.input-parent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+/*.input-parent:has(.input-label--fade) {*/
+/*  overflow: hidden;*/
+/*}*/
+
+.input-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  border-radius: 12px;
+
+  &:focus-visible {
+    outline: 1px solid rgb(var(--accent-color));
+  }
+}
+
+.input-component {
+  border: 1px solid transparent;
+  background: var(--form-bg);
+  box-shadow: var(--form-box-shadow);
+  color: rgb(var(--text-color));
+  border-radius: inherit;
+  transition: padding 0.25s ease;
+  padding: 7px 13px 7px 10px;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+
+  &:focus-visible {
+    outline: 1px solid rgb(var(--accent-color));
+  }
+
+  &.small {
+    padding: 1px 4px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-size: 12px;
+
+    &:focus {
+      padding-left: 4px;
+      outline: 1px solid rgb(var(--accent-color));
+    }
+
+    & + .input-clear {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.input-label {
+  position: absolute;
+  left: 13px;
+  font-size: 0.8rem;
+  transition: all 0.25s ease;
+  cursor: text;
+  user-select: none;
+  pointer-events: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0.4;
+}
+
+.input-component:focus {
+  padding-left: 15px;
+}
+
+.input-component:focus ~ .input-label {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-13px, -77%);
+  font-size: 0.75rem;
+}
+
+.input-label--hidden {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-13px, -77%);
+  font-size: 0.75rem;
+}
+
+.input-label.input-label--fade {
+  opacity: 0.5;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-3px, 0);
+  font-size: 0.75rem;
+}
+
+.input-label.input-has-value {
+  opacity: 0;
+}
+
+.input-component:focus ~ .input-label.input-label--fade {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: auto;
+  transform: translate(50px, 0);
+}
+
+.input-clear {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  min-width: 36px;
+  color: var(--text-color);
+  justify-content: center;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border: 0;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all var(--base-transition);
+}
+
+.input-clear:hover {
+  background-color: var(--table-dark-bg);
+}

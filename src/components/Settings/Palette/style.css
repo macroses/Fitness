@@ -1,0 +1,22 @@
+.palette-list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.palette-item {
+	display: flex;
+	gap: 8px;
+	cursor: pointer;
+
+	&:hover .palette-item__color {
+		scale: 1.1;
+	}
+}
+
+.palette-item__color {
+	width: 24px;
+	height: 24px;
+	border-radius: 9px;
+	transition: scale 0.25s ease-in-out;
+}
