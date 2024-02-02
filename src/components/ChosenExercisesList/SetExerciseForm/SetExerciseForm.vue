@@ -17,8 +17,10 @@ const store = workoutStore()
 const eventsStore = useEventsStore()
 
 const addEffortType = effortId => (store.effort = effortId)
-
 const addSetHandler = exerciseId => store.addSet(exerciseId)
+const isCurrentRepeatsMoreThanLast = computed(() => {
+  return store.getSetRepeats(props.exerciseId) > eventsStore.getTotalPreviousRepeats
+})
 
 const progressPercentage = computed(() => {
   if (store.getSetRepeats(props.exerciseId) === 0) {
@@ -89,7 +91,10 @@ watch(
         </div>
       </div>
       <ChosenExerciseSets :exercise-id="exerciseId" />
-      <div class="chosen-exercises__total-repeats">
+      <div
+        class="chosen-exercises__total-repeats"
+        :class="{ done: isCurrentRepeatsMoreThanLast }"
+      >
         <div class="chosen-exercises__total-current">
           Total repeats:
           <span>
