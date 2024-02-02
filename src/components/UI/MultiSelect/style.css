@@ -103,6 +103,12 @@
   svg {
     color: rgb(var(--accent-color));
   }
+
+  &.selected {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .multiselect__placeholder {
@@ -111,4 +117,5 @@
   gap: 8px;
   font-size: 12px;
   cursor: pointer;
+  padding-left: 8px;
 }
