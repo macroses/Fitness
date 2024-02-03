@@ -1,4 +1,16 @@
-export const bodyParamsOptions = {
+// const legendMargin = {
+//   id: 'legendMargin',
+//   beforeInit (chart) {
+//     const fitValue = chart.legend.fit
+//
+//     chart.legend.fit = function fit() {
+//       fitValue.bind(chart.legend)()
+//       return this.height += 50
+//     }
+//   }
+// }
+
+export const exerciseProgressChart = {
   responsive: true,
   maintainAspectRatio: false,
   circular: true,
@@ -41,7 +53,14 @@ export const bodyParamsOptions = {
   },
   plugins: {
     legend: {
-      display: false
-    }
+      align: 'start',
+      labels: {
+        useBorderRadius: true,
+        borderRadius: 5,
+        boxWidth: 10,
+        boxHeight: 10
+      }
+    },
+    // legendMargin
   }
 }
