@@ -2,7 +2,7 @@
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
-import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
+import { exerciseProgressChart } from '@/chartsconfig/exerciseProgressChart.js'
 import { computed } from 'vue'
 import { useEventsStore } from '@/stores/userEvents.js'
 
@@ -32,6 +32,7 @@ const chartData = computed(() => {
     labels: lastSixExerciseHistory.map(el => dayjs(el.date).format('DD.MM')),
     datasets: [
       {
+        label: 'Weight',
         borderColor: '#1a5cff',
         backgroundColor: '#fff',
         data: lastSixExerciseHistory.map(el => el.weight / 1000),
@@ -39,6 +40,7 @@ const chartData = computed(() => {
         yAxisID: 'y',
       },
       {
+        label: 'Repeats',
         borderColor: 'red',
         backgroundColor: '#fff',
         data: lastSixExerciseHistory.map(el => el.repeats),
@@ -74,7 +76,7 @@ const chartData = computed(() => {
     <Line
       v-if="eventStore.exerciseHistory.length > 3"
       :data="chartData"
-      :options="bodyParamsOptions"
+      :options="exerciseProgressChart"
     />
     <p v-else class="exercise-chart__no-data">
       Not enough data to show chart
