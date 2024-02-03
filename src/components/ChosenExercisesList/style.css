@@ -27,6 +27,7 @@
 
 .chosen-exercises__item {
   border-radius: 12px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .chosen-exercises__supersets {
