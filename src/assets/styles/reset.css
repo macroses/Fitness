@@ -73,3 +73,7 @@ ul {
 b {
   font-weight: 600;
 }
+
+button, a, input {
+  -webkit-tap-highlight-color: transparent;
+}
