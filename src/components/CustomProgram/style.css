@@ -133,3 +133,7 @@
   position: absolute;
   transition: all 0.7s cubic-bezier(0.55, 0, 0.1, 1);
 }
+
+.custom-program__button-next {
+  margin: 0 auto;
+}

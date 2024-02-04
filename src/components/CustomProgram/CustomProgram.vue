@@ -1,16 +1,9 @@
 <script setup>
 import { nextTick, onMounted, ref } from 'vue'
 import { HEADERS, LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
-import {
-  addRow,
-  addTable,
-  removeDayTable,
-  removeRow,
-  tables
-} from '@/components/CustomProgram/composable'
+import { onBeforeEnter, onEnter, onLeave } from '@/components/CustomProgram/composable/tableTransition.js'
+import { addRow, addTable, removeDayTable, removeRow, tables } from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
-import { gsap } from 'gsap'
-import CustomProgramDescription from '@/components/CustomProgram/CustomProgramDescription/CustomProgramDescription.vue'
 
 const isDescriptionVisible = ref(true)
 const tableRow = ref(null)
@@ -36,29 +29,6 @@ const focusInput = (event, columnIndex) => {
 const stopEditing = row => {
   row.editing = false
   editingCellIndex.value = null
-}
-
-const onBeforeEnter = el => {
-  el.style.opacity = 0
-  el.style.height = 0
-}
-
-const onEnter = (el, done) => {
-  gsap.to(el, {
-    duration: 0.2,
-    opacity: 1,
-    height: 'auto',
-    onComplete: done
-  })
-}
-
-const onLeave = (el, done) => {
-  gsap.to(el, {
-    duration: 0.2,
-    opacity: 0,
-    height: 0,
-    onComplete: done
-  })
 }
 
 const hideProgramDescription = () => {
@@ -315,7 +285,7 @@ onMounted(() => {
                 style="width: 30px"
               >
                 <Button
-                  @click="removeRow(tableIndex, rowIndex)"
+                  @click="removeRow(tableIndex, rowIndex, table.id)"
                   transparent
                   size="small"
                 >
@@ -348,6 +318,13 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
+    <div class="custom-program__second-step">
+      
+    </div>
+
+    <Button class="custom-program__button-next">Next Step</Button>
+    {{tables}}
   </section>
 </template>
 

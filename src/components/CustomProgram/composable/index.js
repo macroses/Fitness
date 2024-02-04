@@ -50,14 +50,14 @@ const addRow = tableIndex => {
   tables.value[tableIndex].rows.push(createTableRows())
 }
 
-const removeRow = (tableId, rowId) => {
-  if (tables.value[tableId].rows.length <= 2) {
+const removeRow = (tableIndex, rowId, tableId) => {
+  if (tables.value[tableIndex].rows.length <= 1) {
     removeDayTable(tableId)
-
+    
     return
   }
 
-  tables.value[tableId].rows.splice(rowId, 1)
+  tables.value[tableIndex].rows.splice(rowId, 1)
 }
 
 const addTable = () => {
