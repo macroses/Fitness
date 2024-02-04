@@ -1,5 +1,4 @@
 <script setup>
-import Cookies from 'js-cookie'
 import ColorTheme from '@/components/ColorTheme/ColorTheme.vue'
 
 const palette = [
@@ -16,7 +15,7 @@ const palette = [
 
 const changeColorTheme = color => {
   document.documentElement.style.setProperty('--accent-color', color)
-  Cookies.set('palette-color', color)
+  localStorage.setItem('palette-color', color)
 }
 </script>
 

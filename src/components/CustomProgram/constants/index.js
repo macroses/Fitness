@@ -10,14 +10,14 @@ export const MULTIPLIER = [
 ]
 
 export const HEADERS = [
-  { value: 'Load' },
+  { value: 'Load', icon: 'speedometer' },
   { value: 'Exercise' },
-  { value: 'Multi' },
-  { value: 'Weight' },
-  { value: 'Reps' },
+  { value: 'Multi', icon: 'multiplier' },
+  { value: 'Weight', icon: 'weight-hanging' },
+  { value: 'Reps', icon: 'arrows-repeat' },
   { value: 'Sets' },
   { value: '% of PM' },
-  { value: 'Time, m' },
+  { value: 'Time, m', icon: 'timer' },
   { value: 'Tonnage, kg' },
   { value: 'Total reps' },
   { value: '', width: '40px' }
