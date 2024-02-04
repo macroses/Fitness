@@ -10,6 +10,7 @@ import { toast } from 'vue3-toastify'
 import dayjs from 'dayjs'
 import { onClickOutside } from '@vueuse/core'
 import ButtonGroup from '@/components/UI/ButtonGroup/ButtonGroup.vue'
+import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
 
 const paramsStore = bodyParamsStore()
 const dateStore = chosenDateStore()
@@ -194,6 +195,7 @@ onClickOutside(aside, () => {
             type="number"
             :label-placeholder="paramsStore.activeParam.unit"
             @clear="inputValue = null"
+            @keydown="useOnlyNumbers($event)"
           />
           <Button>Submit</Button>
         </form>

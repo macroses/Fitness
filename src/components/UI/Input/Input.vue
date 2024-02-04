@@ -64,6 +64,26 @@ const modelValue = defineModel({
   type: [String, Number, null],
   required: true
 })
+
+const handleInput = (event) => {
+  if (props.type !== 'number') {
+    return
+  }
+
+  event.target.value = event.target.value.replace(',', '.')
+  console.log(event.target.value)
+
+  let value = event.target.value
+  // Заменяем все запятые на точки
+  value = value.replace(/,/g, '.')
+
+  const firstDotIndex = value.indexOf('.')
+  if (firstDotIndex !== -1) {
+    const beforeDot = value.substring(0, firstDotIndex + 1)
+    const afterDot = value.substring(firstDotIndex + 1)
+    event.target.value = beforeDot + afterDot.replace(/\./g, '')
+  }
+}
 </script>
 
 <template>
@@ -76,13 +96,14 @@ const modelValue = defineModel({
         ref="inp"
         class="input-component"
         :class="{ small: small }"
-        :type="type"
         :inputmode="mode"
         :id="uniqueId"
         v-model="modelValue"
         @focus="inpFocus"
         @blur="$emit('blur')"
+        @input="handleInput"
         autocomplete="new-password"
+        required
       />
       <label
         v-if="labelPlaceholder"
