@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue'
-import Icon from '@/components/UI/Icon/Icon.vue'
 import { workoutStore } from '@/stores/workout'
-import { gsap } from 'gsap'
-import { CSSPlugin } from 'gsap/CSSPlugin'
+import {
+  onBeforeEnter,
+  onEnter,
+  onLeave
+} from '@/components/ChosenExercisesList/ChosenExerciseFuncs/composable/index.js'
 import { onClickOutside } from '@vueuse/core'
-
-gsap.registerPlugin(CSSPlugin)
 
 defineProps({
   element: {
@@ -20,46 +20,12 @@ const store = workoutStore()
 const isExerciseChartVisible = ref(false)
 const chart = ref(null)
 
-const toggleChart = () => {
-  isExerciseChartVisible.value = !isExerciseChartVisible.value
-}
-
-const onBeforeEnter = el => {
-  el.style.scale = 0.5
-  el.style.transformOrigin = '300px 0'
-}
-
-const onEnter = (el, done) => {
-  gsap.to(el, {
-    duration: 0.2,
-    scale: 1.05,
-
-    onComplete: () => {
-      gsap.to(el, {
-        duration: 0.1,
-        scale: 1,
-        onComplete: done
-      })
-    }
-  })
-}
-
-const onLeave = (el, done) => {
-  gsap.to(el, {
-    duration: 0.2,
-    scale: 1.05,
-    onComplete: () => {
-      gsap.to(el, {
-        duration: 0.1,
-        scale: 0,
-        onComplete: done
-      })
-    }
-  })
-}
+const toggleChart = () => isExerciseChartVisible.value = !isExerciseChartVisible.value
 
 onClickOutside(chart, () => {
-  isExerciseChartVisible.value = false
+  setTimeout(() => {
+    isExerciseChartVisible.value = false
+  }, 100)
 })
 </script>
 
