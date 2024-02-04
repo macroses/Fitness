@@ -4,6 +4,7 @@ import { HEADERS, LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
 import { onBeforeEnter, onEnter, onLeave } from '@/components/CustomProgram/composable/tableTransition.js'
 import { addRow, addTable, removeDayTable, removeRow, tables } from '@/components/CustomProgram/composable'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
+import CustomProgramSecondStep from '@/components/CustomProgram/CustomProgramSecondStep/CustomProgramSecondStep.vue'
 
 const isDescriptionVisible = ref(true)
 const tableRow = ref(null)
@@ -319,13 +320,11 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="custom-program__second-step">
-      
-    </div>
 
+
+    <CustomProgramSecondStep />
     <Button class="custom-program__button-next">Next Step</Button>
-    {{tables}}
   </section>
 </template>
 
-<style scoped src="./style.css" />
+<style src="./style.css" />
