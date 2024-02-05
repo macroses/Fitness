@@ -72,9 +72,7 @@ const handleInput = (event) => {
 
   event.target.value = event.target.value
     .replace(/[a-zA-Zа-яА-Я]/g, '')
-    .replace(',', '.');
-
-  // let value = event.target.value
+    .replace(',', '.')
 
   let value = event.target.value.replace(/,/g, '.')
 
