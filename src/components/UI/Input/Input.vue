@@ -74,9 +74,9 @@ const handleInput = (event) => {
     .replace(/[a-zA-Zа-яА-Я]/g, '')
     .replace(',', '.');
 
-  let value = event.target.value
+  // let value = event.target.value
 
-  value = value.replace(/,/g, '.')
+  let value = event.target.value.replace(/,/g, '.')
 
   const firstDotIndex = value.indexOf('.')
   if (firstDotIndex !== -1) {
