@@ -70,12 +70,11 @@ const handleInput = (event) => {
     return
   }
 
-  event.target.value = event.target.value.replace(',', '.')
-  console.log(event.target.value)
+  event.target.value = event.target.value
+    .replace(/[a-zA-Zа-яА-Я]/g, '')
+    .replace(',', '.')
 
-  let value = event.target.value
-  // Заменяем все запятые на точки
-  value = value.replace(/,/g, '.')
+  let value = event.target.value.replace(/,/g, '.')
 
   const firstDotIndex = value.indexOf('.')
   if (firstDotIndex !== -1) {
@@ -103,7 +102,6 @@ const handleInput = (event) => {
         @blur="$emit('blur')"
         @input="handleInput"
         autocomplete="new-password"
-        required
       />
       <label
         v-if="labelPlaceholder"
