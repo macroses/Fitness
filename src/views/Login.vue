@@ -1,11 +1,10 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { toast } from 'vue3-toastify'
-import { supabase } from '@/lib/supabaseClient'
 import Button from '@/components/UI/Button/Button.vue'
 import Input from '@/components/UI/Input/Input.vue'
 import { useEventsStore } from '@/stores/userEvents'
+import { login, signInWithGitHub } from '@/composables/authorization.js'
 
 const router = useRouter()
 const formState = reactive({
@@ -17,38 +16,24 @@ const formState = reactive({
 const userEvents = useEventsStore()
 const loading = ref(false)
 
-const login = async () => {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signInWithPassword({
-      email: formState.email,
-      password: formState.password
-    })
-
-    if (error) throw error
-    router.push('/')
-
-    await userEvents.fetchEventHandler()
-  } catch (error) {
-    toast.error(error.message, { position: toast.POSITION.TOP_RIGHT })
-  } finally {
-    loading.value = false
-  }
+const loginEmail = async () => {
+  await login(formState.email, formState.password, loading)
+  await userEvents.fetchEventHandler()
+  router.push('/')
 }
 
 const isButtonDisabled = computed(() => Boolean(formState.errorMessage))
 
-async function signInWithGitHub() {
-  await supabase.auth.signInWithOAuth({
-    provider: 'github'
-  })
+const githubAuth = async () => {
+  await signInWithGitHub(loading)
+  router.push('/')
 }
 </script>
 
 <template>
   <form
     class="form__auth"
-    @submit.prevent="login"
+    @submit.prevent="loginEmail"
   >
     <h1 class="form__header">Login</h1>
     <Input
@@ -65,7 +50,7 @@ async function signInWithGitHub() {
     <div class="social-auth">
       <Button
         type="button"
-        @click="signInWithGitHub"
+        @click="githubAuth"
         transparent
       >
         <Icon

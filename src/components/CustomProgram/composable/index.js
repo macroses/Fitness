@@ -2,16 +2,6 @@ import { reactive, ref } from 'vue'
 import { uid } from 'uid'
 import { LOAD, MULTIPLIER } from '@/components/CustomProgram/constants/index.js'
 
-// const availableDays = reactive([
-//   { id: 1, value: 'Monday' },
-//   { id: 2, value: 'Tuesday' },
-//   { id: 3, value: 'Wednesday' },
-//   { id: 4, value: 'Thursday' },
-//   { id: 5, value: 'Friday' },
-//   { id: 6, value: 'Saturday' },
-//   { id: 0, value: 'Sunday' }
-// ])
-
 const createTableRows = () => {
   return reactive({
     id: uid(10),
@@ -39,7 +29,6 @@ const createTableRows = () => {
 const tables = ref([
   {
     id: uid(10),
-    // day: availableDays[0].id,
     rows: [createTableRows()]
   }
 ])
@@ -66,7 +55,6 @@ const addTable = () => {
   tables.value.push({
     id: uid(10),
     rows: [createTableRows()],
-    // day: 0
   })
 }
 
