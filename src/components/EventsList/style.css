@@ -18,6 +18,12 @@
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
   }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .events__button {
