@@ -4,6 +4,7 @@ import { CSSPlugin } from 'gsap/CSSPlugin'
 import { onMounted, ref } from 'vue'
 import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
 import Button from '@/components/UI/Button/Button.vue'
+import { animateBeforeCloseWrapper, confirm, useSwipeModal } from '@/components/UI/Modal/composable'
 
 defineProps({
   width: {
@@ -24,57 +25,65 @@ defineProps({
   }
 })
 
+defineEmits(['close'])
+
 const modalLayer = ref(null)
 const modalContent = ref(null)
 
+const { handleTouchStart, handleTouchEnd, handleTouchMove } = useSwipeModal(modalContent)
+const { animateBeforeClose } = animateBeforeCloseWrapper(modalContent, modalLayer)
+
 gsap.registerPlugin(CSSPlugin)
 
-const unmountTimer = () =>
-  setTimeout(() => {
-    close()
-  }, 500)
+// const unmountTimer = () => setTimeout(() => close(), 500)
 
 onMounted(() => {
-  const t1 = gsap.timeline()
-  t1.from(modalLayer.value, { autoAlpha: 0, duration: 0.25 })
-  t1.from(modalContent.value, {
-    autoAlpha: 0,
-    scale: 0.8,
-    y: '-100',
-    duration: 0.25,
-    ease: 'power2'
-  })
-  t1.play()
+  const timeline = gsap.timeline()
+  timeline.from(modalLayer.value, { autoAlpha: 0, duration: 0.25 })
+
+  if (window.innerWidth < 768) {
+    timeline.from(modalContent.value, {
+      y: '1000',
+      duration: 0.25,
+      ease: 'power2'
+    })
+  } else {
+    timeline.from(modalContent.value, {
+      autoAlpha: 0,
+      scale: 0.8,
+      y: '-100',
+      duration: 0.25,
+      ease: 'power2'
+    })
+  }
+
+  timeline.play()
 
   document.body.style.overflow = 'hidden'
 })
 
-const animateBeforeClose = () => {
-  const t2 = gsap.timeline()
-  t2.to(modalContent.value, {
-    autoAlpha: 0,
-    y: '+100',
-    duration: 0.5,
-    ease: 'power2'
-  })
-  t2.to(modalLayer.value, { autoAlpha: 0, duration: 0.5 }, 0)
-  t2.play()
+// const animateBeforeClose = () => {
+//   const timeline = gsap.timeline()
+//   timeline.to(modalContent.value, {
+//     autoAlpha: 0,
+//     y: '+100',
+//     duration: 0.5,
+//     ease: 'power2'
+//   })
+//   timeline.to(modalLayer.value, { autoAlpha: 0, duration: 0.5 }, 0)
+//   timeline.play()
+//
+//   unmountTimer()
+//   clearTimeout(unmountTimer)
+// }
 
-  unmountTimer()
-  clearTimeout(unmountTimer)
-}
-
-const emit = defineEmits(['close', 'confirm'])
-
-const close = () => {
-  emit('close')
-  document.body.style.overflow = 'visible'
-}
-const confirm = () => {
-  animateBeforeClose()
-  emit('confirm')
-  document.body.style.overflow = 'visible'
-}
+// const emit = defineEmits(['confirm'])
+//
+// const confirm = () => {
+//   animateBeforeClose()
+//   emit('confirm')
+//   document.body.style.overflow = 'visible'
+// }
 </script>
 
 <template>
@@ -89,6 +98,9 @@ const confirm = () => {
         ref="modalContent"
         class="modal__content"
         :style="{ maxWidth: width }"
+        @touchstart.passive="handleTouchStart"
+        @touchmove.passive="handleTouchMove"
+        @touchend.passive="handleTouchEnd"
       >
         <div class="modal__header">
           <ButtonClose @click="animateBeforeClose" />

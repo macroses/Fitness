@@ -77,10 +77,10 @@ const getFavoriteId = async id => {
 }
 
 const tabs = readonly([
-  { id: 0, tabTitle: 'All', icon: 'lottie/folder.json', size: 18 },
-  { id: 1, tabTitle: 'Favorites', icon: 'lottie/star.json', size: 18 },
-  { id: 2, tabTitle: 'Recent', icon: 'lottie/clock.json', size: 18 },
-  { id: 3, tabTitle: 'Custom', icon: 'lottie/edit.json', size: 18 }
+  { id: 0, tabTitle: 'All', icon: 'folder-open', size: 18 },
+  { id: 1, tabTitle: 'Favorites', icon: 'star', size: 18 },
+  { id: 2, tabTitle: 'Recent', icon: 'clock-rotate-left', size: 18 },
+  { id: 3, tabTitle: 'Custom', icon: 'pen-to-square', size: 18 }
 ])
 
 const getActiveTab = id => (activeTabId.value = id)
@@ -139,12 +139,6 @@ onMounted(async () => {
             v-else
             class="empty__favorites"
           >
-            <img
-              src="/Star.webp"
-              alt="empty favorites"
-              width="170"
-              height="93"
-            />
             <p>Add a few exercises to favorites</p>
           </div>
         </div>

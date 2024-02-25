@@ -1,9 +1,9 @@
 .button-group {
   display: flex;
   border: 1px solid rgb(var(--accent-color) / 20%);
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
-  height: 42px;
+  height: 32px;
   position: relative;
   width: 100%;
   isolation: isolate;
@@ -15,6 +15,7 @@
 
 .button-group__item {
   background-color: transparent;
+  color: rgb(var(--text-color));
   border: 0;
   position: relative;
   width: auto;
@@ -51,10 +52,9 @@
 
 .shadow-btn {
   position: absolute;
-  top: 2px;
-  border-radius: 9px;
+  border-radius: 4px;
   background-color: rgb(var(--accent-color));
   transition: all 0.25s ease;
-  height: calc(100% - 4px);
+  height: 100%;
   z-index: -1;
 }

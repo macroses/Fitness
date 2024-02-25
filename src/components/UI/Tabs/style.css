@@ -15,6 +15,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  opacity: 0.5;
+
+  &:first-child {
+    padding-left: 0;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -26,6 +31,7 @@
 .tabs__item.active {
   cursor: default;
   color: rgb(var(--accent-color));
+  opacity: 1;
 }
 
 .tabs-line {

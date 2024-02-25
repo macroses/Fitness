@@ -1,6 +1,7 @@
 :root {
   color-scheme: light;
-  --accent-color: 26 92 255;
+  --accent-color: 55 53 47;
+  /*--accent-color: 26 92 255;*/
   /*--accent-color: #1a5cff;*/
   --text-color: 44 62 80;
 
@@ -85,7 +86,8 @@ body {
     color 0.25s,
     background-color 0.25s;
   line-height: 1.6;
-  font-family: 'Poppins', sans-serif;
+  /*font-family: 'Poppins', sans-serif;*/
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 15px;
   color: rgb(var(--text-color));
   background-color: var(--main-bg);
@@ -110,6 +112,10 @@ body {
   position: relative;
 }
 
+.main__layout.workout-mode {
+  gap: 0;
+}
+
 .group {
   display: flex;
   gap: 12px;
@@ -118,7 +124,7 @@ body {
 
   &.home {
     max-width: 500px;
-    margin: 16px auto 0;
+    margin: 0 auto;
 
     & .button {
       flex: 1;
@@ -126,7 +132,6 @@ body {
 
     @media (max-width: 475px) {
       gap: 8px;
-      padding-inline: 8px;
     }
   }
 }
@@ -150,6 +155,21 @@ body {
 
   .main__layout {
     padding-top: 16px;
+  }
+
+  .main__layout.workout-mode {
+    gap: 32px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1), transparent);
+      transform: translateX(-50%);
+    }
   }
 
   .main__layout.workout-mode .calendar {
@@ -189,7 +209,7 @@ body {
   max-width: 524px;
   padding: 16px;
   margin: 0 auto;
-  border-radius: 12px;
+  border-radius: 4px;
   background-color: var(--content-bg);
   border: 1px solid rgb(var(--accent-color) / 0.1);
 

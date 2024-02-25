@@ -4,12 +4,16 @@ import Icon from '@/components/UI/Icon/Icon.vue'
 
 <template>
   <div class="avatar-content">
-    <button class="avatar">
+    <Button
+      bordered
+      is-only-icon
+      class="avatar"
+    >
       <Icon
         icon-name="user-alien"
         width="15px"
       />
-    </button>
+    </Button>
   </div>
 </template>
 

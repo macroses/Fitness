@@ -66,6 +66,8 @@ onBeforeRouteLeave(() => {
                   <span>{{ dateStore.date.format('dddd') }}</span>
                 </div>
                 <Button
+                  bordered
+                  is-only-icon
                   class="hide-calendar__button"
                   :class="{ active: isCalendarVisible }"
                   @click="isCalendarVisible = !isCalendarVisible"

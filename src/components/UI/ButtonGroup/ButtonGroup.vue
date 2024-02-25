@@ -20,8 +20,8 @@ watchEffect(() => {
   if (buttonItem.value && shadowBtn.value) {
     const activeButtonRect = buttonItem.value[activeButton.value].getBoundingClientRect()
     const parentRect = shadowBtn.value.parentNode.getBoundingClientRect()
-    const width = `${activeButtonRect.width - 4}px`
-    const left = `${activeButtonRect.left - parentRect.left + 1}px`
+    const width = `${activeButtonRect.width}px`
+    const left = `${activeButtonRect.left - parentRect.left - 1}px`
 
     tabStyle.value = `width: ${width}; left: ${left};`
   }

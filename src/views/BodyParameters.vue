@@ -158,6 +158,8 @@ onClickOutside(aside, () => {
               {{ dateStore.date.format('DD MMMM YYYY') }}
             </div>
             <Button
+              is-only-icon
+              bordered
               class="hide-calendar__button"
               :class="{ active: isCalendarVisible }"
               @click="isCalendarVisible = !isCalendarVisible"
@@ -174,7 +176,11 @@ onClickOutside(aside, () => {
           </div>
         </div>
         <div class="body-params__top">
-          <Button @click="toggleAside">
+          <Button
+            bordered
+            is-only-icon
+            @click="toggleAside"
+          >
             <Icon
               icon-name="bars"
               width="15px"
@@ -234,10 +240,6 @@ onClickOutside(aside, () => {
           v-else
           class="body-params__empty"
         >
-          <Vue3Lottie
-            animation-link="lottie/box.json"
-            :height="300"
-          />
           No data, add something to start
         </div>
       </div>

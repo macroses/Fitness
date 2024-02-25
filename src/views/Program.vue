@@ -10,8 +10,8 @@ const activeProgram = ref(null)
 const getActiveTab = id => (activeTabId.value = id)
 
 const tabs = readonly([
-  { id: 0, tabTitle: 'All programs', icon: 'lottie/folder.json', size: 18 },
-  { id: 1, tabTitle: 'Custom program', icon: 'lottie/edit.json', size: 24 }
+  { id: 0, tabTitle: 'All programs', icon: 'folder-open' },
+  { id: 1, tabTitle: 'Custom program', icon: 'pen-to-square' }
 ])
 
 const getProgramId = program => {

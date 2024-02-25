@@ -2,7 +2,7 @@
   height: 42px;
   display: flex;
   align-items: center;
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 8px 12px 8px 36px;
   cursor: pointer;
   position: relative;
@@ -196,10 +196,5 @@
 
 .exercises-list__wr {
   background-color: var(--content-bg);
-  padding: 12px;
-  border-radius: 16px;
-
-  @media (width < 768px) {
-    padding: 8px;
-  }
+  padding-bottom: 8px;
 }

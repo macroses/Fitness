@@ -2,11 +2,10 @@ button {
   width: 34px;
   height: 34px;
   background-color: var(--main-bg);
-  border-radius: 12px;
+  border-radius: 4px;
   position: absolute;
   top: 2px;
   right: 3px;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
   border: 0;
   transition: all 0.25s ease;
   cursor: pointer;
@@ -41,11 +40,4 @@ button::before {
   border-radius: 2px;
   transform: rotate(-45deg);
   transition: all 0.3s ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  button:hover {
-    transform: translate(-2px, 2px);
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05);
-  }
 }

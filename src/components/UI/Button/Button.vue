@@ -35,6 +35,10 @@ defineProps({
   active: {
     type: Boolean,
     default: false
+  },
+  isOnlyIcon: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
@@ -52,6 +56,7 @@ defineProps({
       'button--loading': loading,
       'button--transparent': transparent,
       'button--full': full,
+      'button--only-icon': isOnlyIcon,
       active: active
     }"
   >
@@ -73,6 +78,8 @@ defineProps({
       'button--disabled': disabled,
       'button--bordered': bordered,
       'button--loading': loading,
+      'button--transparent': transparent,
+      'button--only-icon': isOnlyIcon,
       'button--full': full
     }"
   >

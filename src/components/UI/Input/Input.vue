@@ -43,6 +43,10 @@ const props = defineProps({
   noClear: {
     type: Boolean,
     default: false
+  },
+  enterkeyhint: {
+    type: String,
+    default: ''
   }
 })
 
@@ -102,6 +106,7 @@ const handleInput = (event) => {
         @blur="$emit('blur')"
         @input="handleInput"
         autocomplete="new-password"
+        :enterkeyhint
       />
       <label
         v-if="labelPlaceholder"
