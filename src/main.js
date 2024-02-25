@@ -3,7 +3,6 @@ import 'vue3-toastify/dist/index.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import Vue3Lottie from 'vue3-lottie'
 import Vue3Toasity from 'vue3-toastify'
 
 import App from './App.vue'
@@ -22,5 +21,4 @@ app.use(Vue3Toasity, {
   hideProgressBar: true,
   pauseOnHover: true
 })
-app.use(Vue3Lottie)
 app.mount('#app')
