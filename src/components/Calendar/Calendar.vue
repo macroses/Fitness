@@ -49,11 +49,11 @@ const goToNextMonth = () => {
   updateCalendar(currentDate, today, calendarCells)
 }
 
-const goToCurrentMonth = () => {
-  currentDate.value = today.value
-  transitionName.value = 'slideMonth'
-  updateCalendar(currentDate, today, calendarCells)
-}
+// const goToCurrentMonth = () => {
+//   currentDate.value = today.value
+//   transitionName.value = 'slideMonth'
+//   updateCalendar(currentDate, today, calendarCells)
+// }
 
 const isMarker = date =>
   props.events.some(event => event.date.isSame(date, 'day'))
@@ -132,15 +132,15 @@ watch(
           aria-label="next month"
         />
       </Button>
-      <Button
-        transparent
-        aria-label="current month"
-        @click="goToCurrentMonth"
-        :disabled="currentDate.isSame(today, 'month')"
-        data-test="prev"
-      >
-        Current
-      </Button>
+<!--      <Button-->
+<!--        transparent-->
+<!--        aria-label="current month"-->
+<!--        @click="goToCurrentMonth"-->
+<!--        :disabled="currentDate.isSame(today, 'month')"-->
+<!--        data-test="prev"-->
+<!--      >-->
+<!--        Current-->
+<!--      </Button>-->
       <Transition
         mode="out-in"
         :name="transitionName"

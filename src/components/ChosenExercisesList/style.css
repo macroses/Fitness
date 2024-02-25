@@ -209,7 +209,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 12px;
+  padding-block: 24px;
 
   & span {
     margin-top: 5px;
@@ -225,6 +225,10 @@
   justify-content: flex-end;
   gap: 8px;
   margin-left: 8px;
+}
+
+.superset-mode .chosen-exercises__item-funcs {
+  visibility: hidden;
 }
 
 .chosen-exercises__item-chart {

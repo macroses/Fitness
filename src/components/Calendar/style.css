@@ -54,7 +54,7 @@
   border: 0;
   font-size: 14px;
   height: 50px;
-  border-radius: 9px;
+  border-radius: 4px;
   transition:
     transform var(--base-transition),
     box-shadow var(--base-transition);
@@ -168,8 +168,8 @@
 .calendar-chosen-date {
   font-weight: 500;
   position: absolute;
-  left: 12px;
-  top: 10px;
+  left: 0;
+  top: 4px;
 
   & span {
     opacity: 0.5;

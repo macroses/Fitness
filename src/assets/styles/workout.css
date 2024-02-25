@@ -24,10 +24,10 @@
 }
 
 .events {
-  padding-block: 6px;
+  padding-block: 12px;
   text-align: center;
   max-width: 524px;
-  margin: 8px auto 0;
+  margin: 0 auto;
 }
 
 .user-workout {
@@ -49,7 +49,7 @@
   padding: 0 12px;
   display: flex;
   align-items: center;
-  border-radius: 9px;
+  border-radius: 4px;
   overflow: hidden;
   height: 35px;
   flex-grow: 1;

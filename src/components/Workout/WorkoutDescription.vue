@@ -15,6 +15,7 @@ const getColor = color => (store.color = color)
         label-placeholder="Workout name"
         label-fade
         @clear="store.title = null"
+        enterkeyhint="next"
       />
       <DropdownColor @drop-color="getColor" />
     </div>

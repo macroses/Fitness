@@ -158,14 +158,6 @@ watch(
     v-if="!store.exercisesParamsCollection.length"
     class="chosen-exercises__empty"
   >
-    <div class="chosen-exercises__img-wr">
-      <img
-        src="/Folder.svg"
-        alt="add exercises"
-        width="80"
-        height="100"
-      />
-    </div>
     <span>To save the workout, add at least one exercise</span>
   </div>
 </template>

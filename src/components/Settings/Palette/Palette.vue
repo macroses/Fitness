@@ -10,7 +10,8 @@ const palette = [
   { id: 5, value: 'Teal', color: '100 210 255' },
   { id: 6, value: 'Indigo', color: '94 92 230' },
   { id: 7, value: 'Purple', color: '191 90 242' },
-  { id: 8, value: 'Brown', color: '162 132 94' }
+  { id: 8, value: 'Brown', color: '162 132 94' },
+  { id: 11, value: 'Black', color: '55 53 47' },
 ]
 
 const changeColorTheme = color => {
@@ -25,23 +26,23 @@ const changeColorTheme = color => {
       <h2 class="settings__content-header">Color theme</h2>
       <ColorTheme />
     </div>
-    <div class="settings__content-subject">
-      <h2 class="settings__content-header">Palette</h2>
-      <ul class="palette-list">
-        <li
-          v-for="{ id, color, value } in palette"
-          :key="id"
-          class="palette-item"
-          @click="changeColorTheme(color)"
-        >
-          <div
-            :style="`background-color: rgb(${color})`"
-            class="palette-item__color"
-          ></div>
-          <span class="palette-item__name">{{ value }}</span>
-        </li>
-      </ul>
-    </div>
+<!--    <div class="settings__content-subject">-->
+<!--      <h2 class="settings__content-header">Palette</h2>-->
+<!--      <ul class="palette-list">-->
+<!--        <li-->
+<!--          v-for="{ id, color, value } in palette"-->
+<!--          :key="id"-->
+<!--          class="palette-item"-->
+<!--          @click="changeColorTheme(color)"-->
+<!--        >-->
+<!--          <div-->
+<!--            :style="`background-color: rgb(${color})`"-->
+<!--            class="palette-item__color"-->
+<!--          ></div>-->
+<!--          <span class="palette-item__name">{{ value }}</span>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
   </div>
 </template>
 
