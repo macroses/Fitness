@@ -34,7 +34,7 @@
   margin-left: 12px;
   background-color: rgb(var(--accent-color) / 0.02);
   border: 1px solid rgb(var(--accent-color) / 0.3);
-  border-radius: 12px;
+  border-radius: 4px;
   position: relative;
 
   & .chosen-exercises__item {
@@ -64,7 +64,7 @@
 
 .btn-split {
   position: absolute;
-  top: calc(50% - 20px);
+  top: calc(50% - 16px);
   right: 12px;
 }
 
@@ -78,7 +78,7 @@
   color: #fff;
   z-index: 5;
   padding: 0 4px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .chosen-exercises__supersets .chosen-exercises__item {
@@ -105,7 +105,7 @@
     height: calc(100% - 20px);
     border-left: 1px solid rgb(var(--accent-color) / 0.6);
     border-top: 1px solid rgb(var(--accent-color) / 0.6);
-    border-top-left-radius: 9px;
+    border-top-left-radius: 4px;
   }
 
   &:last-of-type .chosen-exercises__item-top::before {
@@ -118,7 +118,7 @@
     height: calc(100% - 20px);
     border-left: 1px solid rgb(var(--accent-color) / 0.6);
     border-bottom: 1px solid rgb(var(--accent-color) / 0.6);
-    border-bottom-left-radius: 9px;
+    border-bottom-left-radius: 4px;
   }
 }
 
@@ -261,7 +261,7 @@
   width: 34px;
   height: 100%;
   background-color: transparent;
-  border-radius: 12px;
+  border-radius: 4px;
   color: var(--text-color);
   border: 0;
   cursor: pointer;

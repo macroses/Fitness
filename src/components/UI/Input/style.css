@@ -115,13 +115,13 @@
   background: transparent;
   display: flex;
   align-items: center;
-  height: 36px;
+  height: 100%;
   min-width: 36px;
   color: var(--text-color);
   justify-content: center;
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 0;
+  right: 0;
   border: 0;
   cursor: pointer;
   border-radius: 12px;

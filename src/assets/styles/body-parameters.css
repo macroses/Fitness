@@ -159,7 +159,7 @@ body.blured::after {
 .body-params__table {
   border-collapse: collapse;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 4px;
   font-size: 12px;
 
   & th {

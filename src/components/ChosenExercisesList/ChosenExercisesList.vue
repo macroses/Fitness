@@ -48,7 +48,8 @@ watch(
       <span class="superset-legend">Superset</span>
       <Button
         v-if="!activeExerciseId"
-        transparent
+        bordered
+        is-only-icon
         @click="handleSplit(group.superset)"
         class="btn-split"
       >
@@ -102,6 +103,8 @@ watch(
     >
       <Button
         v-if="store.isSuperset"
+        bordered
+        is-only-icon
         :disabled="supersetExercises.length < 2"
         @click="handleMerge"
         class="btn-merge"
