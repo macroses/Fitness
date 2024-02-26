@@ -209,9 +209,10 @@ body {
   max-width: 524px;
   padding: 16px;
   margin: 0 auto;
-  border-radius: 4px;
   background-color: var(--content-bg);
-  border: 1px solid rgb(var(--accent-color) / 0.1);
+  border: 1px solid;
+  border-image-source: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3), transparent);
+  border-image-slice: 1;
 
   @media (width < 768px) {
     padding: 0 0 8px;

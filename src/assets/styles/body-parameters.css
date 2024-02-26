@@ -11,9 +11,10 @@
   background-color: var(--content-bg);
 
   @media (min-width: 1024px) {
-    border: 1px solid rgba(var(--accent-color) / 10%);
+    border: 1px solid;
+    border-image-source: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3), transparent);
+    border-image-slice: 1;
     padding: 16px;
-    border-radius: 4px;
     grid-template-columns: 220px 1fr;
     margin-top: 12px;
   }
@@ -62,7 +63,9 @@ body.blured::after {
   padding-inline: 12px;
   translate: -100%;
   transition: translate 0.25s ease, background-color 0.25s ease;
-  border-right: 1px solid rgb(var(--accent-color) / 10%);
+  border-right: 1px solid;
+  border-image-source: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1), transparent);
+  border-image-slice: 1;
 
   &.active {
     translate: 0;
