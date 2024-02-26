@@ -12,6 +12,6 @@
 .settings__content-result {
 	margin-top: 16px;
 	padding: 16px;
-	border-radius: 12px;
+	border-radius: 4px;
 	background-color: var(--table-dark-bg);
 }

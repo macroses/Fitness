@@ -15,8 +15,8 @@
   gap: 4px;
   padding: 4px;
   border: 1px solid rgb(var(--accent-color) / 10%);
-  border-radius: 12px;
-  min-height: 42px;
+  border-radius: 4px;
+  min-height: 32px;
   position: relative;
   transition: border-radius 0.25s ease-in-out;
 
@@ -30,12 +30,12 @@
   font-size: 11px;
   background-color: rgb(var(--accent-color));
   color: #fff;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   gap: 8px;
   align-items: center;
   padding: 0 8px;
-  height: 32px;
+  height: 22px;
   transition: box-shadow 0.2s ease-in-out;
 
   & svg {
@@ -112,8 +112,10 @@
 }
 
 .multiselect__placeholder {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
   font-size: 12px;
   cursor: pointer;

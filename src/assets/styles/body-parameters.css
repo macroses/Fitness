@@ -113,7 +113,7 @@ body.blured::after {
   background: transparent;
   border: none;
   padding: 8px;
-  border-radius: 9px;
+  border-radius: 4px;
   color: var(--text-color);
 }
 

@@ -25,7 +25,7 @@ defineProps({
   }
 })
 
-defineEmits(['close'])
+defineEmits(['close', 'confirm'])
 
 const modalLayer = ref(null)
 const modalContent = ref(null)

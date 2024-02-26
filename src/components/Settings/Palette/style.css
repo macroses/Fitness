@@ -17,6 +17,6 @@
 .palette-item__color {
 	width: 24px;
 	height: 24px;
-	border-radius: 9px;
+	border-radius: 4px;
 	transition: scale 0.25s ease-in-out;
 }

@@ -41,7 +41,7 @@
   &.small {
     padding: 1px 4px;
     height: 28px;
-    border-radius: 6px;
+    border-radius: 4px;
     border: 1px solid transparent;
     font-size: 12px;
 
@@ -124,7 +124,7 @@
   right: 0;
   border: 0;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 4px;
   transition: all var(--base-transition);
 }
 

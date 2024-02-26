@@ -24,7 +24,7 @@
   grid-template-columns: 70px 1fr 70px 1fr 1fr 1fr 1fr 1fr 100px 100px 40px;
   background-color: rgb(var(--accent-color) / 0.1);
   border-bottom: 1px solid rgb(var(--accent-color) / 0.05);
-  border-radius: 9px;
+  border-radius: 4px;
 }
 
 .custom-program__head {
@@ -95,7 +95,7 @@
 .custom-program__cell-value {
   height: 100%;
   border: 1px solid rgb(var(--accent-color) / 0.1);
-  border-radius: 6px;
+  border-radius: 4px;
   padding-inline: 4px;
 }
 
