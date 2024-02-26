@@ -25,7 +25,7 @@ defineProps({
   }
 })
 
-defineEmits(['close'])
+defineEmits(['close', 'confirm'])
 
 const modalLayer = ref(null)
 const modalContent = ref(null)
@@ -34,8 +34,6 @@ const { handleTouchStart, handleTouchEnd, handleTouchMove } = useSwipeModal(moda
 const { animateBeforeClose } = animateBeforeCloseWrapper(modalContent, modalLayer)
 
 gsap.registerPlugin(CSSPlugin)
-
-// const unmountTimer = () => setTimeout(() => close(), 500)
 
 onMounted(() => {
   const timeline = gsap.timeline()
@@ -61,29 +59,6 @@ onMounted(() => {
 
   document.body.style.overflow = 'hidden'
 })
-
-// const animateBeforeClose = () => {
-//   const timeline = gsap.timeline()
-//   timeline.to(modalContent.value, {
-//     autoAlpha: 0,
-//     y: '+100',
-//     duration: 0.5,
-//     ease: 'power2'
-//   })
-//   timeline.to(modalLayer.value, { autoAlpha: 0, duration: 0.5 }, 0)
-//   timeline.play()
-//
-//   unmountTimer()
-//   clearTimeout(unmountTimer)
-// }
-
-// const emit = defineEmits(['confirm'])
-//
-// const confirm = () => {
-//   animateBeforeClose()
-//   emit('confirm')
-//   document.body.style.overflow = 'visible'
-// }
 </script>
 
 <template>

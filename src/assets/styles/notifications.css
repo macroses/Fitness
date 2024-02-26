@@ -1,6 +1,6 @@
 body .Toastify__toast {
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
-  border-radius: 9px;
+  border-radius: 4px;
   font-family: 'Poppins', sans-serif;
   --toastify-toast-width: 250px;
 }

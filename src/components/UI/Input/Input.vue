@@ -101,11 +101,11 @@ const handleInput = (event) => {
         :class="{ small: small }"
         :inputmode="mode"
         :id="uniqueId"
+        :type="type"
         v-model="modelValue"
         @focus="inpFocus"
         @blur="$emit('blur')"
         @input="handleInput"
-        autocomplete="new-password"
         :enterkeyhint
       />
       <label
