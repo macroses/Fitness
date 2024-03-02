@@ -149,6 +149,7 @@ body {
 @media (width < 768px) {
   .group.home .button {
     height: 50px;
+    align-items: flex-start;
 
     &::before {
       display: none;

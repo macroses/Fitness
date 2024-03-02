@@ -135,11 +135,6 @@ const rescheduleModalClose = () => {
       v-else
       class="events__empty"
     >
-<!--      <Vue3Lottie
-        animation-link="lottie/box.json"
-        :height="150"
-        :width="200"
-      />-->
       There are no events
     </div>
     <Modal
