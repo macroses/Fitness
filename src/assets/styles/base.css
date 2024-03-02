@@ -130,8 +130,36 @@ body {
       flex: 1;
     }
 
+    @media (width < 768px) {
+      position: fixed;
+      bottom: 0;
+      width: calc(100% - 16px);
+    }
+
     @media (max-width: 475px) {
       gap: 8px;
+    }
+
+    svg {
+      display: none;
+    }
+  }
+}
+
+@media (width < 768px) {
+  .group.home .button {
+    height: 50px;
+
+    &::before {
+      display: none;
+    }
+
+    span {
+      display: none;
+    }
+
+    svg {
+      display: initial;
     }
   }
 }

@@ -13,7 +13,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(Vue3Toasity, {
-  autoClose: 2000,
+  autoClose: 3000,
   limit: 3,
   style: {
     fontSize: '13px'

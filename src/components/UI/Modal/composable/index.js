@@ -69,12 +69,3 @@ export const animateBeforeCloseWrapper = (content, layer) => {
     animateBeforeClose
   }
 }
-
-
-export const confirm = () => {
-  const { emit } = getCurrentInstance()
-
-  animateBeforeClose()
-  emit('confirm')
-  document.body.style.overflow = 'visible'
-}

@@ -1,6 +1,10 @@
 .header {
   background-color: var(--content-bg);
   transition: background-color 0.25s;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 5%);
 }
 
 .header__user {

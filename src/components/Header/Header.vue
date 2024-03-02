@@ -40,9 +40,6 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           Plinx
         </RouterLink>
         <div class="header__user">
-          <!--          <nav class="header__nav">-->
-          <!--            <RouterLink to="/exercises"> Exercises </RouterLink>-->
-          <!--          </nav>-->
           <Avatar
             v-if="session"
             @click="isDropdownVisible = true"

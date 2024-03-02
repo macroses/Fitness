@@ -11,21 +11,34 @@ const dateStore = chosenDateStore()
       bordered
       @click="$emit('workoutMode')"
     >
-      Workout
+      <Icon
+        icon-name="fluent--dumbbell"
+        width="25px"
+      />
+      <span>Workout</span>
     </Button>
     <Button
       is-link
       bordered
       path="/program"
-      >Program</Button
     >
+      <Icon
+        icon-name="computer"
+        width="25px"
+      />
+      <span>Program</span>
+    </Button>
     <Button
       is-link
       bordered
       :disabled="dateStore.date > dayjs()"
       path="/body-parameters"
     >
-      Parameters
+      <Icon
+        icon-name="pen-ruler"
+        width="20px"
+      />
+      <span>Parameters</span>
     </Button>
   </div>
 </template>
