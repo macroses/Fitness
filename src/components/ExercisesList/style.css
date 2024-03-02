@@ -197,4 +197,8 @@
 .exercises-list__wr {
   background-color: var(--content-bg);
   padding-bottom: 8px;
+
+  @media (width < 768px) {
+    padding-bottom: 16px;
+  }
 }

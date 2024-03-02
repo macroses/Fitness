@@ -4,7 +4,7 @@ import { CSSPlugin } from 'gsap/CSSPlugin'
 import { onMounted, ref } from 'vue'
 import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
 import Button from '@/components/UI/Button/Button.vue'
-import { animateBeforeCloseWrapper, confirm, useSwipeModal } from '@/components/UI/Modal/composable'
+import { animateBeforeCloseWrapper, useSwipeModal } from '@/components/UI/Modal/composable'
 
 defineProps({
   width: {
@@ -25,7 +25,7 @@ defineProps({
   }
 })
 
-defineEmits(['close', 'confirm'])
+const emit = defineEmits(['close', 'confirm'])
 
 const modalLayer = ref(null)
 const modalContent = ref(null)
@@ -59,6 +59,12 @@ onMounted(() => {
 
   document.body.style.overflow = 'hidden'
 })
+
+const confirm = () => {
+  animateBeforeClose()
+  emit('confirm')
+  document.body.style.overflow = 'visible'
+}
 </script>
 
 <template>
