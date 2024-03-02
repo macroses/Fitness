@@ -8,40 +8,40 @@ import { userIdFromStorage } from '@/composables/userIdFromStorage'
 import { getProfileColumn } from '@/composables/profile'
 
 export const useEventsStore = defineStore("userEvents", () => {
-  const events = ref([]);
-  const favoritesFromBase = ref([]);
-  const eventsLoading = ref(false);
-  const copyObject = ref(null);
-  const isCopyMode = ref(false);
-  const workoutData = workoutStore();
-  const dateStore = chosenDateStore();
-  const exerciseId = ref(null);
+  const events = ref([])
+  const favoritesFromBase = ref([])
+  const eventsLoading = ref(false)
+  const copyObject = ref(null)
+  const isCopyMode = ref(false)
+  const workoutData = workoutStore()
+  const dateStore = chosenDateStore()
+  const exerciseId = ref(null)
 
   const fetchEventHandler = async () => {
-    await getWorkouts(events, eventsLoading, userIdFromStorage());
+    await getWorkouts(events, eventsLoading, userIdFromStorage())
     await getProfileColumn(
       favoritesFromBase,
       eventsLoading,
       "favorite_exercises"
-    );
+    )
 
     if (favoritesFromBase.value === null) {
       // if it null from base, so create empty array
-      favoritesFromBase.value = [];
+      favoritesFromBase.value = []
     }
-  };
+  }
 
   const deleteEventHandler = async (tableName, columnName, id) => {
-    await deleteEvent(tableName, columnName, id, eventsLoading);
-    events.value = events.value.filter((event) => event.workoutId !== id);
-  };
+    await deleteEvent(tableName, columnName, id, eventsLoading)
+    events.value = events.value.filter((event) => event.workoutId !== id)
+  }
 
   const pushEventHandler = async () => {
-    let workoutObject = {};
+    let workoutObject = {}
 
     if (copyObject.value) {
       const { title, color, exercisesParamsCollection, tonnage } =
-        copyObject.value;
+        copyObject.value
 
       workoutObject = {
         workoutId: uid(50),
@@ -50,16 +50,16 @@ export const useEventsStore = defineStore("userEvents", () => {
         color,
         exercisesParamsCollection,
         tonnage,
-      };
+      }
 
-      await pushEvent("workouts", workoutObject, eventsLoading);
+      await pushEvent("workouts", workoutObject, eventsLoading)
 
-      events.value.push(workoutObject);
+      events.value.push(workoutObject)
 
-      return;
+      return
     }
 
-    if (!workoutData.workoutId) return;
+    if (!workoutData.workoutId) return
 
     workoutObject = {
       title: workoutData.title,
@@ -68,12 +68,12 @@ export const useEventsStore = defineStore("userEvents", () => {
       workoutId: workoutData.workoutId,
       exercisesParamsCollection: workoutData.exercisesParamsCollection,
       tonnage: workoutData.tonnage,
-    };
+    }
 
-    await pushEvent("workouts", workoutObject, eventsLoading);
+    await pushEvent("workouts", workoutObject, eventsLoading)
 
-    events.value.push(workoutObject);
-  };
+    events.value.push(workoutObject)
+  }
 
   const updateEventHandler = async () => {
     const workoutObject = {
@@ -82,7 +82,7 @@ export const useEventsStore = defineStore("userEvents", () => {
       date: dateStore.date,
       exercisesParamsCollection: workoutData.exercisesParamsCollection,
       tonnage: workoutData.tonnage,
-    };
+    }
 
     await updateEvent(
       "workouts",
@@ -90,72 +90,72 @@ export const useEventsStore = defineStore("userEvents", () => {
       workoutData.workoutId,
       workoutObject,
       eventsLoading
-    );
+    )
 
     const index = events.value.findIndex(
       (event) => event.workoutId === workoutData.workoutId
-    );
+    )
 
     if (index !== -1) {
-      events.value.splice(index, 1, workoutObject);
+      events.value.splice(index, 1, workoutObject)
     }
-  };
+  }
 
   const updateAllEvents = async () => {
-    await updateSeveralRows("workouts", events, eventsLoading);
-  };
+    await updateSeveralRows("workouts", events, eventsLoading)
+  }
 
   const getExerciseSets = () => {
     const exerciseParams = workoutData.exercisesParamsCollection.find(
       (item) => item.exerciseId === workoutData.openedExerciseId
-    );
+    )
     return exerciseParams
       ? exerciseParams.sets
         ? exerciseParams.sets
         : []
-      : [];
-  };
+      : []
+  }
 
   const previousResults = computed(() => {
     const userWorkouts = events.value.filter(
       (workout) => workout.date < dateStore.date
-    );
+    )
 
-    const previousSets = [];
+    const previousSets = []
     for (const workout of userWorkouts.reverse()) {
       const exerciseParams = workout.exercisesParamsCollection.find(
         (item) => item.exerciseId === workoutData.openedExerciseId
-      );
+      )
 
       if (exerciseParams && exerciseParams.sets?.length > 0) {
-        previousSets.push(...exerciseParams.sets);
-        break;
+        previousSets.push(...exerciseParams.sets)
+        break
       }
     }
 
-    return previousSets;
-  });
+    return previousSets
+  })
 
   const getTotalPreviousRepeats = computed(() => {
-    const previousSets = previousResults.value.slice();
+    const previousSets = previousResults.value.slice()
     if (previousSets.length === 0) {
-      return 0;
+      return 0
     }
 
     const totalRepeats = previousSets.reduce(
       (total, set) => total + set.repeats,
       0
-    );
+    )
 
-    return totalRepeats;
-  });
+    return totalRepeats
+  })
 
   const combinedResults = computed(() => {
-    const previous = previousResults.value.slice();
-    const exerciseSets = getExerciseSets();
+    const previous = previousResults.value.slice()
+    const exerciseSets = getExerciseSets()
 
     const combined = exerciseSets.map((set, index) => {
-      const prevSet = previous[index] || {};
+      const prevSet = previous[index] || {}
 
       return {
         setId: set.setId,
@@ -165,8 +165,8 @@ export const useEventsStore = defineStore("userEvents", () => {
         prevWeight: prevSet.weight ?? null,
         prevRepeats: prevSet.repeats ?? null,
         prevEffort: prevSet.effort ?? null,
-      };
-    });
+      }
+    })
 
     combined.push(
       ...previous.slice(exerciseSets.length).map((prevSet) => ({
@@ -178,30 +178,30 @@ export const useEventsStore = defineStore("userEvents", () => {
         prevRepeats: prevSet.repeats,
         prevEffort: prevSet.effort,
       }))
-    );
+    )
 
-    return combined;
-  });
+    return combined
+  })
 
   const rescheduleEvent = async (chosenEvent, isFutureEventsMove) => {
     if (isFutureEventsMove.value) {
       const eventsToUpdate = events.value.filter(
         (event) => event.date >= dateStore.date
-      );
+      )
 
       eventsToUpdate.forEach((event) => {
-        event.date = event.date.add(dateStore.rescheduleCounter, "day");
-      });
+        event.date = event.date.add(dateStore.rescheduleCounter, "day")
+      })
 
-      await updateAllEvents();
+      await updateAllEvents()
 
-      return;
+      return
     }
-    workoutData.editUsersEvent(chosenEvent.value);
-    dateStore.date = dateStore.rescheduledEventDate;
-    await updateEventHandler();
-    workoutData.$reset();
-  };
+    workoutData.editUsersEvent(chosenEvent.value)
+    dateStore.date = dateStore.rescheduledEventDate
+    await updateEventHandler()
+    workoutData.$reset()
+  }
 
   // высчитывает дату и тоннаж за всю историю упражнения для графика
   const exerciseHistory = computed(() => {
@@ -236,24 +236,24 @@ export const useEventsStore = defineStore("userEvents", () => {
     async (val) => {
       if (val) {
         // if copyDate and copyObject is defined and filled
-        await pushEventHandler();
-        copyObject.value = null;
-        isCopyMode.value = false;
-        dateStore.copyDate = null;
+        await pushEventHandler()
+        copyObject.value = null
+        isCopyMode.value = false
+        dateStore.copyDate = null
       }
     }
-  );
+  )
 
   watch(
     () => isCopyMode.value,
     async (val) => {
       if (!val) {
-        copyObject.value = null;
-        isCopyMode.value = false;
-        dateStore.copyDate = null;
+        copyObject.value = null
+        isCopyMode.value = false
+        dateStore.copyDate = null
       }
     }
-  );
+  )
 
   return {
     events,
@@ -272,5 +272,5 @@ export const useEventsStore = defineStore("userEvents", () => {
     updateAllEvents,
     rescheduleEvent,
     exerciseHistory,
-  };
-});
+  }
+})
