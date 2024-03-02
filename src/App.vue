@@ -3,26 +3,20 @@ import { onMounted } from 'vue'
 import { useEventsStore } from '@/stores/userEvents'
 import toggleColorTheme from '@/composables/useColorTheme'
 import { cacheExercises } from '@/composables/cacheExercises'
-import { tableSubscriber } from '@/composables/tableSubscriber'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { checkNetworkStatus } from '@/helpers/isOnline.js'
+import { useQuery } from '@tanstack/vue-query'
+
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 
 const userEvents = useEventsStore()
 
 toggleColorTheme()
 
+useQuery({ queryKey: ['events'], queryFn: userEvents.fetchEventHandler() })
+
 onMounted(async () => {
   cacheExercises('exercisesCache')
-  await userEvents.fetchEventHandler()
-
-  tableSubscriber(
-    'workouts-channel',
-    '*',
-    'public',
-    'workouts',
-    'workouts'
-  )
-
   checkNetworkStatus()
 
   if (!localStorage.getItem('bodyParams')) {
@@ -32,6 +26,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <VueQueryDevtools />
   <Header />
   <RouterView v-slot="{ Component }">
     <Transition mode="out-in">
