@@ -22,10 +22,6 @@ onMounted(async () => {
   if (!localStorage.getItem('bodyParams')) {
     localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
   }
-
-  setTimeout(() => {
-    useQuery({ queryKey: ['events'], queryFn: userEvents.fetchEventHandler() })
-  }, 0)
 })
 </script>
 
