@@ -57,7 +57,7 @@ defineProps({
       'button--transparent': transparent,
       'button--full': full,
       'button--only-icon': isOnlyIcon,
-      active: active
+       active: active
     }"
   >
     <slot />
