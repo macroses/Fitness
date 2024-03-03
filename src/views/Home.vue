@@ -1,14 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue'
+import router from '@/router'
 import { uid } from 'uid'
 import { workoutStore } from '@/stores/workout'
-import router from '@/router'
-import Loading from '@/components/UI/Loading/Loading.vue'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
-import EventsList from '@/components/EventsList/EventsList.vue'
-import EventsMode from '@/components/EventsMode/EventsMode.vue'
-import Button from '@/components/UI/Button/Button.vue'
 
 const workoutsStore = workoutStore()
 const dateStore = chosenDateStore()

@@ -13,8 +13,6 @@ const userEvents = useEventsStore()
 
 toggleColorTheme()
 
-useQuery({ queryKey: ['events'], queryFn: userEvents.fetchEventHandler() })
-
 onMounted(async () => {
   cacheExercises('exercisesCache')
   checkNetworkStatus()
@@ -22,6 +20,10 @@ onMounted(async () => {
   if (!localStorage.getItem('bodyParams')) {
     localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
   }
+
+  setTimeout(() => {
+    useQuery({ queryKey: ['events'], queryFn: userEvents.fetchEventHandler() })
+  }, 0)
 })
 </script>
 

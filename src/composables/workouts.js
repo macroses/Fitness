@@ -37,8 +37,6 @@ const getWorkouts = async (userData, loading, userId) => {
   try {
     loading.value = true
 
-    const localStorageWorkouts = localStorage.getItem('workouts')
-
     const { data: workouts, error } = await supabase
       .from('workouts')
       .select('*')
@@ -50,6 +48,8 @@ const getWorkouts = async (userData, loading, userId) => {
       ...el,
       date: dayjs(el.date)
     }))
+
+    const localStorageWorkouts = localStorage.getItem('workouts')
 
     if (localStorageWorkouts) {
       if (localStorageWorkouts !== JSON.stringify(updatedWorkouts)) {

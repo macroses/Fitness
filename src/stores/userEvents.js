@@ -18,7 +18,7 @@ export const useEventsStore = defineStore("userEvents", () => {
   const exerciseId = ref(null)
 
   const fetchEventHandler = async () => {
-    await getWorkouts(events, eventsLoading, userIdFromStorage())
+    await getWorkouts(events, eventsLoading, await userIdFromStorage())
     await getProfileColumn(
       favoritesFromBase,
       eventsLoading,
@@ -26,7 +26,6 @@ export const useEventsStore = defineStore("userEvents", () => {
     )
 
     if (favoritesFromBase.value === null) {
-      // if it null from base, so create empty array
       favoritesFromBase.value = []
     }
   }
