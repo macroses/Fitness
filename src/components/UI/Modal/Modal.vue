@@ -4,7 +4,7 @@ import { CSSPlugin } from 'gsap/CSSPlugin'
 import { onMounted, onUnmounted, ref } from 'vue'
 import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
 import Button from '@/components/UI/Button/Button.vue'
-import { animateBeforeCloseWrapper, useSwipeModal } from '@/components/UI/Modal/composable'
+import { animateBeforeCloseWrapper } from '@/components/UI/Modal/composable'
 
 defineProps({
   width: {
@@ -30,7 +30,6 @@ const emit = defineEmits(['close', 'confirm'])
 const modalLayer = ref(null)
 const modalContent = ref(null)
 
-const { handleTouchStart, handleTouchEnd, handleTouchMove } = useSwipeModal(modalContent)
 const { animateBeforeClose } = animateBeforeCloseWrapper(modalContent, modalLayer)
 
 gsap.registerPlugin(CSSPlugin)
@@ -83,9 +82,6 @@ onUnmounted(() => {
         ref="modalContent"
         class="modal__content"
         :style="{ maxWidth: width }"
-        @touchstart.passive="handleTouchStart"
-        @touchmove.passive="handleTouchMove"
-        @touchend.passive="handleTouchEnd"
       >
         <div class="modal__header">
           <ButtonClose @click="animateBeforeClose" />

@@ -1,45 +1,5 @@
 import { gsap } from 'gsap'
-import { getCurrentInstance, ref } from 'vue'
-
-const touchStartY = ref(0)
-const touchEndY = ref(0)
-
-export const useSwipeModal = (ref) => {
-  const { emit } = getCurrentInstance()
-
-  const handleTouchMove = event => {
-    const swipeDistance = event.touches[0].clientY - touchStartY.value
-
-    if (swipeDistance < 0) {
-      gsap.to(ref.value, { y: 0, duration: 0.1, ease: 'none' })
-    } else {
-      gsap.to(ref.value, {
-        y: swipeDistance,
-        duration: 0.1,
-        ease: 'none'
-      })
-    }
-  }
-
-  const handleTouchStart = event => (touchStartY.value = event.touches[0].clientY)
-
-  const handleTouchEnd = event => {
-    touchEndY.value = event.changedTouches[0].clientY
-    const swipeDistance = touchEndY.value - touchStartY.value
-
-    if (swipeDistance >= 100) {
-      emit('close')
-    } else {
-      gsap.to(ref.value, { y: 0, duration: 0.25, ease: 'none' })
-    }
-  }
-
-  return {
-    handleTouchMove,
-    handleTouchStart,
-    handleTouchEnd
-  }
-}
+import { getCurrentInstance } from 'vue'
 
 export const animateBeforeCloseWrapper = (content, layer) => {
   const { emit } = getCurrentInstance()
@@ -64,6 +24,8 @@ export const animateBeforeCloseWrapper = (content, layer) => {
     unmountTimer()
     clearTimeout(unmountTimer)
   }
+
+  document.body.style.overflow = 'visible'
 
   return {
     animateBeforeClose
