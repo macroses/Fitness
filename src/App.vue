@@ -13,6 +13,8 @@ const userEvents = useEventsStore()
 
 toggleColorTheme()
 
+useQuery({ queryKey: ['events'], queryFn: userEvents.fetchEventHandler() })
+
 onMounted(async () => {
   cacheExercises('exercisesCache')
   checkNetworkStatus()
