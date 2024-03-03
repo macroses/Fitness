@@ -4,7 +4,6 @@ import { uid } from 'uid'
 import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } from '@/composables/workouts'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { userIdFromStorage } from '@/composables/userIdFromStorage'
 import { getProfileColumn } from '@/composables/profile'
 
 export const useEventsStore = defineStore("userEvents", () => {
@@ -16,18 +15,9 @@ export const useEventsStore = defineStore("userEvents", () => {
   const workoutData = workoutStore()
   const dateStore = chosenDateStore()
   const exerciseId = ref(null)
-  const isAuth = ref(false)
 
   const fetchEventHandler = async () => {
-    const user_id = await userIdFromStorage()
-
-    if (!user_id) {
-      return
-    }
-
-    isAuth.value = true
-
-    await getWorkouts(events, eventsLoading, user_id)
+    await getWorkouts(events, eventsLoading)
     await getProfileColumn(
       favoritesFromBase,
       eventsLoading,
@@ -264,7 +254,6 @@ export const useEventsStore = defineStore("userEvents", () => {
   )
 
   return {
-    isAuth,
     events,
     favoritesFromBase,
     eventsLoading,
@@ -280,6 +269,6 @@ export const useEventsStore = defineStore("userEvents", () => {
     combinedResults,
     updateAllEvents,
     rescheduleEvent,
-    exerciseHistory,
+    exerciseHistory
   }
 })

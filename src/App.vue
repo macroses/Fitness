@@ -1,39 +1,39 @@
 <script setup>
-import { onMounted, watchEffect } from 'vue'
-import { useEventsStore } from '@/stores/userEvents'
+import { onMounted, ref, watchEffect } from 'vue'
 import toggleColorTheme from '@/composables/useColorTheme'
 import { cacheExercises } from '@/composables/cacheExercises'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { checkNetworkStatus } from '@/helpers/isOnline.js'
-import { useQuery } from '@tanstack/vue-query'
-
-// import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
-
-const userEvents = useEventsStore()
-// const route = useRoute()
+import { supabase } from '@/lib/supabaseClient.js'
+import { useEventsStore } from '@/stores/userEvents.js'
 
 toggleColorTheme()
-
-useQuery({ queryKey: ['events'], queryFn: userEvents.fetchEventHandler() })
+const userEvents = useEventsStore()
+const user = ref(null)
 
 onMounted(async () => {
   cacheExercises('exercisesCache')
   checkNetworkStatus()
+
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (session?.user) {
+    user.value = session.user
+  }
 
   if (!localStorage.getItem('bodyParams')) {
     localStorage.setItem('bodyParams', JSON.stringify(BODY_PARAMS))
   }
 })
 
-watchEffect(() => {
-  if (userEvents.isAuth) {
-    userEvents.fetchEventHandler()
+watchEffect(async () => {
+  if (user.value) {
+    await userEvents.fetchEventHandler()
   }
 })
 </script>
 
 <template>
-<!--  <VueQueryDevtools />-->
   <Header />
   <RouterView v-slot="{ Component }">
     <Transition mode="out-in">
