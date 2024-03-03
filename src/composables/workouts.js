@@ -33,14 +33,16 @@ const updateStorage = (data, storageName, userData) => {
   }))
 }
 
-const getWorkouts = async (userData, loading, userId) => {
+const getWorkouts = async (userData, loading) => {
   try {
     loading.value = true
+
+    const { data: { session } } = await supabase.auth.getSession()
 
     const { data: workouts, error } = await supabase
       .from('workouts')
       .select('*')
-      .eq('user_id', userId)
+      .eq('user_id', session?.user.id)
 
     if (error) throw new Error(error.message)
 
