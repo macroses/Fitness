@@ -71,6 +71,11 @@ const router = createRouter({
       meta: {
         auth: true
       }
+    },
+    {
+      name: '404',
+      path: '/:pathMatch(.*)*',
+      component: () => import('@/views/404.vue')
     }
   ]
 })
