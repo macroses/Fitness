@@ -93,7 +93,6 @@
 }
 
 .input-label.input-label--fade {
-  opacity: 0.5;
   visibility: visible;
   pointer-events: auto;
   transform: translate(-3px, 0);

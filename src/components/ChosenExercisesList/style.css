@@ -215,7 +215,7 @@
     margin-top: 5px;
     font-size: 12px;
     opacity: 0.8;
-    color: rgb(var(--accent-color));
+    color: rgb(var(--text-color));
   }
 }
 

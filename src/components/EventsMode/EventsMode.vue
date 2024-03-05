@@ -10,6 +10,7 @@ const dateStore = chosenDateStore()
     <Button
       bordered
       @click="$emit('workoutMode')"
+      aria-label="Workout Mode"
     >
       <Icon
         icon-name="fluent--dumbbell"
@@ -21,6 +22,7 @@ const dateStore = chosenDateStore()
       is-link
       bordered
       path="/program"
+      aria-label="Program"
     >
       <Icon
         icon-name="computer"
@@ -33,6 +35,7 @@ const dateStore = chosenDateStore()
       bordered
       :disabled="dateStore.date > dayjs()"
       path="/body-parameters"
+      aria-label="Parameters"
     >
       <Icon
         icon-name="pen-ruler"

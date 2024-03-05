@@ -8,6 +8,8 @@ import Icon from '@/components/UI/Icon/Icon.vue'
       bordered
       is-only-icon
       class="avatar"
+      aria-label="User Avatar"
+      aria-pressed="false"
     >
       <Icon
         icon-name="user-alien"

@@ -71,6 +71,7 @@ onBeforeRouteLeave(() => {
                   class="hide-calendar__button"
                   :class="{ active: isCalendarVisible }"
                   @click="isCalendarVisible = !isCalendarVisible"
+                  aria-label="hide calendar"
                 >
                   <Icon
                     width="20px"

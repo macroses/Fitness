@@ -63,7 +63,7 @@
 
   &::before {
     content: '';
-    border: 1px solid rgb(var(--accent-color));
+    border: 1px solid rgb(var(--text-color));
     position: absolute;
     top: 0;
     left: 0;

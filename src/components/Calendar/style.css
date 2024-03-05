@@ -113,7 +113,7 @@
 }
 
 .calendar__cell--other-month {
-  color: rgb(var(--text-color) / 0.3);
+  color: rgb(var(--text-color) / 0.7);
 }
 
 .calendar__controls {
@@ -172,7 +172,6 @@
   top: 4px;
 
   & span {
-    opacity: 0.5;
     font-style: italic;
   }
 }
