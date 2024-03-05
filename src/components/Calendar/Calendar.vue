@@ -180,6 +180,7 @@ watch(
           ]"
           tabindex="0"
           @click="handleClickCell(cell.date)"
+          aria-label="calendar cell"
         >
           <span class="calendar__cell-text">{{
             dayjs(cell.date).format('D')

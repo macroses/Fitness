@@ -30,7 +30,7 @@
 
 .tabs__item.active {
   cursor: default;
-  color: rgb(var(--accent-color));
+  color: rgb(var(--text-color));
   opacity: 1;
 }
 

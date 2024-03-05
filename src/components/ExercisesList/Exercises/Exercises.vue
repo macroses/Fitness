@@ -57,6 +57,7 @@ const deleteExercise = id => emit('deleteExercise', id)
           class="favorite-icon"
           v-if="!isCustomExercises"
           @click.stop="toggleToFavoriteExercise(exercise.id)"
+          aria-label="add to favorite"
         >
           <Icon
             :icon-name="isFavorite(exercise.id) ? 'star-fill' : 'star'"
@@ -68,6 +69,7 @@ const deleteExercise = id => emit('deleteExercise', id)
           class="favorite-icon"
           v-else
           @click.stop="deleteExercise(exercise.id)"
+          aria-label="delete exercise"
         >
           <Icon
             icon-name="trash"
