@@ -55,6 +55,7 @@ const isTemporaryWorkoutAvailable = computed(() => {
   return !isWorkoutWasSaved.value
     && workoutsStore.exercisesParamsCollection.length
     && workoutsStore.title
+    && !workoutsStore.isWorkoutEdit
     && !isBackToMainPage.value
 })
 
@@ -68,6 +69,8 @@ onBeforeRouteLeave(() => {
       exercisesParamsCollection: workoutsStore.exercisesParamsCollection,
       tonnage: workoutsStore.tonnage
     }
+
+    useTemporaryWorkout.saveToLocalStorage()
   }
 
   localStorage.removeItem('wId')

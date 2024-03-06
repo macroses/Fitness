@@ -10,8 +10,8 @@ import Icon from '@/components/UI/Icon/Icon.vue'
       class="avatar"
     >
       <Icon
-        icon-name="user-alien"
-        width="18px"
+        icon-name="face-disguise"
+        width="20px"
       />
     </Button>
   </div>

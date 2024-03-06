@@ -1,55 +1,74 @@
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { temporaryWorkoutStore } from '@/stores/temporaryWorkout.js'
+import { useTemporaryWorkoutComposable } from './composable'
+import router from '@/router/index.js'
+import { workoutStore } from '@/stores/workout.js'
+import { useEventsStore } from '@/stores/userEvents.js'
 
 const useTemporaryWorkout = temporaryWorkoutStore()
+const workoutsStore = workoutStore()
+const userEvents = useEventsStore()
 
 const isOpened = ref(false)
 const workoutControls = ref(null)
-const timeLeft = ref(600) // 5 minutes in seconds
+
+const {
+  startTimer,
+  calculateTimeLeft,
+  isAlert,
+  formatTime,
+  timeLeft
+} = useTemporaryWorkoutComposable()
+
 let timerId = null
 
-const formatTime = (time) => {
-  const minutes = Math.floor(time / 60)
-  const seconds = time % 60
-  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+const editTemporaryWorkout = () => {
+  workoutsStore.editUsersEvent(useTemporaryWorkout.temporaryWorkout, true)
+
+  isOpened.value = false
+  router.push('/workout')
+  useTemporaryWorkout.clearLocalStorage()
 }
 
-const isAlert = computed(() => timeLeft.value <= 60)
+const saveTemporaryWorkout = async () => {
+  await userEvents.pushEventHandler(useTemporaryWorkout.temporaryWorkout)
+  isOpened.value = false
+  useTemporaryWorkout.clearLocalStorage()
+}
 
 const deleteTemporaryWorkout = () => {
-
-  useTemporaryWorkout.$reset()
+  useTemporaryWorkout.clearLocalStorage()
+  clearInterval(timerId)
 }
 
 onMounted(() => {
+  startTimer()
+  calculateTimeLeft()
   timerId = setInterval(() => {
     if (timeLeft.value > 0) {
       timeLeft.value--
     } else {
       clearInterval(timerId)
-      useTemporaryWorkout.$reset()
+      useTemporaryWorkout.clearLocalStorage()
     }
   }, 1000)
 })
 
-onUnmounted(() => {
-  clearInterval(timerId)
-})
+onUnmounted(() => clearInterval(timerId))
 
 onClickOutside(workoutControls, () => isOpened.value = false)
 </script>
 
 <template>
-  <div
-    class="temporary-workout"
-  >
+  <div class="temporary-workout">
     <button
       class="temporary-workout__button"
-      :class="{ 'time-left': isAlert}"
+      :class="{ 'time-left': isAlert }"
       @click="isOpened = !isOpened"
     >
+      <span :class="{'temporary-first': !useTemporaryWorkout.isWorkoutAvailable}" />
       <Icon
         icon-name="timer"
         width="20px"
@@ -73,12 +92,14 @@ onClickOutside(workoutControls, () => isOpened.value = false)
             <Button
               bordered
               aria-label="Save temporary workout"
+              @click="saveTemporaryWorkout"
             >
               Save
             </Button>
             <Button
               bordered
               aria-label="Edit temporary workout"
+              @click="editTemporaryWorkout"
             >
               Edit
             </Button>
@@ -96,4 +117,4 @@ onClickOutside(workoutControls, () => isOpened.value = false)
   </div>
 </template>
 
-<style src="./style.css" />
+<style scoped src="./style.css" />

@@ -1,6 +1,29 @@
 .temporary-workout {
 	margin-left: auto;
-	position: relative;
+}
+
+.temporary-first {
+	animation: primary 3s;
+	position: absolute;
+	display: block;
+	width: 30px;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: #ff3636;
+}
+
+@keyframes primary {
+	0% { background: transparent; }
+	10% { background: #ff3636; }
+	20% { background: transparent; }
+	30% { background: #ff3636; }
+	40% { background: transparent; }
+	50% { background: #ff3636; }
+	60% { background: transparent; }
+	70% { background: #ff3636; }
+	80% { background: transparent; }
+	90% { background: #ff3636; }
+	100% { background: transparent; }
 }
 
 .temporary-workout__button {
@@ -93,7 +116,7 @@
 	position: absolute;
 	overflow: hidden;
 	width: 250px;
-	right: -50px;
+	right: 12px;
 	top: calc(100% + 10px);
 	background-color: var(--content-bg);
 	box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);

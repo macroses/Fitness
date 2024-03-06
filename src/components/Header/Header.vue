@@ -16,9 +16,7 @@ const userEvents = useEventsStore()
 const useTemporaryWorkout = temporaryWorkoutStore()
 let scrollPosition = ref(0)
 
-const checkScroll = () => {
-  scrollPosition.value = window.pageYOffset || document.documentElement.scrollTop
-}
+const checkScroll = () => scrollPosition.value = window.pageYOffset || document.documentElement.scrollTop
 
 const handleSignOut = async () => {
   await signOut(loading)
@@ -35,6 +33,7 @@ const redirectToPage = page => {
 
 onMounted(() => {
   window.addEventListener('scroll', checkScroll)
+  useTemporaryWorkout.loadFromLocalStorage()
 })
 
 onUnmounted(() => {

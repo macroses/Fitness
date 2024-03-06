@@ -34,7 +34,12 @@ export const useEventsStore = defineStore("userEvents", () => {
     events.value = events.value.filter((event) => event.workoutId !== id)
   }
 
-  const pushEventHandler = async () => {
+  const pushEventHandler = async (temporaryWorkout) => {
+    if (temporaryWorkout) {
+      await pushEvent("workouts", temporaryWorkout, eventsLoading)
+      events.value.push(temporaryWorkout)
+    }
+
     let workoutObject = {}
 
     if (copyObject.value) {
