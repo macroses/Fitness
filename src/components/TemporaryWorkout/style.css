@@ -1,0 +1,153 @@
+.temporary-workout {
+	margin-left: auto;
+	position: relative;
+}
+
+.temporary-workout__button {
+	position: relative;
+	background-color: transparent;
+	border: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&::before {
+		content: '';
+		position: absolute;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		bottom: 0;
+		left: 1px;
+		animation: blinkTemp 2s infinite;
+		background: #02cb02;
+	}
+
+	&.time-left::before {
+		background: red;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	& svg {
+		animation: bounceClock 5.5s infinite;
+		animation-delay: 5s;
+		transform-origin: bottom center;
+		transform: rotate(0);
+	}
+}
+
+@keyframes blinkTemp {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes bounceClock {
+	1% {
+		transform: rotate(-15deg);
+	}
+	2% {
+		transform: rotate(0);
+	}
+	3% {
+		transform: rotate(15deg);
+	}
+	4% {
+		transform: rotate(0);
+	}
+	5% {
+		transform: rotate(-15deg);
+	}
+	6% {
+		transform: rotate(0);
+	}
+	7% {
+		transform: rotate(15deg);
+	}
+	8% {
+		transform: rotate(0);
+	}
+	9% {
+		transform: rotate(-15deg);
+	}
+	10% {
+		transform: rotate(0);
+	}
+}
+
+.temporary-workout__content {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.5s, visibility 0.5s;
+	position: absolute;
+	overflow: hidden;
+	width: 250px;
+	right: -50px;
+	top: calc(100% + 10px);
+	background-color: var(--content-bg);
+	box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.05);
+	border-radius: 4px;
+	z-index: 2;
+	visibility: hidden;
+
+	&.opened {
+		grid-template-rows: 1fr;
+		visibility: visible;
+
+		& .temporary-workout__funcs {
+			padding: 8px;
+			visibility: visible;
+			opacity: 1;
+			border-color: rgb(var(--accent-color) / 0.2);
+		}
+	}
+}
+
+.temporary-workout__funcs {
+	min-height: 0;
+	border-radius: 4px;
+	opacity: 0;
+	transition: padding 0.5s ease-in-out,
+		visibility 0.5s ease-in-out,
+		border-color 0.5s ease-in-out,
+		opacity 0.5s ease-in-out;
+	visibility: hidden;
+	background-color: #fff;
+	border: 1px solid transparent;
+}
+
+.temporary-workout__funcs-list {
+	display: flex;
+	gap: 4px;
+
+	& button {
+		flex: 1;
+		font-size: 12px;
+	}
+}
+
+.temporary-workout__timer {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.temporary-workout__timer-wrap {
+	font-size: 18px;
+	text-align: center;
+	font-weight: 500;
+	background-color: var(--table-dark-bg);
+	border-radius: 4px;
+
+}

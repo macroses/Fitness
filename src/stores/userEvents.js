@@ -38,8 +38,7 @@ export const useEventsStore = defineStore("userEvents", () => {
     let workoutObject = {}
 
     if (copyObject.value) {
-      const { title, color, exercisesParamsCollection, tonnage } =
-        copyObject.value
+      const { title, color, exercisesParamsCollection, tonnage } = copyObject.value
 
       workoutObject = {
         workoutId: uid(50),
@@ -65,7 +64,7 @@ export const useEventsStore = defineStore("userEvents", () => {
       date: dateStore.date,
       workoutId: workoutData.workoutId,
       exercisesParamsCollection: workoutData.exercisesParamsCollection,
-      tonnage: workoutData.tonnage,
+      tonnage: workoutData.tonnage
     }
 
     await pushEvent("workouts", workoutObject, eventsLoading)

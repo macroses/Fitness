@@ -4,7 +4,10 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 5%);
+
+  &.scrolled {
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%);
+  }
 }
 
 .header__user {
@@ -12,7 +15,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 8px;
 }
 
 .header__wrap {

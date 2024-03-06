@@ -5,13 +5,13 @@ import Icon from '@/components/UI/Icon/Icon.vue'
 <template>
   <div class="avatar-content">
     <Button
-      bordered
+      transparent
       is-only-icon
       class="avatar"
     >
       <Icon
         icon-name="user-alien"
-        width="15px"
+        width="18px"
       />
     </Button>
   </div>

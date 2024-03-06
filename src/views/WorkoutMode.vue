@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import { onBeforeRouteLeave } from 'vue-router'
 import { workoutStore } from '@/stores/workout'
@@ -7,13 +7,17 @@ import { exerciseStore } from '@/stores/exercise'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/userEvents'
+import { temporaryWorkoutStore } from '@/stores/temporaryWorkout.js'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()
 const dateStore = chosenDateStore()
 const userEvents = useEventsStore()
+const useTemporaryWorkout = temporaryWorkoutStore()
 const chosenDate = ref(dayjs())
 const isCalendarVisible = ref(false)
+const isWorkoutWasSaved = ref(false)
+const isBackToMainPage = ref(false)
 
 const getDate = date => {
   chosenDate.value = date
@@ -21,19 +25,51 @@ const getDate = date => {
   isCalendarVisible.value = false
 }
 
+const backToMainPage = () => {
+  isBackToMainPage.value = true
+
+  router.push('/')
+}
+
 const workoutToBase = async () => {
   if (workoutsStore.isWorkoutEdit) {
     await userEvents.updateEventHandler()
+    isWorkoutWasSaved.value = true
     router.push('/')
     return
   }
 
   await userEvents.pushEventHandler()
+  isWorkoutWasSaved.value = true
   workoutsStore.$reset()
   router.push('/')
 }
 
+const workoutSaveText = computed(() => {
+  return workoutsStore.isWorkoutEdit
+    ? 'Update workout'
+    : 'Save workout'
+})
+
+const isTemporaryWorkoutAvailable = computed(() => {
+  return !isWorkoutWasSaved.value
+    && workoutsStore.exercisesParamsCollection.length
+    && workoutsStore.title
+    && !isBackToMainPage.value
+})
+
 onBeforeRouteLeave(() => {
+  if (isTemporaryWorkoutAvailable.value) {
+    useTemporaryWorkout.temporaryWorkout = {
+      title: workoutsStore.title,
+      color: workoutsStore.color,
+      date: dateStore.date,
+      workoutId: workoutsStore.workoutId,
+      exercisesParamsCollection: workoutsStore.exercisesParamsCollection,
+      tonnage: workoutsStore.tonnage
+    }
+  }
+
   localStorage.removeItem('wId')
   workoutsStore.$reset()
 })
@@ -103,7 +139,7 @@ onBeforeRouteLeave(() => {
                 <Button
                   bordered
                   full
-                  @click="router.push('/')"
+                  @click="backToMainPage"
                 >
                   Back
                 </Button>
@@ -112,11 +148,7 @@ onBeforeRouteLeave(() => {
                   @click="workoutToBase"
                   :disabled="!workoutsStore.exercisesParamsCollection.length"
                 >
-                  {{
-                    workoutsStore.isWorkoutEdit
-                      ? 'Update workout'
-                      : 'Save workout'
-                  }}
+                  {{ workoutSaveText }}
                 </Button>
               </div>
             </div>
