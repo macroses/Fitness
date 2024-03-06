@@ -79,8 +79,8 @@ export const workoutStore = defineStore({
 
       this.updateTonnage()
     },
-    editUsersEvent(event) {
-      this.isWorkoutEdit = true
+    editUsersEvent(event, isTemporary) {
+      this.isWorkoutEdit = !isTemporary;
 
       this.workoutId = event.workoutId
       this.title = event.title

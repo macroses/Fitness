@@ -1,10 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { signOut } from '@/composables/profile'
 import { getSession } from '@/composables/getSession'
 import router from '@/router'
 import { useEventsStore } from '@/stores/userEvents'
+import { temporaryWorkoutStore } from '@/stores/temporaryWorkout.js'
 
 const { session } = getSession()
 
@@ -12,6 +13,10 @@ const loading = ref(true)
 const userMenu = ref(null)
 const isDropdownVisible = ref(false)
 const userEvents = useEventsStore()
+const useTemporaryWorkout = temporaryWorkoutStore()
+let scrollPosition = ref(0)
+
+const checkScroll = () => scrollPosition.value = window.pageYOffset || document.documentElement.scrollTop
 
 const handleSignOut = async () => {
   await signOut(loading)
@@ -26,11 +31,23 @@ const redirectToPage = page => {
   isDropdownVisible.value = false
 }
 
+onMounted(() => {
+  window.addEventListener('scroll', checkScroll)
+  useTemporaryWorkout.loadFromLocalStorage()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', checkScroll)
+})
+
 onClickOutside(userMenu, () => (isDropdownVisible.value = false))
 </script>
 
 <template>
-  <header class="header">
+  <header
+    class="header"
+    :class="{ scrolled: scrollPosition > 0 }"
+  >
     <div class="container">
       <div class="header__wrap">
         <RouterLink
@@ -40,6 +57,9 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           Plinx
         </RouterLink>
         <div class="header__user">
+          <TemporaryWorkout
+            v-if="useTemporaryWorkout.temporaryWorkout"
+          />
           <Avatar
             v-if="session"
             @click="isDropdownVisible = true"

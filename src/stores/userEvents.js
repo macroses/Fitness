@@ -34,12 +34,16 @@ export const useEventsStore = defineStore("userEvents", () => {
     events.value = events.value.filter((event) => event.workoutId !== id)
   }
 
-  const pushEventHandler = async () => {
+  const pushEventHandler = async (temporaryWorkout) => {
+    if (temporaryWorkout) {
+      await pushEvent("workouts", temporaryWorkout, eventsLoading)
+      events.value.push(temporaryWorkout)
+    }
+
     let workoutObject = {}
 
     if (copyObject.value) {
-      const { title, color, exercisesParamsCollection, tonnage } =
-        copyObject.value
+      const { title, color, exercisesParamsCollection, tonnage } = copyObject.value
 
       workoutObject = {
         workoutId: uid(50),
@@ -65,7 +69,7 @@ export const useEventsStore = defineStore("userEvents", () => {
       date: dateStore.date,
       workoutId: workoutData.workoutId,
       exercisesParamsCollection: workoutData.exercisesParamsCollection,
-      tonnage: workoutData.tonnage,
+      tonnage: workoutData.tonnage
     }
 
     await pushEvent("workouts", workoutObject, eventsLoading)
