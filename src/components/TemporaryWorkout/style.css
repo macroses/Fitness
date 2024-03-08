@@ -33,6 +33,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: rgb(var(--text-color));
 
 	&::before {
 		content: '';
@@ -41,7 +42,7 @@
 		height: 7px;
 		border-radius: 50%;
 		bottom: 0;
-		left: 1px;
+		left: calc(50% - 15px);
 		animation: blinkTemp 2s infinite;
 		background: #02cb02;
 	}
@@ -112,7 +113,7 @@
 .temporary-workout__content {
 	display: grid;
 	grid-template-rows: 0fr;
-	transition: grid-template-rows 0.5s, visibility 0.5s;
+	transition: grid-template-rows 0.25s, visibility 0.25s;
 	position: absolute;
 	overflow: hidden;
 	width: 250px;
@@ -152,7 +153,7 @@
 
 .temporary-workout__funcs-list {
 	display: flex;
-	gap: 4px;
+	gap: 8px;
 
 	& button {
 		flex: 1;
