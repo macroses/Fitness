@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, ref } from 'vue'
 import dayjs from 'dayjs'
 import { onBeforeRouteLeave } from 'vue-router'
 import { workoutStore } from '@/stores/workout'
@@ -63,7 +63,7 @@ const isTemporaryWorkoutAvailable = computed(() => {
     && !isBackToMainPage.value
 })
 
-onBeforeRouteLeave(() => {
+const saveToLocalStorage = () => {
   if (isTemporaryWorkoutAvailable.value) {
     useTemporaryWorkout.temporaryWorkout = {
       title: workoutsStore.title,
@@ -76,9 +76,17 @@ onBeforeRouteLeave(() => {
 
     useTemporaryWorkout.saveToLocalStorage()
   }
+}
 
+onBeforeRouteLeave(() => {
+  saveToLocalStorage()
   localStorage.removeItem('wId')
   workoutsStore.$reset()
+})
+
+onBeforeUnmount(() => {
+  window.addEventListener('beforeunload', saveToLocalStorage)
+  localStorage.removeItem('wId')
 })
 </script>
 
