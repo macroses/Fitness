@@ -24,7 +24,7 @@ export const useTemporaryWorkoutComposable = () => {
 
     if (startTime) {
       const elapsedTime = Math.floor((Date.now() - startTime) / 1000)
-      timeLeft.value = 600 - elapsedTime
+      timeLeft.value = 300 - elapsedTime
     }
   }
 

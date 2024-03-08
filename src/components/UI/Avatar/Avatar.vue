@@ -10,7 +10,7 @@ import Icon from '@/components/UI/Icon/Icon.vue'
       class="avatar"
     >
       <Icon
-        icon-name="face-disguise"
+        icon-name="face-smile"
         width="20px"
       />
     </Button>

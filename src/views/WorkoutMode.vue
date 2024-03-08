@@ -51,6 +51,10 @@ const workoutSaveText = computed(() => {
     : 'Save workout'
 })
 
+const isWorkoutSaveAvailable = computed(() => {
+  return workoutsStore.exercisesParamsCollection.length && workoutsStore.title
+})
+
 const isTemporaryWorkoutAvailable = computed(() => {
   return !isWorkoutWasSaved.value
     && workoutsStore.exercisesParamsCollection.length
@@ -149,7 +153,7 @@ onBeforeRouteLeave(() => {
                 <Button
                   full
                   @click="workoutToBase"
-                  :disabled="!workoutsStore.exercisesParamsCollection.length"
+                  :disabled="!isWorkoutSaveAvailable"
                 >
                   {{ workoutSaveText }}
                 </Button>
