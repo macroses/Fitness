@@ -31,7 +31,7 @@ const getProfile = async (userData, isLoading) => {
   }
 }
 
-const getProfileColumn = async (userData, loading, columnName) => {
+const getProfileColumn = async (userData, loading, columnName, ) => {
   const {
     data: { session }
   } = await supabase.auth.getSession()

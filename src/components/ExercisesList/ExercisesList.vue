@@ -5,7 +5,7 @@ import SearchExercises from '@/components/SearchExercises/SearchExercises.vue'
 import Exercises from '@/components/ExercisesList/Exercises/Exercises.vue'
 import MuscleItemHeader from '@/components/ExercisesList/MuscleItemHeader/MuscleItemHeader.vue'
 import { updateProfile } from '@/composables/profile'
-import { useEventsStore } from '@/stores/userEvents'
+import { useEventsStore } from '@/stores/userEvents/userEvents.js'
 import CreateExercise from '@/components/CreateExercise/CreateExercise.vue'
 import { userExercisesStore } from '@/stores/userExercises.js'
 

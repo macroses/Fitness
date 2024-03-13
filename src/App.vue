@@ -5,7 +5,7 @@ import { cacheExercises } from '@/composables/cacheExercises'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
 import { checkNetworkStatus } from '@/helpers/isOnline.js'
 import { supabase } from '@/lib/supabaseClient.js'
-import { useEventsStore } from '@/stores/userEvents.js'
+import { useEventsStore } from '@/stores/userEvents/userEvents.js'
 
 toggleColorTheme()
 const userEvents = useEventsStore()

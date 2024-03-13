@@ -2,7 +2,7 @@
 import { computed, watch } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
 import { workoutStore } from '@/stores/workout'
-import { useEventsStore } from '@/stores/userEvents'
+import { useEventsStore } from '@/stores/userEvents/userEvents.js'
 import { EFFORTS } from '@/constants/EFFORTS'
 import ChosenExerciseSets from '@/components/ChosenExercisesList/ChosenExerciseSets/ChosenExerciseSets.vue'
 

@@ -5,7 +5,7 @@ import { temporaryWorkoutStore } from '@/stores/temporaryWorkout.js'
 import { useTemporaryWorkoutComposable } from './composable'
 import router from '@/router/index.js'
 import { workoutStore } from '@/stores/workout.js'
-import { useEventsStore } from '@/stores/userEvents.js'
+import { useEventsStore } from '@/stores/userEvents/userEvents.js'
 
 const useTemporaryWorkout = temporaryWorkoutStore()
 const workoutsStore = workoutStore()

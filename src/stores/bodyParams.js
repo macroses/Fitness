@@ -11,9 +11,7 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
   const dateStore = chosenDateStore()
 
   const bodyParams = ref([])
-  const activeBodyField = ref(
-    JSON.parse(localStorage.getItem('bodyParams'))?.[0].id
-  )
+  const activeBodyField = ref(JSON.parse(localStorage.getItem('bodyParams'))?.[0].id)
   const eventsLoading = ref(false)
 
   const fetchEventHandler = async () => {
@@ -21,17 +19,18 @@ export const bodyParamsStore = defineStore('bodyParams', () => {
   }
 
   const addParam = (params, activeParam, inputValue) => {
-    const existingParam = params.find(
-      param => param.label === activeParam.label
-    )
+    const existingParam = params.find(param => param.label === activeParam.label)
+
     if (existingParam) {
       existingParam.value = inputValue.value
-    } else {
-      params.push({
-        label: activeParam.label,
-        value: inputValue.value
-      })
+
+      return
     }
+
+    params.push({
+      label: activeParam.label,
+      value: inputValue.value
+    })
   }
 
   const pushBodyParamsToBase = async (inputValue, activeParam, isLoading) => {

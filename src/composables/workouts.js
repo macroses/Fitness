@@ -43,6 +43,7 @@ const getWorkouts = async (userData, loading) => {
       .from('workouts')
       .select('*')
       .eq('user_id', session?.user.id)
+      .order('date', { ascending: false })
 
     if (error) throw new Error(error.message)
 

@@ -12,6 +12,7 @@ export const workoutStore = defineStore({
     color: '213, 0, 0',
     weight: null,
     repeats: null,
+    repeatsSum: 0,
     effort: 0,
     tonnage: 0,
     exercisesParamsCollection: [],
@@ -19,9 +20,7 @@ export const workoutStore = defineStore({
   }),
   actions: {
     addExerciseToWorkout(exerciseId, exerciseName) {
-      if (
-        !this.exercisesParamsCollection.some(e => e.exerciseId === exerciseId)
-      ) {
+      if (!this.exercisesParamsCollection.some(e => e.exerciseId === exerciseId)) {
         this.exercisesParamsCollection.push({
           exerciseId,
           exerciseName
@@ -37,6 +36,7 @@ export const workoutStore = defineStore({
         this.exercisesParamsCollection.splice(index, 1)
 
         this.updateTonnage()
+        this.updateRepeatsSum()
       }
     },
     addSet(exerciseId) {
@@ -60,11 +60,10 @@ export const workoutStore = defineStore({
       }
 
       this.updateTonnage()
+      this.updateRepeatsSum()
     },
     deleteSet(setId) {
-      const exerciseParams = this.exercisesParamsCollection.find(
-        item => item.exerciseId === this.openedExerciseId
-      )
+      const exerciseParams = this.exercisesParamsCollection.find(item => item.exerciseId === this.openedExerciseId)
       if (exerciseParams) {
         exerciseParams.sets = exerciseParams.sets.filter(
           set => set.setId !== setId
@@ -78,6 +77,7 @@ export const workoutStore = defineStore({
       }
 
       this.updateTonnage()
+      this.updateRepeatsSum()
     },
     editUsersEvent(event, isTemporary) {
       this.isWorkoutEdit = !isTemporary;
@@ -89,27 +89,23 @@ export const workoutStore = defineStore({
       this.exercisesParamsCollection = event.exercisesParamsCollection
     },
     getSetTonnage(id) {
-      const exercise = this.exercisesParamsCollection.find(
-        item => item.exerciseId === id
-      )
+      const exercise = this.exercisesParamsCollection.find(item => item.exerciseId === id)
       return exercise.setTonnage ? exercise.setTonnage : 0
     },
     getSetRepeats(id) {
-      const exercise = this.exercisesParamsCollection.find(
-        item => item.exerciseId === id
-      )
+      const exercise = this.exercisesParamsCollection.find(item => item.exerciseId === id)
 
-      return exercise.sets
-        ? exercise.sets.reduce((acc, curSet) => acc + curSet.repeats, 0)
-        : 0
+      return exercise.sets ? exercise.sets.reduce((acc, curSet) => acc + curSet.repeats, 0) : 0
     },
     updateTonnage() {
-      const sumTonnage = this.exercisesParamsCollection.reduce(
-        (acc, exerciseParams) => acc + (exerciseParams.setTonnage || 0),
-        0
-      )
-
-      this.tonnage = sumTonnage
+      this.tonnage = this.exercisesParamsCollection.reduce((acc, exerciseParams) => {
+        return acc + (exerciseParams.setTonnage || 0)
+      }, 0)
+    },
+    updateRepeatsSum() {
+      this.repeatsSum = this.exercisesParamsCollection.reduce((acc, exerciseParams) => {
+        return acc + (exerciseParams.sets ? exerciseParams.sets.reduce((acc, set) => acc + set.repeats, 0) : 0)
+      }, 0)
     },
     mergeToSuperset(supersetsIdArray) {
       if (supersetsIdArray.value.length < 2) return
@@ -146,12 +142,9 @@ export const workoutStore = defineStore({
       }
     }
   },
-
   getters: {
     supersetsArray() {
-      const exercises = JSON.parse(
-        JSON.stringify(this.exercisesParamsCollection)
-      )
+      const exercises = JSON.parse(JSON.stringify(this.exercisesParamsCollection))
       const cache = JSON.parse(localStorage.getItem('exercisesCache'))
 
       return exercises.reduce((supersetGroups, exercise) => {
@@ -181,12 +174,9 @@ export const workoutStore = defineStore({
     },
     filteredCacheExercises() {
       return JSON.parse(localStorage.getItem('exercisesCache')).filter(
-        sessionExercise =>
-          this.exercisesParamsCollection.some(
-            exercise =>
-              sessionExercise.id === exercise.exerciseId &&
-              !exercise.hasOwnProperty('superset')
-          )
+        sessionExercise => this.exercisesParamsCollection.some(
+          exercise => sessionExercise.id === exercise.exerciseId && !exercise.hasOwnProperty('superset')
+        )
       )
     }
   }

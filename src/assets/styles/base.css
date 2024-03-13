@@ -110,6 +110,16 @@ body {
   padding-top: 8px;
   gap: 16px;
   position: relative;
+
+  &:has(.main-layout__chart) .main__layout-container {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  &:has(.main-layout__chart) .events {
+    margin: 0;
+    max-width: 100%;
+  }
 }
 
 .main__layout.workout-mode {
@@ -227,6 +237,10 @@ body {
 .main__layout-right {
   max-width: 100%;
   width: 100%;
+}
+
+.main-layout__chart {
+  flex: 1;
 }
 
 .main__layout-left {
