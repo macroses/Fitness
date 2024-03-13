@@ -85,9 +85,7 @@ watch(
 )
 
 onMounted(() => {
-  accentColor.value = getComputedStyle(
-    document.documentElement
-  ).getPropertyValue('--accent-color')
+  accentColor.value = getComputedStyle(document.documentElement).getPropertyValue('--accent-color')
 })
 </script>
 

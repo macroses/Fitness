@@ -5,6 +5,10 @@ const props = defineProps({
   buttons: {
     type: Array,
     default: () => []
+  },
+  isFlexible: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -29,7 +33,10 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="button-group">
+  <div
+    class="button-group"
+    :class="{ 'button-group--flexible': isFlexible }"
+  >
     <button
       ref="buttonItem"
       v-for="(item, index) in buttons"

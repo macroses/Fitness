@@ -13,6 +13,12 @@
   }
 }
 
+.button-group--flexible .button-group__item {
+  @media (min-width: 768px) {
+    width: fit-content;
+  }
+}
+
 .button-group__item {
   background-color: transparent;
   color: rgb(var(--text-color));

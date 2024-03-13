@@ -4,7 +4,7 @@ import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
 import { exerciseProgressChart } from '@/chartsconfig/exerciseProgressChart.js'
 import { computed } from 'vue'
-import { useEventsStore } from '@/stores/userEvents.js'
+import { useEventsStore } from '@/stores/userEvents/userEvents.js'
 
 ChartJS.register(
   Legend,

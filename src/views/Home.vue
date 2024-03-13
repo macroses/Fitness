@@ -4,7 +4,8 @@ import router from '@/router'
 import { uid } from 'uid'
 import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { useEventsStore } from '@/stores/userEvents'
+import { useEventsStore } from '@/stores/userEvents/userEvents.js'
+import StatisticChart from '@/components/StatisticChart/StatisticChart.vue'
 
 const workoutsStore = workoutStore()
 const dateStore = chosenDateStore()
@@ -79,6 +80,7 @@ const deleteHandler = workoutId => {
             @deleteEvent="deleteHandler"
           />
         </div>
+        <StatisticChart />
       </div>
     </div>
   </main>

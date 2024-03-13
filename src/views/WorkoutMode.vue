@@ -6,8 +6,8 @@ import { workoutStore } from '@/stores/workout'
 import { exerciseStore } from '@/stores/exercise'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { useEventsStore } from '@/stores/userEvents'
-import { temporaryWorkoutStore } from '@/stores/temporaryWorkout.js'
+import { useEventsStore } from '@/stores/userEvents/userEvents'
+import { temporaryWorkoutStore } from '@/stores/temporaryWorkout'
 
 const workoutsStore = workoutStore()
 const exercisesStore = exerciseStore()

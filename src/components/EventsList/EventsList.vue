@@ -4,7 +4,7 @@ import { onClickOutside } from '@vueuse/core'
 import { workoutStore } from '@/stores/workout'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { useEventsStore } from '@/stores/userEvents'
+import { useEventsStore } from '@/stores/userEvents/userEvents.js'
 
 defineProps({
   events: {

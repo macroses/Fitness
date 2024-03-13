@@ -6,7 +6,7 @@ import { workoutStore } from '@/stores/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { getProfileColumn } from '@/composables/profile'
 
-export const useEventsStore = defineStore("userEvents", () => {
+export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])
   const favoritesFromBase = ref([])
   const eventsLoading = ref(false)
@@ -21,7 +21,7 @@ export const useEventsStore = defineStore("userEvents", () => {
     await getProfileColumn(
       favoritesFromBase,
       eventsLoading,
-      "favorite_exercises"
+      'favorite_exercises'
     )
 
     if (favoritesFromBase.value === null) {
@@ -43,7 +43,7 @@ export const useEventsStore = defineStore("userEvents", () => {
     let workoutObject = {}
 
     if (copyObject.value) {
-      const { title, color, exercisesParamsCollection, tonnage } = copyObject.value
+      const { title, color, exercisesParamsCollection, tonnage, repeatsSum } = copyObject.value
 
       workoutObject = {
         workoutId: uid(50),
@@ -52,6 +52,7 @@ export const useEventsStore = defineStore("userEvents", () => {
         color,
         exercisesParamsCollection,
         tonnage,
+        repeatsSum
       }
 
       await pushEvent("workouts", workoutObject, eventsLoading)
@@ -69,7 +70,8 @@ export const useEventsStore = defineStore("userEvents", () => {
       date: dateStore.date,
       workoutId: workoutData.workoutId,
       exercisesParamsCollection: workoutData.exercisesParamsCollection,
-      tonnage: workoutData.tonnage
+      tonnage: workoutData.tonnage,
+      repeatsSum: workoutData.repeatsSum,
     }
 
     await pushEvent("workouts", workoutObject, eventsLoading)
@@ -84,6 +86,7 @@ export const useEventsStore = defineStore("userEvents", () => {
       date: dateStore.date,
       exercisesParamsCollection: workoutData.exercisesParamsCollection,
       tonnage: workoutData.tonnage,
+      repeatsSum: workoutData.repeatsSum,
     }
 
     await updateEvent(
@@ -94,9 +97,7 @@ export const useEventsStore = defineStore("userEvents", () => {
       eventsLoading
     )
 
-    const index = events.value.findIndex(
-      (event) => event.workoutId === workoutData.workoutId
-    )
+    const index = events.value.findIndex(event => event.workoutId === workoutData.workoutId)
 
     if (index !== -1) {
       events.value.splice(index, 1, workoutObject)
@@ -119,15 +120,11 @@ export const useEventsStore = defineStore("userEvents", () => {
   }
 
   const previousResults = computed(() => {
-    const userWorkouts = events.value.filter(
-      (workout) => workout.date < dateStore.date
-    )
+    const userWorkouts = events.value.filter(workout => workout.date < dateStore.date)
 
     const previousSets = []
-    for (const workout of userWorkouts.reverse()) {
-      const exerciseParams = workout.exercisesParamsCollection.find(
-        (item) => item.exerciseId === workoutData.openedExerciseId
-      )
+    for (const workout of userWorkouts) {
+      const exerciseParams = workout.exercisesParamsCollection.find(item => item.exerciseId === workoutData.openedExerciseId)
 
       if (exerciseParams && exerciseParams.sets?.length > 0) {
         previousSets.push(...exerciseParams.sets)
@@ -144,10 +141,7 @@ export const useEventsStore = defineStore("userEvents", () => {
       return 0
     }
 
-    const totalRepeats = previousSets.reduce(
-      (total, set) => total + set.repeats,
-      0
-    )
+    const totalRepeats = previousSets.reduce((total, set) => total + set.repeats, 0)
 
     return totalRepeats
   })
@@ -170,8 +164,7 @@ export const useEventsStore = defineStore("userEvents", () => {
       }
     })
 
-    combined.push(
-      ...previous.slice(exerciseSets.length).map((prevSet) => ({
+    combined.push(...previous.slice(exerciseSets.length).map((prevSet) => ({
         setId: null,
         weight: null,
         repeats: null,
