@@ -131,12 +131,6 @@ const rescheduleModalClose = () => {
         </div>
       </li>
     </ul>
-    <div
-      v-else
-      class="events__empty"
-    >
-      There are no events
-    </div>
     <Modal
       v-if="isRescheduleModal"
       width="400px"

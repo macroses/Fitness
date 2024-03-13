@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
 
 const props = defineProps({
   buttons: {
@@ -20,7 +20,7 @@ const tabStyle = ref(null)
 
 const activateButton = index => (activeButton.value = index)
 
-watchEffect(() => {
+const calculateTabStyle = () => {
   if (buttonItem.value && shadowBtn.value) {
     const activeButtonRect = buttonItem.value[activeButton.value].getBoundingClientRect()
     const parentRect = shadowBtn.value.parentNode.getBoundingClientRect()
@@ -29,7 +29,12 @@ watchEffect(() => {
 
     tabStyle.value = `width: ${width}; left: ${left};`
   }
-})
+}
+
+watchEffect(calculateTabStyle)
+
+onMounted(() => window.addEventListener('resize', calculateTabStyle))
+onUnmounted(() => window.removeEventListener('resize', calculateTabStyle))
 </script>
 
 <template>

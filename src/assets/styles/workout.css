@@ -28,6 +28,12 @@
   text-align: center;
   max-width: 524px;
   margin: 0 auto;
+
+  &:empty::after {
+    content: 'There are no events';
+    height: 38px;
+    display: block;
+  }
 }
 
 .user-workout {
