@@ -73,7 +73,7 @@ const statisticChartData = computed(() => {
         data: averageData,
         tension: 0.4,
         pointRadius: 0,
-        label: 'Среднее значение'
+        label: 'Average'
       }
     ]
   }
