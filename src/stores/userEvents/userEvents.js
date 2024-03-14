@@ -108,6 +108,9 @@ export const useEventsStore = defineStore('userEvents', () => {
     await updateSeveralRows("workouts", events, eventsLoading)
   }
 
+  const getMaxTonnage = () => Math.max(...events.value.map(el => el.tonnage / 1000))
+  const getMaxRepeats = () => Math.max(...events.value.map(el => el.repeatsSum))
+
   const getExerciseSets = () => {
     const exerciseParams = workoutData.exercisesParamsCollection.find(
       (item) => item.exerciseId === workoutData.openedExerciseId
@@ -266,6 +269,8 @@ export const useEventsStore = defineStore('userEvents', () => {
     combinedResults,
     updateAllEvents,
     rescheduleEvent,
-    exerciseHistory
+    exerciseHistory,
+    getMaxTonnage,
+    getMaxRepeats,
   }
 })
