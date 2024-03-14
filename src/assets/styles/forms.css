@@ -25,15 +25,6 @@
   color: rgb(var(--accent-color));
 }
 
-.reset-password {
-  text-align: center;
-  font-size: 13px;
-
-  & span {
-    cursor: pointer;
-  }
-}
-
 .social-auth {
   height: 42px;
   display: flex;

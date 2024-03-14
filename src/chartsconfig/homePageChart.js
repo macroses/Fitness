@@ -55,9 +55,21 @@ export const createHomePageChart = (data, filterDaysNumber) => {
         radius: 4
       }
     },
+    interaction: {
+      intersect: false,
+      mode: 'nearest',
+      axis: 'xy'
+    },
     plugins: {
       legend: {
         display: false
+      },
+      title: {
+        display: true,
+        text: (ctx) => {
+          const {axis = 'xy', intersect, mode} = ctx.chart.options.interaction;
+          return 'Mode: ' + mode + ', axis: ' + axis + ', intersect: ' + intersect;
+        }
       }
     }
   }

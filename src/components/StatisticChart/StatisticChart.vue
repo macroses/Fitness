@@ -10,14 +10,12 @@ import {
   Tooltip
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-import { createHomePageChart } from '@/chartsconfig/homePageChart.js'
+import { createHomePageChart } from '@/chartsconfig/homePageChart'
 import { computed, ref } from 'vue'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
-import { FILTER_LIST, HOME_PAGE_CHART_FILTER } from '@/constants/FILTER_LIST.js'
+import { useEventsStore } from '@/stores/userEvents/userEvents'
+import { FILTER_LIST, HOME_PAGE_CHART_FILTER } from '@/constants/FILTER_LIST'
 import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm'
 import dayjs from 'dayjs'
-import ButtonGroup from '@/components/UI/ButtonGroup/ButtonGroup.vue'
-import FlexContainer from '@/components/UI/FlexContainer/FlexContainer.vue'
 
 ChartJS.register(
   Legend,
@@ -32,45 +30,55 @@ ChartJS.register(
 const userEvents = useEventsStore()
 const activeFilter = ref(1)
 const filterValue = ref(30)
+const lineChartRef = ref(null)
 
-const getMaxTonnage = () => Math.max(...userEvents.events.map(el => el.tonnage / 1000))
-const getMaxRepeats = () => Math.max(...userEvents.events.map(el => el.repeatsSum))
-
-const getFilter = filterId => {
-  switch (filterId) {
-    case 1: filterValue.value = 90
-      break
-    case 2: filterValue.value = 180
-      break
-    case 3: filterValue.value = 365
-      break
-    default: filterValue.value = 30
-  }
-}
+const getFilter = filter => filterValue.value = FILTER_LIST[filter].days
 
 const maxChartData = computed(() => {
-  return activeFilter.value === 1
-    ? getMaxTonnage()
-    : getMaxRepeats()
+  return activeFilter.value === 1 ? userEvents.getMaxTonnage() : userEvents.getMaxRepeats()
 })
 
+const calculateAverage = (property) => {
+  return computed(() => {
+    return userEvents.events
+      .map(el => el[property] / 1000)
+      .reduce((acc, el) => acc + el, 0) / userEvents.events.length
+  })
+}
+
 const statisticChartData = computed(() => {
+  const sortedEvents = [...userEvents.events].sort((a, b) => dayjs(a.date) - dayjs(b.date))
+
   const data = activeFilter.value === 1
-    ? userEvents.events.map(el => el.tonnage / 1000)
-    : userEvents.events.map(el => el.repeatsSum)
+    ? sortedEvents.map(el => el.tonnage / 1000)
+    : sortedEvents.map(el => el.repeatsSum)
+
+  const averageData = Array(sortedEvents.length).fill(
+    calculateAverage(activeFilter.value === 1 ? 'tonnage' : 'repeatsSum' ).value
+  )
 
   return {
-    labels: userEvents.events.map(el => dayjs(el.date).toISOString()),
+    labels: sortedEvents.map(el => dayjs(el.date).toISOString()),
     datasets: [
       {
         borderColor: 'rgba(0,0,0, 0.5)',
         backgroundColor: '#fff',
         data,
-        tension: 0.4
+        tension: 0.4,
+        pointRadius: 0,
+      },
+      {
+        borderDash: [6, 6],
+        borderColor: 'rgb(121 134 203 / 0.5)',
+        data: averageData,
+        tension: 0.4,
+        pointRadius: 0,
+        label: 'Среднее значение'
       }
     ]
   }
 })
+
 </script>
 
 <template>
