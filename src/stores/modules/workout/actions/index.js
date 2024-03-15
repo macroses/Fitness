@@ -10,9 +10,7 @@ const actions = {
     }
   },
   deleteExercise(id) {
-    const index = this.exercisesParamsCollection.findIndex(
-      item => item.exerciseId === id
-    )
+    const index = this.exercisesParamsCollection.findIndex(item => item.exerciseId === id)
 
     if (index !== -1) {
       this.exercisesParamsCollection.splice(index, 1)

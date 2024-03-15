@@ -28,8 +28,8 @@ onClickOutside(chart, () => {
 <template>
   <div class="chosen-exercises__item-name">
     <div
-      class="collapse__icon"
       v-if="!store.isSuperset"
+      class="collapse__icon"
     />
     <div class="chosen-exercises__item-value">
       {{ element.name }}

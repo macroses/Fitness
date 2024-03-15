@@ -1,9 +1,10 @@
 <script setup>
 import dayjs from 'dayjs'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import { updateCalendar } from '@/helpers/calendarHelper'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
+import useCalendar from '@/composables/useCalendar'
 
 const props = defineProps({
   events: {
@@ -17,16 +18,20 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['getDate'])
-
 const dateStore = chosenDateStore()
 const userStore = useEventsStore()
 
-const currentDate = ref(dayjs())
-const today = ref(dayjs())
-const calendarCells = ref([])
-const transitionName = ref('')
 const calendarParent = ref(null)
 const SWIPE_THRESHOLD = 20
+
+const {
+  currentDate,
+  today,
+  calendarCells,
+  transitionName,
+  goToPreviousMonth,
+  goToNextMonth
+} = useCalendar()
 
 const handleClickCell = cellDate => {
   if (props.isAfterDaysOff && dayjs(cellDate).isAfter(today.value, 'day')) {
@@ -37,25 +42,11 @@ const handleClickCell = cellDate => {
   transitionName.value = ''
 }
 
-const goToPreviousMonth = () => {
-  currentDate.value = currentDate.value.subtract(1, 'month')
-  transitionName.value = 'slideMonth'
-  updateCalendar(currentDate, today, calendarCells)
-}
-
-const goToNextMonth = () => {
-  currentDate.value = currentDate.value.add(1, 'month')
-  transitionName.value = 'slideMonthRight'
-  updateCalendar(currentDate, today, calendarCells)
-}
-
 const isMarker = date =>
   props.events.some(event => event.date.isSame(date, 'day'))
 
 const getCellColor = date => {
-  const matchingEvent = props.events.find(event =>
-    event.date.isSame(date, 'day')
-  )
+  const matchingEvent = props.events.find(event => event.date.isSame(date, 'day'))
   return matchingEvent ? matchingEvent.color : ''
 }
 
@@ -85,15 +76,9 @@ onMounted(() => {
   updateCalendar(currentDate, today, calendarCells)
 })
 
-watch(
-  props.events,
-  val => {
-    if (val) {
-      updateCalendar(currentDate, today, calendarCells)
-    }
-  },
-  { immediate: true }
-)
+watchEffect(props.events, val => {
+  if (val) updateCalendar(currentDate, today, calendarCells)
+})
 </script>
 
 <template>

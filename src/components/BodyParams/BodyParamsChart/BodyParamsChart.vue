@@ -2,7 +2,7 @@
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart'
 import { bodyParamsStore } from '@/stores/bodyParams'
 
@@ -69,23 +69,16 @@ const chartData = computed(() => {
   }
 })
 
-watch(
-  () => props.filter,
-  val => {
-    const values = [
-      { days: 30, points: 30 },
-      { days: 90, points: 10 },
-      { days: 180, points: 10 },
-      { days: 365, points: 5 }
-    ]
+watch(() => props.filter, val => {
+  const values = [
+    { days: 30, points: 30 },
+    { days: 90, points: 10 },
+    { days: 180, points: 10 },
+    { days: 365, points: 5 }
+  ]
 
-    daysCounterByFilter.value = values[val].days
-    numPoints.value = values[val].points
-  }
-)
-
-onMounted(() => {
-  accentColor.value = getComputedStyle(document.documentElement).getPropertyValue('--accent-color')
+  daysCounterByFilter.value = values[val].days
+  numPoints.value = values[val].points
 })
 </script>
 

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getProfileColumn, updateProfile } from '@/composables/profile.js'
+import { getProfileColumn, updateProfile } from '@/api/profile.js'
 
 export const userExercisesStore = defineStore('userExercises', () => {
   const exercises = ref([])

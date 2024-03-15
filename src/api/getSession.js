@@ -1,5 +1,5 @@
 import { onMounted, ref } from 'vue'
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/lib/supabaseClient.js'
 
 export const getSession = () => {
   const session = ref(null)

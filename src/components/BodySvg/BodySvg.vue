@@ -12,39 +12,45 @@ const props = defineProps({
   }
 })
 
+const removeActiveClasses = () => {
+  const groups = document.querySelectorAll('g')
+  groups.forEach(group => {
+    group.classList.remove('active')
+    group.classList.remove('secondary-active')
+  })
+}
+
+const addActiveClass = () => {
+  const selectedClass = document.querySelectorAll(`.${props.bodyPart}`)
+  selectedClass.forEach(g => {
+    g.classList.add('active')
+  })
+}
+
+const addSecondaryActiveClass = () => {
+  if (props.secondaryPart) {
+    props.secondaryPart.forEach(part => {
+      document.querySelectorAll(`.${part}`).forEach(el => {
+        el.classList.add('secondary-active')
+      })
+    })
+  }
+}
+
 onMounted(() => {
-  watch(
-    () => [props.bodyPart, props.secondaryPart],
+  watch(() => [props.bodyPart, props.secondaryPart],
     value => {
       if (value) {
-        const groups = document.querySelectorAll('g')
-        groups.forEach(group => {
-          group.classList.remove('active')
-          group.classList.remove('secondary-active')
-        })
-
-        const selectedClass = document.querySelectorAll(`.${props.bodyPart}`)
-        selectedClass.forEach(g => {
-          g.classList.add('active')
-        })
-
-        if (props.secondaryPart) {
-          props.secondaryPart.forEach(part => {
-            document.querySelectorAll(`.${part}`).forEach(el => {
-              el.classList.add('secondary-active')
-            })
-          })
-        }
+        removeActiveClasses()
+        addActiveClass()
+        addSecondaryActiveClass()
       }
-    },
-    { immediate: true }
-  )
+    }, { immediate: true })
 })
 </script>
 
 <template>
   <svg
-    version="1.1"
     id="svg13936"
     inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
     sodipodi:docname="Anatomy-both.svg"

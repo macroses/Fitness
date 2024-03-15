@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import { exerciseStore } from '@/stores/exercise'
 import { workoutStore } from '@/stores/modules/workout/index'
+import useSwipe from '@/composables/useSwipe/index.js'
 
 gsap.registerPlugin(CSSPlugin)
 
@@ -13,39 +14,11 @@ const workoutsStore = workoutStore()
 const asideExercise = ref(null)
 const asideLayout = ref(null)
 
-const touchStartX = ref(0)
-const touchEndX = ref(0)
+const { handleTouchStart, handleTouchMove, handleTouchEnd } = useSwipe()
 
 const addExerciseToWorkout = (exerciseId, exerciseName) => {
   workoutsStore.addExerciseToWorkout(exerciseId, exerciseName)
   closeAside()
-}
-
-const handleTouchMove = event => {
-  const swipeDistance = event.touches[0].clientX - touchStartX.value
-
-  if (swipeDistance < 0) {
-    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' })
-  } else {
-    gsap.to(asideExercise.value, {
-      x: swipeDistance,
-      duration: 0.1,
-      ease: 'none'
-    })
-  }
-}
-
-const handleTouchStart = event => (touchStartX.value = event.touches[0].clientX)
-
-const handleTouchEnd = event => {
-  touchEndX.value = event.changedTouches[0].clientX
-  const swipeDistance = touchEndX.value - touchStartX.value
-
-  if (swipeDistance >= 100) {
-    closeAside()
-  } else {
-    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' })
-  }
 }
 
 const closeAside = () => {

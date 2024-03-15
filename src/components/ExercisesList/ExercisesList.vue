@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, readonly, ref } from 'vue'
 import { exerciseStore } from '@/stores/exercise'
-import { updateProfile } from '@/composables/profile'
+import { updateProfile } from '@/api/profile.js'
 import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 import { userExercisesStore } from '@/stores/userExercises'
 
