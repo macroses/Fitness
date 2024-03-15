@@ -12,7 +12,7 @@ import {
 import { Line } from 'vue-chartjs'
 import { createHomePageChart } from '@/chartsconfig/homePageChart'
 import { computed, ref } from 'vue'
-import { useEventsStore } from '@/stores/userEvents/userEvents'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 import { FILTER_LIST, HOME_PAGE_CHART_FILTER } from '@/constants/FILTER_LIST'
 import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm'
 import dayjs from 'dayjs'

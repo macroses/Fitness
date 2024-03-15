@@ -1,10 +1,8 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Button from '@/components/UI/Button/Button.vue'
-import Input from '@/components/UI/Input/Input.vue'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
-import { login, signInWithGitHub } from '@/composables/authorization.js'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
+import { login, signInWithGitHub } from '@/composables/authorization'
 
 const router = useRouter()
 const formState = reactive({

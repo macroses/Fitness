@@ -13,9 +13,7 @@ export const userExercisesStore = defineStore('userExercises', () => {
 
     exercises.value.forEach(exercise => {
       // if exercise is not in cache, push it
-      if (
-        !exerciseCache.some(cachedExercise => cachedExercise.id === exercise.id)
-      ) {
+      if (!exerciseCache.some(cachedExercise => cachedExercise.id === exercise.id)) {
         exerciseCache.push(exercise)
       }
     })

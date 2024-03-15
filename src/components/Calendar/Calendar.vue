@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { onMounted, ref, watch } from 'vue'
 import { updateCalendar } from '@/helpers/calendarHelper'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 
 const props = defineProps({
   events: {

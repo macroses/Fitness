@@ -1,7 +1,7 @@
 <script setup>
 import { EFFORTS } from '@/constants/EFFORTS'
-import { workoutStore } from '@/stores/workout'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
+import { workoutStore } from '@/stores/modules/workout'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 
 const store = workoutStore()
 const eventsStore = useEventsStore()

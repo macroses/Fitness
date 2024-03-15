@@ -1,11 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { workoutStore } from '@/stores/workout'
-import {
-  onBeforeEnter,
-  onEnter,
-  onLeave
-} from '@/components/ChosenExercisesList/ChosenExerciseFuncs/composable/index.js'
+import { workoutStore } from '@/stores/modules/workout'
+import { onBeforeEnter, onEnter, onLeave } from '@/components/ChosenExercisesList/ChosenExerciseFuncs/composable'
 import { onClickOutside } from '@vueuse/core'
 
 defineProps({

@@ -1,6 +1,6 @@
 <script setup>
 import dayjs from 'dayjs'
-import { bodyParamsStore } from '@/stores/bodyParams.js'
+import { bodyParamsStore } from '@/stores/bodyParams'
 
 const paramsStore = bodyParamsStore()
 </script>

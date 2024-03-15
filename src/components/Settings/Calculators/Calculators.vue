@@ -7,8 +7,7 @@ import {
   oneRepMaxLander,
   repeats
 } from '@/components/Settings/Calculators/utility/maxWeight'
-import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
-import Accordion from '@/components/UI/Accordion/Accordion.vue'
+import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
 </script>
 
 <template>

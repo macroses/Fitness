@@ -2,9 +2,9 @@
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Tooltip } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
-import { exerciseProgressChart } from '@/chartsconfig/exerciseProgressChart.js'
+import { exerciseProgressChart } from '@/chartsconfig/exerciseProgressChart'
 import { computed } from 'vue'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 
 ChartJS.register(
   Legend,

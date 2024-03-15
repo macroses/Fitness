@@ -1,8 +1,5 @@
 <script setup>
 import { computed, ref } from 'vue'
-import AccountSettings from '@/components/Settings/AccountSettings/AccountSettings.vue'
-import Palette from '@/components/Settings/Palette/Palette.vue'
-import Calculators from '@/components/Settings/Calculators/Calculators.vue'
 import SETTINGS_TABS from '@/constants/SETTINGS_TABS'
 
 const activeTab = ref(0)

@@ -1,5 +1,4 @@
 <script setup>
-import ColorTheme from '@/components/ColorTheme/ColorTheme.vue'
 
 const palette = [
   { id: 0, value: 'Default', color: '26 92 255' },

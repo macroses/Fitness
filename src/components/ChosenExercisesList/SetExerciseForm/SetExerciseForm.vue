@@ -1,10 +1,9 @@
 <script setup>
 import { computed, watch } from 'vue'
 import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
-import { workoutStore } from '@/stores/workout'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
+import { workoutStore } from '@/stores/modules/workout'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 import { EFFORTS } from '@/constants/EFFORTS'
-import ChosenExerciseSets from '@/components/ChosenExercisesList/ChosenExerciseSets/ChosenExerciseSets.vue'
 
 const props = defineProps({
   exerciseId: {

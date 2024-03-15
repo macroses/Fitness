@@ -2,10 +2,9 @@
 import { computed, ref } from 'vue'
 import router from '@/router'
 import { uid } from 'uid'
-import { workoutStore } from '@/stores/workout'
+import { workoutStore } from '@/stores/modules/workout'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
-import StatisticChart from '@/components/StatisticChart/StatisticChart.vue'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 
 const workoutsStore = workoutStore()
 const dateStore = chosenDateStore()

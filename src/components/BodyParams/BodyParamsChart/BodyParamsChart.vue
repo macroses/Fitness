@@ -3,8 +3,8 @@ import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, Poin
 import { Line } from 'vue-chartjs'
 import dayjs from 'dayjs'
 import { computed, onMounted, ref, watch } from 'vue'
-import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart.js'
-import { bodyParamsStore } from '@/stores/bodyParams.js'
+import { bodyParamsOptions } from '@/chartsconfig/bodyParamsChart'
+import { bodyParamsStore } from '@/stores/bodyParams'
 
 ChartJS.register(
   Legend,

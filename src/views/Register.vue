@@ -3,8 +3,6 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue3-toastify'
 import { supabase } from '@/lib/supabaseClient'
-import Button from '@/components/UI/Button/Button.vue'
-import Input from '@/components/UI/Input/Input.vue'
 import { useVuelidate } from '@vuelidate/core'
 import { minLength, required } from '@vuelidate/validators'
 
