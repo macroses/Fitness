@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import Icon from '@/components/UI/Icon/Icon.vue'
 
 const colorCollection = [
   { id: 1, rgb: '213, 0, 0' },

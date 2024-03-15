@@ -1,13 +1,9 @@
 <script setup>
 import { computed, reactive, ref, watch } from 'vue'
 import { uid } from 'uid'
-import {
-  exerciseLevelData,
-  forceType,
-  musclesGroups
-} from '@/constants/MUSCLES.js'
+import { exerciseLevelData, forceType, musclesGroups } from '@/constants/MUSCLES'
 import { toast } from 'vue3-toastify'
-import { userExercisesStore } from '@/stores/userExercises.js'
+import { userExercisesStore } from '@/stores/userExercises'
 
 const userExercises = userExercisesStore()
 const isCreateExerciseVisible = ref(false)
@@ -74,9 +70,7 @@ const resetNewExercise = () => {
   helpersGroupsList.value = JSON.parse(JSON.stringify(musclesGroups))
 }
 
-watch(
-  () => newExercise.type,
-  val => {
+watch(() => newExercise.type, val => {
     if (val === 'Isolation') {
       helpersGroupsList.value.forEach(item => (item.selected = false))
       newExercise.helpers = []
@@ -84,9 +78,7 @@ watch(
   }
 )
 
-watch(
-  () => isCreateExerciseVisible.value,
-  val => {
+watch(() => isCreateExerciseVisible.value, val => {
     if (!val) resetNewExercise()
   }
 )

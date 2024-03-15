@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import { workoutStore } from '@/stores/workout'
+import { workoutStore } from '@/stores/modules/workout'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 
 defineProps({
   events: {

@@ -1,8 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { workoutStore } from '@/stores/workout'
-import Icon from '@/components/UI/Icon/Icon.vue'
-import ChosenExerciseFuncs from '@/components/ChosenExercisesList/ChosenExerciseFuncs/ChosenExerciseFuncs.vue'
+import { workoutStore } from '@/stores/modules/workout'
 
 const store = workoutStore()
 const activeExerciseId = ref(null)

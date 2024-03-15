@@ -1,11 +1,11 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import { temporaryWorkoutStore } from '@/stores/temporaryWorkout.js'
+import { temporaryWorkoutStore } from '@/stores/modules/temporaryWorkout'
 import { useTemporaryWorkoutComposable } from './composable'
-import router from '@/router/index.js'
-import { workoutStore } from '@/stores/workout.js'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
+import router from '@/router'
+import { workoutStore } from '@/stores/modules/workout'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 
 const useTemporaryWorkout = temporaryWorkoutStore()
 const workoutsStore = workoutStore()

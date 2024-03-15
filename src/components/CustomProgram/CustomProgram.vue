@@ -1,10 +1,9 @@
 <script setup>
 import { nextTick, onMounted, ref } from 'vue'
 import { HEADERS, LOAD, MULTIPLIER } from '@/components/CustomProgram/constants'
-import { onBeforeEnter, onEnter, onLeave } from '@/components/CustomProgram/composable/tableTransition.js'
+import { onBeforeEnter, onEnter, onLeave } from '@/components/CustomProgram/composable/tableTransition'
 import { addRow, addTable, removeDayTable, removeRow, tables } from '@/components/CustomProgram/composable'
-import { useOnlyNumbers } from '@/helpers/useOnlyNumbers.js'
-import CustomProgramSecondStep from '@/components/CustomProgram/CustomProgramSecondStep/CustomProgramSecondStep.vue'
+import { useOnlyNumbers } from '@/helpers/useOnlyNumbers'
 
 const isDescriptionVisible = ref(true)
 const tableRow = ref(null)

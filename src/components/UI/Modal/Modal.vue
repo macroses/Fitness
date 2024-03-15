@@ -2,8 +2,6 @@
 import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import { onMounted, onUnmounted, ref } from 'vue'
-import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
-import Button from '@/components/UI/Button/Button.vue'
 import { animateBeforeCloseWrapper } from '@/components/UI/Modal/composable'
 
 defineProps({

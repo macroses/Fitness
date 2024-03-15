@@ -2,10 +2,10 @@
 import { onMounted, ref, watchEffect } from 'vue'
 import toggleColorTheme from '@/composables/useColorTheme'
 import { cacheExercises } from '@/composables/cacheExercises'
-import { BODY_PARAMS } from '@/constants/BODY_PARAMS.js'
-import { checkNetworkStatus } from '@/helpers/isOnline.js'
-import { supabase } from '@/lib/supabaseClient.js'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
+import { BODY_PARAMS } from '@/constants/BODY_PARAMS'
+import { checkNetworkStatus } from '@/helpers/isOnline'
+import { supabase } from '@/lib/supabaseClient'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 
 toggleColorTheme()
 const userEvents = useEventsStore()

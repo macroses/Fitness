@@ -1,5 +1,5 @@
 <script setup>
-import { workoutStore } from '@/stores/workout.js'
+import { workoutStore } from '@/stores/modules/workout'
 
 const props = defineProps({
   exercises: {

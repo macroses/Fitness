@@ -1,15 +1,12 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import BodyParamsChart from '@/components/BodyParams/BodyParamsChart/BodyParamsChart.vue'
-import { chosenDateStore } from '../stores/chosenDate.js'
-import { FILTER_LIST } from '@/constants/FILTER_LIST.js'
-import { bodyParamsStore } from '@/stores/bodyParams.js'
+import { chosenDateStore } from '../stores/chosenDate'
+import { FILTER_LIST } from '@/constants/FILTER_LIST'
+import { bodyParamsStore } from '@/stores/bodyParams'
 import draggable from 'vuedraggable'
-import ParamsTable from '@/components/BodyParams/ParamsTable/ParamsTable.vue'
 import { toast } from 'vue3-toastify'
 import dayjs from 'dayjs'
 import { onClickOutside } from '@vueuse/core'
-import ButtonGroup from '@/components/UI/ButtonGroup/ButtonGroup.vue'
 
 const paramsStore = bodyParamsStore()
 const dateStore = chosenDateStore()
@@ -64,7 +61,7 @@ const getDate = date => {
   })
 }
 
-const getFilter = filterId => (filterType.value = filterId)
+const getFilter = filterId => filterType.value = filterId
 
 onMounted(async () => await paramsStore.fetchEventHandler())
 
@@ -222,11 +219,7 @@ onClickOutside(aside, () => {
               }}</span>
             </div>
             <div class="body-params__last-date">
-              {{
-                dayjs(paramsStore.calculateTableCellContent[0].date).format(
-                  'dddd DD.MM.YYYY'
-                )
-              }}
+              {{ dayjs(paramsStore.calculateTableCellContent[0].date).format('dddd DD.MM.YYYY') }}
             </div>
           </div>
           <div class="body-params__data">

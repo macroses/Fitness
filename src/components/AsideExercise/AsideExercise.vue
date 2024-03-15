@@ -4,10 +4,7 @@ import { onClickOutside } from '@vueuse/core'
 import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import { exerciseStore } from '@/stores/exercise'
-import BodySvg from '@/components/BodySvg/BodySvg.vue'
-import ButtonClose from '@/components/UI/ButtonClose/ButtonClose.vue'
-import Button from '@/components/UI/Button/Button.vue'
-import { workoutStore } from '@/stores/workout'
+import { workoutStore } from '@/stores/modules/workout/index'
 
 gsap.registerPlugin(CSSPlugin)
 

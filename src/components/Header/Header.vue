@@ -4,8 +4,8 @@ import { onClickOutside } from '@vueuse/core'
 import { signOut } from '@/composables/profile'
 import { getSession } from '@/composables/getSession'
 import router from '@/router'
-import { useEventsStore } from '@/stores/userEvents/userEvents.js'
-import { temporaryWorkoutStore } from '@/stores/temporaryWorkout.js'
+import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
+import { temporaryWorkoutStore } from '@/stores/modules/temporaryWorkout'
 
 const { session } = getSession()
 

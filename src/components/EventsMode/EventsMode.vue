@@ -2,7 +2,7 @@
 import dayjs from 'dayjs'
 import { computed } from 'vue'
 import { chosenDateStore } from '@/stores/chosenDate'
-import { temporaryWorkoutStore } from '@/stores/temporaryWorkout'
+import { temporaryWorkoutStore } from '@/stores/modules/temporaryWorkout'
 
 const emit = defineEmits(['workoutMode'])
 

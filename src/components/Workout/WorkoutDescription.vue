@@ -1,6 +1,5 @@
 <script setup>
-import { workoutStore } from '@/stores/workout'
-import Input from '@/components/UI/Input/Input.vue'
+import { workoutStore } from '@/stores/modules/workout'
 
 const store = workoutStore()
 const getColor = color => (store.color = color)

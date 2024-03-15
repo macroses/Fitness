@@ -1,7 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import ProgramsList from '@/components/ProgramsList/ProgramsList.vue'
-import ProgramItemModal from '@/components/ProgramItemModal/ProgramItemModal.vue'
 
 const activeTabId = ref(0)
 const activeProgram = ref(null)
