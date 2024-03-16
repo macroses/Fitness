@@ -202,3 +202,15 @@
     padding-bottom: 16px;
   }
 }
+
+.exercises__delete-attention {
+  display: flex;
+  font-size: 12px;
+  gap: 16px;
+  background-color: #fedada;
+  color: #c20b0b;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  text-align: left;
+}
