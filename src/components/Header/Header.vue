@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import { signOut } from '@/composables/profile'
-import { getSession } from '@/composables/getSession'
+import { signOut } from '@/api/profile.js'
+import { getSession } from '@/api/getSession.js'
 import router from '@/router'
 import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 import { temporaryWorkoutStore } from '@/stores/modules/temporaryWorkout'

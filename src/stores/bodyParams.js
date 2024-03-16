@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import { getProfileColumn, updateProfile } from '@/composables/profile.js'
+import { getProfileColumn, updateProfile } from '@/api/profile.js'
 import dayjs from 'dayjs'
 import { uid } from 'uid'
 import { chosenDateStore } from '@/stores/chosenDate.js'

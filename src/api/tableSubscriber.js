@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/lib/supabaseClient.js'
 
 const tableSubscriber = (channel, event, schema, tableName, storageName) => {
   const cache = JSON.parse(localStorage.getItem(storageName)) || []

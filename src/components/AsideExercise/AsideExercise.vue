@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import { exerciseStore } from '@/stores/exercise'
 import { workoutStore } from '@/stores/modules/workout/index'
+import useSwipe from '@/composables/useSwipe'
 
 gsap.registerPlugin(CSSPlugin)
 
@@ -13,63 +14,35 @@ const workoutsStore = workoutStore()
 const asideExercise = ref(null)
 const asideLayout = ref(null)
 
-const touchStartX = ref(0)
-const touchEndX = ref(0)
+const { handleTouchStart, handleTouchMove, handleTouchEnd } = useSwipe()
 
 const addExerciseToWorkout = (exerciseId, exerciseName) => {
   workoutsStore.addExerciseToWorkout(exerciseId, exerciseName)
   closeAside()
 }
 
-const handleTouchMove = event => {
-  const swipeDistance = event.touches[0].clientX - touchStartX.value
-
-  if (swipeDistance < 0) {
-    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' })
-  } else {
-    gsap.to(asideExercise.value, {
-      x: swipeDistance,
-      duration: 0.1,
-      ease: 'none'
-    })
-  }
-}
-
-const handleTouchStart = event => (touchStartX.value = event.touches[0].clientX)
-
-const handleTouchEnd = event => {
-  touchEndX.value = event.changedTouches[0].clientX
-  const swipeDistance = touchEndX.value - touchStartX.value
-
-  if (swipeDistance >= 100) {
-    closeAside()
-  } else {
-    gsap.to(asideExercise.value, { x: 0, duration: 0.1, ease: 'none' })
-  }
-}
-
 const closeAside = () => {
-  const t1 = gsap.timeline()
-  t1.to(asideExercise.value, {
+  const timeline = gsap.timeline()
+  timeline.to(asideExercise.value, {
     autoAlpha: 0,
     x: '+350',
     duration: 0.25,
     ease: 'sine'
   })
-  t1.to(asideLayout.value, { autoAlpha: 0, duration: 0.25 })
-  t1.call(() => (store.exercise = null))
+  timeline.to(asideLayout.value, { autoAlpha: 0, duration: 0.25 })
+  timeline.call(() => (store.exercise = null))
 }
 
 onMounted(() => {
-  const t1 = gsap.timeline()
-  t1.from(asideLayout.value, { autoAlpha: 0, duration: 0.25 })
-  t1.from(asideExercise.value, {
+  const timeline = gsap.timeline()
+  timeline.from(asideLayout.value, { autoAlpha: 0, duration: 0.25 })
+  timeline.from(asideExercise.value, {
     autoAlpha: 0,
     x: '+100',
     duration: 0.25,
     ease: 'sine'
   })
-  t1.play()
+  timeline.play()
 })
 
 onClickOutside(asideExercise, () => closeAside())
