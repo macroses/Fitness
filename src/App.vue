@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, watchEffect } from 'vue'
-import toggleColorTheme from '@/composables/useColorTheme'
+import toggleColorTheme from '@/composables/useColorTheme/useColorTheme.js'
 import { cacheExercises } from '@/composables/cacheExercises'
 import { BODY_PARAMS } from '@/constants/BODY_PARAMS'
 import { checkNetworkStatus } from '@/helpers/isOnline'

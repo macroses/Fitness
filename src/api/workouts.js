@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/lib/supabaseClient.js'
 
 const pushEvent = async (tableName, userData, loading) => {
   const {

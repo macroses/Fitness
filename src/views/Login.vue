@@ -2,7 +2,7 @@
 import { computed, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
-import { login, signInWithGitHub } from '@/composables/authorization'
+import { login, signInWithGitHub } from '@/api/authorization.js'
 
 const router = useRouter()
 const formState = reactive({

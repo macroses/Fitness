@@ -1,5 +1,5 @@
-import { getCollection } from '@/composables/getCollection'
-import { tableSubscriber } from './tableSubscriber'
+import { getCollection } from '@/api/getCollection.js'
+import { tableSubscriber } from '../api/tableSubscriber.js'
 
 const cacheExercises = async cacheKey => {
   const cachedData = localStorage.getItem(cacheKey)

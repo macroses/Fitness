@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { uid } from 'uid'
-import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } from '@/composables/workouts.js'
+import { deleteEvent, getWorkouts, pushEvent, updateEvent, updateSeveralRows } from '@/api/workouts.js'
 import { workoutStore } from '@/stores/modules/workout/index.js'
 import { chosenDateStore } from '@/stores/chosenDate.js'
-import { getProfileColumn } from '@/composables/profile.js'
+import { getProfileColumn } from '@/api/profile.js'
 
 export const useEventsStore = defineStore('userEvents', () => {
   const events = ref([])

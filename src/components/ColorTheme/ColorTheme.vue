@@ -1,5 +1,5 @@
 <script setup>
-import toggleColorTheme from '@/composables/useColorTheme'
+import toggleColorTheme from '@/composables/useColorTheme/useColorTheme.js'
 
 const { userTheme, toggleTheme } = toggleColorTheme()
 </script>
