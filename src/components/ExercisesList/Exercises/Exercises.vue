@@ -1,5 +1,6 @@
 <script setup>
 import { workoutStore } from '@/stores/modules/workout'
+import { ref } from 'vue'
 
 const props = defineProps({
   exercises: {
@@ -23,6 +24,8 @@ const emit = defineEmits([
 ])
 
 const workoutsStore = workoutStore()
+const confirmDialog = ref(null)
+const eventToDelete = ref(null)
 
 const showExercise = exercise => emit('showChosenExercises', exercise)
 
@@ -30,7 +33,19 @@ const toggleToFavoriteExercise = async id => emit('getFavoriteId', id)
 
 const isFavorite = id => props.favorites.includes(id)
 
-const deleteExercise = id => emit('deleteExercise', id)
+const showConfirmDialog = (event) => {
+  eventToDelete.value = event
+  confirmDialog.value?.show()
+}
+
+const confirmDelete = () => {
+  if (eventToDelete.value) {
+    emit('deleteExercise', eventToDelete.value.id)
+    eventToDelete.value = null
+  }
+}
+
+// const deleteExercise = id => emit('deleteExercise', id)
 </script>
 
 <template>
@@ -46,9 +61,7 @@ const deleteExercise = id => emit('deleteExercise', id)
         <button
           type="button"
           class="exercises__item-add"
-          @click.stop="
-            workoutsStore.addExerciseToWorkout(exercise.id, exercise.name)
-          "
+          @click.stop="workoutsStore.addExerciseToWorkout(exercise.id, exercise.name)"
         >
           +
         </button>
@@ -67,7 +80,7 @@ const deleteExercise = id => emit('deleteExercise', id)
           type="button"
           class="favorite-icon"
           v-else
-          @click.stop="deleteExercise(exercise.id)"
+          @click.stop="showConfirmDialog(exercise)"
         >
           <Icon
             icon-name="trash"
@@ -76,5 +89,20 @@ const deleteExercise = id => emit('deleteExercise', id)
         </button>
       </li>
     </ul>
+    <ConfirmDialog
+      ref="confirmDialog"
+      showCancel
+      width="500px"
+      @confirm="confirmDelete"
+      confirm-text="Delete"
+    >
+      <template #confirmMessage>
+        Are you sure you want to delete <b>{{ eventToDelete?.name }}</b> exercise?
+      </template>
+      <div class="exercises__delete-attention">
+        <Icon icon-name="triangle-exclamation" width="50px"/>
+        <p>If you delete the exercise, all workout history and statistics related to this exercise will be permanently deleted</p>
+      </div>
+    </ConfirmDialog>
   </div>
 </template>

@@ -5,6 +5,7 @@ import { workoutStore } from '@/stores/modules/workout'
 import router from '@/router'
 import { chosenDateStore } from '@/stores/chosenDate'
 import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
+// import ConfirmDialog from '@/components/ConfirmModal/ConfirmDialog'
 
 defineProps({
   events: {
@@ -23,16 +24,28 @@ const isFutureEventsMove = ref(false)
 const isRescheduleModal = ref(false)
 const isReadModal = ref(false)
 const readableEvent = ref(null)
+const confirmDialog = ref(null)
 
 const chosenEvent = ref(null)
 
-const deleteEvent = eventId => emit('deleteEvent', eventId)
+const eventToDelete = ref(null)
+
+const showConfirmDialog = (event) => {
+  eventToDelete.value = event
+  confirmDialog.value?.show()
+}
+
+const confirmDelete = () => {
+  if (eventToDelete.value) {
+    emit('deleteEvent', eventToDelete.value.workoutId)
+    eventToDelete.value = null
+  }
+}
 
 const activeIndex = ref(null)
 const dropdownList = ref(null)
 
-const toggleMenu = index =>
-  (activeIndex.value = activeIndex.value === index ? null : index)
+const toggleMenu = index => (activeIndex.value = activeIndex.value === index ? null : index)
 
 onClickOutside(dropdownList, () => (activeIndex.value = null))
 
@@ -46,8 +59,7 @@ const openRescheduleModule = event => {
   isRescheduleModal.value = true
 }
 
-const rescheduleEventHandler = () =>
-  userEvents.rescheduleEvent(chosenEvent, isFutureEventsMove)
+const rescheduleEventHandler = () => userEvents.rescheduleEvent(chosenEvent, isFutureEventsMove)
 
 const copyEventHandler = event => {
   userEvents.isCopyMode = true
@@ -122,7 +134,7 @@ const rescheduleModalClose = () => {
               </li>
               <li
                 class="user-dropdown__item"
-                @click="deleteEvent(event.workoutId)"
+                @click="showConfirmDialog(event)"
               >
                 Delete
               </li>
@@ -165,6 +177,16 @@ const rescheduleModalClose = () => {
       @closeReadModal="closeReadModal"
     />
   </div>
+  <ConfirmDialog
+    ref="confirmDialog"
+    showCancel
+    @confirm="confirmDelete"
+    confirm-text="Delete"
+  >
+    <template #confirmMessage>
+      Are you sure you want to delete <b>{{ eventToDelete?.title }}</b> event?
+    </template>
+  </ConfirmDialog>
 </template>
 
 <style scoped src="./style.css" />

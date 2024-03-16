@@ -6,6 +6,7 @@ import { useTemporaryWorkoutComposable } from './composable'
 import router from '@/router'
 import { workoutStore } from '@/stores/modules/workout'
 import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
+import ConfirmDialog from '@/components/ConfirmModal/ConfirmDialog.vue'
 
 const useTemporaryWorkout = temporaryWorkoutStore()
 const workoutsStore = workoutStore()
@@ -13,6 +14,7 @@ const userEvents = useEventsStore()
 
 const isOpened = ref(false)
 const workoutControls = ref(null)
+const confirmDialog = ref(null)
 
 const {
   startTimer,
@@ -36,6 +38,10 @@ const saveTemporaryWorkout = async () => {
   await userEvents.pushEventHandler(useTemporaryWorkout.temporaryWorkout)
   isOpened.value = false
   useTemporaryWorkout.clearLocalStorage()
+}
+
+const showConfirmDialog = () => {
+  confirmDialog.value?.show()
 }
 
 const deleteTemporaryWorkout = () => {
@@ -106,7 +112,7 @@ onClickOutside(workoutControls, () => isOpened.value = false)
             <Button
               bordered
               aria-label="Delete temporary workout"
-              @click="deleteTemporaryWorkout"
+              @click="showConfirmDialog"
             >
               Delete
             </Button>
@@ -115,6 +121,16 @@ onClickOutside(workoutControls, () => isOpened.value = false)
       </div>
     </div>
   </div>
+  <ConfirmDialog
+    ref="confirmDialog"
+    showCancel
+    @confirm="deleteTemporaryWorkout"
+    confirm-text="Delete"
+  >
+    <template #confirmMessage>
+      Are you sure you want to delete <b>{{ useTemporaryWorkout.temporaryWorkout.title }}</b> event?
+    </template>
+  </ConfirmDialog>
 </template>
 
 <style scoped src="./style.css" />
