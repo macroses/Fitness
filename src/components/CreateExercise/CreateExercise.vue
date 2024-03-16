@@ -1,5 +1,6 @@
 <script setup>
 import { useExercise } from '@/composables/useCreateExercise'
+import { exerciseLevelData, forceType } from '@/constants/MUSCLES'
 
 const {
   isCreateExerciseVisible,
