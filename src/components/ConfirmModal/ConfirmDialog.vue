@@ -53,7 +53,6 @@ defineExpose({
   close: (returnVal) => dialog.value.close(returnVal),
   visible
 })
-
 </script>
 
 <template>
