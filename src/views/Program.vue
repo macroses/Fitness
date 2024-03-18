@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 
-const activeTabId = ref(0)
 const activeProgram = ref(null)
 
 const getProgramId = program => {
@@ -9,21 +8,6 @@ const getProgramId = program => {
 }
 
 const closeModal = () => (activeProgram.value = null)
-
-// const activeTab = computed(() => {
-//   switch (activeTabId.value) {
-//     case 0:
-//       return {
-//         component: CustomProgram,
-//         emits: {}
-//       }
-//     case 1:
-//       return {
-//         component: ProgramsList,
-//         emits: { 'get-program-id': getProgramId }
-//       }
-//   }
-// })
 </script>
 
 <template>

@@ -213,4 +213,8 @@
   border-radius: 4px;
   margin-bottom: 12px;
   text-align: left;
+
+  svg {
+    min-width: 40px;
+  }
 }

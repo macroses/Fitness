@@ -123,7 +123,7 @@ export const useEventsStore = defineStore('userEvents', () => {
   }
 
   const previousResults = computed(() => {
-    const userWorkouts = events.value.filter(workout => workout.date < dateStore.date)
+    const userWorkouts = events.value.filter(workout => workout.date <= dateStore.date)
 
     const previousSets = []
     for (const workout of userWorkouts) {
@@ -133,6 +133,11 @@ export const useEventsStore = defineStore('userEvents', () => {
         previousSets.push(...exerciseParams.sets)
         break
       }
+    }
+
+    // Исключаем последнее упражнение, так как оно еще не завершено
+    if (userWorkouts[userWorkouts.length - 1].date.isSame(dateStore.date, 'day')) {
+      previousSets.pop()
     }
 
     return previousSets

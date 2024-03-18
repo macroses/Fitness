@@ -59,7 +59,7 @@
 
 .shadow-btn {
   position: absolute;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: rgb(var(--accent-color));
   transition: all 0.25s ease;
   height: 100%;
