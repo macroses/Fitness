@@ -28,6 +28,29 @@
 .chosen-exercises__item {
   border-radius: 4px;
   -webkit-tap-highlight-color: transparent;
+  background-color: var(--main-bg);
+  transition: transform 0.25s linear;
+}
+
+@media (width < 768px) {
+  .container:has(.chosen-exercises__item-top.active) {
+    transform: scale(0.9) translateY(-70px);
+    transition: transform 0.25s linear;
+
+    &:has(.chosen-exercises__supersets .chosen-exercises__item-top.active) {
+      transform: scale(1) translateY(0);
+      transition: transform var(--base-transition);
+    }
+  }
+
+  .chosen-exercises__item:has(.chosen-exercises__item-top.active) {
+    transform: scale(1.1);
+    z-index: 2;
+  }
+
+  .chosen-exercises__supersets .chosen-exercises__item:has(.chosen-exercises__item-top.active) {
+    transform: scale(1);
+  }
 }
 
 .chosen-exercises__supersets {
@@ -129,7 +152,7 @@
   border-radius: 4px 4px 0 0;
   border: 1px solid transparent;
   border-bottom: 0;
-  transition: border-color 0.25s ease;
+  transition: border-color var(--base-transition);
 
   &.superset .chosen-exercises__item-name {
     padding-left: 0;
@@ -187,12 +210,7 @@
 
 .chosen-exercises__item-name {
   padding-left: 24px;
-  /*max-width: 75%;*/
   overflow: hidden;
-
-  /*@media (max-width: 500px) {*/
-  /*  max-width: 200px;*/
-  /*}*/
 }
 
 .chosen-exercises__item-value {
@@ -259,7 +277,7 @@
 
 .chosen-exercises__delete {
   width: 34px;
-  height: 100%;
+  height: 24px;
   background-color: transparent;
   border-radius: 4px;
   color: var(--text-color);

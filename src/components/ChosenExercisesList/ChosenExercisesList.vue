@@ -26,10 +26,7 @@ const handleMerge = () => store.mergeToSuperset(supersetExercises)
 
 const handleSplit = supersetId => store.splitToExercises(supersetId)
 
-watch(
-  () => store.isSuperset,
-  () => (activeExerciseId.value = null)
-)
+watch(() => store.isSuperset, () => (activeExerciseId.value = null))
 </script>
 
 <template>
