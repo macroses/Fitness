@@ -45,7 +45,9 @@ const confirmDelete = () => {
   }
 }
 
-// const deleteExercise = id => emit('deleteExercise', id)
+const isExerciseInWorkout = id => {
+  return workoutsStore.exercisesParamsCollection.some(exercise => exercise.exerciseId === id)
+}
 </script>
 
 <template>
@@ -61,6 +63,7 @@ const confirmDelete = () => {
         <button
           type="button"
           class="exercises__item-add"
+          v-if="!isExerciseInWorkout(exercise.id)"
           @click.stop="workoutsStore.addExerciseToWorkout(exercise.id, exercise.name)"
         >
           +
