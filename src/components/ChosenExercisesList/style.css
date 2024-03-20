@@ -32,27 +32,6 @@
   transition: transform 0.25s linear;
 }
 
-@media (width < 768px) {
-  .container:has(.chosen-exercises__item-top.active) {
-    transform: scale(0.9) translateY(-70px);
-    transition: transform 0.25s linear;
-
-    &:has(.chosen-exercises__supersets .chosen-exercises__item-top.active) {
-      transform: scale(1) translateY(0);
-      transition: transform var(--base-transition);
-    }
-  }
-
-  .chosen-exercises__item:has(.chosen-exercises__item-top.active) {
-    transform: scale(1.1);
-    z-index: 2;
-  }
-
-  .chosen-exercises__supersets .chosen-exercises__item:has(.chosen-exercises__item-top.active) {
-    transform: scale(1);
-  }
-}
-
 .chosen-exercises__supersets {
   margin-left: 12px;
   background-color: rgb(var(--accent-color) / 0.02);

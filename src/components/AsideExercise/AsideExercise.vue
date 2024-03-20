@@ -33,6 +33,10 @@ const closeAside = () => {
   timeline.call(() => (store.exercise = null))
 }
 
+const isExerciseInWorkout = id => {
+  return workoutsStore.exercisesParamsCollection.some(exercise => exercise.exerciseId === id)
+}
+
 onMounted(() => {
   const timeline = gsap.timeline()
   timeline.from(asideLayout.value, { autoAlpha: 0, duration: 0.25 })
@@ -68,6 +72,7 @@ onClickOutside(asideExercise, () => closeAside())
         close
       </ButtonClose>
       <Button
+        v-if="!isExerciseInWorkout(store.exercise?.id)"
         class="button_to-workout"
         @click="addExerciseToWorkout(store.exercise?.id, store.exercise?.name)"
       >
