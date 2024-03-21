@@ -1,15 +1,10 @@
 <script setup>
 import { uid } from 'uid'
-import { computed } from 'vue'
 
 const props = defineProps({
   value: {
     type: [String, Number],
     default: ''
-  },
-  modelValue: {
-    type: Boolean,
-    default: false
   },
   label: {
     type: String,
@@ -17,17 +12,9 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
-
 const uniqueId = uid(10)
-const model = computed({
-  get() {
-    return props.modelValue
-  },
-  set(value) {
-    emit('update:modelValue', value)
-  }
-})
+
+const checked = defineModel('checked')
 </script>
 
 <template>
@@ -37,13 +24,13 @@ const model = computed({
         <input
           class="checkbox-component"
           type="checkbox"
+          :value="value"
           :id="uniqueId"
-          v-model="model"
-          :checked="modelValue"
+          v-model="checked"
         />
         <div
           class="checkbox-effect"
-          :class="{ active: modelValue }"
+          :class="{ active: checked }"
         >
           <div class="checkbox-icon">
             <div class="line1" />
@@ -56,8 +43,9 @@ const model = computed({
         v-if="label"
         :for="uniqueId"
         class="checkbox-label"
-        >{{ label }}</label
-      >
+        >
+        {{ label }}
+      </label>
     </div>
   </div>
 </template>

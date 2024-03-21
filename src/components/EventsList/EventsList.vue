@@ -166,7 +166,7 @@ const rescheduleModalClose = () => {
       <template #modal-footer>
         <Checkbox
           label="Move all future events"
-          v-model="isFutureEventsMove"
+          v-model:checked="isFutureEventsMove"
         />
       </template>
     </Modal>

@@ -78,7 +78,6 @@ const statisticChartData = computed(() => {
     ]
   }
 })
-
 </script>
 
 <template>
