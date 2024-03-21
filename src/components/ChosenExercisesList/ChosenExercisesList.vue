@@ -5,6 +5,7 @@ import { workoutStore } from '@/stores/modules/workout'
 const store = workoutStore()
 const activeExerciseId = ref(null)
 const supersetExercises = ref([])
+const checkboxStates = ref({})
 
 const toggleParameters = id => {
   activeExerciseId.value === id
@@ -19,6 +20,7 @@ const toggleParameters = id => {
 }
 
 const handleCheckbox = (exerciseId, isChecked) => {
+  checkboxStates.value[exerciseId] = isChecked
   store.checkExercisesForSuperset(supersetExercises, exerciseId, isChecked)
 }
 
@@ -130,8 +132,8 @@ watch(() => store.isSuperset, () => (activeExerciseId.value = null))
           >
             <Checkbox
               v-if="store.isSuperset"
-              :model-value="supersetExercises.includes(element.id)"
-              @update:modelValue="value => handleCheckbox(element.id, value)"
+              v-model:checked="checkboxStates[element.id]"
+              @change="value => handleCheckbox(element.id, value)"
             />
             <div
               class="chosen-exercises__item-header"

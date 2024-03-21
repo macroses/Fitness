@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
                   </div>
                   <Checkbox
                     v-if="workoutsStore.filteredCacheExercises.length > 1"
-                    v-model="workoutsStore.isSuperset"
+                    v-model:checked="workoutsStore.isSuperset"
                     label="Supersets"
                   />
                 </div>
