@@ -10,8 +10,8 @@ import {
   Tooltip
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-import { createHomePageChart } from '@/chartsconfig/homePageChart'
-import { computed, ref } from 'vue'
+import { chartAreaBorder, createHomePageChart } from '@/chartsconfig/homePageChart'
+import { computed, onMounted, ref } from 'vue'
 import { useEventsStore } from '@/stores/modules/userEvents/userEvents'
 import { FILTER_LIST, HOME_PAGE_CHART_FILTER } from '@/constants/FILTER_LIST'
 import 'chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm'
@@ -31,6 +31,7 @@ const userEvents = useEventsStore()
 const activeFilter = ref(1)
 const filterValue = ref(30)
 const lineChartRef = ref(null)
+const chartColor = ref('')
 
 const getFilter = filter => filterValue.value = FILTER_LIST[filter].days
 
@@ -61,7 +62,7 @@ const statisticChartData = computed(() => {
     labels: sortedEvents.map(el => dayjs(el.date).toISOString()),
     datasets: [
       {
-        borderColor: 'rgba(0,0,0, 0.5)',
+        borderColor: `rgb(${chartColor.value} / 0.7)`,
         backgroundColor: '#fff',
         data,
         tension: 0.4,
@@ -77,6 +78,10 @@ const statisticChartData = computed(() => {
       }
     ]
   }
+})
+
+onMounted(() => {
+  chartColor.value = getComputedStyle(document.documentElement).getPropertyValue('--text-color')
 })
 </script>
 
@@ -103,6 +108,7 @@ const statisticChartData = computed(() => {
         ref="lineChartRef"
         :data="statisticChartData"
         :options="createHomePageChart(maxChartData, filterValue)"
+        :plugins="[chartAreaBorder]"
       />
     </div>
   </div>

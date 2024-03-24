@@ -24,7 +24,6 @@ const checked = defineModel('checked')
         <input
           class="checkbox-component"
           type="checkbox"
-          :value="value"
           :id="uniqueId"
           v-model="checked"
         />

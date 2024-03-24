@@ -1,7 +1,6 @@
 .events__list {
-  border: 1px solid rgb(var(--accent-color) / 0.1);
+  border: 1px solid rgb(var(--border-color));
   border-radius: 4px;
-  background-color: var(--content-bg);
 }
 
 .events__item {
@@ -34,7 +33,7 @@
     width: 3px;
     height: 3px;
     border-radius: 50px;
-    background-color: rgb(var(--accent-color));
+    background-color: rgb(var(--text-color));
   }
 }
 

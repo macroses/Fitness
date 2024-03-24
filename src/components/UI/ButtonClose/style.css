@@ -1,7 +1,7 @@
 button {
   width: 34px;
   height: 34px;
-  background-color: var(--main-bg);
+  background-color: transparent;
   border-radius: 4px;
   position: absolute;
   top: 2px;
@@ -17,7 +17,7 @@ button {
 
 .left {
   right: auto;
-  left: -6px;
+  left: 0;
 }
 
 button::after {

@@ -1,6 +1,5 @@
 .statistic-chart-wrapper {
 	height: 412px;
-	margin-left: -4px;
 	margin-top: 6px;
 
 	@media (width < 768px) {

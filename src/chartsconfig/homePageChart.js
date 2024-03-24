@@ -31,7 +31,7 @@ export const createHomePageChart = (data, filterDaysNumber) => {
           }
         },
         grid: {
-          color: 'rgba(0,0,0, 0.05)'
+          color: 'rgba(0,0,0, 0.05)',
         }
       },
       y: {
@@ -64,6 +64,11 @@ export const createHomePageChart = (data, filterDaysNumber) => {
       legend: {
         display: false
       },
+      chartAreaBorder: {
+        borderColor: 'rgb(235 236 240 / 0.1)',
+        borderRadius: 4,
+        borderWidth: 1,
+      },
       title: {
         display: true,
         text: (ctx) => {
@@ -72,5 +77,19 @@ export const createHomePageChart = (data, filterDaysNumber) => {
         }
       }
     }
+  }
+}
+
+export const chartAreaBorder = {
+  id: 'chartAreaBorder',
+  beforeDraw(chart, args, options) {
+    const {ctx, chartArea: {left, top, width, height}} = chart;
+    ctx.save();
+    ctx.strokeStyle = options.borderColor;
+    ctx.lineWidth = options.borderWidth;
+    ctx.setLineDash(options.borderDash || []);
+    ctx.lineDashOffset = options.borderDashOffset;
+    ctx.strokeRect(left, top, width, height);
+    ctx.restore();
   }
 }

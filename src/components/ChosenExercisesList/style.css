@@ -34,8 +34,8 @@
 
 .chosen-exercises__supersets {
   margin-left: 12px;
-  background-color: rgb(var(--accent-color) / 0.02);
-  border: 1px solid rgb(var(--accent-color) / 0.3);
+  background-color: rgb(var(--border-color) / 0.02);
+  border: 1px solid rgb(var(--border-color));
   border-radius: 4px;
   position: relative;
 
@@ -93,7 +93,7 @@
     left: -12px;
     width: 12px;
     height: 100%;
-    border-left: 1px solid rgb(var(--accent-color) / 0.7);
+    border-left: 1px solid rgb(var(--text-color) / 0.7);
     border-top: 0;
     border-bottom: 0;
   }
@@ -105,8 +105,8 @@
     left: -12px;
     width: 12px;
     height: calc(100% - 20px);
-    border-left: 1px solid rgb(var(--accent-color) / 0.6);
-    border-top: 1px solid rgb(var(--accent-color) / 0.6);
+    border-left: 1px solid rgb(var(--text-color) / 0.6);
+    border-top: 1px solid rgb(var(--text-color) / 0.6);
     border-top-left-radius: 4px;
   }
 
@@ -118,8 +118,8 @@
     left: -12px;
     width: 12px;
     height: calc(100% - 20px);
-    border-left: 1px solid rgb(var(--accent-color) / 0.6);
-    border-bottom: 1px solid rgb(var(--accent-color) / 0.6);
+    border-left: 1px solid rgb(var(--text-color) / 0.6);
+    border-bottom: 1px solid rgb(var(--text-color) / 0.6);
     border-bottom-left-radius: 4px;
   }
 }
@@ -138,11 +138,12 @@
   }
 
   &.superset .chosen-exercises__item-header {
-    border: 1px solid rgb(var(--accent-color) / 0.6);
+    border: 1px solid rgb(var(--border-color) / 0.6);
   }
 
   &.active {
-    border: 1px solid rgb(var(--accent-color) / 0.6);
+    border: 1px solid rgb(var(--border-color) / 0.6);
+    background-color: var(--table-dark-bg);
     border-bottom: none;
   }
 }
@@ -165,7 +166,7 @@
 
   &.active {
     background: rgba(244, 247, 248, 1);
-    border: 1px solid rgb(var(--accent-color) / 0.6);
+    border: 1px solid rgb(var(--border-color) / 0.6);
     border-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -206,13 +207,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-block: 24px;
+  height: 44px;
 
   & span {
     margin-top: 5px;
     font-size: 12px;
     opacity: 0.8;
-    color: rgb(var(--accent-color));
+    color: rgb(var(--text-color));
   }
 }
 
@@ -274,7 +275,7 @@
   display: grid;
   overflow: hidden;
   grid-template-rows: 0fr;
-  border: 1px solid rgb(var(--accent-color) / 0.6);
+  border: 1px solid rgb(var(--border-color) / 0.6);
   border-top: 0;
   padding: 0 12px;
   border-bottom-left-radius: 4px;
@@ -322,7 +323,6 @@
   font-size: 12px;
   border: none;
   height: 32px;
-  color: rgb(var(--text-color));
   opacity: 0.8;
   cursor: pointer;
 

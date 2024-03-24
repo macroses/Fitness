@@ -60,14 +60,14 @@ const isExerciseInWorkout = id => {
         @click="showExercise(exercise)"
       >
         {{ exercise.name }}
-        <button
-          type="button"
-          class="exercises__item-add"
+        <Button
+          bordered
           v-if="!isExerciseInWorkout(exercise.id)"
+          class="exercises__item-add"
           @click.stop="workoutsStore.addExerciseToWorkout(exercise.id, exercise.name)"
         >
           +
-        </button>
+        </Button>
         <button
           type="button"
           class="favorite-icon"

@@ -5,7 +5,7 @@
 
 .textarea__input {
   border: 2px solid transparent;
-  background: var(--form-bg);
+  background: rgb(var(--form-bg));
   color: rgb(var(--text-color));
   border-radius: inherit;
   transition: all 0.25s ease;

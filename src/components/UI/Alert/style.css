@@ -2,7 +2,7 @@
   padding: 20px 35px;
   background-color: rgb(100 149 237 / 0.1);
   border-left: 5px solid rgb(100, 149, 237);
-  color: rgb(var(--accent-color));
+  color: rgb(var(--text-color));
   border-radius: 0 4px 4px 0;
 
   &.alert--sm {

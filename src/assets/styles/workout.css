@@ -51,19 +51,25 @@
 
 .total-tonnage {
   font-size: 12px;
-  background-color: var(--table-dark-bg);
-  padding: 0 12px;
   display: flex;
   align-items: center;
   border-radius: 4px;
   overflow: hidden;
-  height: 35px;
+  height: 12px;
   flex-grow: 1;
 }
 
-.user-workout__funcs {
+.user-workout__funcs:not(:empty) {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  height: 34px;
+  padding: 4px 8px;
+  border: 1px solid rgb(var(--border-color) / 0.5);
+  border-radius: 4px;
   gap: 12px;
+
+  & .checkbox-parent {
+    margin-left: auto;
+  }
 }

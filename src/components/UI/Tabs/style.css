@@ -24,13 +24,14 @@
 
 @media (hover: hover) and (pointer: fine) {
   .tabs__item:hover {
-    color: rgb(var(--accent-color));
+    opacity: 1;
+    color: rgb(var(--text-color));
   }
 }
 
 .tabs__item.active {
   cursor: default;
-  color: rgb(var(--accent-color));
+  color: rgb(var(--text-color));
   opacity: 1;
 }
 

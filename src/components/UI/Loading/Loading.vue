@@ -55,8 +55,8 @@ defineProps({
   content: '';
   width: 17px;
   height: 17px;
-  border: 2px solid rgba(255, 255, 255, 0);
-  border-left: dotted rgb(var(--accent-color));
+  border: 2px solid rgb(var(--text-color));
+  border-left: dotted rgb(var(--border-color));
   border-radius: 50%;
   position: absolute;
   animation: load 0.6s linear infinite;
