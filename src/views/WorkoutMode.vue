@@ -104,38 +104,37 @@ onBeforeUnmount(() => {
         >
           <div class="main__layout-left">
             <div class="exercises-list__wr">
-              <div
-                class="calendar-wr"
-                :class="{ hidden: !isCalendarVisible }"
-              >
-                <Calendar @get-date="getDate" />
+              <div class="user-workout">
+                <WorkoutDescription />
                 <div
-                  v-if="!isCalendarVisible"
-                  class="calendar-chosen-date"
+                  class="calendar-wr"
+                  :class="{ hidden: !isCalendarVisible }"
                 >
-                  {{ dateStore.date.format('DD MMMM YYYY') }}
-                  <span>{{ dateStore.date.format('dddd') }}</span>
-                </div>
-                <Button
-                  bordered
-                  is-only-icon
-                  class="hide-calendar__button"
-                  :class="{ active: isCalendarVisible }"
-                  @click="isCalendarVisible = !isCalendarVisible"
-                >
-                  <Icon
-                    width="20px"
-                    :icon-name="
+                  <Calendar @get-date="getDate" />
+                  <div
+                    v-if="!isCalendarVisible"
+                    class="calendar-chosen-date"
+                  >
+                    {{ dateStore.date.format('DD MMMM YYYY') }}
+                    <span>{{ dateStore.date.format('dddd') }}</span>
+                  </div>
+                  <Button
+                    bordered
+                    is-only-icon
+                    class="hide-calendar__button"
+                    :class="{ active: isCalendarVisible }"
+                    @click="isCalendarVisible = !isCalendarVisible"
+                  >
+                    <Icon
+                      width="20px"
+                      :icon-name="
                       isCalendarVisible
                         ? 'calendar-arrow-up'
                         : 'calendar-arrow-down'
                     "
-                  />
-                </Button>
-              </div>
-
-              <div class="user-workout">
-                <WorkoutDescription />
+                    />
+                  </Button>
+                </div>
                 <div class="user-workout__funcs">
                   <div class="total-tonnage">
                     Total tonnage:&nbsp;
@@ -149,6 +148,10 @@ onBeforeUnmount(() => {
                 </div>
                 <ChosenExercisesList />
               </div>
+
+
+
+
 
               <div class="group">
                 <Button

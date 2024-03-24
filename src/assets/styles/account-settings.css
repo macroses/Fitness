@@ -42,7 +42,7 @@
 	overflow: hidden;
 
 	&.active {
-		border: 1px solid rgb(var(--accent-color));
+		border: 1px solid rgb(var(--border-color));
 		border-radius: 4px;
 		pointer-events: none;
 	}

@@ -1,6 +1,6 @@
 .button-group {
   display: flex;
-  border: 1px solid rgb(var(--accent-color) / 20%);
+  border: 1px solid rgb(var(--border-color));
   border-radius: 4px;
   overflow: hidden;
   height: 32px;
@@ -40,7 +40,7 @@
     top: calc(50% - 10px);
     width: 1px;
     height: 20px;
-    background: rgb(var(--accent-color) / 20%);
+    background: rgb(var(--text-color) / 20%);
   }
 
   &:not(.active) {
@@ -60,7 +60,7 @@
 .shadow-btn {
   position: absolute;
   border-radius: 3px;
-  background-color: rgb(var(--accent-color));
+  background-color: rgb(64 68 74);
   transition: all 0.25s ease;
   height: 100%;
   z-index: -1;

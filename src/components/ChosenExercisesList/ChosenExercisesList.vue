@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { workoutStore } from '@/stores/modules/workout'
 
 const store = workoutStore()
@@ -8,14 +8,11 @@ const supersetExercises = ref([])
 const checkboxStates = ref({})
 
 const toggleParameters = id => {
-  activeExerciseId.value === id
-    ? (activeExerciseId.value = null)
-    : (activeExerciseId.value = id)
+  activeExerciseId.value === id ? (activeExerciseId.value = null) : (activeExerciseId.value = id)
 
   store.effort = 0
   store.weight = null
   store.repeats = null
-
   store.openedExerciseId = activeExerciseId.value
 }
 
@@ -28,12 +25,16 @@ const handleMerge = () => store.mergeToSuperset(supersetExercises)
 
 const handleSplit = supersetId => store.splitToExercises(supersetId)
 
+const isExerciseVisible = computed(() => {
+  return store.supersetsArray.length || store.exercisesParamsCollection.length
+})
+
 watch(() => store.isSuperset, () => (activeExerciseId.value = null))
 </script>
 
 <template>
   <div
-    v-if="store.supersetsArray.length || store.exercisesParamsCollection.length"
+    v-if="isExerciseVisible"
     class="chosen-exercises__wrap"
   >
     <div
@@ -133,14 +134,14 @@ watch(() => store.isSuperset, () => (activeExerciseId.value = null))
             <Checkbox
               v-if="store.isSuperset"
               v-model:checked="checkboxStates[element.id]"
-              @change="value => handleCheckbox(element.id, value)"
+              @input="value => handleCheckbox(element.id, value)"
             />
             <div
               class="chosen-exercises__item-header"
               :class="{ disabledExercise: store.isSuperset }"
               @click="toggleParameters(element.id)"
             >
-              <ChosenExerciseFuncs :element="element" />
+              <ChosenExerciseFuncs :element />
             </div>
           </div>
           <TransitionSlideY>

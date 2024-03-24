@@ -15,7 +15,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .muscles__item-header:hover {
-    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
+    background: var(--table-dark-bg);
     transform: translateY(-3px);
   }
 }
@@ -40,7 +40,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid rgb(var(--accent-color) / 0.5);
+  border: 1px solid rgb(var(--border-color) / 0.5);
 }
 
 .collapse__icon {
@@ -145,17 +145,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: rgb(var(--accent-color));
   transition:
     color 0.25s ease,
     background-color 0.25s ease;
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      color: #fff;
-      background-color: rgb(var(--accent-color));
-    }
-  }
 }
 
 .favorite-icon svg {
@@ -195,7 +187,7 @@
 }
 
 .exercises-list__wr {
-  background-color: var(--content-bg);
+  /*background-color: var(--content-bg);*/
   padding-bottom: 8px;
 
   @media (width < 768px) {

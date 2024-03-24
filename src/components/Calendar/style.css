@@ -67,7 +67,7 @@
   }
 
   &.active {
-    background-color: rgb(var(--accent-color) / 0.2);
+    background-color: rgb(var(--text-color) / 0.2);
     transform: translateY(-3px);
     transition:
       transform var(--base-transition),
@@ -86,11 +86,11 @@
 }
 
 .calendar__cell--current-day {
-  color: rgb(var(--accent-color));
+  color: rgb(var(--text-color));
   font-weight: 600;
 
   & .calendar__cell-text {
-    border-bottom: 2px solid rgb(var(--accent-color));
+    border-bottom: 2px solid rgb(var(--text-color));
     display: inline-block;
     width: 15px;
   }

@@ -60,12 +60,10 @@
   border: 2px solid rgb(var(--text-color) / 0.4);
   transition: all 0.25s ease;
   display: block;
-  box-shadow: 0 0 0 0 rgb(var(--accent-color) / 0.4);
 }
 
 .radio-effect.active::after {
-  border: 7px solid rgb(var(--accent-color));
-  box-shadow: 0 3px 12px 0 rgb(var(--accent-color) / 0.3);
+  border: 7px solid rgb(var(--text-color));
 }
 
 .radio-label {

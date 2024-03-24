@@ -57,6 +57,7 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           Plinx
         </RouterLink>
         <div class="header__user">
+<!--          <ColorTheme />-->
           <TemporaryWorkout
             v-if="useTemporaryWorkout.temporaryWorkout"
           />
@@ -66,7 +67,7 @@ onClickOutside(userMenu, () => (isDropdownVisible.value = false))
           />
           <div
             ref="userMenu"
-            class="user-dropdown__content"
+            class="user-dropdown__content user-dropdown__top"
             :class="{ 'user-menu--visible': isDropdownVisible }"
           >
             <ul class="user-dropdown">

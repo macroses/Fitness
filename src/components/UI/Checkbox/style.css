@@ -21,7 +21,7 @@
 }
 
 .checkbox-content:hover .checkbox-effect:not(.active) {
-  background-color: var(--form-bg);
+  background-color: rgb(var(--form-bg));
 }
 
 .checkbox {
@@ -41,7 +41,7 @@
   height: 100%;
   border-radius: inherit;
   transition: all 0.25s ease;
-  border: 2px solid rgba(230, 233, 234, 1);
+  border: 2px solid rgb(var(--border-color));
   color: rgba(230, 233, 234, 1);
   display: flex;
   align-items: center;
@@ -49,9 +49,7 @@
 }
 
 .checkbox-effect.active {
-  border: 2px solid rgb(var(--accent-color));
-  background-color: rgb(var(--accent-color));
-  box-shadow: 0 3px 12px 0 rgb(var(--accent-color) / 0.3);
+  border: 2px solid rgb(var(--border-color));
 }
 
 .checkbox-label {
@@ -95,7 +93,7 @@
 
 .checkbox-effect.active .line1,
 .checkbox-effect.active .line2 {
-  background-color: var(--main-bg);
+  background-color: rgb(var(--text-color));
 }
 
 .checkbox-effect.active .line1 {

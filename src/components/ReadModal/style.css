@@ -2,7 +2,7 @@
   overflow: hidden;
   border-radius: 4px;
   margin-bottom: 12px;
-  border: 1px solid rgb(var(--accent-color) / 0.1);
+  border: 1px solid rgb(var(--border-color) / 0.1);
 
   &:has(.read-event__table-empty) {
     border: 0;
@@ -31,13 +31,9 @@
   }
 
   & tr:nth-child(odd) {
-    background-color: var(--content-inner-bg);
+    background-color: rgb(var(--form-bg));
 
   }
-}
-
-.read-event__table tr:nth-child(odd) {
-
 }
 
 .read-event__table-empty {
@@ -97,7 +93,7 @@
 
 .read-event__edit {
   border: 0;
-  color: rgb(var(--accent-color));
+  color: rgb(var(--text-color));
   font-size: 12px;
   background-color: transparent;
   cursor: pointer;
@@ -127,7 +123,7 @@
   align-items: center;
   gap: 4px;
   padding: 4px 8px;
-  background-color: var(--table-dark-bg);
+  background-color: rgb(var(--form-bg));
   border-radius: 4px;
   margin-bottom: 8px;
 
@@ -161,7 +157,7 @@
 
 .superset-list {
   padding: 8px 16px 0;
-  border: 1px solid rgba(var(--accent-color) / 30%);
+  border: 1px solid rgba(var(--border-color) / 30%);
   border-radius: 4px;
   background-color: rgba(var(--accent-color) / 5%);
   margin-bottom: 8px;

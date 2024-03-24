@@ -10,7 +10,7 @@ body:has(.aside) {
   bottom: 8px;
   width: 359px;
   min-height: calc(100% - 20px);
-  background-color: var(--dropdown-bg);
+  background-color: rgb(var(--dropdown-bg));
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   padding: 32px 16px 16px;
